@@ -57,7 +57,7 @@ public abstract class RowViewProvider {
 		
 		@Override
 		public View getView(Bookmark bm, View convertView, ViewGroup parent) {
-	        int resid = bm.isFolder() ? R.layout.list_row_folder : R.layout.list_row_bookmark;
+	        int resid = bm.isFolder() ? R.layout.list15_row_folder : R.layout.list15_row_bookmark;
 	        View rowview = inflater.inflate(resid, null);
 	        prepare(rowview, bm);
 			return rowview;
@@ -111,7 +111,7 @@ public abstract class RowViewProvider {
 				holder = (ViewHolder)convertView.getTag();
 			}
 			else {
-		        convertView = inflater.inflate(R.layout.list_row_relative, parent, false);
+		        convertView = inflater.inflate(R.layout.list20_row_relative, parent, false);
 		        
 				holder = new ViewHolder();
 				holder.titleCell = (TextView) convertView.findViewById(R.id.bmTitle);
