@@ -75,8 +75,13 @@ public abstract class RowViewProvider {
 
 	public static class ProviderModern extends RowViewProvider {
 
-		public ProviderModern(LayoutInflater inflater) {
+		private final boolean compact;
+		private final int layoutId;
+
+		public ProviderModern(LayoutInflater inflater, boolean compact) {
 			super(inflater);
+			this.compact = compact;
+			this.layoutId = compact ? R.layout.list20_row_compact : R.layout.list20_row_relative;
 		}
 		
 		private void prepare(ViewHolder holder, Bookmark bm) {
@@ -84,13 +89,15 @@ public abstract class RowViewProvider {
 			holder.titleCell.setText(bm.getDisplayTitle());
 	    	holder.indentionCell.getLayoutParams().width = bm.hasParentFolder() ? bm.getLevel() * childLevelIndention : 0; 
 	    	
-	    	if (bm.isBrowserBookmark()) {
-		        holder.urlCell.setText(bm.getUrl());
-		        holder.urlCell.setVisibility(View.VISIBLE);
-	    	}
-	    	else if (holder.urlCell!=null) {
-	    		holder.urlCell.setText(null);
-	    		holder.urlCell.setVisibility(View.GONE);
+	    	if (!compact) {
+		    	if (bm.isBrowserBookmark()) {
+			        holder.urlCell.setText(bm.getUrl());
+			        holder.urlCell.setVisibility(View.VISIBLE);
+		    	}
+		    	else if (holder.urlCell!=null) {
+		    		holder.urlCell.setText(null);
+		    		holder.urlCell.setVisibility(View.GONE);
+		    	}
 	    	}
 
 	    	holder.iconCell.isFolder = bm.isFolder();
@@ -111,13 +118,15 @@ public abstract class RowViewProvider {
 				holder = (ViewHolder)convertView.getTag();
 			}
 			else {
-		        convertView = inflater.inflate(R.layout.list20_row_relative, parent, false);
+		        convertView = inflater.inflate(layoutId, parent, false);
 		        
 				holder = new ViewHolder();
 				holder.titleCell = (TextView) convertView.findViewById(R.id.bmTitle);
 				holder.indentionCell = convertView.findViewById(R.id.bmIndention);
 				holder.iconCell = (FaviconImageView) convertView.findViewById(R.id.bmIcon);
-				holder.urlCell = (TextView) convertView.findViewById(R.id.bmUrl);
+				if (!compact) {
+					holder.urlCell = (TextView) convertView.findViewById(R.id.bmUrl);
+				}
 		    	convertView.setTag(holder);
 			}
 			

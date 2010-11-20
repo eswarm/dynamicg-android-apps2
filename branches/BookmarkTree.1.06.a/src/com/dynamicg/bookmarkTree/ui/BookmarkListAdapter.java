@@ -31,7 +31,8 @@ public class BookmarkListAdapter extends BaseAdapter {
 		this.ctx = ctx;
 		
 		if (ctx.getPreferencesWrapper().isOptimisedLayout()) {
-			rowViewProvider = new RowViewProvider.ProviderModern(ctx.getLayoutInflater());; 
+			boolean compact = ctx.getPreferencesWrapper().isCompact();
+			rowViewProvider = new RowViewProvider.ProviderModern(ctx.getLayoutInflater(), compact);; 
 		}
 		else {
 			rowViewProvider = new RowViewProvider.ProviderOldStyle(ctx.getLayoutInflater());
