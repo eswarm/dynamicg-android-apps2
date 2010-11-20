@@ -15,11 +15,12 @@ public class BookmarkDataProcessor {
 	private static final Logger log = new Logger(BookmarkDataProcessor.class);
 	
 	private final BookmarkTreeContext ctx;
-	private BookmarkSortCache bookmarkSortCache = BookmarkSortCache.createInstance();
+	private final BookmarkSortCache bookmarkSortCache;
 	private int maxLevel;
 
 	public BookmarkDataProcessor(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
+		this.bookmarkSortCache = BookmarkSortCache.createInstance(ctx);
 		if (log.isDebugEnabled()) {
 			log.debug("start");
 		}

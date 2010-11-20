@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.main.SystemUtil;
 
 public class PreferencesWrapper {
 
@@ -93,6 +94,20 @@ public class PreferencesWrapper {
 	public void storeDisclaimerLastDisplayed(int newDisclaimerVersion) {
 		disclaimerLastDisplayed = newDisclaimerVersion;
 		write();
+	}
+	
+	public static final int SORT_ALPHA = 1;
+	public static final int SORT_FOLDERS_BEFORE_BM = 2;
+	public static final int SORT_BM_BEFORE_FOLDERS = 3;
+	
+	// TODO - ADD PREF
+	public int getSortStyle() {
+		if (SystemUtil.isDevelopmentOrDevDevice()) {
+			return SORT_FOLDERS_BEFORE_BM;
+		}
+		else {
+			return SORT_ALPHA;
+		}
 	}
 	
 }

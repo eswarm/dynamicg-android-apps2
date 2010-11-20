@@ -3,11 +3,12 @@ package com.dynamicg.bookmarkTree.data;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.PreferencesWrapper;
 import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.FolderBean;
 import com.dynamicg.common.main.Logger;
-import com.dynamicg.common.main.SystemUtil;
 
 public abstract class BookmarkSortCache {
 
@@ -133,18 +134,12 @@ public abstract class BookmarkSortCache {
 		}
 	}
 	
-	public static BookmarkSortCache createInstance() {
-		if (!SystemUtil.isDevelopmentOrDevDevice()) {
-			return new AlphaOverall();
-		}
-		if (false) {
-			return new AlphaOverall();
-		}
-		else if (true){
-			return new ByType(true);
-		}
-		else {
-			return new ByType(false);
+	public static BookmarkSortCache createInstance(BookmarkTreeContext ctx) {
+		int sortStyle = ctx.getPreferencesWrapper().getSortStyle();
+		switch (sortStyle) {
+		case PreferencesWrapper.SORT_FOLDERS_BEFORE_BM: return new ByType(true);
+		case PreferencesWrapper.SORT_BM_BEFORE_FOLDERS: return new ByType(false);
+		default: return new AlphaOverall();
 		}
 	}
 	
