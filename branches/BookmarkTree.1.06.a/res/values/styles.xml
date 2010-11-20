@@ -5,10 +5,16 @@
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
     </style>
+    
     <style name="TitleText" parent="GenericText">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">#fff</item>
     </style>
+    <style name="TitleTextCompact" parent="GenericText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+    
     <style name="UrlText" parent="GenericText">
         <item name="android:textSize">14sp</item>
     </style>
