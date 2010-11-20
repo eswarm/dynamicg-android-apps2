@@ -35,15 +35,15 @@ public abstract class BookmarkSortCache {
 	
 	public static class ByType extends BookmarkSortCache {
 		
-		private final boolean bookmarksFirst;
+		private final boolean putFoldersFirst;
 		
 		private ArrayList<FolderBean> folders = new ArrayList<FolderBean>();
 		private ArrayList<BrowserBookmarkBean> topLevelBookmarks = new ArrayList<BrowserBookmarkBean>();
 		
 		private ArrayList<Bookmark> finalList = new ArrayList<Bookmark>();
 		
-		public ByType(boolean foldersFirst) {
-			this.bookmarksFirst = foldersFirst;
+		public ByType(boolean putFoldersFirst) {
+			this.putFoldersFirst = putFoldersFirst;
 		}
 		
 		private void addTopLevelItems() {
@@ -81,13 +81,13 @@ public abstract class BookmarkSortCache {
 			finalList.add(folder); // add "self"
 			Collection<Bookmark> children = folder.getChildren();
 			
-			if (bookmarksFirst) {
-				processBookmarks(children);
+			if (putFoldersFirst) {
 				processFolders(children);
+				processBookmarks(children);
 			}
 			else {
-				processFolders(children);
 				processBookmarks(children);
+				processFolders(children);
 			}
 		}
 		
@@ -96,7 +96,7 @@ public abstract class BookmarkSortCache {
 				log.debug("number of folders", folders.size());
 			}
 			
-			if (bookmarksFirst) {
+			if (!putFoldersFirst) {
 				addTopLevelItems();
 			}
 			for (FolderBean folder:folders) {
@@ -105,7 +105,7 @@ public abstract class BookmarkSortCache {
 				}
 				recursiveAdd(folder);
 			}
-			if (!bookmarksFirst) {
+			if (putFoldersFirst) {
 				addTopLevelItems();
 			}
 			
@@ -141,10 +141,10 @@ public abstract class BookmarkSortCache {
 			return new AlphaOverall();
 		}
 		else if (true){
-			return new ByType(false);
+			return new ByType(true);
 		}
 		else {
-			return new ByType(true);
+			return new ByType(false);
 		}
 	}
 	
