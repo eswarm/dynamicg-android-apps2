@@ -78,6 +78,7 @@ public class PreferencesDialog extends Dialog {
 		doFullUpdateCheckbox = (CheckBox)findViewById(R.id.prefsFullUpdateOnChange);
 		checkForChangedSeparator(); // inactivate intially
 		
+		// TODO ## add confirmation
 		Button sortAlpha = (Button)findViewById(R.id.prefsSortAlpha);
 		sortAlpha.setOnClickListener(new View.OnClickListener() {
 			@Override
