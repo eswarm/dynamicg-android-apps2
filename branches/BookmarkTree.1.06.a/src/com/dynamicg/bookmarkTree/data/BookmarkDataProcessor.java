@@ -15,18 +15,20 @@ public class BookmarkDataProcessor {
 	private static final Logger log = new Logger(BookmarkDataProcessor.class);
 	
 	private final BookmarkTreeContext ctx;
-	private ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
+	private BookmarkSortCache bookmarkSortCache = BookmarkSortCache.createInstance();
 	private int maxLevel;
 
 	public BookmarkDataProcessor(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
-		log.debug("start");
+		if (log.isDebugEnabled()) {
+			log.debug("start");
+		}
 		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity);
 		buildTree(rows);
 	}
 	
 	public ArrayList<Bookmark> getBookmarks() {
-		return bookmarks;
+		return bookmarkSortCache.getList();
 	}
 	
 	private void buildTree(ArrayList<BrowserBookmarkBean> rows) {
@@ -35,9 +37,9 @@ public class BookmarkDataProcessor {
 		FolderBean currentParent;
 		int currentLevel;
 		final String folderSeparator = ctx.getFolderSeparator();
+		final String nodeConcatenation = ctx.getNodeConcatenation();
 		
 		final FolderCache folderCache = new FolderCache();
-		final String nodeConcatenation = ctx.getNodeConcatenation();
 		TitleTokenizer titleTokenizer;
 		
 		for (BrowserBookmarkBean bookmark:rows) {
@@ -51,7 +53,7 @@ public class BookmarkDataProcessor {
 			
 			if (bookmarkTitle.indexOf(folderSeparator)==-1) {
 				// no hierarchy - add as "plain"
-				bookmarks.add(bookmark);
+				bookmarkSortCache.addBookmark(bookmark);
 				continue;
 			}
 
@@ -71,7 +73,7 @@ public class BookmarkDataProcessor {
 				bookmark.setLevel(currentLevel);
 				bookmark.setParentFolder(currentParent);
 				bookmark.setNodeTitle(titleTokenizer.getLast().nodeTitle);
-				bookmarks.add(bookmark);
+				bookmarkSortCache.addBookmark(bookmark);
 				if (currentLevel>maxLevel) {
 					maxLevel = currentLevel;
 				}
@@ -95,7 +97,7 @@ public class BookmarkDataProcessor {
 		folderBean.setParentFolder(currentParent);
 		folderCache.put(item, folderBean);
 		
-		bookmarks.add(folderBean);
+		bookmarkSortCache.addFolder(folderBean);
 		
 		return folderBean;
 	}
