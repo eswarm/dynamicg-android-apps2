@@ -36,8 +36,9 @@ public class BookmarkDataProcessor {
 		int currentLevel;
 		final String folderSeparator = ctx.getFolderSeparator();
 		
+		final FolderCache folderCache = new FolderCache();
+		final String nodeConcatenation = ctx.getNodeConcatenation();
 		TitleTokenizer titleTokenizer;
-		FolderCache folderCache = new FolderCache();
 		
 		for (BrowserBookmarkBean bookmark:rows) {
 			
@@ -57,7 +58,7 @@ public class BookmarkDataProcessor {
 			// all other cases - resolve folder structure:
 			currentParent=null;
 			currentLevel=-1;
-			titleTokenizer = new TitleTokenizer(bookmarkTitle, folderSeparator, ctx.getNodeConcatenation() );
+			titleTokenizer = new TitleTokenizer(bookmarkTitle, folderSeparator, nodeConcatenation );
 			for ( int i=0 ; i<titleTokenizer.size()-1 ; i++ ) {
 				// loop all but last entries
 				currentLevel++;
