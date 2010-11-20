@@ -2,7 +2,6 @@ package com.dynamicg.bookmarkTree.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.TitleTokenizer.TitleItem;
@@ -15,8 +14,6 @@ public class BookmarkDataProcessor {
 
 	private static final Logger log = new Logger(BookmarkDataProcessor.class);
 	
-	private static final boolean MERGE_SHALLOW_FOLDERS = false; // set to true if we want to skip folders with only one entry
-	
 	private final BookmarkTreeContext ctx;
 	private ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
 	private int maxLevel;
@@ -26,9 +23,6 @@ public class BookmarkDataProcessor {
 		log.debug("start");
 		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity);
 		buildTree(rows);
-		if (MERGE_SHALLOW_FOLDERS) {
-			cleanup();
-		}
 	}
 	
 	public ArrayList<Bookmark> getBookmarks() {
@@ -103,43 +97,6 @@ public class BookmarkDataProcessor {
 		bookmarks.add(folderBean);
 		
 		return folderBean;
-	}
-	
-	public void cleanup() {
-		
-		// remove folders with only one child
-		// iterate levels descending and (for each level) the bookmarks bottom to top
-		HashSet<Bookmark> deletionMap; 
-		
-		Bookmark bookmark;
-		FolderBean parent;
-		for ( int ilevel=maxLevel;ilevel>=0;ilevel--) {
-
-			deletionMap = new HashSet<Bookmark>(); 
-			
-			for ( int ibookm=bookmarks.size()-1;ibookm>=0;ibookm--) { 
-				// loop bottom to top
-				
-				bookmark = bookmarks.get(ibookm);
-				if (bookmark.getLevel()!=ilevel) {
-					// different level => skip to next
-					continue;
-				}
-				
-				parent = bookmark.getParentFolder();
-				if (parent!=null && parent.getChildren().size()==1) {
-					// this is the only child => move one level up
-					bookmark.attachToGrandparent(ctx);
-					deletionMap.add(parent);
-					log.debug("deletionMap", ilevel, parent.getDisplayTitle());
-				}
-				
-			}
-			
-			bookmarks.removeAll(deletionMap);
-			
-		}
-		
 	}
 	
 	private class FolderCache {
