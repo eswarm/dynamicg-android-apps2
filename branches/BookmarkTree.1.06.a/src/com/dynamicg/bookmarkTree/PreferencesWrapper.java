@@ -102,7 +102,7 @@ public class PreferencesWrapper {
 	
 	// TODO - ADD PREF
 	public int getSortStyle() {
-		if (SystemUtil.isDevelopmentOrDevDevice()) {
+		if (SystemUtil.isDevelopmentOrDevDevice() || SystemUtil.isMyProdDevice()) {
 			return SORT_FOLDERS_BEFORE_BM;
 		}
 		else {
@@ -112,7 +112,7 @@ public class PreferencesWrapper {
 
 	// TODO - ADD PREF
 	public boolean isCompact() {
-		return SystemUtil.isDevelopmentOrDevDevice();
+		return SystemUtil.isDevelopmentOrDevDevice() || SystemUtil.isMyProdDevice();
 	}
 	
 }
