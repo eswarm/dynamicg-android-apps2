@@ -109,5 +109,10 @@ public class PreferencesWrapper {
 			return SORT_ALPHA;
 		}
 	}
+
+	// TODO - ADD PREF
+	public boolean isCompact() {
+		return SystemUtil.isDevelopmentOrDevDevice();
+	}
 	
 }
