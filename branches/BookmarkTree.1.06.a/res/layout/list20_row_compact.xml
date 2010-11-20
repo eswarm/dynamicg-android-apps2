@@ -5,6 +5,7 @@
     android:layout_height="40dip"
     android:padding="2dip"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     >
     
     <FrameLayout
@@ -18,7 +19,6 @@
         android:layout_width="32dip"
         android:layout_height="32dip"
         android:scaleType="centerInside"
-        android:layout_gravity="center"
         android:layout_marginRight="@dimen/iconRightMargin"
         android:layout_marginTop="2dip"
         android:layout_marginBottom="2dip"
@@ -28,7 +28,6 @@
         android:id="@+id/bmTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
     />
 
 </LinearLayout>
