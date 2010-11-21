@@ -28,8 +28,11 @@ public abstract class RowViewProvider {
 	
 	public static class ProviderOldStyle extends RowViewProvider {
 
-		public ProviderOldStyle(LayoutInflater inflater) {
+		private final boolean compact;
+
+		public ProviderOldStyle(LayoutInflater inflater, boolean compact) {
 			super(inflater);
+			this.compact = compact;
 		}
 
 		private void prepare(View rowview, Bookmark bm) {
@@ -40,9 +43,11 @@ public abstract class RowViewProvider {
 	        View indentionCell = rowview.findViewById(R.id.bmIndention);
 	    	indentionCell.getLayoutParams().width = bm.hasParentFolder() ? bm.getLevel() * childLevelIndention : 0; 
 	    	
-	    	if (bm.isBrowserBookmark()) {
-		        TextView urlCell = (TextView) rowview.findViewById(R.id.bmUrl);
-		        urlCell.setText(bm.getUrl());
+	    	if (!compact) {
+		    	if (bm.isBrowserBookmark()) {
+			        TextView urlCell = (TextView) rowview.findViewById(R.id.bmUrl);
+			        urlCell.setText(bm.getUrl());
+		    	}
 	    	}
 
 	        ImageView iconCell = (ImageView) rowview.findViewById(R.id.bmIcon);
@@ -57,7 +62,13 @@ public abstract class RowViewProvider {
 		
 		@Override
 		public View getView(Bookmark bm, View convertView, ViewGroup parent) {
-	        int resid = bm.isFolder() ? R.layout.list15_row_folder : R.layout.list15_row_bookmark;
+	        int resid;
+	        if (compact) {
+	        	resid = R.layout.list_row_compact;
+	        }
+	        else {
+	        	resid = bm.isFolder() ? R.layout.list15_row_folder : R.layout.list15_row_bookmark;
+	        }
 	        View rowview = inflater.inflate(resid, null);
 	        prepare(rowview, bm);
 			return rowview;
@@ -81,7 +92,7 @@ public abstract class RowViewProvider {
 		public ProviderModern(LayoutInflater inflater, boolean compact) {
 			super(inflater);
 			this.compact = compact;
-			this.layoutId = compact ? R.layout.list20_row_compact : R.layout.list20_row_relative;
+			this.layoutId = compact ? R.layout.list_row_compact : R.layout.list20_row_relative;
 		}
 		
 		private void prepare(ViewHolder holder, Bookmark bm) {
