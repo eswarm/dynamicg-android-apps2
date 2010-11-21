@@ -2,7 +2,7 @@ package com.dynamicg.bookmarkTree.ui;
 
 import java.util.ArrayList;
 
-import android.view.View;
+import android.app.Dialog;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -10,6 +10,13 @@ import com.dynamicg.bookmarkTree.PreferencesWrapper;
 
 public class SpinnerUtil {
 
+	private final Dialog dialog;
+
+	public SpinnerUtil(Dialog dialog) {
+		this.dialog = dialog;
+		
+	}
+	
 	public static class KeyValue {
 		public int key;
 		public String value;
@@ -22,8 +29,8 @@ public class SpinnerUtil {
 		}
 	}
 	
-	public static void bind(View spinnerObject, int currentKey, ArrayList<KeyValue> items) {
-		Spinner spinner = (Spinner)spinnerObject;
+	public void bind(int spinnerResId, int currentKey, ArrayList<KeyValue> items) {
+		Spinner spinner = (Spinner)dialog.findViewById(spinnerResId);
 		ArrayAdapter<KeyValue> adapter = new ArrayAdapter<KeyValue> ( spinner.getContext()
 				, android.R.layout.simple_spinner_item, items);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -39,11 +46,12 @@ public class SpinnerUtil {
 		
 	}
 	
-	public static int getCurrentValue(View spinnerObject) {
-		Spinner spinner = (Spinner)spinnerObject;
+	public int getCurrentValue(int spinnerResId) {
+		Spinner spinner = (Spinner)dialog.findViewById(spinnerResId);
 		KeyValue item = (KeyValue)spinner.getSelectedItem();
 		return item==null ? 0 : item.key;
 	}
+	
 	
 	public static ArrayList<KeyValue> getListStyleItems() {
 		ArrayList<KeyValue> list = new ArrayList<KeyValue>();

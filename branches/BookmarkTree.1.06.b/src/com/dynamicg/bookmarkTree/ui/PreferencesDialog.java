@@ -38,6 +38,7 @@ public class PreferencesDialog extends Dialog {
 	private final BookmarkTreeContext ctx;
 	private final String currentSeparator;
 	private final PreferencesWrapper prefsWrapper;
+	private final SpinnerUtil spinnerUtil;
 
 	private EditText separatorItem;
 	private CheckBox doFullUpdateCheckbox;
@@ -50,6 +51,7 @@ public class PreferencesDialog extends Dialog {
 		super(ctx.activity);
 		this.ctx = ctx;
 		this.prefsWrapper = ctx.getPreferencesWrapper();
+		this.spinnerUtil = new SpinnerUtil(this);
 		setContentView(R.layout.prefs_dialog);
 
 		currentSeparator = ctx.getFolderSeparator();
@@ -119,8 +121,8 @@ public class PreferencesDialog extends Dialog {
 		};
 
 		// attach spinners
-		SpinnerUtil.bind ( findViewById(R.id.prefsListStyle), prefsWrapper.prefsBean.getListStyle(), SpinnerUtil.getListStyleItems() );
-		SpinnerUtil.bind ( findViewById(R.id.prefsSortOption), prefsWrapper.prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems() );
+		spinnerUtil.bind ( R.id.prefsListStyle, prefsWrapper.prefsBean.getListStyle(), SpinnerUtil.getListStyleItems() );
+		spinnerUtil.bind ( R.id.prefsSortOption, prefsWrapper.prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems() );
 		
 	}
 	
@@ -158,8 +160,8 @@ public class PreferencesDialog extends Dialog {
 		prefsWrapper.setShowDeleteIcon(showDeleteIconCheckbox.isChecked());
 		prefsWrapper.setOptimisedLayout(optimiseLayout.isChecked());
 		
-		prefsWrapper.prefsBean.setListStyle(SpinnerUtil.getCurrentValue(findViewById(R.id.prefsListStyle)));
-		prefsWrapper.prefsBean.setSortOption(SpinnerUtil.getCurrentValue(findViewById(R.id.prefsSortOption)));
+		prefsWrapper.prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));
+		prefsWrapper.prefsBean.setSortOption(spinnerUtil.getCurrentValue(R.id.prefsSortOption));
 		
 		prefsWrapper.write();
 	}
