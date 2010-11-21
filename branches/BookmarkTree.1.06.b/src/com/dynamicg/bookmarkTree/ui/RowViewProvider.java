@@ -16,7 +16,7 @@ public abstract class RowViewProvider {
 	private static final int childLevelIndention = 32;
 	
 	public final LayoutInflater inflater;
-	public boolean compact;
+	public final boolean compact;
 
 	public RowViewProvider(LayoutInflater inflater, boolean compact) {
 		this.inflater = inflater;

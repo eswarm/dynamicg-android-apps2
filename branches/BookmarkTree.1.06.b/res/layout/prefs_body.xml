@@ -72,6 +72,12 @@
 			    android:layout_marginLeft="5dip"
 			    />
 	    </TableRow>
+	    <TableRow>
+	    	<TextView style="@style/PrefsHint" 
+	    		android:layout_span="2"
+	    		android:text="\u2192 Restart app when changed"
+	    		/>
+	    </TableRow>
     </TableLayout>
     
 	<!-- ====================== Special Ops ====================== -->
