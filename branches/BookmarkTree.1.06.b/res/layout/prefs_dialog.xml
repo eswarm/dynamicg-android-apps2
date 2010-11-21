@@ -13,6 +13,8 @@
 	    android:padding="@dimen/mainPadding"
 	    >
 	
+		<!-- ====================== Setup ====================== -->
+		
 		<View android:layout_width="fill_parent" style="@style/Divider" /> 
 		
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -46,7 +48,41 @@
 		    android:layout_height="wrap_content"
 		    android:text="Update all bookmarks\nwith new separator"
 		    />
+		    
+		<!-- ====================== Presentation ====================== -->
+		<View android:layout_width="fill_parent" style="@style/Divider" /> 
 	    
+	    <TableLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:padding="@dimen/mainPadding"
+		    >
+		    <TableRow>
+		    	<TextView style="@style/PrefsLabel" 
+		    		android:text="List style:" 
+		    		android:layout_gravity="center_vertical"
+		    		/>
+		    	<Spinner android:id="@+id/prefsListStyle"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="5dip"
+				    />
+		    </TableRow>
+		    <TableRow>
+		    	<TextView style="@style/PrefsLabel"
+		    		android:text="Sort option:" 
+		    		android:layout_gravity="center_vertical"
+		    		/>
+		    	<Spinner android:id="@+id/prefsSortOption"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="5dip"
+				    />
+		    </TableRow>
+	    </TableLayout>
+	    
+		<!-- ====================== Special Ops ====================== -->
+		
 		<View android:layout_width="fill_parent" style="@style/Divider" /> 
 		
 	    <CheckBox style="@style/PrefsLabel"
@@ -75,6 +111,8 @@
 	    
 		<View android:layout_width="fill_parent" style="@style/Divider" /> 
 		    
+		<!-- ====================== Button Panel ====================== -->
+		
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"

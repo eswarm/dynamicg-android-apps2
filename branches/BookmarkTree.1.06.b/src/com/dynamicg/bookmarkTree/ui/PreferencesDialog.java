@@ -57,7 +57,7 @@ public class PreferencesDialog extends Dialog {
 
 		super.onCreate(savedInstanceState);
 
-		setTitle("Preferences and Settings");
+		setTitle("Preferences");
 
 		separatorItem = (EditText)findViewById(R.id.prefsSeparator);
 		separatorItem.setText(currentSeparator);
