@@ -28,14 +28,14 @@ public class SpinnerUtil {
 				, android.R.layout.simple_spinner_item, items);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+		spinner.setAdapter(adapter);
+		
 		for (int i=0;i<items.size();i++) {
 			if (items.get(i).key==currentKey) {
 				spinner.setSelection(i);
 				break;
 			}
 		}
-		
-		spinner.setAdapter(adapter);
 		
 	}
 	

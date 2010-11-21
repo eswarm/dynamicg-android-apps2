@@ -44,7 +44,9 @@ public class PreferencesWrapper {
 		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		if (log.isDebugEnabled()) {
-			log.debug("write prefs", prefsBean.folderSeparator);
+			log.debug("write prefs - folderSeparator", prefsBean.folderSeparator);
+			log.debug("write prefs - listStyle", prefsBean.listStyle);
+			log.debug("write prefs - sortOption", prefsBean.sortOption);
 		}
 		editor.putString(KEY_FOLDER_SEPARATOR, prefsBean.folderSeparator);
 		editor.putInt(KEY_DISCLAIMER, prefsBean.disclaimerLastDisplayed);
