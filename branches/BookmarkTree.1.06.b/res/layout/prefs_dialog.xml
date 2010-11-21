@@ -96,7 +96,7 @@
 	    	android:id="@+id/prefsOptimiseLayout"
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
-		    android:text="Optimisation for Android 2.0++.\nPlease disable if layout is broken.\nNeeds restart after change."
+		    android:text="Optimisation for Android 2.0++.\nDisable if layout is broken.\nNeeds restart after change."
 		    />
 		    
 		<View android:layout_width="fill_parent" style="@style/Divider" /> 
