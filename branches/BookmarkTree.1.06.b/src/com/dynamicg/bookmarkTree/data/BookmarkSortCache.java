@@ -135,8 +135,8 @@ public abstract class BookmarkSortCache {
 	}
 	
 	public static BookmarkSortCache createInstance(BookmarkTreeContext ctx) {
-		int sortStyle = ctx.getPreferencesWrapper().getSortStyle();
-		switch (sortStyle) {
+		int sortOption = ctx.getPreferencesWrapper().getSortOption();
+		switch (sortOption) {
 		case PreferencesWrapper.SORT_FOLDERS_BEFORE_BM: return new ByType(true);
 		case PreferencesWrapper.SORT_BM_BEFORE_FOLDERS: return new ByType(false);
 		default: return new AlphaOverall();

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.dynamicg.common.main.Logger;
-import com.dynamicg.common.main.SystemUtil;
 
 public class PreferencesWrapper {
 
@@ -17,6 +16,8 @@ public class PreferencesWrapper {
 	private static final String KEY_DISCLAIMER = "disclaimerLastDisplayed";
 	private static final String KEY_SHOW_DELETE_ICON = "showDeleteIcon";
 	private static final String KEY_OPTIMISED_LAYOUT = "optimisedLayout";
+	private static final String KEY_LIST_STYLE = "listStyle";
+	private static final String KEY_SORT_OPTION = "sortOption";
 	
 	private final Context context;
 	
@@ -25,6 +26,8 @@ public class PreferencesWrapper {
 	private int disclaimerLastDisplayed;
 	private int showDeleteIcon;
 	private int optimisedLayout;
+	private int listStyle;
+	private int sortOption;
 	
 	public PreferencesWrapper(Context context) {
 		this.context = context;
@@ -38,6 +41,9 @@ public class PreferencesWrapper {
 			defaultOptimisation = VersionAccessor.isEclairOrHigher() ? 1 : 0;
 		}
 		optimisedLayout = settings.getInt(KEY_OPTIMISED_LAYOUT, defaultOptimisation);
+		
+		listStyle = settings.getInt(KEY_LIST_STYLE,0);
+		sortOption = settings.getInt(KEY_SORT_OPTION,0);
 	}
 	
 	public void write() {
@@ -50,6 +56,8 @@ public class PreferencesWrapper {
 		editor.putInt(KEY_DISCLAIMER, disclaimerLastDisplayed);
 		editor.putInt(KEY_SHOW_DELETE_ICON, showDeleteIcon);
 		editor.putInt(KEY_OPTIMISED_LAYOUT, optimisedLayout);
+		editor.putInt(KEY_LIST_STYLE, listStyle);
+		editor.putInt(KEY_SORT_OPTION, sortOption);
 		editor.commit();
 	}
 	
@@ -96,23 +104,19 @@ public class PreferencesWrapper {
 		write();
 	}
 	
-	public static final int SORT_ALPHA = 1;
-	public static final int SORT_FOLDERS_BEFORE_BM = 2;
-	public static final int SORT_BM_BEFORE_FOLDERS = 3;
+	public static final int SORT_ALPHA = 0;
+	public static final int SORT_FOLDERS_BEFORE_BM = 1;
+	public static final int SORT_BM_BEFORE_FOLDERS = 2;
 	
-	// TODO - ADD PREF
-	public int getSortStyle() {
-		if (SystemUtil.isDevelopmentOrDevDevice() || SystemUtil.isMyProdDevice()) {
-			return SORT_FOLDERS_BEFORE_BM;
-		}
-		else {
-			return SORT_ALPHA;
-		}
+	public int getSortOption() {
+		return sortOption;
 	}
 
-	// TODO - ADD PREF
+	public static final int LIST_STYLE_CLASSIC = 0;
+	public static final int LIST_STYLE_COMPACT = 1;
+	
 	public boolean isCompact() {
-		return SystemUtil.isDevelopmentOrDevDevice() || SystemUtil.isMyProdDevice();
+		return listStyle==LIST_STYLE_COMPACT;
 	}
 	
 }
