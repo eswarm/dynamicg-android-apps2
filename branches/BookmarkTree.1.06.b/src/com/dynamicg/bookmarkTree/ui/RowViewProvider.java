@@ -16,9 +16,11 @@ public abstract class RowViewProvider {
 	private static final int childLevelIndention = 32;
 	
 	public final LayoutInflater inflater;
+	public final boolean compact;
 
-	public RowViewProvider(LayoutInflater inflater) {
+	public RowViewProvider(LayoutInflater inflater, boolean compact) {
 		this.inflater = inflater;
+		this.compact = compact;
 		if (log.isDebugEnabled()) {
 			log.info("create RowViewProvider", this);
 		}
@@ -28,11 +30,8 @@ public abstract class RowViewProvider {
 	
 	public static class ProviderOldStyle extends RowViewProvider {
 
-		private final boolean compact;
-
 		public ProviderOldStyle(LayoutInflater inflater, boolean compact) {
-			super(inflater);
-			this.compact = compact;
+			super(inflater, compact);
 		}
 
 		private void prepare(View rowview, Bookmark bm) {
@@ -51,6 +50,9 @@ public abstract class RowViewProvider {
 	    	}
 
 	        ImageView iconCell = (ImageView) rowview.findViewById(R.id.bmIcon);
+	    	if (compact && bm.isFolder()) {
+		    	((FaviconImageView)iconCell).isFolder = true;
+	    	}
 			if (bm.isFolder()) {
 		        iconCell.setImageResource(bm.isExpanded() ? R.drawable.folder_open : R.drawable.folder_dflt );
 			}
@@ -86,12 +88,10 @@ public abstract class RowViewProvider {
 
 	public static class ProviderModern extends RowViewProvider {
 
-		private final boolean compact;
 		private final int layoutId;
 
 		public ProviderModern(LayoutInflater inflater, boolean compact) {
-			super(inflater);
-			this.compact = compact;
+			super(inflater, compact);
 			this.layoutId = compact ? R.layout.list_row_compact : R.layout.list20_row_relative;
 		}
 		
