@@ -129,6 +129,9 @@ public class BookmarkListAdapter extends BaseAdapter {
 	// called by click event and via menu actions
 	public void redraw() {
 		updateBookmarkList();
+		if (rowViewProvider!=null) {
+			rowViewProvider.compact = ctx.getPreferencesWrapper().isCompact();
+		}
 		// force repaint
 		listview.invalidateViews();
 	}
