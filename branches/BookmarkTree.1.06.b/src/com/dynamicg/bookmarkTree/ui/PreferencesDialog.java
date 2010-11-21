@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
@@ -93,6 +94,7 @@ public class PreferencesDialog extends Dialog {
 							@Override
 							public void done() {
 								ctx.reloadAndRefresh(); // needs to be done by main thread
+								Toast.makeText(getContext(), "Bookmark sort done", Toast.LENGTH_SHORT).show();
 							}
 						};
 					}
