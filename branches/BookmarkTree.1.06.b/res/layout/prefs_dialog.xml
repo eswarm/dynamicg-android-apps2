@@ -15,7 +15,7 @@
 	
 		<!-- ====================== Setup ====================== -->
 		
-		<View android:layout_width="fill_parent" style="@style/Divider" /> 
+		<TextView style="@style/PrefsGroup" android:layout_marginTop="0dip" android:text="Setup" /> 
 		
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_height="wrap_content"
@@ -50,7 +50,8 @@
 		    />
 		    
 		<!-- ====================== Presentation ====================== -->
-		<View android:layout_width="fill_parent" style="@style/Divider" /> 
+
+		<TextView style="@style/PrefsGroup" android:text="Presentation" /> 
 	    
 	    <TableLayout
 		    android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
 	    
 		<!-- ====================== Special Ops ====================== -->
 		
-		<View android:layout_width="fill_parent" style="@style/Divider" /> 
+		<TextView style="@style/PrefsGroup" android:text="Additional options" /> 
 		
 	    <CheckBox style="@style/PrefsLabel"
 	    	android:id="@+id/prefsDeletionActive"
@@ -99,21 +100,17 @@
 		    android:text="Optimisation for Android 2.0++.\nDisable if layout is broken.\nNeeds restart after change."
 		    />
 		    
-		<View android:layout_width="fill_parent" style="@style/Divider" /> 
-		
 	    <Button
 	    	android:id="@+id/prefsActionSortAlpha"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="Sort bookmarks A-Z"
-		    android:layout_gravity="right"
+		    android:layout_marginTop="10dip"
 		    />
-	    
-		<View android:layout_width="fill_parent" style="@style/Divider" /> 
-		    
+	    		    
 		<!-- ====================== Button Panel ====================== -->
 		
-		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		<LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
