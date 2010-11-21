@@ -71,9 +71,15 @@ public class PreferencesWrapper {
 	public boolean isShowDeleteIcon() {
 		return prefsBean.showDeleteIcon==1;
 	}
+	public void setShowDeleteIcon(boolean checkboxCheckedState) {
+		prefsBean.showDeleteIcon = checkboxCheckedState?1:0;
+	}
 	
 	public boolean isOptimisedLayout() {
 		return prefsBean.optimisedLayout==1;
+	}
+	public void setOptimisedLayout(boolean checkboxCheckedState) {
+		prefsBean.optimisedLayout = checkboxCheckedState?1:0;
 	}
 	
 	public void storeDisclaimerLastDisplayed(int newDisclaimerVersion) {
