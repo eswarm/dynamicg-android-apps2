@@ -99,7 +99,7 @@
 	    />
    	<TextView style="@style/PrefsHint" 
    		android:layout_span="2"
-   		android:text="\u2192 Disable if layout is broken. Restart when changed."
+   		android:text="\u2192 Disable if layout broken. Restart when changed."
    		/>
 	    
     <Button
