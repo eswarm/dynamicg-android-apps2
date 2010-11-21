@@ -157,6 +157,10 @@ public class PreferencesDialog extends Dialog {
 		processSeparatorUpdate();
 		prefsWrapper.setShowDeleteIcon(showDeleteIconCheckbox.isChecked());
 		prefsWrapper.setOptimisedLayout(optimiseLayout.isChecked());
+		
+		prefsWrapper.prefsBean.setListStyle(SpinnerUtil.getCurrentValue(findViewById(R.id.prefsListStyle)));
+		prefsWrapper.prefsBean.setSortOption(SpinnerUtil.getCurrentValue(findViewById(R.id.prefsSortOption)));
+		
 		prefsWrapper.write();
 	}
 

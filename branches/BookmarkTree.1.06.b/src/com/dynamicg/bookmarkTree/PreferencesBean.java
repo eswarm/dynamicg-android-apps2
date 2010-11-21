@@ -25,5 +25,11 @@ public class PreferencesBean {
 	public int getSortOption() {
 		return sortOption;
 	}
+	public void setListStyle(int listStyle) {
+		this.listStyle = listStyle;
+	}
+	public void setSortOption(int sortOption) {
+		this.sortOption = sortOption;
+	}
 	
 }

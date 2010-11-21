@@ -39,6 +39,12 @@ public class SpinnerUtil {
 		
 	}
 	
+	public static int getCurrentValue(View spinnerObject) {
+		Spinner spinner = (Spinner)spinnerObject;
+		KeyValue item = (KeyValue)spinner.getSelectedItem();
+		return item==null ? 0 : item.key;
+	}
+	
 	public static ArrayList<KeyValue> getListStyleItems() {
 		ArrayList<KeyValue> list = new ArrayList<KeyValue>();
 		list.add(new KeyValue(PreferencesWrapper.LIST_STYLE_CLASSIC, "Classic"));
