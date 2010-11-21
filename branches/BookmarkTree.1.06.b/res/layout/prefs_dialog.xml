@@ -58,22 +58,22 @@
 		    android:padding="@dimen/mainPadding"
 		    >
 		    <TableRow>
-		    	<TextView style="@style/PrefsLabel" 
-		    		android:text="List style:" 
+		    	<TextView style="@style/PrefsLabel"
+		    		android:text="Sorting:" 
 		    		android:layout_gravity="center_vertical"
 		    		/>
-		    	<Spinner android:id="@+id/prefsListStyle"
+		    	<Spinner android:id="@+id/prefsSortOption"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 				    android:layout_marginLeft="5dip"
 				    />
 		    </TableRow>
 		    <TableRow>
-		    	<TextView style="@style/PrefsLabel"
-		    		android:text="Sorting:" 
+		    	<TextView style="@style/PrefsLabel" 
+		    		android:text="List style:" 
 		    		android:layout_gravity="center_vertical"
 		    		/>
-		    	<Spinner android:id="@+id/prefsSortOption"
+		    	<Spinner android:id="@+id/prefsListStyle"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
 				    android:layout_marginLeft="5dip"
