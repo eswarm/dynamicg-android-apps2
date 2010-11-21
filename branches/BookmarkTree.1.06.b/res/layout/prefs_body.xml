@@ -52,7 +52,7 @@
 	    >
 	    <TableRow>
 	    	<TextView style="@style/PrefsLabel"
-	    		android:text="Sorting:" 
+	    		android:text="Sort:" 
 	    		android:layout_gravity="center_vertical"
 	    		/>
 	    	<Spinner android:id="@+id/prefsSortOption"
