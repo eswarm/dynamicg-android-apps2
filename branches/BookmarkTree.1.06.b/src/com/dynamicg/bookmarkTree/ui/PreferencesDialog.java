@@ -119,8 +119,8 @@ public class PreferencesDialog extends Dialog {
 		};
 
 		// attach spinners
-		SpinnerUtil.bind ( findViewById(R.id.prefsListStyle), prefsWrapper.getListStyle(), SpinnerUtil.getListStyleItems() );
-		SpinnerUtil.bind ( findViewById(R.id.prefsSortOption), prefsWrapper.getSortOption(), SpinnerUtil.getSortOptionItems() );
+		SpinnerUtil.bind ( findViewById(R.id.prefsListStyle), prefsWrapper.prefsBean.getListStyle(), SpinnerUtil.getListStyleItems() );
+		SpinnerUtil.bind ( findViewById(R.id.prefsSortOption), prefsWrapper.prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems() );
 		
 	}
 	
