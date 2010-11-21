@@ -163,6 +163,13 @@ public class PreferencesDialog extends Dialog {
 		prefsWrapper.prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));
 		prefsWrapper.prefsBean.setSortOption(spinnerUtil.getCurrentValue(R.id.prefsSortOption));
 		
+		// see if "refresh" is required
+		if ( spinnerUtil.isChanged(R.id.prefsListStyle)
+				|| spinnerUtil.isChanged(R.id.prefsSortOption)
+				) {
+			dataRefreshRequired = true;
+		}
+		
 		prefsWrapper.write();
 	}
 
