@@ -111,10 +111,19 @@ public class PreferencesWrapper {
 	public int getSortOption() {
 		return sortOption;
 	}
+	public void setSortOption(int sortOption) {
+		this.sortOption = sortOption;
+	}
 
 	public static final int LIST_STYLE_CLASSIC = 0;
 	public static final int LIST_STYLE_COMPACT = 1;
 	
+	public int getListStyle() {
+		return listStyle;
+	}
+	public void setListStyle(int listStyle) {
+		this.listStyle = listStyle;
+	}
 	public boolean isCompact() {
 		return listStyle==LIST_STYLE_COMPACT;
 	}

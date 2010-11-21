@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.PreferencesWrapper;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writer.AlphaSortWriter;
@@ -36,6 +37,7 @@ public class PreferencesDialog extends Dialog {
     
 	private final BookmarkTreeContext ctx;
 	private final String currentSeparator;
+	private final PreferencesWrapper prefsWrapper;
 
 	private EditText separatorItem;
 	private CheckBox doFullUpdateCheckbox;
@@ -47,6 +49,7 @@ public class PreferencesDialog extends Dialog {
 	public PreferencesDialog(BookmarkTreeContext ctx) {
 		super(ctx.activity);
 		this.ctx = ctx;
+		this.prefsWrapper = ctx.getPreferencesWrapper();
 		setContentView(R.layout.prefs_dialog);
 
 		currentSeparator = ctx.getFolderSeparator();
@@ -79,7 +82,7 @@ public class PreferencesDialog extends Dialog {
 		doFullUpdateCheckbox = (CheckBox)findViewById(R.id.prefsFullUpdateOnChange);
 		checkForChangedSeparator(); // inactivate intially
 		
-		Button sortAlpha = (Button)findViewById(R.id.prefsSortAlpha);
+		Button sortAlpha = (Button)findViewById(R.id.prefsActionSortAlpha);
 		sortAlpha.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,10 +106,10 @@ public class PreferencesDialog extends Dialog {
 		});
 		
 		showDeleteIconCheckbox = (CheckBox)findViewById(R.id.prefsDeletionActive);
-		showDeleteIconCheckbox.setChecked(ctx.getPreferencesWrapper().isShowDeleteIcon());
+		showDeleteIconCheckbox.setChecked(prefsWrapper.isShowDeleteIcon());
 
 		optimiseLayout = (CheckBox)findViewById(R.id.prefsOptimiseLayout);
-		optimiseLayout.setChecked(ctx.getPreferencesWrapper().isOptimisedLayout());
+		optimiseLayout.setChecked(prefsWrapper.isOptimisedLayout());
 
 		new DialogButtonPanelWrapper(this,R.id.prefsButtonOk,R.id.prefsButtonCancel) {
 			@Override
@@ -115,6 +118,10 @@ public class PreferencesDialog extends Dialog {
 			}
 		};
 
+		// attach spinners
+		SpinnerUtil.bind ( findViewById(R.id.prefsListStyle), prefsWrapper.getListStyle(), SpinnerUtil.getListStyleItems() );
+		SpinnerUtil.bind ( findViewById(R.id.prefsSortOption), prefsWrapper.getSortOption(), SpinnerUtil.getSortOptionItems() );
+		
 	}
 	
 	private void checkForChangedSeparator() {
@@ -148,9 +155,9 @@ public class PreferencesDialog extends Dialog {
 	
 	private void saveMain() {
 		processSeparatorUpdate();
-		ctx.getPreferencesWrapper().setShowDeleteIcon(showDeleteIconCheckbox.isChecked());
-		ctx.getPreferencesWrapper().setOptimisedLayout(optimiseLayout.isChecked());
-		ctx.getPreferencesWrapper().write();
+		prefsWrapper.setShowDeleteIcon(showDeleteIconCheckbox.isChecked());
+		prefsWrapper.setOptimisedLayout(optimiseLayout.isChecked());
+		prefsWrapper.write();
 	}
 
 	private void savePostprocessing() {
@@ -168,7 +175,7 @@ public class PreferencesDialog extends Dialog {
 			return;
 		}
 
-		ctx.getPreferencesWrapper().setNewSeparator(newSeparator);
+		prefsWrapper.setNewSeparator(newSeparator);
 
 		if (doFullUpdateCheckbox.isChecked()) {
 			new SeparatorChangedBookmarkWriter(ctx, currentSeparator, newSeparator);

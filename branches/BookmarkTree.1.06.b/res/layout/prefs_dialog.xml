@@ -102,7 +102,7 @@
 		<View android:layout_width="fill_parent" style="@style/Divider" /> 
 		
 	    <Button
-	    	android:id="@+id/prefsSortAlpha"
+	    	android:id="@+id/prefsActionSortAlpha"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:text="Sort bookmarks A-Z"
