@@ -69,7 +69,7 @@
         <item name="android:background">#666</item>
         <item name="android:textColor">#fff</item>
         <item name="android:layout_marginTop">10dip</item>
-        <item name="android:layout_marginLeft">4dip</item>
+        <item name="android:layout_marginLeft">2dip</item>
         <item name="android:layout_marginRight">2dip</item>
         <item name="android:layout_marginBottom">2dip</item>
         <item name="android:paddingLeft">4dip</item>
