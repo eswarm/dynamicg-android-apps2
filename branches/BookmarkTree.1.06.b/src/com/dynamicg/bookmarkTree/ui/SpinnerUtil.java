@@ -80,8 +80,8 @@ public class SpinnerUtil {
 	public static ArrayList<KeyValue> getSortOptionItems() {
 		ArrayList<KeyValue> list = new ArrayList<KeyValue>();
 		list.add(new KeyValue(PreferencesWrapper.SORT_ALPHA, "Alpha overall"));
-		list.add(new KeyValue(PreferencesWrapper.SORT_FOLDERS_BEFORE_BM, "Folders before bookmarks"));
-		list.add(new KeyValue(PreferencesWrapper.SORT_BM_BEFORE_FOLDERS, "Bookmarks before folders"));
+		list.add(new KeyValue(PreferencesWrapper.SORT_FOLDERS_BEFORE_BM, "Folders first"));
+		list.add(new KeyValue(PreferencesWrapper.SORT_BM_BEFORE_FOLDERS, "Bookmarks first"));
 		return list;
 	}
 	
