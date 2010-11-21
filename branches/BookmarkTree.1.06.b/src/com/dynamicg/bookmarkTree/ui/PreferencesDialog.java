@@ -78,19 +78,23 @@ public class PreferencesDialog extends Dialog {
 		doFullUpdateCheckbox = (CheckBox)findViewById(R.id.prefsFullUpdateOnChange);
 		checkForChangedSeparator(); // inactivate intially
 		
-		// TODO ## add confirmation
 		Button sortAlpha = (Button)findViewById(R.id.prefsSortAlpha);
 		sortAlpha.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleProgressDialog(ctx.activity, "Please wait...") {
+				new SimpleAlertDialog(ctx.activity, "Sort browser bookmarks?", "OK", "Cancel") {
 					@Override
-					public void backgroundWork() {
-						new AlphaSortWriter(ctx);
-					}
-					@Override
-					public void done() {
-						ctx.reloadAndRefresh(); // needs to be done by main thread
+					public void onPositiveButton() {
+						new SimpleProgressDialog(ctx.activity, "Please wait...") {
+							@Override
+							public void backgroundWork() {
+								new AlphaSortWriter(ctx);
+							}
+							@Override
+							public void done() {
+								ctx.reloadAndRefresh(); // needs to be done by main thread
+							}
+						};
 					}
 				};
 			}
