@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
@@ -65,10 +66,14 @@ implements BackupEventListener {
 	
 	private void setupRestoreList() {
 		
-		final ArrayList<File> backupFiles = BackupManager.getBackupFiles();
-		
-		RadioGroup backupListGroup = (RadioGroup)findViewById(R.id.brRestoreList);
+		final RadioGroup backupListGroup = (RadioGroup)findViewById(R.id.brRestoreList);
 		backupListGroup.removeAllViews(); // for repeated calls
+		
+		final ArrayList<File> backupFiles = BackupManager.getBackupFiles();
+		if (backupFiles.size()==0) {
+			TextView hint = SimpleAlertDialog.createTextView(context, Messages.brNoFilesForRestore);
+			backupListGroup.addView(hint);
+		}
 		
 		RadioButton rb;
 		String filename;
@@ -80,7 +85,6 @@ implements BackupEventListener {
 			backupListGroup.addView(rb);
 		}
 		
-		// TODO - hint if no files found
 		// TODO - add "files stored in" hint
 		
 		backupListGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {

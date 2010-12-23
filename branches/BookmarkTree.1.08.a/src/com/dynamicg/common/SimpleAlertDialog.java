@@ -151,6 +151,10 @@ public abstract class SimpleAlertDialog {
 	}
 	
 	public TextView createTextView(String text) {
+		return createTextView(context, text);
+	}
+	
+	public static TextView createTextView(Context context, String text) {
 		TextView textview = new TextView(context);
 		textview.setText(text);
 		if (textviewPaddingScaled==0) {
