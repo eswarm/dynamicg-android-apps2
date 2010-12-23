@@ -82,9 +82,8 @@ public class BackupManager {
 	public static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener) {
 		
 		final Context context = ctx.activity;
-		final String title = "Create backup ...";
 		
-		new SimpleProgressDialog(context, title) {
+		new SimpleProgressDialog(context, Messages.brProgressCreateBackup) {
 			
 			String filename;
 			
@@ -110,8 +109,7 @@ public class BackupManager {
 			
 			@Override
 			public void done() {
-				String confirmation = "Backup created:\n{1}";
-				toast ( ctx, StringUtil.replaceFirst(confirmation, "{1}", filename) );
+				toast ( ctx, StringUtil.replaceFirst(Messages.brHintBackupCreated, "{1}", filename) );
 				backupDoneListener.backupDone();
 			}
 			
@@ -130,9 +128,8 @@ public class BackupManager {
 			, final BackupEventListener backupDoneListener
 			) 
 	{
-		final String title = "Restore bookmarks ...";
 		
-		new SimpleProgressDialog(ctx.activity, title) {
+		new SimpleProgressDialog(ctx.activity, Messages.brProgressRestoreBookmarks) {
 			
 			@Override
 			public void backgroundWork() {
@@ -150,7 +147,7 @@ public class BackupManager {
 			
 			@Override
 			public void done() {
-				toast(ctx, "Restore done ...");
+				toast(ctx, Messages.brHintBookmarksRestored);
 				backupDoneListener.restoreDone();
 			}
 			

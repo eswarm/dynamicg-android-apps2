@@ -120,7 +120,7 @@ implements BackupEventListener {
 			public View getBody() {
 				
 				TextView selectedFile = new TextView(context);
-				String selectedFileHint = StringUtil.replaceFirst(Messages.brSelectedFile, "{1}", backupFile.getName() );
+				String selectedFileHint = StringUtil.replaceFirst(Messages.brSelectedFileLabel, "{1}", backupFile.getName() );
 				selectedFile.setText(selectedFileHint);
 				
 				CheckBox box = new CheckBox(context);
