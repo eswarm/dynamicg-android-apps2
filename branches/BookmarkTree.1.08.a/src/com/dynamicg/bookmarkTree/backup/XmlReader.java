@@ -43,7 +43,7 @@ public class XmlReader {
 		return Long.parseLong(parser.getText());
 	}
 	
-	public ArrayList<RawDataBean> read(boolean includeIcons) 
+	public ArrayList<RawDataBean> read() 
 	throws Exception {
 		
 		ArrayList<RawDataBean> list = new ArrayList<RawDataBean>();
@@ -77,7 +77,7 @@ public class XmlReader {
 				else if (equals(tag, Tags.URL)) {
 					bean.url = getNextText();
 				}
-				else if (equals(tag, Tags.FAVICON) && includeIcons) {
+				else if (equals(tag, Tags.FAVICON)) {
 					bean.favicon = encodeIconData(getNextText());
 				}
 			}

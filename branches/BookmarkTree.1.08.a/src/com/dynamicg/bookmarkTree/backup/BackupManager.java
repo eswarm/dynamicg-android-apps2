@@ -15,6 +15,8 @@ import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.main.Logger;
 import com.dynamicg.common.main.StringUtil;
 
+//TODO -- validation after backup
+//TODO -- add "menu/delete old backup files"
 public class BackupManager {
 
 	private static final Logger log = new Logger(BackupManager.class);
@@ -92,12 +94,14 @@ public class BackupManager {
 				File backupdir = getBackupDir();
 				backupdir.mkdirs();
 				
-				filename = getFilename();
-				File xmlfile = new File ( backupdir, filename );
+				this.filename = getFilename();
+				File xmlfileTemp = new File ( backupdir, filename+".tmp" );
+				File xmlfileFinal = new File ( backupdir, filename );
 				
 				ArrayList<RawDataBean> bookmarks = BookmarkDataProvider.readBrowserBookmarks(ctx);
 				try {
-					new XmlWriter(xmlfile, bookmarks);
+					new XmlWriter(xmlfileTemp, bookmarks);
+					xmlfileTemp.renameTo(xmlfileFinal);
 				}
 				catch (Exception e) {
 					if (e instanceof RuntimeException) {
@@ -124,7 +128,6 @@ public class BackupManager {
 	
 	public static void restore ( final BookmarkTreeContext ctx
 			, final File xmlfile
-			, final boolean includeIcons
 			, final BackupEventListener backupDoneListener
 			) 
 	{
@@ -134,7 +137,7 @@ public class BackupManager {
 			@Override
 			public void backgroundWork() {
 				try {
-					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read(includeIcons);
+					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
 					BookmarkDataProvider.replaceFull(ctx, rows);
 				}
 				catch (Exception e) {

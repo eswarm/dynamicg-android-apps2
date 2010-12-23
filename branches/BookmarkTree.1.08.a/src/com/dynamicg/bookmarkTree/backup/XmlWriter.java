@@ -43,12 +43,20 @@ public class XmlWriter {
 		addTextNode(tag, Long.toString(value));
 	}
 
+	private static String split(final StringBuffer sb, final int linesize) {
+		final int chunks = (sb.length()-1) / linesize;
+		for ( int i=chunks;i>0;i-- ) {
+			sb.insert(i*linesize, '\n');
+		}
+		return sb.toString();
+	}
+	
 	private String getIconData(RawDataBean b) {
 		String buffer;
 		// buffer = Hex.encodeHex(MockIcon.getIcon(context), false) ;
 		if (b.favicon!=null&&b.favicon.length>0) {
 			buffer = Hex.encodeHex(b.favicon, false) ;
-			return BackupRestoreUtil.breakToLines(buffer, 80);
+			return split ( new StringBuffer(buffer), 80);
 		}
 		else {
 			return "";

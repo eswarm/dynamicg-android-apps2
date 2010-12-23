@@ -8,12 +8,9 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
@@ -102,11 +99,9 @@ implements BackupEventListener {
 	private void restore(final RadioGroup group, final File backupFile) {
 		new SimpleAlertDialog(context, Messages.brRestoreConfirmation, R.string.commonOK, R.string.commonCancel) {
 			
-			CheckBox includeIcons;
-			
 			@Override
 			public void onPositiveButton() {
-				BackupManager.restore(ctx, backupFile, includeIcons.isChecked(), BackupRestoreDialog.this);
+				BackupManager.restore(ctx, backupFile, BackupRestoreDialog.this);
 			}
 
 			@Override
@@ -114,29 +109,12 @@ implements BackupEventListener {
 				group.clearCheck();
 			}
 
-
-
 			@Override
-			public View getBody() {
-				
-				TextView selectedFile = new TextView(context);
-				String selectedFileHint = StringUtil.replaceFirst(Messages.brSelectedFileLabel, "{1}", backupFile.getName() );
-				selectedFile.setText(selectedFileHint);
-				
-				CheckBox box = new CheckBox(context);
-				box.setText(Messages.brIncludeIcons);
-				box.setChecked(true); // default on
-				includeIcons = box;
-
-				LinearLayout layout = new LinearLayout(context);
-				layout.setOrientation(LinearLayout.VERTICAL);
-				layout.addView(selectedFile);
-				layout.addView(box);
-				layout.setPadding(5,5,5,5); // TODO -- scaling
-				
-				return layout;
+			public String getPlainBodyText() {
+				// TODO - check padding
+				return StringUtil.replaceFirst(Messages.brSelectedFileLabel, "{1}", backupFile.getName() );
 			}
-			
+
 		};
 	}
 

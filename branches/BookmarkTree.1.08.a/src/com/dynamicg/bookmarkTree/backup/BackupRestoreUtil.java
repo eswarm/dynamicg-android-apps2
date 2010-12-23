@@ -13,31 +13,6 @@ import com.dynamicg.bookmarkTree.R;
 
 public class BackupRestoreUtil {
 
-	public static String breakToLines(String s, int linesize) {
-		
-		final StringBuffer sb = new StringBuffer();
-		final int strlen = s.length();
-		
-		int counter=0, startpos, endpos;
-		while (true) {
-			startpos = counter*linesize;
-			endpos = startpos+linesize;
-			if (strlen>endpos) {
-				sb.append(s.substring(startpos,endpos));
-				sb.append("\n");
-			}
-			else if (s.length() > startpos) {
-				sb.append(s.substring(startpos));
-			}
-			else {
-				break;
-			}
-			counter++;
-		}
-		
-		return sb.toString();
-	}
-	
 	public static ArrayList<byte[]> getIcons(Context context) {
 		
 		Resources resources = context.getResources();
