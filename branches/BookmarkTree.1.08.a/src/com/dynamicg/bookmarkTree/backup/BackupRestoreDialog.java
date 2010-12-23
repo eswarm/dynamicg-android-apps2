@@ -20,6 +20,7 @@ import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.backup.BackupManager.BackupEventListener;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
+import com.dynamicg.common.main.StringUtil;
 import com.dynamicg.common.ui.SimpleAlertDialog;
 
 public class BackupRestoreDialog extends Dialog
@@ -44,7 +45,7 @@ implements BackupEventListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
-		setTitle("Backup and restore");
+		setTitle(Messages.brDialogTitle);
 		
 		Button backup = (Button)findViewById(R.id.brBackup);
 		backup.setOnClickListener(new View.OnClickListener() {
@@ -99,9 +100,7 @@ implements BackupEventListener {
 	}
 	
 	private void restore(final RadioGroup group, final File backupFile) {
-		final String title = "Restore bookmarks?";
-		final String includeIconsLabel = "Include icons";
-		new SimpleAlertDialog(context, title, R.string.commonOK, R.string.commonCancel) {
+		new SimpleAlertDialog(context, Messages.brRestoreConfirmation, R.string.commonOK, R.string.commonCancel) {
 			
 			CheckBox includeIcons;
 			
@@ -121,10 +120,11 @@ implements BackupEventListener {
 			public View getBody() {
 				
 				TextView selectedFile = new TextView(context);
-				selectedFile.setText("Selected file:\n"+backupFile.getName());
+				String selectedFileHint = StringUtil.replaceFirst(Messages.brSelectedFile, "{1}", backupFile.getName() );
+				selectedFile.setText(selectedFileHint);
 				
 				CheckBox box = new CheckBox(context);
-				box.setText(includeIconsLabel);
+				box.setText(Messages.brIncludeIcons);
 				box.setChecked(true); // default on
 				includeIcons = box;
 
