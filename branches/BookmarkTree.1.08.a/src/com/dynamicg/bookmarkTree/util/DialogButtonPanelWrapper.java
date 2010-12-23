@@ -9,7 +9,7 @@ import com.dynamicg.bookmarkTree.R;
 public abstract class DialogButtonPanelWrapper {
 
 	public static final int TYPE_SAVE_CANCEL = 1;
-	public static final int TYPE_INFO = 2;
+	public static final int TYPE_CLOSE = 2;
 	
 	private final Dialog dialog;
 	
@@ -21,7 +21,7 @@ public abstract class DialogButtonPanelWrapper {
 		if (what==TYPE_SAVE_CANCEL) {
 			setup(R.string.commonSave, R.string.commonCancel);
 		}
-		else if (what==TYPE_INFO) {
+		else if (what==TYPE_CLOSE) {
 			setup(R.string.commonClose, 0 );
 		}
 	}

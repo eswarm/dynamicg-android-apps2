@@ -66,4 +66,10 @@ public class SystemUtil {
 		
 	}
 	
+	public static void dumpIfDevelopment(Throwable e) {
+		if (SystemUtil.isDevelopmentOrDevDevice()) {
+			e.printStackTrace();
+		}
+	}
+
 }

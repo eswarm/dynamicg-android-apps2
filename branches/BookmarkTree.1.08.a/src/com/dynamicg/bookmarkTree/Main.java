@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
 import com.dynamicg.common.main.SystemUtil;
 
+// TODO - add "restore every 20 days" pref
 public class Main extends Activity {
 
 	/*
@@ -26,6 +28,7 @@ public class Main extends Activity {
     public static final int ACTION_SETTINGS = ++actionCounter;
     public static final int ACTION_DELETE_BOOKMARK = ++actionCounter;
     public static final int ACTION_NEW_BM = ++actionCounter;
+    public static final int ACTION_BACKUP_RESTORE = ++actionCounter;
 
     private static boolean initialised = false;
     
@@ -42,7 +45,6 @@ public class Main extends Activity {
     	this.ctx = new BookmarkTreeContext(this);
     	
     	DisclaimerPopup.showOnce(ctx);
-    	
     }
     
     
@@ -55,6 +57,7 @@ public class Main extends Activity {
 		createMenu(menu, ACTION_COLLAPSE_ALL, R.string.menuCollapseAll, R.drawable.menu_collapse);
 		createMenu(menu, ACTION_RELOAD, R.string.menuReload, R.drawable.menu_reload);
 		createMenu(menu, ACTION_NEW_BM, R.string.menuCreate, R.drawable.menu_create);
+		createMenu(menu, ACTION_BACKUP_RESTORE, R.string.menuBackup, R.drawable.menu_save);
 		createMenu(menu, ACTION_SETTINGS, R.string.menuPrefs, R.drawable.menu_prefs);
 		return true;
 	}
@@ -73,6 +76,9 @@ public class Main extends Activity {
 		}
 		else if ( id==ACTION_NEW_BM ) {
 			new EditBookmarkDialog(ctx);
+		}
+		else if ( id==ACTION_BACKUP_RESTORE ) {
+			new BackupRestoreDialog(ctx);
 		}
 		return true;
 	}
