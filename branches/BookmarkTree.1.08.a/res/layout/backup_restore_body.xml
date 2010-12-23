@@ -31,7 +31,7 @@
     
 	<!-- ====================== Restore ====================== -->
 
-	<TextView style="@style/PrefsGroup" android:text="Restore - select file" /> 
+	<TextView style="@style/PrefsGroup" android:text="Restore - select file:" /> 
 
 	<RadioGroup android:id="@+id/brRestoreList"
 		android:layout_width="wrap_content"

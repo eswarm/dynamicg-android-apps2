@@ -23,7 +23,7 @@ public class BackupManager {
 	private static final String exportSubdir = "dynamicg/bookmarks";
 	
 	private static final String FILE_PATTERN = "backup-{stamp}.xml";
-	private static final String FMT_STAMP = "%Y-%m-%d-%H-%M-%S";
+	private static final String FMT_STAMP = "%Y-%m-%d.%H-%M-%S";
 	
 	public static final File getBackupDir() {
 		File extdir = Environment.getExternalStorageDirectory();
