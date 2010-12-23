@@ -23,7 +23,9 @@ public class BackupManager {
 	
 	private static final String exportSubdir = "dynamicg/bookmarks";
 	
-	private static final String FILE_PATTERN = "backup-{stamp}.xml";
+	private static final String FILE_PREFIX = "backup.";
+	private static final String FILE_SUFFIX = ".xml";
+	private static final String FILE_PATTERN = FILE_PREFIX + "{stamp}" + FILE_SUFFIX;
 	private static final String FMT_STAMP = "%Y-%m-%d.%H-%M-%S";
 	
 	public static final File getBackupDir() {
@@ -42,13 +44,11 @@ public class BackupManager {
 	}
 	
 	public static ArrayList<File> getBackupFiles() {
-		final String filePrefix = "backup-";
-		final String fileSuffix = ".xml";
 		File dir = getBackupDir();
 		File[] files = dir.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
-				return filename.startsWith(filePrefix) && filename.endsWith(fileSuffix);
+				return filename.startsWith(FILE_PREFIX) && filename.endsWith(FILE_SUFFIX);
 			}
 		});
 		
