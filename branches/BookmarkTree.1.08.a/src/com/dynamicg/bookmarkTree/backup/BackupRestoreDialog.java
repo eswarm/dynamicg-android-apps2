@@ -26,6 +26,8 @@ import com.dynamicg.common.StringUtil;
 public class BackupRestoreDialog extends Dialog
 implements BackupEventListener {
 
+	public static final int DELETION_DAYS_LIMIT = 90;
+	
     public static final int ACTION_DELETE_OLD = 1;
     public static final int ACTION_DELETE_ALL = 2;
     
@@ -145,9 +147,13 @@ implements BackupEventListener {
 		dismiss();
 	}
 	
+	private String getDeletionOldLabel() {
+		return Messages.brDeleteOld.replace("{1}", Integer.toString(DELETION_DAYS_LIMIT));
+	}
+	
 	private void deleteConfirmation(final int what) {
 		String msg = what==ACTION_DELETE_ALL ? Messages.brDeleteAll
-				: what==ACTION_DELETE_OLD ? Messages.brDeleteOld
+				: what==ACTION_DELETE_OLD ? getDeletionOldLabel()
 						: "<undefined>";
 		new SimpleAlertDialog.OkCancelDialog(context, msg+"?") {
 			@Override
@@ -159,7 +165,7 @@ implements BackupEventListener {
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, ACTION_DELETE_OLD, 0, Messages.brDeleteOld);
+		menu.add(0, ACTION_DELETE_OLD, 0, getDeletionOldLabel());
 		menu.add(0, ACTION_DELETE_ALL, 0, Messages.brDeleteAll);
 		return true;
 	}

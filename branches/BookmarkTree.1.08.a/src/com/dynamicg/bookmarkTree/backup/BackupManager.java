@@ -197,7 +197,7 @@ public class BackupManager {
 			
 			Time t = new Time();
 			t.setToNow();
-			t.month = t.month - 3; // 3 months
+			t.monthDay = t.monthDay - BackupRestoreDialog.DELETION_DAYS_LIMIT;
 			t.normalize(false);
 			
 			final String fnameStampLimit = getFilename(t);
