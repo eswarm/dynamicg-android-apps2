@@ -26,7 +26,7 @@ public class BackupManager {
 	private static final String FILE_PATTERN = "backup-{stamp}.xml";
 	private static final String FMT_STAMP = "%Y-%m-%d-%H-%M-%S";
 	
-	private static final File getBackupDir() {
+	public static final File getBackupDir() {
 		File extdir = Environment.getExternalStorageDirectory();
 		File backupdir = new File(extdir, exportSubdir);
 		return backupdir;

@@ -62,6 +62,9 @@ implements BackupEventListener {
 			}
 		};
 		
+		((TextView)findViewById(R.id.brStorageHint1)).setText(Messages.brStorageHint);
+		((TextView)findViewById(R.id.brStorageHint2)).setText(BackupManager.getBackupDir().toString());
+		
 	}
 	
 	private void setupRestoreList() {
@@ -84,8 +87,6 @@ implements BackupEventListener {
 			rb.setId(pos);
 			backupListGroup.addView(rb);
 		}
-		
-		// TODO - add "files stored in" hint
 		
 		backupListGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override

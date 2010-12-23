@@ -9,14 +9,24 @@
 
 	<TextView style="@style/PrefsGroup" android:text="Backup" android:layout_marginTop="0dip" /> 
 
-	<Button
-		android:id="@+id/brBackup"
+	<Button android:id="@+id/brBackup"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="Create backup"
 		android:layout_marginTop="10dip"
 		android:layout_marginBottom="10dip"
 		android:width="140dip"
+		/>
+    
+    <TextView style="@style/PrefsHint" 
+    	android:id="@+id/brStorageHint1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		/>
+    <TextView style="@style/PrefsHint" 
+    	android:id="@+id/brStorageHint2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		/>
     
 	<!-- ====================== Restore ====================== -->
