@@ -80,7 +80,7 @@ public class BackupManager {
 		public void restoreDone();
 	}
 	
-	public static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener) {
+	public synchronized static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener) {
 		
 		final Context context = ctx.activity;
 		
@@ -131,7 +131,7 @@ public class BackupManager {
 		
 	}
 	
-	public static void restore ( final BookmarkTreeContext ctx
+	public synchronized static void restore ( final BookmarkTreeContext ctx
 			, final File xmlfile
 			, final BackupEventListener backupDoneListener
 			) 
@@ -190,7 +190,25 @@ public class BackupManager {
 		}
 		else if (what==BackupRestoreDialog.ACTION_DELETE_OLD) {
 			ArrayList<File> backupFiles = getBackupFiles();
-			// TODO - impl
+			ArrayList<File> deletions = new ArrayList<File>();
+			
+			Time t = new Time();
+			t.setToNow();
+			t.month = t.month - 3; // 3 months
+			t.normalize(false);
+			
+			int comp;
+			String datelimitStr = t.format(FMT_STAMP);
+			for (File f:backupFiles) {
+				comp = f.getName().compareTo(datelimitStr);
+				if (log.isDebugEnabled()) {
+					log.debug("check old files", datelimitStr, f.getName(), comp, comp<=0?"***":"-");
+				}
+				if (comp<=0) {
+					deletions.add(f);
+				}
+			}
+			deleteImpl(deletions);
 		}
 	}
 
