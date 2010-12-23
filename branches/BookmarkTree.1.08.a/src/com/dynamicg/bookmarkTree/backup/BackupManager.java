@@ -3,6 +3,7 @@ package com.dynamicg.bookmarkTree.backup;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.TreeMap;
 
 import android.content.Context;
@@ -83,13 +84,22 @@ public class BackupManager {
 		public void restoreDone();
 	}
 	
+	private static final HashSet<String> locktable = new HashSet<String>();
+	
 	public synchronized static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener) {
 		
 		final Context context = ctx.activity;
 		
+		final String filename = getFilename();
+		synchronized (locktable) {
+			if (locktable.contains(filename)) {
+				return; // already running. double-click(?)
+			}
+			locktable.add(filename);
+		}
+		
 		new SimpleProgressDialog(context, Messages.brProgressCreateBackup) {
 			
-			String filename;
 			int numberOfRows;
 			
 			@Override
@@ -97,7 +107,6 @@ public class BackupManager {
 				File backupdir = getBackupDir();
 				backupdir.mkdirs();
 				
-				this.filename = getFilename();
 				File xmlfileTemp = new File ( backupdir, filename+".tmp" );
 				File xmlfileFinal = new File ( backupdir, filename );
 				
