@@ -88,6 +88,7 @@ public class BackupManager {
 		new SimpleProgressDialog(context, Messages.brProgressCreateBackup) {
 			
 			String filename;
+			int numberOfRows;
 			
 			@Override
 			public void backgroundWork() {
@@ -99,6 +100,7 @@ public class BackupManager {
 				File xmlfileFinal = new File ( backupdir, filename );
 				
 				ArrayList<RawDataBean> bookmarks = BookmarkDataProvider.readBrowserBookmarks(ctx);
+				numberOfRows = bookmarks.size();
 				try {
 					new XmlWriter(xmlfileTemp, bookmarks);
 					xmlfileTemp.renameTo(xmlfileFinal);
@@ -113,7 +115,11 @@ public class BackupManager {
 			
 			@Override
 			public void done() {
-				toast ( ctx, StringUtil.replaceFirst(Messages.brHintBackupCreated, "{1}", filename) );
+				String text = Messages.brHintBackupCreated
+				.replace("{1}", filename)
+				.replace("{2}", Integer.toString(numberOfRows))
+				;
+				toast(ctx, text);
 				backupDoneListener.backupDone();
 			}
 			
@@ -134,10 +140,13 @@ public class BackupManager {
 		
 		new SimpleProgressDialog(ctx.activity, Messages.brProgressRestoreBookmarks) {
 			
+			int numberOfRows;
+			
 			@Override
 			public void backgroundWork() {
 				try {
 					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
+					numberOfRows = rows.size();
 					BookmarkDataProvider.replaceFull(ctx, rows);
 				}
 				catch (Exception e) {
@@ -150,7 +159,8 @@ public class BackupManager {
 			
 			@Override
 			public void done() {
-				toast(ctx, Messages.brHintBookmarksRestored);
+				String text = Messages.brHintBookmarksRestored.replace("{1}", Integer.toString(numberOfRows));
+				toast(ctx, text);
 				backupDoneListener.restoreDone();
 			}
 			
