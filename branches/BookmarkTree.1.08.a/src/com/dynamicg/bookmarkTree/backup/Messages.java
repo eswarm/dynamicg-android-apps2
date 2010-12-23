@@ -13,4 +13,7 @@ public class Messages {
 	public static final String brNoFilesForRestore = "\u2192 No backup files available";
 	public static final String brStorageHint = "\u2192 Backup files are stored here:";
 	
+	public static final String brDeleteOld = "Delete backups >3 months";
+	public static final String brDeleteAll = "Delete all backups";
+	
 }

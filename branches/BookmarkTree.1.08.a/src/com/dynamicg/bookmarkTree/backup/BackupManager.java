@@ -16,7 +16,6 @@ import com.dynamicg.common.Logger;
 import com.dynamicg.common.StringUtil;
 
 //TODO -- validation after backup
-//TODO -- add "menu/delete old backup files"
 public class BackupManager {
 
 	private static final Logger log = new Logger(BackupManager.class);
@@ -171,6 +170,28 @@ public class BackupManager {
 			
 		};
 		
+	}
+
+	private static void deleteImpl(ArrayList<File> backupFiles) {
+		for (File f:backupFiles) {
+			f.delete();
+		}
+	}
+	public static void deleteOldFiles() {
+		ArrayList<File> backupFiles = getBackupFiles();
+		for (File f:backupFiles) {
+			f.delete();
+		}
+	}
+
+	public static void deleteFiles(int what) {
+		if (what==BackupRestoreDialog.ACTION_DELETE_ALL) {
+			deleteImpl(getBackupFiles());
+		}
+		else if (what==BackupRestoreDialog.ACTION_DELETE_OLD) {
+			ArrayList<File> backupFiles = getBackupFiles();
+			// TODO - impl
+		}
 	}
 
 }

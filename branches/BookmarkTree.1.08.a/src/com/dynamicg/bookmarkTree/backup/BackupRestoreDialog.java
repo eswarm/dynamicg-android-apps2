@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -24,6 +26,9 @@ import com.dynamicg.common.StringUtil;
 public class BackupRestoreDialog extends Dialog
 implements BackupEventListener {
 
+    public static final int ACTION_DELETE_OLD = 1;
+    public static final int ACTION_DELETE_ALL = 2;
+    
 	private final BookmarkTreeContext ctx;
 	private final Activity context;
 
@@ -53,7 +58,7 @@ implements BackupEventListener {
 			}
 		});
 		
-		setupRestoreList();
+		refreshBackupFilesList();
 		
 		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_CLOSE) {
 			@Override
@@ -67,7 +72,7 @@ implements BackupEventListener {
 		
 	}
 	
-	private void setupRestoreList() {
+	private void refreshBackupFilesList() {
 		
 		final RadioGroup backupListGroup = (RadioGroup)findViewById(R.id.brRestoreList);
 		backupListGroup.removeAllViews(); // for repeated calls
@@ -104,7 +109,7 @@ implements BackupEventListener {
 	}
 	
 	private void restore(final RadioGroup group, final File backupFile) {
-		new SimpleAlertDialog(context, Messages.brRestoreConfirmation, R.string.commonOK, R.string.commonCancel) {
+		new SimpleAlertDialog.OkCancelDialog(context, Messages.brRestoreConfirmation) {
 			
 			@Override
 			public void onPositiveButton() {
@@ -130,7 +135,7 @@ implements BackupEventListener {
 	
 	@Override
 	public void backupDone() {
-		setupRestoreList();
+		refreshBackupFilesList();
 	}
 
 	@Override
@@ -139,5 +144,35 @@ implements BackupEventListener {
 		ctx.reloadAndRefresh();
 		dismiss();
 	}
+	
+	private void deleteConfirmation(final int what) {
+		String msg = what==ACTION_DELETE_ALL ? Messages.brDeleteAll
+				: what==ACTION_DELETE_OLD ? Messages.brDeleteOld
+						: "<undefined>";
+		new SimpleAlertDialog.OkCancelDialog(context, msg+"?") {
+			@Override
+			public void onPositiveButton() {
+				BackupManager.deleteFiles(what);
+				refreshBackupFilesList();
+			}
+		};
+	}
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, ACTION_DELETE_OLD, 0, Messages.brDeleteOld);
+		menu.add(0, ACTION_DELETE_ALL, 0, Messages.brDeleteAll);
+		return true;
+	}
+
+	@Override
+	public boolean onMenuItemSelected(int featureId, MenuItem item) {
+		int id = item.getItemId();
+		if (id==ACTION_DELETE_OLD || id==ACTION_DELETE_ALL) {
+			deleteConfirmation(id);
+		}
+		return true;
+	}
+	
+	
 	
 }
