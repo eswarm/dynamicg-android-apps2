@@ -40,4 +40,13 @@ public class ContextUtil {
     	return new String[]{version, svnrevision};
     }
 
+	private static float DENSITY_SCALE = -1;
+	
+	public static int getScaledSizeInt(Context context, float size) {
+		if (DENSITY_SCALE==-1) {
+			DENSITY_SCALE = context.getResources().getDisplayMetrics().density;
+	    }
+		return (int) (size * DENSITY_SCALE) ;
+	}
+	
 }

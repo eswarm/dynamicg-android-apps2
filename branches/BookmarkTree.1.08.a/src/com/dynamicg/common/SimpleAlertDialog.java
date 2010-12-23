@@ -13,6 +13,8 @@ import com.dynamicg.bookmarkTree.R;
 
 public abstract class SimpleAlertDialog {
 
+	private static int textviewPaddingScaled;
+	
 	private final Context context;
 	
 	/**
@@ -151,7 +153,11 @@ public abstract class SimpleAlertDialog {
 	public TextView createTextView(String text) {
 		TextView textview = new TextView(context);
 		textview.setText(text);
-		textview.setPadding(5,5,5,5); // TODO - scaling
+		if (textviewPaddingScaled==0) {
+			textviewPaddingScaled = ContextUtil.getScaledSizeInt(context, 5);
+		}
+		int paddingScaled = textviewPaddingScaled;
+		textview.setPadding(paddingScaled,paddingScaled,paddingScaled,paddingScaled);
 		return textview;
 	}
 	
