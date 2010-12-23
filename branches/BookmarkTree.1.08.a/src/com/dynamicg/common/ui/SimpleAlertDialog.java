@@ -151,7 +151,7 @@ public abstract class SimpleAlertDialog {
 	public TextView createTextView(String text) {
 		TextView textview = new TextView(context);
 		textview.setText(text);
-		textview.setPadding(5,5,5,5);
+		textview.setPadding(5,5,5,5); // TODO - scaling
 		return textview;
 	}
 	
