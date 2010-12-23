@@ -120,7 +120,7 @@ public class PreferencesDialog extends Dialog {
 		keepStateCheckbox = (CheckBox)findViewById(R.id.prefsKeepState);
 		keepStateCheckbox.setChecked(prefsWrapper.isKeepState());
 		
-		new DialogButtonPanelWrapper(this) {
+		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_SAVE_CANCEL) {
 			@Override
 			public void onPositiveButton() {
 				saveClicked();
@@ -163,9 +163,7 @@ public class PreferencesDialog extends Dialog {
 	}
 	
 	private void saveMain() {
-		
 		processSeparatorUpdate();
-		
 		prefsWrapper.setOptimisedLayout(optimiseLayout.isChecked());
 		
 		prefsWrapper.prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));

@@ -79,7 +79,7 @@ public class EditBookmarkDialog extends Dialog {
 
 		addToNewFolderItem = (EditText)findViewById(R.id.editBookmarkAddToNewFolder);
 
-		new DialogButtonPanelWrapper(this) {
+		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_SAVE_CANCEL) {
 			@Override
 			public void onPositiveButton() {
 				saveBookmark(bookmark);
