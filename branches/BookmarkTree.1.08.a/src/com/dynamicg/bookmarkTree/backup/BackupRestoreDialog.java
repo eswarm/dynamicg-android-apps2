@@ -71,9 +71,11 @@ implements BackupEventListener {
 		backupListGroup.removeAllViews(); // for repeated calls
 		
 		RadioButton rb;
+		String filename;
 		for ( int pos=0 ; pos<backupFiles.size() ; pos++ ) {
 			rb = new RadioButton(context);
-			rb.setText(backupFiles.get(pos).getName());
+			filename = backupFiles.get(pos).getName().replace("\\.xml", ""); // skip extension on display items
+			rb.setText(filename);
 			rb.setId(pos);
 			backupListGroup.addView(rb);
 		}
