@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.R;
@@ -97,14 +99,23 @@ public abstract class SimpleAlertDialog {
 		}
 		
 		View body = getBody();
+		String plaintext = getPlainBodyText();
+		String scrolltext = getScrollViewText();
+		
 		if (body!=null) {
 			builder.setView(body);
 		}
-		else {
-			String text = getPlainBodyText();
-			if (text!=null && text.length()>0) {
-				builder.setView(createTextView(text));
-			}
+		else if (plaintext!=null && plaintext.length()>0) {
+			builder.setView(createTextView(plaintext));
+		}
+		else if (scrolltext!=null && scrolltext.length()>0) {
+			HorizontalScrollView hscroll = new HorizontalScrollView(context);
+			hscroll.addView(createTextView(scrolltext));
+			
+			ScrollView scroll = new ScrollView(context);
+			scroll.addView(hscroll);
+			
+			builder.setView(scroll);
 		}
 		
 		builder.show();
@@ -133,6 +144,10 @@ public abstract class SimpleAlertDialog {
 		return null;
 	}
 	
+	public String getScrollViewText() {
+		return null;
+	}
+	
 	public TextView createTextView(String text) {
 		TextView textview = new TextView(context);
 		textview.setText(text);
@@ -148,6 +163,10 @@ public abstract class SimpleAlertDialog {
 	}
 	
 	public static void plainInfo(Context context, int title) {
+		new SimpleAlertDialog(context, title, R.string.commonClose) {
+		};
+	}
+	public static void plainInfo(Context context, String title) {
 		new SimpleAlertDialog(context, title, R.string.commonClose) {
 		};
 	}
