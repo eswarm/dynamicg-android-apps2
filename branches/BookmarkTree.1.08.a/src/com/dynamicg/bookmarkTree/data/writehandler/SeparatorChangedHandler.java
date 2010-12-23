@@ -3,8 +3,8 @@ package com.dynamicg.bookmarkTree.data.writehandler;
 import java.util.ArrayList;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writer.BookmarkWriter;
-import com.dynamicg.bookmarkTree.data.writer.BookmarkWriterA;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.main.Logger;
 import com.dynamicg.common.main.StringUtil;
@@ -27,7 +27,7 @@ public class SeparatorChangedHandler {
 	}
 
 	private void fullProcess() {
-		ArrayList<BrowserBookmarkBean> browserBookmarks = BookmarkWriterA.getBrowserBookmarks(ctx);
+		ArrayList<BrowserBookmarkBean> browserBookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx);
 		for (BrowserBookmarkBean bm:browserBookmarks) {
 			update(bm);
 		}
