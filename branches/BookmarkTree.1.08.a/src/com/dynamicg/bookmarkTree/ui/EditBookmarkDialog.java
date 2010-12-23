@@ -20,7 +20,7 @@ import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.FolderBean;
 import com.dynamicg.bookmarkTree.util.BookmarkUtil;
-import com.dynamicg.bookmarkTree.util.CommonDialogHelper;
+import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.common.main.Logger;
 import com.dynamicg.common.main.StringUtil;
@@ -45,7 +45,7 @@ public class EditBookmarkDialog extends Dialog {
 		this.ctx = ctx;
 		this.bookmark = bookmark;
 		this.forCreateBookmark = bookmark==NEW_BOOKMARK;
-		CommonDialogHelper.expandContent(this, R.layout.edit_body);
+		DialogHelper.expandContent(this, R.layout.edit_body);
 		this.show();
 	}
 

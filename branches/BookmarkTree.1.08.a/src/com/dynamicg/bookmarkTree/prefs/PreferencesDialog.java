@@ -26,7 +26,7 @@ import com.dynamicg.bookmarkTree.data.writer.AlphaSortWriter;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
 import com.dynamicg.bookmarkTree.ui.SpinnerUtil;
-import com.dynamicg.bookmarkTree.util.CommonDialogHelper;
+import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.ui.SimpleAlertDialog;
@@ -55,7 +55,7 @@ public class PreferencesDialog extends Dialog {
 		this.prefsWrapper = ctx.preferencesWrapper;
 		this.spinnerUtil = new SpinnerUtil(this);
 		
-		CommonDialogHelper.expandContent(this, R.layout.prefs_body);
+		DialogHelper.expandContent(this, R.layout.prefs_body);
 
 		currentSeparator = ctx.getFolderSeparator();
 		this.show();
