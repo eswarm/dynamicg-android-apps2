@@ -111,7 +111,6 @@ implements BackupEventListener {
 
 			@Override
 			public String getPlainBodyText() {
-				// TODO - check padding
 				return StringUtil.replaceFirst(Messages.brSelectedFileLabel, "{1}", backupFile.getName() );
 			}
 
