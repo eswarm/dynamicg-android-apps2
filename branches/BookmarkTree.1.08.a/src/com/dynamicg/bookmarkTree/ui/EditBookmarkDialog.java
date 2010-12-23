@@ -23,8 +23,8 @@ import com.dynamicg.bookmarkTree.util.BookmarkUtil;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.main.SimpleAlertDialog;
 import com.dynamicg.common.main.StringUtil;
-import com.dynamicg.common.ui.SimpleAlertDialog;
 
 public class EditBookmarkDialog extends Dialog {
 

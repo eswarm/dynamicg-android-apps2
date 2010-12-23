@@ -29,7 +29,7 @@ import com.dynamicg.bookmarkTree.ui.SpinnerUtil;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
-import com.dynamicg.common.ui.SimpleAlertDialog;
+import com.dynamicg.common.main.SimpleAlertDialog;
 
 public class PreferencesDialog extends Dialog {
 

@@ -1,4 +1,4 @@
-package com.dynamicg.common.ui;
+package com.dynamicg.common.main;
 
 import android.app.AlertDialog;
 import android.content.Context;

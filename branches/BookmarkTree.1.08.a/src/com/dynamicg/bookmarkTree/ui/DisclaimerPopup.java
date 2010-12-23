@@ -7,8 +7,8 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.main.ContextUtil;
+import com.dynamicg.common.main.SimpleAlertDialog;
 import com.dynamicg.common.main.StringUtil;
-import com.dynamicg.common.ui.SimpleAlertDialog;
 
 public class DisclaimerPopup {
 
