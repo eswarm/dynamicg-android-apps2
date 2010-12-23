@@ -31,10 +31,13 @@ public class BackupManager {
 		return backupdir;
 	}
 	
+	private static String getFilename(Time t) {
+		return StringUtil.replaceFirst(FILE_PATTERN, "{stamp}", t.format(FMT_STAMP));
+	}
 	private static String getFilename() {
 		Time t = new Time();
 		t.setToNow();
-		return StringUtil.replaceFirst(FILE_PATTERN, "{stamp}", t.format(FMT_STAMP));
+		return getFilename(t);
 	}
 	
 	public static ArrayList<File> getBackupFiles() {
@@ -197,12 +200,12 @@ public class BackupManager {
 			t.month = t.month - 3; // 3 months
 			t.normalize(false);
 			
+			final String fnameStampLimit = getFilename(t);
 			int comp;
-			String datelimitStr = t.format(FMT_STAMP);
 			for (File f:backupFiles) {
-				comp = f.getName().compareTo(datelimitStr);
+				comp = f.getName().compareTo(fnameStampLimit);
 				if (log.isDebugEnabled()) {
-					log.debug("check old files", datelimitStr, f.getName(), comp, comp<=0?"***":"-");
+					log.debug("check old files", fnameStampLimit, f.getName(), comp, comp<=0?"***":"-");
 				}
 				if (comp<=0) {
 					deletions.add(f);
