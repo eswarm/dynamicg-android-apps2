@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Browser;
 
+import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.main.Logger;
 
@@ -66,4 +67,8 @@ public class BrowserBookmarkLoader {
 		return rows;
 	}
 
+	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(BookmarkTreeContext ctx) {
+		return loadBrowserBookmarks(ctx.activity);
+	}
+	
 }
