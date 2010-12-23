@@ -54,7 +54,7 @@
 	<!-- ====================== Special Ops ====================== -->
 	
 	<TextView style="@style/PrefsGroup" android:text="@string/prefsGroupExtras" /> 
-	
+
     <CheckBox style="@style/PrefsLabel"
     	android:id="@+id/prefsOptimiseLayout"
 	    android:layout_width="fill_parent"
