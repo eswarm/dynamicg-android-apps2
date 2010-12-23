@@ -210,7 +210,7 @@ public class EditBookmarkDialog extends Dialog {
 			}
 		}
 
-		new SimpleAlertDialog(ctx.activity, alertTitle, R.string.commonOK, R.string.commonCancel) {
+		new SimpleAlertDialog.OkCancelDialog(ctx.activity, alertTitle) {
 			@Override
 			public void onPositiveButton() {
 				deleteBookmark();

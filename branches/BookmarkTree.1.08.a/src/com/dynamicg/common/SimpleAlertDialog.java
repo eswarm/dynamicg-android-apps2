@@ -181,4 +181,13 @@ public abstract class SimpleAlertDialog {
 		};
 	}
 	
+	public abstract static class OkCancelDialog extends SimpleAlertDialog {
+		public OkCancelDialog(Context context, String title) {
+			super(context, title, R.string.commonOK, R.string.commonCancel);
+		}
+		public OkCancelDialog(Context context, int title) {
+			super(context, title, R.string.commonOK, R.string.commonCancel);
+		}
+	}
+			
 }

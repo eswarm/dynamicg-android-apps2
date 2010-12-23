@@ -95,7 +95,7 @@ public class PreferencesDialog extends Dialog {
 		sortAlpha.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new SimpleAlertDialog(ctx.activity, R.string.actionSortBookmarksConfirm, R.string.commonOK, R.string.commonCancel) {
+				new SimpleAlertDialog.OkCancelDialog(ctx.activity, R.string.actionSortBookmarksConfirm) {
 					@Override
 					public void onPositiveButton() {
 						new SimpleProgressDialog(ctx.activity, getText(R.string.commonPleaseWait) ) {
