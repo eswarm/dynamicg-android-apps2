@@ -1,4 +1,4 @@
-package com.dynamicg.common.main;
+package com.dynamicg.common;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

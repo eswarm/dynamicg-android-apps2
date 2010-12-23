@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.model.Bookmark;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public abstract class RowViewProvider {
 

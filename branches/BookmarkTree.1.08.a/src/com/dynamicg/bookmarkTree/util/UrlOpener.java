@@ -8,7 +8,7 @@ import android.webkit.MimeTypeMap;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.common.main.SimpleAlertDialog;
+import com.dynamicg.common.SimpleAlertDialog;
 
 public class UrlOpener {
 

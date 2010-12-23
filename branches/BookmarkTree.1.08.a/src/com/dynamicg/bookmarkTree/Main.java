@@ -10,7 +10,7 @@ import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
-import com.dynamicg.common.main.SystemUtil;
+import com.dynamicg.common.SystemUtil;
 
 // TODO - add "restore every 20 days" pref
 public class Main extends Activity {

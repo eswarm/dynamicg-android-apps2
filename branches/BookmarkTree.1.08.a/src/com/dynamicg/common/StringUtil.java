@@ -1,4 +1,4 @@
-package com.dynamicg.common.main;
+package com.dynamicg.common;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;

@@ -6,8 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.common.main.SimpleAlertDialog;
-import com.dynamicg.common.main.SystemUtil;
+import com.dynamicg.common.SimpleAlertDialog;
+import com.dynamicg.common.SystemUtil;
 
 public abstract class SimpleProgressDialog {
 

@@ -6,8 +6,8 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writer.BookmarkWriter;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
-import com.dynamicg.common.main.Logger;
-import com.dynamicg.common.main.StringUtil;
+import com.dynamicg.common.Logger;
+import com.dynamicg.common.StringUtil;
 
 public class SeparatorChangedHandler {
 

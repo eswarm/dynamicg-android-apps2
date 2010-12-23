@@ -15,7 +15,7 @@ import com.dynamicg.bookmarkTree.FolderStateHandler;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.util.UrlOpener;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public class BookmarkListAdapter extends BaseAdapter {
 

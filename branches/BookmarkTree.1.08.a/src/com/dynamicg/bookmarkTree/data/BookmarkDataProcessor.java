@@ -8,7 +8,7 @@ import com.dynamicg.bookmarkTree.data.TitleTokenizer.TitleItem;
 import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.FolderBean;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public class BookmarkDataProcessor {
 

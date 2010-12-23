@@ -2,8 +2,8 @@ package com.dynamicg.bookmarkTree.data;
 
 import java.util.ArrayList;
 
-import com.dynamicg.common.main.Logger;
-import com.dynamicg.common.main.StringUtil;
+import com.dynamicg.common.Logger;
+import com.dynamicg.common.StringUtil;
 
 public class TitleTokenizer {
 

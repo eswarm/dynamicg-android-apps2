@@ -6,7 +6,7 @@ import java.util.HashSet;
 import android.graphics.Bitmap;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public abstract class Bookmark {
 

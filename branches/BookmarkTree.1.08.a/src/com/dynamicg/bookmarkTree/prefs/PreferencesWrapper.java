@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.dynamicg.bookmarkTree.VersionAccessor;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public class PreferencesWrapper {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.dynamicg.bookmarkTree.model.Bookmark;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public class FolderStateHandler {
 

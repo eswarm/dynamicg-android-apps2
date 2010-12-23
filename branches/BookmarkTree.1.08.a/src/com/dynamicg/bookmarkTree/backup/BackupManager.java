@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
-import com.dynamicg.common.main.Logger;
-import com.dynamicg.common.main.StringUtil;
+import com.dynamicg.common.Logger;
+import com.dynamicg.common.StringUtil;
 
 //TODO -- validation after backup
 //TODO -- add "menu/delete old backup files"

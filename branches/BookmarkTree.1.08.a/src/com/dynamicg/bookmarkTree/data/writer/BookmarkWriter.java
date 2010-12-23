@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.common.main.Logger;
+import com.dynamicg.common.Logger;
 
 public class BookmarkWriter extends BookmarkWriterA {
 

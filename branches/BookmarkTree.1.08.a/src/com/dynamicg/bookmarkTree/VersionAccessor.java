@@ -2,7 +2,7 @@ package com.dynamicg.bookmarkTree;
 
 import java.lang.reflect.Field;
 
-import com.dynamicg.common.main.SystemUtil;
+import com.dynamicg.common.SystemUtil;
 
 public class VersionAccessor {
 

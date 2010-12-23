@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import com.dynamicg.common.main.SystemUtil;
+import com.dynamicg.common.SystemUtil;
 
 
 
