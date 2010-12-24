@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.common.ErrorNotification;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 
@@ -20,8 +19,6 @@ public class SDCardCheck {
 	
 	private final Context context;
 
-	private Throwable touchFileException;
-	
 	public SDCardCheck(Context context) {
 		this.context = context;
 	}
@@ -57,21 +54,21 @@ public class SDCardCheck {
 		
 		if (!Environment.MEDIA_MOUNTED.equals(sdCardState)) {
 			alert(context, errorTitle, "SD Card is not mounted.\nCurrent state is '"+sdCardState+"'");
+			return null;
 		}
 		else if (backupdir.exists() && backupdir.canRead() && !backupdir.canWrite()) {
 			alert(context, errorTitle, "Directory "+backupdir+" is read only");
+			return null;
 		}
 		else if (!backupdir.exists()) {
 			alert(context, errorTitle, "Could not create backup directory:\n"+backupdir);
-		}
-		else if (touchFileException!=null) {
-			ErrorNotification.notifyError(context, touchFileException);
+			return null;
 		}
 		else {
 			// we got an uncaught error - see what happens with actual backup:
 			return backupdir;
 		}
-		return null; // not okay
+		
 	}
 	
 	public boolean readyForRead() {
