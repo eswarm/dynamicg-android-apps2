@@ -33,19 +33,21 @@ public class Main extends Activity {
 
     private static boolean initialised = false;
     
-    private final BookmarkTreeContext ctx;
+    private BookmarkTreeContext ctx;
     
     public Main() {
-    	if (!initialised) {
-    		SystemUtil.init(this);
-    		initialised = true;
-    	}
-    	this.ctx = new BookmarkTreeContext(this);
     }
     
     public void onCreate(Bundle savedInstanceState) {
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+    	if (!initialised) {
+    		SystemUtil.init(this);
+    		initialised = true;
+    	}
+    	this.ctx = new BookmarkTreeContext(this);
+    	
     	BackupPrefs.onStartup(ctx);
     	DisclaimerPopup.showOnce(ctx); // TODO - remove
     }
