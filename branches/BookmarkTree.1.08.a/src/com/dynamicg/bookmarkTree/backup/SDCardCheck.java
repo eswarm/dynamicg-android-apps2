@@ -79,24 +79,25 @@ public class SDCardCheck {
 			return true;
 		}
 		
-		if ( !Environment.MEDIA_MOUNTED.equals(sdCardState)
-				&& !Environment.MEDIA_MOUNTED_READ_ONLY.equals(sdCardState) )
-		{
-			alert(context, errorTitle, "SD Card is not available.\nCurrent state is '"+sdCardState+"'");
+		if (!checkMountedSdCard()) {
+			return false;
 		}
 		else if (!backupdir.exists()) {
 			alert(context, errorTitle, "Backup directory does not exist:\n"+backupdir);
+			return false;
 		}
 		
-		return false;
+		return true; // listing of backup files will probably run into issues?
 	}
 	
-	public void checkMountedSdCard() {
+	public boolean checkMountedSdCard() {
 		if ( !Environment.MEDIA_MOUNTED.equals(sdCardState)
 				&& !Environment.MEDIA_MOUNTED_READ_ONLY.equals(sdCardState) )
 		{
 			alert(context, errorTitle, "SD Card is not available.\nCurrent state is '"+sdCardState+"'");
+			return false;
 		}
+		return true;
 	}
 	
 }
