@@ -7,9 +7,9 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.dynamicg.bookmarkTree.R;
+import com.dynamicg.common.ErrorNotification;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
-import com.dynamicg.common.SystemUtil;
 
 public class SDCardCheck {
 
@@ -80,7 +80,11 @@ public class SDCardCheck {
 			alert(context, errorTitle, "SD Card is not mounted.\nCurrent state is '"+sdCardState+"'");
 		}
 		else if (touchFileException!=null) {
-			alert(context, errorTitle, "Write error: "+SystemUtil.getExceptionText(touchFileException) );
+			ErrorNotification.notifyError(context, touchFileException);
+		}
+		else {
+			// we got an uncaught error - see what happens with actual backup:
+			return backupdir;
 		}
 		return null; // not okay
 	}

@@ -5,9 +5,10 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 
+import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.ui.AboutDialog;
 
-public class MailSender {
+public class ErrorNotification {
 
 	private static void createIntent ( Context context, String title, String body) {
 		Intent msg = new Intent(Intent.ACTION_SEND);
@@ -18,10 +19,27 @@ public class MailSender {
 		context.startActivity(Intent.createChooser(msg, "Send error report"));
 	}
 	
-	public static void emailError(Context context, Throwable exception) {
+	private static void emailError(Context context, Throwable exception) {
 		String title = "Bookmark Tree - Error ("+Locale.getDefault().getLanguage()+")";
 		String body = SystemUtil.getExceptionText(exception);
 		createIntent(context, title, body);
+	}
+	
+	public static void notifyError(final Context context, final Throwable e) {
+		new SimpleAlertDialog(context, "Error", "Email DEV", context.getString(R.string.commonClose) ) {
+			
+			@Override
+			public String getScrollViewText() {
+				return SystemUtil.getExceptionText(e);
+			}
+	
+			@Override
+			public void onPositiveButton() {
+				emailError(context, e);
+			}
+			
+		};
+		Logger.dumpIfDevelopment(e);
 	}
 	
 }

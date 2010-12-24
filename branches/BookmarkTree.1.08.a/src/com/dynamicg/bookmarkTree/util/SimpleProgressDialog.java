@@ -5,11 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.common.Logger;
-import com.dynamicg.common.MailSender;
-import com.dynamicg.common.SimpleAlertDialog;
-import com.dynamicg.common.SystemUtil;
+import com.dynamicg.common.ErrorNotification;
 
 public abstract class SimpleProgressDialog {
 
@@ -64,20 +60,7 @@ public abstract class SimpleProgressDialog {
 	 * override in implementations if required
 	 */
 	public void handleError(final Throwable e) {
-		new SimpleAlertDialog(context, "Error", "Email DEV", context.getString(R.string.commonClose) ) {
-			
-			@Override
-			public String getScrollViewText() {
-				return SystemUtil.getExceptionText(e);
-			}
-
-			@Override
-			public void onPositiveButton() {
-				MailSender.emailError(context, e);
-			}
-			
-		};
-		Logger.dumpIfDevelopment(e);
+		ErrorNotification.notifyError(context, e);
 	}
 	
 }
