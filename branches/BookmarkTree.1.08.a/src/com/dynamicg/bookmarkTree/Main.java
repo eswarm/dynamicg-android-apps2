@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
-import com.dynamicg.bookmarkTree.ui.AboutPopup;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
 import com.dynamicg.common.SystemUtil;
 
@@ -49,7 +48,6 @@ public class Main extends Activity {
     	this.ctx = new BookmarkTreeContext(this);
     	
     	BackupPrefs.onStartup(ctx);
-    	AboutPopup.showOnce(ctx); // TODO - remove
     }
     
     

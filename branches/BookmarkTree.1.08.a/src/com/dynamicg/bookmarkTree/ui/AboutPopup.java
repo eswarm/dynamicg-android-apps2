@@ -5,24 +5,12 @@ import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.ContextUtil;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
 import com.dynamicg.common.SystemUtil;
 
 public class AboutPopup {
-
-	private static final int CURRENT_DISCLAIMER_VERSION = 2; 
-	
-	public static void showOnce(BookmarkTreeContext ctx) {
-		PreferencesWrapper prefs = ctx.preferencesWrapper;
-		if ( CURRENT_DISCLAIMER_VERSION == prefs.prefsBean.getDisclaimerLastDisplayed() ) {
-			return;
-		}
-		show(ctx);
-		prefs.storeDisclaimerLastDisplayed(CURRENT_DISCLAIMER_VERSION);
-	}
 
 	public static void show(final BookmarkTreeContext ctx) {
 
