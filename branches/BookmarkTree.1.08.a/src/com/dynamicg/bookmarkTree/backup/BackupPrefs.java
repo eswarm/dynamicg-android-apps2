@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.backup.BackupManager.BackupEventListener;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 
@@ -11,7 +12,7 @@ public class BackupPrefs {
 
 	private static final Logger log = new Logger(BackupPrefs.class);
 	
-	public static final int DAYS_BETWEEN = 20;
+	public static final int DAYS_BETWEEN = log.debugEnabled ? 1 : 20;
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
 	private static final String KEY_INITIAL_CONFIRMATION = "backup.initConfirm";
@@ -35,7 +36,7 @@ public class BackupPrefs {
 			@Override
 			public void onPositiveButton() {
 				writePref(KEY_AUTO_ENABLED, 1);
-				BackupManager.createBackup(ctx, null); // no callback - "createBackup" will register this backup on its own
+				backupAndRegister(ctx);
 			}
 		};
 	}
@@ -57,8 +58,23 @@ public class BackupPrefs {
 			log.debug("checkPeriodicBackup", daynr, lastBackup, required);
 		}
 		if (required) {
-			BackupManager.createBackup(ctx, null); // no callback - "createBackup" will register this backup on its own
+			backupAndRegister(ctx);
 		}
+	}
+	
+	private static void backupAndRegister(BookmarkTreeContext ctx) {
+		BackupEventListener l = new BackupEventListener() {
+			@Override
+			public void backupDone() {
+				// register as "latest backup"
+				writePref(KEY_LAST_BACKUP, getDayNr());
+			}
+			@Override
+			public void restoreDone() {
+				// nothing to do
+			}
+		};
+		BackupManager.createBackup(ctx, l);
 	}
 	
 	private static void writePref(String key, int value) {
@@ -77,10 +93,6 @@ public class BackupPrefs {
 		edit.remove(KEY_AUTO_ENABLED);
 		edit.remove(KEY_LAST_BACKUP);
 		edit.commit();
-	}
-	
-	public static void registerBackup() {
-		writePref(KEY_LAST_BACKUP, getDayNr());
 	}
 	
 	public static boolean isAutoBackupEnabled() {
