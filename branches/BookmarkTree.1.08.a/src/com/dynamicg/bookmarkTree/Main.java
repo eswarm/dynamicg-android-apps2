@@ -39,13 +39,13 @@ public class Main extends Activity {
     }
     
     public void onCreate(Bundle savedInstanceState) {
-    	super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
         
+    	super.onCreate(savedInstanceState);
     	if (!initialised) {
     		SystemUtil.init(this);
     		initialised = true;
     	}
+        setContentView(R.layout.main);
     	this.ctx = new BookmarkTreeContext(this);
     	
     	BackupPrefs.onStartup(ctx);
