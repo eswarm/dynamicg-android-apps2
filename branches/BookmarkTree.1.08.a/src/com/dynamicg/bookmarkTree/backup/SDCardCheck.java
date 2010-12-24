@@ -80,7 +80,7 @@ public class SDCardCheck {
 		}
 		
 		if ( !Environment.MEDIA_MOUNTED.equals(sdCardState)
-				|| !Environment.MEDIA_MOUNTED_READ_ONLY.equals(sdCardState) )
+				&& !Environment.MEDIA_MOUNTED_READ_ONLY.equals(sdCardState) )
 		{
 			alert(context, errorTitle, "SD Card is not available.\nCurrent state is '"+sdCardState+"'");
 		}
