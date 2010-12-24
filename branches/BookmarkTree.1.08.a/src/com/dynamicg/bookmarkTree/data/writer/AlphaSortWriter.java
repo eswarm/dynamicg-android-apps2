@@ -19,7 +19,8 @@ public class AlphaSortWriter extends BookmarkWriterA {
 	
 	public AlphaSortWriter(BookmarkTreeContext ctx) {
 		super(ctx);
-		ArrayList<BrowserBookmarkBean> bookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, false);
+		ArrayList<BrowserBookmarkBean> bookmarks = 
+			BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, BrowserBookmarkLoader.FAVOICON_RESOLVE_NONE);
 		// set new "CREATED" values descending (i.e. newest has highest value)
 		nextValue = BASE + bookmarks.size()*INCREMENT;
 		for (BrowserBookmarkBean bm:bookmarks) {
