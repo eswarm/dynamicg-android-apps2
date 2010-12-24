@@ -1,7 +1,6 @@
 package com.dynamicg.bookmarkTree.backup;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 import android.content.Context;
 import android.os.Environment;
@@ -14,7 +13,6 @@ import com.dynamicg.common.SimpleAlertDialog;
 public class SDCardCheck {
 
 	private static final String exportSubdir = "dynamicg/bookmarks";
-	private static final String TOUCH_FILE = ".touch";
 	
 	private final File backupdir = getBackupDir();
 	private final String sdCardState = Environment.getExternalStorageState();
@@ -51,26 +49,13 @@ public class SDCardCheck {
 		};
 	}
 	
-	private boolean touchFileOkay() {
-		try {
-			File f = new File(backupdir,TOUCH_FILE);
-			FileOutputStream out = new FileOutputStream(f);
-			out.write(46); // dot
-			out.flush();
-			out.close();
-			return true;
-		}
-		catch (Throwable e) {
-			touchFileException = e;
-			return false;
-		}
-	}
-	
 	public File readyForWrite() {
-		if (touchFileOkay()) {
+		
+		if (backupdir.exists() && backupdir.canWrite()) {
 			return backupdir;
 		}
-		else if (!Environment.MEDIA_MOUNTED.equals(sdCardState)) {
+		
+		if (!Environment.MEDIA_MOUNTED.equals(sdCardState)) {
 			alert(context, errorTitle, "SD Card is not mounted.\nCurrent state is '"+sdCardState+"'");
 		}
 		else if (backupdir.exists() && backupdir.canRead() && !backupdir.canWrite()) {
