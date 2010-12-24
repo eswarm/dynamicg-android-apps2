@@ -1,15 +1,14 @@
 package com.dynamicg.bookmarkTree.prefs;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.VersionAccessor;
 import com.dynamicg.common.Logger;
 
 public class PreferencesWrapper {
 
 	private static final Logger log = new Logger(PreferencesWrapper.class);
-	private static final String PREFS_NAME = "dynamicg.bookmarkTree";
 	
 	private static final String KEY_FOLDER_SEPARATOR = "separator";
 	private static final String DEFVALUE_FOLDER_SEPARATOR = "-";
@@ -21,11 +20,10 @@ public class PreferencesWrapper {
 	private static final String KEY_KEEP_STATE = "keepState";
 	
 	public final PreferencesBean prefsBean;
-	public final SharedPreferences settings;
 	
-	public PreferencesWrapper(Context context) {
+	public PreferencesWrapper() {
+		final SharedPreferences settings = BookmarkTreeContext.settings;
 		this.prefsBean = new PreferencesBean();
-		this.settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 		
 		setFolderSeparator ( settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR) );
 		prefsBean.disclaimerLastDisplayed = settings.getInt(KEY_DISCLAIMER, 0);
@@ -42,7 +40,7 @@ public class PreferencesWrapper {
 	}
 	
 	public void write() {
-		SharedPreferences.Editor editor = settings.edit();
+		SharedPreferences.Editor editor = BookmarkTreeContext.settings.edit();
 		if (log.debugEnabled) {
 			log.debug("write prefs - folderSeparator", prefsBean.folderSeparator);
 			log.debug("write prefs - listStyle", prefsBean.listStyle);
