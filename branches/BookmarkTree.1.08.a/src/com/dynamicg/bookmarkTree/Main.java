@@ -12,7 +12,7 @@ import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
 import com.dynamicg.common.SystemUtil;
 
-//TODO - add "restore every 20 days" pref
+//TODO - add "backup every 20 days" pref
 //TODO - add "email to DEV"
 public class Main extends Activity {
 
