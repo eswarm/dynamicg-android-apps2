@@ -4,8 +4,8 @@ import android.util.Log;
 
 public class Logger {
 
-	private static boolean TRACE_ENABLED ;
-	private static boolean DEBUG_ENABLED ;
+	private static boolean TRACE_ENABLED;
+	private static boolean DEBUG_ENABLED;
 
 	static {
 		if (SystemUtil.development) {
