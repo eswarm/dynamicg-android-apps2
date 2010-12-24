@@ -11,7 +11,6 @@ import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
 
-//TODO - add "email to DEV"
 public class Main extends Activity {
 
 	/*

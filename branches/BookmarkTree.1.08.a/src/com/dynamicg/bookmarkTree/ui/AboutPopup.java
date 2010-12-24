@@ -12,6 +12,8 @@ import com.dynamicg.common.SystemUtil;
 
 public class AboutPopup {
 
+	public static final String AUTHOR = "dynamicg.android@gmail.com";
+	
 	public static void show(final BookmarkTreeContext ctx) {
 
 		final String[] appinfo = ContextUtil.getVersion(ctx.activity);
