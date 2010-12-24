@@ -74,6 +74,10 @@ implements BackupEventListener {
 		((TextView)findViewById(R.id.brStorageHint2)).setText(backupdir);
 		
 		setupAutoBackup();
+		
+		// check sd card
+		new SDCardCheck(context).checkMountedSdCard();
+		
 	}
 	
 	private void setupAutoBackup() {
