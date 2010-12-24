@@ -20,6 +20,7 @@ public class BackupPrefs {
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
+		//cleanup();
 		if (!settings.contains(KEY_INITIAL_CONFIRMATION)) {
 			writePref(KEY_INITIAL_CONFIRMATION, 1);
 			BackupPrefs.initialBackupConfirmation(ctx);
@@ -69,6 +70,15 @@ public class BackupPrefs {
 		}
 	}
 
+	@SuppressWarnings("unused")
+	private static void cleanup() {
+		Editor edit = settings.edit();
+		edit.remove(KEY_INITIAL_CONFIRMATION);
+		edit.remove(KEY_AUTO_ENABLED);
+		edit.remove(KEY_LAST_BACKUP);
+		edit.commit();
+	}
+	
 	public static void registerBackup() {
 		writePref(KEY_LAST_BACKUP, getDayNr());
 	}
