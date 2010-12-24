@@ -9,7 +9,6 @@ import org.xmlpull.v1.XmlSerializer;
 import android.text.format.Time;
 import android.util.Xml;
 
-
 public class XmlWriter {
 
 	public static final String ENCODING = "UTF-8";
