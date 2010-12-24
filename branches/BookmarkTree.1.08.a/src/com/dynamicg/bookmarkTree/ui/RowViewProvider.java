@@ -22,7 +22,7 @@ public abstract class RowViewProvider {
 		this.inflater = inflater;
 		this.compact = compact;
 		if (log.isDebugEnabled()) {
-			log.info("create RowViewProvider", this);
+			log.debug("create RowViewProvider", this);
 		}
 	}
 	

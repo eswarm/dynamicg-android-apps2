@@ -34,7 +34,7 @@ public class ContextUtil {
 	        svnrevision = svnrevision.split(" ")[1];
     	} 
     	catch (Exception e) {
-    		log.error("get version/revision", e);
+    		log.warn("get version/revision", e);
     	}
     	
     	return new String[]{version, svnrevision};
