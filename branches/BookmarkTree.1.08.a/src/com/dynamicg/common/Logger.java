@@ -25,9 +25,9 @@ public class Logger {
 		}
 	}
 
-	private static StringBuffer append(Object... args) {
-		StringBuffer sb = new StringBuffer(args[0].toString());
-		for ( int i=1;i<args.length;i++ ) {
+	private static StringBuffer append(String text, Object... args) {
+		StringBuffer sb = new StringBuffer(text);
+		for ( int i=0;i<args.length;i++ ) {
 			sb.append(" [");
 			sb.append(args[i]);
 			sb.append("]");
