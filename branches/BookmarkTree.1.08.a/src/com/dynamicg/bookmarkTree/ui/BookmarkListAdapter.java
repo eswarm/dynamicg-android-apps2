@@ -2,6 +2,7 @@ package com.dynamicg.bookmarkTree.ui;
 
 import java.util.ArrayList;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.util.UrlOpener;
 import com.dynamicg.common.Logger;
+import com.dynamicg.common.SystemUtil;
 
 public class BookmarkListAdapter extends BaseAdapter {
 
@@ -23,19 +25,21 @@ public class BookmarkListAdapter extends BaseAdapter {
 	
 	private final BookmarkTreeContext ctx;
 	private final ListView listview;
+	private final LayoutInflater layoutInflater;
 	
 	private ArrayList<Bookmark> bookmarks;
 	private RowViewProvider rowViewProvider;
 
 	public BookmarkListAdapter(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
+		this.layoutInflater = SystemUtil.getLayoutInflater(ctx.activity);
 		boolean compact = ctx.preferencesWrapper.isCompact();
 		
 		if (ctx.preferencesWrapper.isOptimisedLayout()) {
-			rowViewProvider = new RowViewProvider.ProviderModern(ctx.getLayoutInflater(), compact);; 
+			rowViewProvider = new RowViewProvider.ProviderModern(layoutInflater, compact);; 
 		}
 		else {
-			rowViewProvider = new RowViewProvider.ProviderOldStyle(ctx.getLayoutInflater(), compact);
+			rowViewProvider = new RowViewProvider.ProviderOldStyle(layoutInflater, compact);
 		}
 		
 		this.listview = (ListView)ctx.activity.findViewById(R.id.mainList);
