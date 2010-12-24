@@ -7,6 +7,7 @@ import java.util.Properties;
 import android.content.Context;
 import android.provider.Settings.Secure;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 public class SystemUtil {
 
@@ -70,6 +71,10 @@ public class SystemUtil {
 		if (SystemUtil.isDevelopmentOrDevDevice()) {
 			e.printStackTrace();
 		}
+	}
+
+	public static LayoutInflater getLayoutInflater(Context context) {
+		return (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 }
