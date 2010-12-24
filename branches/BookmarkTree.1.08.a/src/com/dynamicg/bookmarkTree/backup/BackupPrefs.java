@@ -86,14 +86,14 @@ public class BackupPrefs {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private static void cleanup() {
-		Editor edit = settings.edit();
-		edit.remove(KEY_INITIAL_CONFIRMATION);
-		edit.remove(KEY_AUTO_ENABLED);
-		edit.remove(KEY_LAST_BACKUP);
-		edit.commit();
-	}
+//	@SuppressWarnings("unused")
+//	private static void cleanup() {
+//		Editor edit = settings.edit();
+//		edit.remove(KEY_INITIAL_CONFIRMATION);
+//		edit.remove(KEY_AUTO_ENABLED);
+//		edit.remove(KEY_LAST_BACKUP);
+//		edit.commit();
+//	}
 	
 	public static boolean isAutoBackupEnabled() {
 		if (log.debugEnabled) {
