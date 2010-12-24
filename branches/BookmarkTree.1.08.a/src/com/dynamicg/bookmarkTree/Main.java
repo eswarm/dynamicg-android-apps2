@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
@@ -44,6 +45,8 @@ public class Main extends Activity {
     	}
         setContentView(R.layout.main);
     	this.ctx = new BookmarkTreeContext(this);
+    	
+    	BackupPrefs.init(ctx);
     	
     	DisclaimerPopup.showOnce(ctx);
     }

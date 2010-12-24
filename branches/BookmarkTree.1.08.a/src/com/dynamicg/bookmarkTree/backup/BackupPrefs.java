@@ -16,14 +16,20 @@ public class BackupPrefs {
 	private static final String KEY_INITIAL_CONFIRMATION = "backup.initConfirm";
 	private static final String KEY_AUTO_ENABLED = "backup.auto";
 	
+	private static SharedPreferences prefs;
+	
 	private final BookmarkTreeContext ctx;
 	private final Activity context;
-	private final SharedPreferences prefs;
 	
 	public BackupPrefs(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
-		context = ctx.activity;
-		prefs = PreferencesWrapper.getSharedPrefs(context);
+		this.context = ctx.activity;
+	}
+	
+	public static void init(BookmarkTreeContext ctx) {
+		if (prefs==null) {
+			prefs = PreferencesWrapper.getSharedPrefs(ctx.activity);
+		}
 	}
 	
 	public void initialBackupConfirmation() {
@@ -31,12 +37,12 @@ public class BackupPrefs {
 			return;
 		}
 		// set flag
-		writePref(prefs, KEY_INITIAL_CONFIRMATION, 1);
+		writePref(KEY_INITIAL_CONFIRMATION, 1);
 		
 		new SimpleAlertDialog.OkCancelDialog(context, Messages.brEnableAutoBackup) {
 			@Override
 			public void onPositiveButton() {
-				writePref(prefs, KEY_AUTO_ENABLED, 1);
+				writePref(KEY_AUTO_ENABLED, 1);
 				BackupManager.createBackup(ctx, null); // no callback
 			}
 		};
@@ -49,6 +55,9 @@ public class BackupPrefs {
 	}
 	
 	public void checkPeriodicBackup() {
+		if (prefs.getInt(KEY_AUTO_ENABLED, 0) != 1) {
+			return;
+		}
 		int daynr = getDayNr();
 		int lastBackup = prefs.getInt(KEY_LAST_BACKUP, 0);
 		if ( daynr-lastBackup > DAYS_BETWEEN ) {
@@ -56,14 +65,14 @@ public class BackupPrefs {
 		}
 	}
 	
-	private static void writePref(SharedPreferences prefs, String key, int value) {
+	private static void writePref(String key, int value) {
 		Editor edit = prefs.edit();
 		edit.putInt(key, value);
 		edit.commit();
 	}
 
-	public void registerBackup() {
-		writePref(prefs, KEY_LAST_BACKUP, getDayNr());
+	public static void registerBackup() {
+		writePref(KEY_LAST_BACKUP, getDayNr());
 	}
-	
+
 }
