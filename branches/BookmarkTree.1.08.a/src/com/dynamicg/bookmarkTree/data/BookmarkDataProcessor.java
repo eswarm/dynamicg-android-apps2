@@ -20,7 +20,7 @@ public class BookmarkDataProcessor {
 
 	public BookmarkDataProcessor(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
-		this.bookmarkSortCache = BookmarkSortCache.createInstance(ctx);
+		this.bookmarkSortCache = BookmarkSortCache.createInstance();
 		if (log.debugEnabled) {
 			log.debug("start");
 		}

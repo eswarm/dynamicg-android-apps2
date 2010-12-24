@@ -33,9 +33,9 @@ public class BookmarkListAdapter extends BaseAdapter {
 	public BookmarkListAdapter(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
 		this.layoutInflater = SystemUtil.getLayoutInflater(ctx.activity);
-		boolean compact = ctx.preferencesWrapper.isCompact();
+		boolean compact = BookmarkTreeContext.preferencesWrapper.isCompact();
 		
-		if (ctx.preferencesWrapper.isOptimisedLayout()) {
+		if (BookmarkTreeContext.preferencesWrapper.isOptimisedLayout()) {
 			rowViewProvider = new RowViewProvider.ProviderModern(layoutInflater, compact);; 
 		}
 		else {
@@ -97,7 +97,7 @@ public class BookmarkListAdapter extends BaseAdapter {
 		else if (bm.isFolder()) {
 			bm.setExpanded(!bm.isExpanded());
 			redraw();
-			if (ctx.preferencesWrapper.isKeepState()) {
+			if (BookmarkTreeContext.preferencesWrapper.isKeepState()) {
 				FolderStateHandler.folderClicked(bm);
 			}
 		}

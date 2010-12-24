@@ -28,7 +28,7 @@ public class BookmarkManager {
 			}
 		}
 		
-		if (ctx.preferencesWrapper.isKeepState()) {
+		if (BookmarkTreeContext.preferencesWrapper.isKeepState()) {
 			if (log.debugEnabled) {
 				log.debug("restore folder state");
 			}
@@ -77,7 +77,7 @@ public class BookmarkManager {
 	public void toggleFolders(int action) {
 		if (action==Main.ACTION_EXPAND_ALL) {
 			setAllFolderStates(true);
-			if (ctx.preferencesWrapper.isKeepState()) {
+			if (BookmarkTreeContext.preferencesWrapper.isKeepState()) {
 				FolderStateHandler.saveExpandedFolders(ctx, bookmarksCache);
 			}
 		}

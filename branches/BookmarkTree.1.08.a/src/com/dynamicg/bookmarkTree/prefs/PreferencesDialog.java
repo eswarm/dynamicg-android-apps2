@@ -52,7 +52,7 @@ public class PreferencesDialog extends Dialog {
 	public PreferencesDialog(BookmarkTreeContext ctx) {
 		super(ctx.activity);
 		this.ctx = ctx;
-		this.prefsWrapper = ctx.preferencesWrapper;
+		this.prefsWrapper = BookmarkTreeContext.preferencesWrapper;
 		this.spinnerUtil = new SpinnerUtil(this);
 		
 		DialogHelper.expandContent(this, R.layout.prefs_body);

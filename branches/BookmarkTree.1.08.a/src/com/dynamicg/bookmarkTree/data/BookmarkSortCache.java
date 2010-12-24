@@ -134,8 +134,8 @@ public abstract class BookmarkSortCache {
 		}
 	}
 	
-	public static BookmarkSortCache createInstance(BookmarkTreeContext ctx) {
-		int sortOption = ctx.preferencesWrapper.prefsBean.getSortOption();
+	public static BookmarkSortCache createInstance() {
+		int sortOption = BookmarkTreeContext.preferencesWrapper.prefsBean.getSortOption();
 		switch (sortOption) {
 		case PreferencesWrapper.SORT_FOLDERS_FIRST: return new ByType(true);
 		case PreferencesWrapper.SORT_BOOKMARKS_FIRST: return new ByType(false);
