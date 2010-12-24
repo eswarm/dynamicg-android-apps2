@@ -23,10 +23,14 @@ public class PreferencesWrapper {
 	private final Context context;
 	public final PreferencesBean prefsBean;
 	
+	public static SharedPreferences getSharedPrefs(Context context) {
+		return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+	}
+	
 	public PreferencesWrapper(Context context) {
 		this.context = context;
 		prefsBean = new PreferencesBean();
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		SharedPreferences settings = getSharedPrefs(context);
 		setFolderSeparator ( settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR) );
 		prefsBean.disclaimerLastDisplayed = settings.getInt(KEY_DISCLAIMER, 0);
 		
@@ -42,7 +46,7 @@ public class PreferencesWrapper {
 	}
 	
 	public void write() {
-		SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		SharedPreferences settings = getSharedPrefs(context);
 		SharedPreferences.Editor editor = settings.edit();
 		if (log.isDebugEnabled()) {
 			log.debug("write prefs - folderSeparator", prefsBean.folderSeparator);

@@ -133,7 +133,11 @@ public class BackupManager {
 				.replace("{2}", Integer.toString(numberOfRows))
 				;
 				toast(ctx, text);
-				backupDoneListener.backupDone();
+				if (backupDoneListener!=null) {
+					// callback to refresh UI
+					backupDoneListener.backupDone();
+				}
+				new BackupPrefs(ctx).registerBackup();
 			}
 			
 			@Override
