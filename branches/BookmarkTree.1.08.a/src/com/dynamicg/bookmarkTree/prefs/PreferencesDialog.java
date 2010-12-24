@@ -207,7 +207,7 @@ public class PreferencesDialog extends Dialog {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, ACTION_SHOW_DISCLAIMER, 0, "Disclaimer ...");
+		menu.add(0, ACTION_SHOW_DISCLAIMER, 0, "About ...");
 		menu.add(0, ACTION_DUMP_BOOKMARKS, 0, "Internal bookmarks ...");
 		return true;
 	}

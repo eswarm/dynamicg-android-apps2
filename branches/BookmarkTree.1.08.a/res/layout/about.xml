@@ -30,16 +30,18 @@
 	android:singleLine="true"
 	android:text="https://dynamicg-android-apps2.googlecode.com/svn/trunk/BookmarkTree"
 />
+<TextView style="@style/DisclaimerText" android:text="" />
 <TextView style="@style/DisclaimerText"
 	android:singleLine="true"
 	android:text="Programmed by dynamicg.android@gmail.com"
 />
+<TextView style="@style/DisclaimerText" android:text="" />
 <TextView android:id="@+id/disclaimerSvnRevision"
 	style="@style/DisclaimerText"
 	android:text="SVN Revision: ${revision}"
 />
 
-<TextView style="@style/DisclaimerText" android:text="\n\n" />
+<TextView style="@style/DisclaimerText" android:text="\n" />
 	
 	</LinearLayout>
 
