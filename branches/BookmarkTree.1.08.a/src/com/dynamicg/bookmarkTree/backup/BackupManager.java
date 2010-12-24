@@ -148,6 +148,10 @@ public class BackupManager {
 			) 
 	{
 		
+		if (!new SDCardCheck(ctx.activity).readyForRead()) {
+			return;
+		}
+		
 		new SimpleProgressDialog(ctx.activity, Messages.brProgressRestoreBookmarks) {
 			
 			int numberOfRows;

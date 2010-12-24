@@ -18,8 +18,10 @@ public class SDCardCheck {
 	
 	private final File backupdir = getBackupDir();
 	private final String sdCardState = Environment.getExternalStorageState();
-	private final Context context;
+	private final String errorTitle = "SD Card access error";
 	
+	private final Context context;
+
 	private Throwable touchFileException;
 	
 	public SDCardCheck(Context context) {
@@ -49,10 +51,6 @@ public class SDCardCheck {
 		};
 	}
 	
-	public static boolean readyForRead() {
-		return true;
-	}
-	
 	private boolean touchFileOkay() {
 		try {
 			File f = new File(backupdir,TOUCH_FILE);
@@ -69,7 +67,6 @@ public class SDCardCheck {
 	}
 	
 	public File readyForWrite() {
-		String errorTitle = "SD Card access error";
 		if (touchFileOkay()) {
 			return backupdir;
 		}
@@ -90,6 +87,23 @@ public class SDCardCheck {
 			return backupdir;
 		}
 		return null; // not okay
+	}
+	
+	public boolean readyForRead() {
+		if (backupdir.exists() && backupdir.canRead()) {
+			return true;
+		}
+		
+		if ( !Environment.MEDIA_MOUNTED.equals(sdCardState)
+				|| !Environment.MEDIA_MOUNTED_READ_ONLY.equals(sdCardState) )
+		{
+			alert(context, errorTitle, "SD Card is not available.\nCurrent state is '"+sdCardState+"'");
+		}
+		else if (!backupdir.exists()) {
+			alert(context, errorTitle, "Backup directory does not exist:\n"+backupdir);
+		}
+		
+		return false;
 	}
 	
 }

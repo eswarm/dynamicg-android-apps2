@@ -44,9 +44,6 @@ implements BackupEventListener {
 		DialogHelper.expandContent(this, R.layout.backup_restore_body);
 		
 		this.show();
-		
-		// TODO check sd card availability
-		
 	}
 
 	@Override
