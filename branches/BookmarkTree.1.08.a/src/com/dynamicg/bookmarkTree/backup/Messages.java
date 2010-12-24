@@ -17,5 +17,6 @@ public class Messages {
 	public static final String brDeleteAll = "Delete all backups";
 	
 	public static final String brEnableAutoBackup = "Enable auto backup?";
+	public static final String brAutoBackupLabel = "Auto backup every {1} days";
 	
 }

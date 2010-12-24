@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -71,6 +73,22 @@ implements BackupEventListener {
 		
 		((TextView)findViewById(R.id.brStorageHint1)).setText(Messages.brStorageHint);
 		((TextView)findViewById(R.id.brStorageHint2)).setText(BackupManager.getBackupDir().toString());
+		
+		setupAutoBackup();
+	}
+	
+	private void setupAutoBackup() {
+		CheckBox autoBackup = (CheckBox)findViewById(R.id.brAutoBackup);
+		String autoBackupLabel = Messages.brAutoBackupLabel.replace("{1}", Integer.toString(BackupPrefs.DAYS_BETWEEN)); 
+		autoBackup.setText(autoBackupLabel);
+		autoBackup.setChecked(BackupPrefs.isAutoBackupEnabled());
+		
+		autoBackup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				BackupPrefs.writeAutoBackupEnabled(isChecked);
+			}
+		});
 		
 	}
 	

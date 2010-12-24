@@ -18,6 +18,11 @@
 		android:width="140dip"
 		/>
     
+    <CheckBox android:id="@+id/brAutoBackup"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		/>
+    
     <TextView style="@style/PrefsHint" 
     	android:id="@+id/brStorageHint1"
 		android:layout_width="wrap_content"

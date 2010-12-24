@@ -14,8 +14,10 @@ public class BackupPrefs {
 	private static final String KEY_INITIAL_CONFIRMATION = "backup.initConfirm";
 	private static final String KEY_AUTO_ENABLED = "backup.auto";
 	
+	private static final SharedPreferences settings = BookmarkTreeContext.settings;
+	
 	public static void onStartup(BookmarkTreeContext ctx) {
-		if (!BookmarkTreeContext.settings.contains(KEY_INITIAL_CONFIRMATION)) {
+		if (!settings.contains(KEY_INITIAL_CONFIRMATION)) {
 			writePref(KEY_INITIAL_CONFIRMATION, 1);
 			BackupPrefs.initialBackupConfirmation(ctx);
 		}
@@ -41,8 +43,7 @@ public class BackupPrefs {
 	}
 	
 	private static void checkPeriodicBackup(BookmarkTreeContext ctx) {
-		final SharedPreferences settings = BookmarkTreeContext.settings;
-		if (settings.getInt(KEY_AUTO_ENABLED, 0) != 1) {
+		if (!isAutoBackupEnabled()) {
 			return;
 		}
 		int daynr = getDayNr();
@@ -53,13 +54,21 @@ public class BackupPrefs {
 	}
 	
 	private static void writePref(String key, int value) {
-		Editor edit = BookmarkTreeContext.settings.edit();
+		Editor edit = settings.edit();
 		edit.putInt(key, value);
 		edit.commit();
 	}
 
 	public static void registerBackup() {
 		writePref(KEY_LAST_BACKUP, getDayNr());
+	}
+	
+	public static boolean isAutoBackupEnabled() {
+		return settings.getInt(KEY_AUTO_ENABLED, 0) == 1;
+	}
+
+	public static void writeAutoBackupEnabled(boolean isChecked) {
+		writePref(KEY_AUTO_ENABLED, isChecked?1:0);
 	}
 
 }
