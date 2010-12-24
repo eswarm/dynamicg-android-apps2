@@ -163,7 +163,7 @@ public class BackupManager {
 				try {
 					ArrayList<BrowserBookmarkBean> rows = new XmlReader(xmlfile).read();
 					numberOfRows = rows.size();
-					BookmarkDataProvider.replaceFull(ctx, rows);
+					RestoreWriter.replaceFull(ctx, rows);
 				}
 				catch (RuntimeException e) {
 					throw (RuntimeException)e;

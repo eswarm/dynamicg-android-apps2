@@ -11,9 +11,9 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
-public class BookmarkDataProvider {
+public class RestoreWriter {
 
-	private static final Logger log = new Logger(BookmarkDataProvider.class);
+	private static final Logger log = new Logger(RestoreWriter.class);
 	
 	private static final Uri BOOKMARKS_URI = android.provider.Browser.BOOKMARKS_URI;
 	
