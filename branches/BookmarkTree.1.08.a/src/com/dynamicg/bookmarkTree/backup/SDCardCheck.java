@@ -69,15 +69,18 @@ public class SDCardCheck {
 	}
 	
 	public File readyForWrite() {
-		String errorTitle = "Cannot write to SD Card";
+		String errorTitle = "SD Card access error";
 		if (touchFileOkay()) {
 			return backupdir;
 		}
-		else if (backupdir.exists() && !backupdir.canWrite()) {
-			alert(context, errorTitle, "Directory "+backupdir+" is read only");
-		}
 		else if (!Environment.MEDIA_MOUNTED.equals(sdCardState)) {
 			alert(context, errorTitle, "SD Card is not mounted.\nCurrent state is '"+sdCardState+"'");
+		}
+		else if (backupdir.exists() && backupdir.canRead() && !backupdir.canWrite()) {
+			alert(context, errorTitle, "Directory "+backupdir+" is read only");
+		}
+		else if (!backupdir.exists()) {
+			alert(context, errorTitle, "Could not create backup directory:\n"+backupdir);
 		}
 		else if (touchFileException!=null) {
 			ErrorNotification.notifyError(context, touchFileException);
