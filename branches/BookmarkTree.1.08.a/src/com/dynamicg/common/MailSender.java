@@ -19,7 +19,7 @@ public class MailSender {
 	}
 	
 	public static void emailError(Context context, Throwable exception) {
-		String title = "Bookmark Tree Manager ("+Locale.getDefault().getLanguage()+")";
+		String title = "Bookmark Tree - Error ("+Locale.getDefault().getLanguage()+")";
 		String body = SystemUtil.getExceptionText(exception);
 		createIntent(context, title, body);
 	}
