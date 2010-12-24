@@ -24,7 +24,7 @@ import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writehandler.SeparatorChangedHandler;
 import com.dynamicg.bookmarkTree.data.writer.AlphaSortWriter;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
-import com.dynamicg.bookmarkTree.ui.DisclaimerPopup;
+import com.dynamicg.bookmarkTree.ui.AboutPopup;
 import com.dynamicg.bookmarkTree.ui.SpinnerUtil;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
@@ -219,7 +219,7 @@ public class PreferencesDialog extends Dialog {
 			dumpBrowserBookmarks();
 		}
 		else if (id==ACTION_SHOW_DISCLAIMER) {
-			DisclaimerPopup.show(ctx);
+			AboutPopup.show(ctx);
 		}
 		return true;
 	}

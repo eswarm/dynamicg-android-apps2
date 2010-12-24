@@ -9,8 +9,9 @@ import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.ContextUtil;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
+import com.dynamicg.common.SystemUtil;
 
-public class DisclaimerPopup {
+public class AboutPopup {
 
 	private static final int CURRENT_DISCLAIMER_VERSION = 2; 
 	
@@ -27,10 +28,10 @@ public class DisclaimerPopup {
 
 		final String[] appinfo = ContextUtil.getVersion(ctx.activity);
 
-		new SimpleAlertDialog(ctx.activity, "Disclaimer", "Close") {
+		new SimpleAlertDialog(ctx.activity, "About", "Close") {
 			@Override
 			public View getBody() {
-				View body = ctx.getLayoutInflater().inflate(R.layout.disclaimer, null);
+				View body = SystemUtil.getLayoutInflater(ctx.activity).inflate(R.layout.about, null);
 
 				TextView titleItem = (TextView)body.findViewById(R.id.disclaimerTitle);
 				String title = titleItem.getText().toString();
