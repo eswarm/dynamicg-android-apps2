@@ -85,15 +85,17 @@ public class BookmarkDataProvider {
 		
 		ContentResolver contentResolver = ctx.activity.getContentResolver(); 
 		
+		// prepare new rows
+		ContentValues[] newValues = transform(rows);
+		
 		// delete existing entries
 		contentResolver.delete ( BOOKMARKS_URI
 				, Browser.BookmarkColumns.BOOKMARK+"=1"
 				, new String[]{}
 		);
 		
-		// insert from XML 
-		ContentValues[] values = transform(rows);
-		contentResolver.bulkInsert(BOOKMARKS_URI, values);
+		// insert
+		contentResolver.bulkInsert(BOOKMARKS_URI, newValues);
 		
 	}
 	
