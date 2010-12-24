@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.dynamicg.bookmarkTree.R;
+import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.SystemUtil;
 
@@ -68,7 +69,7 @@ public abstract class SimpleProgressDialog {
 				return SystemUtil.getExceptionText(e);
 			}
 		};
-		SystemUtil.dumpIfDevelopment(e);
+		Logger.dumpIfDevelopment(e);
 	}
 	
 }

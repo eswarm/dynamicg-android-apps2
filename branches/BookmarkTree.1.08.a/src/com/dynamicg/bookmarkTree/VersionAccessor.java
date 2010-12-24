@@ -2,7 +2,7 @@ package com.dynamicg.bookmarkTree;
 
 import java.lang.reflect.Field;
 
-import com.dynamicg.common.SystemUtil;
+import com.dynamicg.common.Logger;
 
 public class VersionAccessor {
 
@@ -18,7 +18,7 @@ public class VersionAccessor {
 			}
 		}
 		catch (Throwable t) {
-			SystemUtil.dumpIfDevelopment(t);
+			Logger.dumpIfDevelopment(t);
 		}
 		return false;
 	}

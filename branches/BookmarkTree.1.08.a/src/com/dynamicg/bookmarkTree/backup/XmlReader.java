@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
 
-import com.dynamicg.common.SystemUtil;
-
-
-
 import android.util.Xml;
+
+import com.dynamicg.common.Logger;
 
 public class XmlReader {
 
@@ -101,7 +99,7 @@ public class XmlReader {
 			return Hex.decodeHex(hexString);
 		}
 		catch (RuntimeException e) {
-			SystemUtil.dumpIfDevelopment(e);
+			Logger.dumpIfDevelopment(e);
 			return null;
 		}
 	}

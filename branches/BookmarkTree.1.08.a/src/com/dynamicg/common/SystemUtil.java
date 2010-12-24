@@ -35,12 +35,6 @@ public class SystemUtil {
 		
 	}
 	
-	public static void dumpIfDevelopment(Throwable e) {
-		if (development) {
-			e.printStackTrace();
-		}
-	}
-
 	public static LayoutInflater getLayoutInflater(Context context) {
 		return (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
