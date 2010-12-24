@@ -3,7 +3,6 @@ package com.dynamicg.bookmarkTree;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.LayoutInflater;
 
 import com.dynamicg.bookmarkTree.data.BookmarkManager;
 import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
@@ -19,7 +18,6 @@ public class BookmarkTreeContext {
 	public final BookmarkManager bookmarkManager;
 	public final BookmarkListAdapter bookmarkListAdapter;
 	public final PreferencesWrapper preferencesWrapper;
-	private LayoutInflater layoutInflater;
 	
 	public BookmarkTreeContext(Activity activity) {
 		if (settings==null) {
@@ -40,13 +38,6 @@ public class BookmarkTreeContext {
 		return preferencesWrapper.prefsBean.getNodeConcatenation();
 	}
 	
-	public LayoutInflater getLayoutInflater() {
-		if (layoutInflater==null) {
-			layoutInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		}
-		return layoutInflater;
-	}
-
 	public void reloadAndRefresh() {
 		bookmarkManager.reloadData();
 		bookmarkListAdapter.redraw();
