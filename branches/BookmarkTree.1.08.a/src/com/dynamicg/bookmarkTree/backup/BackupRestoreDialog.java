@@ -44,6 +44,9 @@ implements BackupEventListener {
 		DialogHelper.expandContent(this, R.layout.backup_restore_body);
 		
 		this.show();
+		
+		// check sd card
+		new SDCardCheck(context).checkMountedSdCard();
 	}
 
 	@Override
@@ -74,9 +77,6 @@ implements BackupEventListener {
 		((TextView)findViewById(R.id.brStorageHint2)).setText(backupdir);
 		
 		setupAutoBackup();
-		
-		// check sd card
-		new SDCardCheck(context).checkMountedSdCard();
 		
 	}
 	
