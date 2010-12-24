@@ -10,7 +10,6 @@ import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
-import com.dynamicg.common.SystemUtil;
 
 //TODO - add "backup every 20 days" pref
 //TODO - add "email to DEV"
@@ -30,8 +29,6 @@ public class Main extends Activity {
     public static final int ACTION_NEW_BM = 6;
     public static final int ACTION_BACKUP_RESTORE = 7;
 
-    private static boolean initialised = false;
-    
     private BookmarkTreeContext ctx;
     
     public Main() {
@@ -40,10 +37,6 @@ public class Main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         
     	super.onCreate(savedInstanceState);
-    	if (!initialised) {
-    		SystemUtil.init(this);
-    		initialised = true;
-    	}
         setContentView(R.layout.main);
     	this.ctx = new BookmarkTreeContext(this);
     	

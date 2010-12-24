@@ -2,21 +2,13 @@ package com.dynamicg.common;
 
 import android.util.Log;
 
+/*
+ * this class will be replaced with LoggerPROD on production builds
+ */
 public class Logger {
 
-	private static boolean TRACE_ENABLED;
-	private static boolean DEBUG_ENABLED;
-
-	static {
-		if (SystemUtil.development) {
-			TRACE_ENABLED = false;
-			DEBUG_ENABLED = true;
-		}
-		else {
-			TRACE_ENABLED = false;
-			DEBUG_ENABLED = false;
-		}
-	}
+	private static boolean TRACE_ENABLED = false;
+	private static boolean DEBUG_ENABLED = true;
 
 	public final boolean debugEnabled = DEBUG_ENABLED;
 	public final boolean traceEnabled = TRACE_ENABLED;

@@ -15,4 +15,6 @@ public class Logger {
 	public void warn(String text, Object... args) {}
 	public void debug(String text, Object... args) {}
 
+	public static void dumpIfDevelopment(Throwable e) {}
+	
 }
