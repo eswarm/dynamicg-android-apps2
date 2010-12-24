@@ -103,24 +103,26 @@ public class BackupManager {
 			int numberOfRows;
 			
 			@Override
-			public synchronized void backgroundWork() {
-				File backupdir = getBackupDir();
-				backupdir.mkdirs();
-				
-				File xmlfileTemp = new File ( backupdir, filename+".tmp" );
-				File xmlfileFinal = new File ( backupdir, filename );
-				
-				ArrayList<RawDataBean> bookmarks = BookmarkDataProvider.readBrowserBookmarks(ctx);
-				numberOfRows = bookmarks.size();
-				try {
-					new XmlWriter(xmlfileTemp, bookmarks);
-					xmlfileTemp.renameTo(xmlfileFinal);
-				}
-				catch (Exception e) {
-					if (e instanceof RuntimeException) {
-						throw (RuntimeException)e;
+			public void backgroundWork() {
+				synchronized (locktable) {
+					File backupdir = getBackupDir();
+					backupdir.mkdirs();
+					
+					File xmlfileTemp = new File ( backupdir, filename+".tmp" );
+					File xmlfileFinal = new File ( backupdir, filename );
+					
+					ArrayList<RawDataBean> bookmarks = BookmarkDataProvider.readBrowserBookmarks(ctx);
+					numberOfRows = bookmarks.size();
+					try {
+						new XmlWriter(xmlfileTemp, bookmarks);
+						xmlfileTemp.renameTo(xmlfileFinal);
 					}
-					throw new RuntimeException(e);
+					catch (Exception e) {
+						if (e instanceof RuntimeException) {
+							throw (RuntimeException)e;
+						}
+						throw new RuntimeException(e);
+					}
 				}
 			}
 			
