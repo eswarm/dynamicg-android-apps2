@@ -23,32 +23,31 @@ public class Main extends Activity {
 	 * http://www.iconeasy.com/
 	 */
 	
-	private static int actionCounter=-1;
-    public static final int ACTION_COLLAPSE_ALL = ++actionCounter;
-    public static final int ACTION_EXPAND_ALL = ++actionCounter;
-    public static final int ACTION_RELOAD = ++actionCounter;
-    public static final int ACTION_SETTINGS = ++actionCounter;
-    public static final int ACTION_DELETE_BOOKMARK = ++actionCounter;
-    public static final int ACTION_NEW_BM = ++actionCounter;
-    public static final int ACTION_BACKUP_RESTORE = ++actionCounter;
+    public static final int ACTION_COLLAPSE_ALL = 1;
+    public static final int ACTION_EXPAND_ALL = 2;
+    public static final int ACTION_RELOAD = 3;
+    public static final int ACTION_SETTINGS = 4;
+    public static final int ACTION_DELETE_BOOKMARK = 5;
+    public static final int ACTION_NEW_BM = 6;
+    public static final int ACTION_BACKUP_RESTORE = 7;
 
     private static boolean initialised = false;
     
-    private BookmarkTreeContext ctx;
+    private final BookmarkTreeContext ctx;
     
-    public void onCreate(Bundle savedInstanceState) {
-        
-    	super.onCreate(savedInstanceState);
+    public Main() {
     	if (!initialised) {
     		SystemUtil.init(this);
     		initialised = true;
     	}
-        setContentView(R.layout.main);
     	this.ctx = new BookmarkTreeContext(this);
-    	
-    	BackupPrefs.init(ctx);
-    	
-    	DisclaimerPopup.showOnce(ctx);
+    }
+    
+    public void onCreate(Bundle savedInstanceState) {
+    	super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+    	BackupPrefs.onStartup(ctx);
+    	DisclaimerPopup.showOnce(ctx); // TODO - remove
     }
     
     
