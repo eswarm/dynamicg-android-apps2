@@ -72,7 +72,9 @@ implements BackupEventListener {
 		};
 		
 		((TextView)findViewById(R.id.brStorageHint1)).setText(Messages.brStorageHint);
-		((TextView)findViewById(R.id.brStorageHint2)).setText(BackupManager.getBackupDir().toString());
+		
+		String backupdir = SDCardCheck.getBackupDir().toString();
+		((TextView)findViewById(R.id.brStorageHint2)).setText(backupdir);
 		
 		setupAutoBackup();
 	}

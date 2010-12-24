@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.TreeMap;
 
 import android.content.Context;
-import android.os.Environment;
 import android.text.format.Time;
 import android.widget.Toast;
 
@@ -21,18 +20,10 @@ public class BackupManager {
 
 	private static final Logger log = new Logger(BackupManager.class);
 	
-	private static final String exportSubdir = "dynamicg/bookmarks";
-	
 	private static final String FILE_PREFIX = "backup.";
 	private static final String FILE_SUFFIX = ".xml";
 	private static final String FILE_PATTERN = FILE_PREFIX + "{stamp}" + FILE_SUFFIX;
 	private static final String FMT_STAMP = "%Y-%m-%d.%H-%M-%S";
-	
-	public static final File getBackupDir() {
-		File extdir = Environment.getExternalStorageDirectory();
-		File backupdir = new File(extdir, exportSubdir);
-		return backupdir;
-	}
 	
 	private static String getFilename(Time t) {
 		return StringUtil.replaceFirst(FILE_PATTERN, "{stamp}", t.format(FMT_STAMP));
@@ -44,7 +35,7 @@ public class BackupManager {
 	}
 	
 	public static ArrayList<File> getBackupFiles() {
-		File dir = getBackupDir();
+		File dir = SDCardCheck.getBackupDir();
 		File[] files = dir.listFiles(new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String filename) {
@@ -90,6 +81,11 @@ public class BackupManager {
 		
 		final Context context = ctx.activity;
 		
+		final File backupdir = new SDCardCheck(context).readyForWrite();
+		if (backupdir==null) {
+			return; // not ready
+		}
+		
 		final String filename = getFilename();
 		synchronized (locktable) {
 			if (locktable.contains(filename)) {
@@ -105,9 +101,6 @@ public class BackupManager {
 			@Override
 			public void backgroundWork() {
 				synchronized (locktable) {
-					File backupdir = getBackupDir();
-					backupdir.mkdirs();
-					
 					File xmlfileTemp = new File ( backupdir, filename+".tmp" );
 					File xmlfileFinal = new File ( backupdir, filename );
 					
