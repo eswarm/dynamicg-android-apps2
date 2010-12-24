@@ -15,18 +15,18 @@ public class BackupPrefs {
 	public static final int DAYS_BETWEEN = log.debugEnabled ? 1 : 20;
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
-	private static final String KEY_INITIAL_CONFIRMATION = "backup.initConfirm";
 	private static final String KEY_AUTO_ENABLED = "backup.auto";
 	
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
 		//cleanup();
-		if (!settings.contains(KEY_INITIAL_CONFIRMATION)) {
-			writePref(KEY_INITIAL_CONFIRMATION, 1);
+		int autoEnabled = settings.getInt(KEY_AUTO_ENABLED, -1);
+		if (autoEnabled==-1) {
+			writePref(KEY_AUTO_ENABLED, 0); // init to 0 for next call
 			BackupPrefs.initialBackupConfirmation(ctx);
 		}
-		else {
+		else if (autoEnabled==1) {
 			checkPeriodicBackup(ctx);
 		}
 	}
