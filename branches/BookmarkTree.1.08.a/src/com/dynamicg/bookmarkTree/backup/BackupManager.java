@@ -103,7 +103,7 @@ public class BackupManager {
 			int numberOfRows;
 			
 			@Override
-			public void backgroundWork() {
+			public synchronized void backgroundWork() {
 				File backupdir = getBackupDir();
 				backupdir.mkdirs();
 				
