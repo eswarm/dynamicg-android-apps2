@@ -1,38 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/disclaimerBody"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="wrap_content"
->
+	android:orientation="vertical"
+	android:paddingLeft="10dip"
+	android:paddingRight="10dip"
+>	
 
-	<LinearLayout
+	<TextView 
+		android:id="@+id/aboutSubTitle"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingLeft="10dip"
-		android:paddingRight="10dip"
-	>	
+		android:textStyle="bold"
+		android:textSize="18dp"
+	/>
 
-		<TextView 
-			android:id="@+id/aboutSubTitle"
+	<HorizontalScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		>
+		<TextView android:id="@+id/aboutBody"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
-			android:textStyle="bold"
-			android:textSize="18dp"
-		/>
+			android:autoLink="all"
+			/>
+	</HorizontalScrollView>
 
-		<HorizontalScrollView
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			>
-			<TextView android:id="@+id/aboutBody"
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:autoLink="all"
-				/>
-		</HorizontalScrollView>
+</LinearLayout>
 
-	</LinearLayout>
-
-</ScrollView>
