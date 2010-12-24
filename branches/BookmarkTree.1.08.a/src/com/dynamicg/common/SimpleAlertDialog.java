@@ -122,11 +122,6 @@ public abstract class SimpleAlertDialog {
 		
 		builder.show();
 		
-//		AlertDialog dialog = builder.show();
-//		System.err.println("-------------------1 "+dialog.getButton(0));
-//		System.err.println("-------------------2 "+dialog.getButton(AlertDialog.BUTTON_POSITIVE));
-//		System.err.println("-------------------3 "+dialog.getButton(AlertDialog.BUTTON1));
-		
 	}
 
 	public void onPositiveButton() {
