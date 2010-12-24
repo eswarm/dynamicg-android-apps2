@@ -4,12 +4,16 @@ import java.util.Collection;
 
 import android.graphics.Bitmap;
 
+/*
+ * TODO -- merge with RawDataBean
+ */
 public class BrowserBookmarkBean extends Bookmark {
 
-	protected Integer id;
-	protected String fullTitle;
-	protected String url;
-	protected Bitmap favicon;
+	public int id;
+	public long created;
+	public String fullTitle;
+	public String url;
+	public Bitmap favicon;
 	
 	public BrowserBookmarkBean(Integer id, String fullTitle, String url, Bitmap favicon) {
 		super();

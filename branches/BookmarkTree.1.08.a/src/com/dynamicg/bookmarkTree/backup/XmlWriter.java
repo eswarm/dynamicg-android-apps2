@@ -53,8 +53,8 @@ public class XmlWriter {
 	private String getIconData(RawDataBean b) {
 		String buffer;
 		// buffer = Hex.encodeHex(MockIcon.getIcon(context), false) ;
-		if (b.favicon!=null&&b.favicon.length>0) {
-			buffer = Hex.encodeHex(b.favicon, false) ;
+		if (b.faviconData!=null&&b.faviconData.length>0) {
+			buffer = Hex.encodeHex(b.faviconData, false) ;
 			return split ( new StringBuffer(buffer), 80);
 		}
 		else {
@@ -73,7 +73,7 @@ public class XmlWriter {
 			
 			addTextNode(Tags.ID, b.id);
 			addTextNode(Tags.CREATED, b.created);
-			addTextNode(Tags.TITLE, b.title);
+			addTextNode(Tags.TITLE, b.fullTitle);
 			addTextNode(Tags.URL, b.url);
 			addTextNode(Tags.FAVICON, getIconData(b));
 			

@@ -1,9 +1,9 @@
 package com.dynamicg.bookmarkTree.backup;
 
 public class RawDataBean {
-	public long id;
+	public int id;
 	public long created;
-	public String title;
+	public String fullTitle;
 	public String url;
-	public byte[] favicon;
+	public byte[] faviconData;
 }

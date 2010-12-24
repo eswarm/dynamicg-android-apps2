@@ -41,6 +41,12 @@ public class XmlReader {
 		return Long.parseLong(parser.getText());
 	}
 	
+	private int getNextInt()
+	throws Exception {
+		nextItem();
+		return Integer.parseInt(parser.getText());
+	}
+	
 	public ArrayList<RawDataBean> read() 
 	throws Exception {
 		
@@ -64,19 +70,19 @@ public class XmlReader {
 					nextItem();
 				}
 				else if (equals(tag, Tags.ID)) {
-					bean.id = getNextLong();
+					bean.id = getNextInt();
 				}
 				else if (equals(tag, Tags.CREATED)) {
 					bean.created = getNextLong();
 				}
 				else if (equals(tag, Tags.TITLE)) {
-					bean.title = getNextText();
+					bean.fullTitle = getNextText();
 				}
 				else if (equals(tag, Tags.URL)) {
 					bean.url = getNextText();
 				}
 				else if (equals(tag, Tags.FAVICON)) {
-					bean.favicon = encodeIconData(getNextText());
+					bean.faviconData = encodeIconData(getNextText());
 				}
 			}
 			

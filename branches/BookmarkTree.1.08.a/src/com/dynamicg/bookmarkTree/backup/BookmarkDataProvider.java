@@ -43,11 +43,11 @@ public class BookmarkDataProvider {
 		RawDataBean b;
 		while ( crs.moveToNext() ) {
 			b = new RawDataBean(); 
-			b.id = crs.getLong(0);
+			b.id = crs.getInt(0);
 			b.created = crs.getLong(1);
-			b.title = crs.getString(2);
+			b.fullTitle = crs.getString(2);
 			b.url = crs.getString(3);
-			b.favicon = crs.getBlob(4);
+			b.faviconData = crs.getBlob(4);
 			rows.add(b);
 		}
 		
@@ -67,12 +67,12 @@ public class BookmarkDataProvider {
 			
 			entry.put(Browser.BookmarkColumns.BOOKMARK, 1);
 			entry.put(Browser.BookmarkColumns.CREATED, b.created);
-			entry.put(Browser.BookmarkColumns.TITLE, b.title);
+			entry.put(Browser.BookmarkColumns.TITLE, b.fullTitle);
 			entry.put(Browser.BookmarkColumns.URL, b.url);
-			entry.put(Browser.BookmarkColumns.FAVICON, b.favicon);
+			entry.put(Browser.BookmarkColumns.FAVICON, b.faviconData);
 			
 			if (log.debugEnabled) {
-				log.debug("put item", b.title, b.url, b.id, b.favicon!=null?b.favicon.length:"-1");
+				log.debug("put item", b.fullTitle, b.url, b.id, b.faviconData!=null?b.faviconData.length:"-1");
 			}
 			list.add(entry);
 		}
