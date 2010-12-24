@@ -13,19 +13,20 @@ public class BookmarkTreeContext {
 	private static final String PREFS_NAME = "dynamicg.bookmarkTree";
 	
 	public static SharedPreferences settings;
+	public static PreferencesWrapper preferencesWrapper;
 	
 	public final Activity activity;
 	public final BookmarkManager bookmarkManager;
 	public final BookmarkListAdapter bookmarkListAdapter;
-	public final PreferencesWrapper preferencesWrapper;
 	
 	public BookmarkTreeContext(Activity activity) {
+		
 		if (settings==null) {
 			settings = activity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+	    	preferencesWrapper = new PreferencesWrapper();
 		}
 		
     	this.activity = activity;
-    	this.preferencesWrapper = new PreferencesWrapper();
     	this.bookmarkManager = new BookmarkManager(this);
     	this.bookmarkListAdapter = new BookmarkListAdapter(this);
 	}
