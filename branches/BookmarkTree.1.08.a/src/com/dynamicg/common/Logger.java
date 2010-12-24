@@ -8,13 +8,6 @@ public class Logger {
 	private static boolean DEBUG_ENABLED ;
 
 	static {
-		resetLogging();
-	}
-
-	public final boolean debugEnabled = DEBUG_ENABLED;
-	public final boolean traceEnabled = TRACE_ENABLED;
-	
-	public static void resetLogging() {
 		if ( SystemUtil.isDevelopmentOrDevDevice() ) {
 			TRACE_ENABLED = false;
 			DEBUG_ENABLED = true;
@@ -24,6 +17,9 @@ public class Logger {
 			DEBUG_ENABLED = false;
 		}
 	}
+
+	public final boolean debugEnabled = DEBUG_ENABLED;
+	public final boolean traceEnabled = TRACE_ENABLED;
 	
 	private final String textPrefix;
 
