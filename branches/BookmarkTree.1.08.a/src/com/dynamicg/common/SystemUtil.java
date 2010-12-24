@@ -2,7 +2,6 @@ package com.dynamicg.common;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Properties;
 
 import android.content.Context;
 import android.provider.Settings.Secure;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 public class SystemUtil {
 
 	private static final String MY_HTC_HERO = "2001459694cb4e56";
-	private static final String MY_HTC_DESIRE = "200145745b9424b8";
 	private static final String EMULATOR_2_2 = "9774d56d682e549c";
 
 	private static String androidId;
@@ -24,34 +22,10 @@ public class SystemUtil {
 		Log.i("dynamicG", "SystemUtil - initInstance done: androidid=["+androidId+"]");
 	}
 	
-	public static String getAndroidId() {
-		return androidId;
-	}
-	
-	public static String getAllSystemProps() {
-		Properties props = System.getProperties();
-		StringBuffer sb = new StringBuffer();
-		for ( Object key:props.keySet()) {
-			sb.append("["+key+"]=["+props.getProperty((String)key)+"]\n") ;
-		}
-		return sb.toString();
-	}
-	
 	public static boolean isDevelopmentOrDevDevice() {
 		return emulator || MY_HTC_HERO.equals(androidId);
 	}
 	
-	public static boolean isMyProdDevice() {
-		return MY_HTC_DESIRE.equals(androidId);
-	}
-	
-	public static void sleep(long mili) {
-		try { 
-			Thread.sleep(mili);
-		}
-		catch (Exception e) {}
-	}
-
 	public static String getExceptionText(Throwable exception) {
 		final int limit = 1200;
 		
