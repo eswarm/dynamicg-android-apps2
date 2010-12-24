@@ -8,7 +8,7 @@ public class Logger {
 	private static boolean DEBUG_ENABLED ;
 
 	static {
-		if ( SystemUtil.isDevelopmentOrDevDevice() ) {
+		if (SystemUtil.development) {
 			TRACE_ENABLED = false;
 			DEBUG_ENABLED = true;
 		}

@@ -62,17 +62,13 @@ public abstract class SimpleProgressDialog {
 	 * override in implementations if required
 	 */
 	public void handleError(final Throwable e) {
-		
 		new SimpleAlertDialog(context, "Error", R.string.commonClose) {
 			@Override
 			public String getScrollViewText() {
 				return SystemUtil.getExceptionText(e);
 			}
 		};
-		
-		if (SystemUtil.isDevelopmentOrDevDevice()) {
-			e.printStackTrace(System.err);
-		}
+		SystemUtil.dumpIfDevelopment(e);
 	}
 	
 }

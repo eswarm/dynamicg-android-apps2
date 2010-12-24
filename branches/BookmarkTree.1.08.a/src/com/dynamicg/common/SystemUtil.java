@@ -5,7 +5,6 @@ import java.io.StringWriter;
 
 import android.content.Context;
 import android.provider.Settings.Secure;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 public class SystemUtil {
@@ -13,17 +12,12 @@ public class SystemUtil {
 	private static final String MY_HTC_HERO = "2001459694cb4e56";
 	private static final String EMULATOR_2_2 = "9774d56d682e549c";
 
-	private static String androidId;
-	private static boolean emulator;
+	public static boolean development;
 	
 	public static void init(Context maincontext) {
-		androidId = Secure.getString(maincontext.getContentResolver(), Secure.ANDROID_ID);
-		emulator = androidId==null || androidId.equals(EMULATOR_2_2);
-		Log.i("dynamicG", "SystemUtil - initInstance done: androidid=["+androidId+"]");
-	}
-	
-	public static boolean isDevelopmentOrDevDevice() {
-		return emulator || MY_HTC_HERO.equals(androidId);
+		String androidId = Secure.getString(maincontext.getContentResolver(), Secure.ANDROID_ID);
+		boolean emulator = androidId==null || androidId.equals(EMULATOR_2_2);
+		development = emulator || MY_HTC_HERO.equals(androidId);
 	}
 	
 	public static String getExceptionText(Throwable exception) {
@@ -42,7 +36,7 @@ public class SystemUtil {
 	}
 	
 	public static void dumpIfDevelopment(Throwable e) {
-		if (SystemUtil.isDevelopmentOrDevDevice()) {
+		if (development) {
 			e.printStackTrace();
 		}
 	}
