@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
 public class BookmarkDataProvider {
@@ -17,7 +18,7 @@ public class BookmarkDataProvider {
 	
 	private static final Uri BOOKMARKS_URI = android.provider.Browser.BOOKMARKS_URI;
 	
-	public static ArrayList<RawDataBean> readBrowserBookmarks(BookmarkTreeContext ctx) {
+	public static ArrayList<BrowserBookmarkBean> readBrowserBookmarks(BookmarkTreeContext ctx) {
 
 		String[] columns = new String[] { Browser.BookmarkColumns._ID
 				, Browser.BookmarkColumns.CREATED
@@ -33,16 +34,16 @@ public class BookmarkDataProvider {
 				, Browser.BookmarkColumns.TITLE
 		);
 
-		ArrayList<RawDataBean> rows = new ArrayList<RawDataBean>();
+		ArrayList<BrowserBookmarkBean> rows = new ArrayList<BrowserBookmarkBean>();
 		
 		// see error report "Aug 13, 2010 10:19:37 PM"
 		if (crs==null) {
 			return rows;
 		}
 		
-		RawDataBean b;
+		BrowserBookmarkBean b;
 		while ( crs.moveToNext() ) {
-			b = new RawDataBean(); 
+			b = new BrowserBookmarkBean(); 
 			b.id = crs.getInt(0);
 			b.created = crs.getLong(1);
 			b.fullTitle = crs.getString(2);
@@ -59,10 +60,10 @@ public class BookmarkDataProvider {
 
 	}
 
-	private static ContentValues[] transform(ArrayList<RawDataBean> rows) {
+	private static ContentValues[] transform(ArrayList<BrowserBookmarkBean> rows) {
 		ArrayList<ContentValues> list = new ArrayList<ContentValues>();
 		ContentValues entry;
-		for (RawDataBean b:rows) {
+		for (BrowserBookmarkBean b:rows) {
 			entry = new ContentValues();
 			
 			entry.put(Browser.BookmarkColumns.BOOKMARK, 1);
@@ -79,7 +80,7 @@ public class BookmarkDataProvider {
 		return list.toArray(new ContentValues[]{});
 	}
 	
-	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<RawDataBean> rows) 
+	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<BrowserBookmarkBean> rows) 
 	throws Exception {
 		
 		ContentResolver contentResolver = ctx.activity.getContentResolver(); 

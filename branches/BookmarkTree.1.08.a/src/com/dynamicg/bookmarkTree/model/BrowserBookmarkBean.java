@@ -13,10 +13,14 @@ public class BrowserBookmarkBean extends Bookmark {
 	public long created;
 	public String fullTitle;
 	public String url;
+	// set alternatively: for backup/restore only the byte[] data
 	public Bitmap favicon;
+	public byte[] faviconData;
 	
-	public BrowserBookmarkBean(Integer id, String fullTitle, String url, Bitmap favicon) {
+	public BrowserBookmarkBean() {
 		super();
+	}
+	public BrowserBookmarkBean(Integer id, String fullTitle, String url, Bitmap favicon) {
 		this.id = id;
 		this.fullTitle = fullTitle;
 		this.url = url;
