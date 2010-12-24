@@ -23,7 +23,8 @@ public class BackupPrefs {
 		//cleanup();
 		int autoEnabled = settings.getInt(KEY_AUTO_ENABLED, -1);
 		if (autoEnabled==-1) {
-			writePref(KEY_AUTO_ENABLED, 0); // init to 0 for next call
+			// first call - init to 0 and ask for "auto enable"
+			writePref(KEY_AUTO_ENABLED, 0);
 			BackupPrefs.initialBackupConfirmation(ctx);
 		}
 		else if (autoEnabled==1) {
@@ -48,9 +49,6 @@ public class BackupPrefs {
 	}
 	
 	private static void checkPeriodicBackup(BookmarkTreeContext ctx) {
-		if (!isAutoBackupEnabled()) {
-			return;
-		}
 		int daynr = getDayNr();
 		int lastBackup = settings.getInt(KEY_LAST_BACKUP, 0);
 		boolean required = daynr-lastBackup >= DAYS_BETWEEN;
@@ -89,7 +87,6 @@ public class BackupPrefs {
 //	@SuppressWarnings("unused")
 //	private static void cleanup() {
 //		Editor edit = settings.edit();
-//		edit.remove(KEY_INITIAL_CONFIRMATION);
 //		edit.remove(KEY_AUTO_ENABLED);
 //		edit.remove(KEY_LAST_BACKUP);
 //		edit.commit();
