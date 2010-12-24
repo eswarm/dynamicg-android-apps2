@@ -25,21 +25,6 @@ public class Logger {
 		}
 	}
 	
-	public static void enable() {
-		INFO_ENABLED = true;
-		DEBUG_ENABLED = true;
-	}
-	
-	public static void enableTrace() {
-		TRACE_ENABLED = true;
-	}
-	
-	public static void disable() {
-		INFO_ENABLED = false;
-		DEBUG_ENABLED = false;
-		TRACE_ENABLED = false;
-	}
-	
 	private String textPrefix;
 
 	public Logger(Class<?> cls) {
@@ -47,9 +32,9 @@ public class Logger {
 		textPrefix = "DG/"+textPrefix.substring(textPrefix.lastIndexOf(".")+1);
 	}
 
-	private static StringBuffer append(String text, Object... args) {
-		StringBuffer sb = new StringBuffer(text);
-		for ( int i=0;i<args.length;i++ ) {
+	private static StringBuffer append(Object... args) {
+		StringBuffer sb = new StringBuffer(args[0].toString());
+		for ( int i=1;i<args.length;i++ ) {
 			sb.append(" [");
 			sb.append(args[i]);
 			sb.append("]");
@@ -57,26 +42,12 @@ public class Logger {
 		return sb;
 	}
 	
-	public void info(String text) {
-		if (!INFO_ENABLED) {
-			return;
-		}
-		Log.i(textPrefix, text);
-	}
-
 	public void info(String text, Object... args) {
 		if (!INFO_ENABLED) {
 			return;
 		}
 		StringBuffer sb = append(text, args);
 		Log.i(textPrefix, sb.toString());
-	}
-
-	public void debug(String text) {
-		if (!DEBUG_ENABLED) {
-			return;
-		}
-		Log.d(textPrefix, text);
 	}
 
 	public void debug(String text, Object... args) {
@@ -87,12 +58,6 @@ public class Logger {
 		Log.d(textPrefix, sb.toString());
 	}
 
-	public void trace(String text) {
-		if (!TRACE_ENABLED ) {
-			return;
-		}
-		Log.v(textPrefix, text);
-	}
 	public void trace(String text, Object... args) {
 		if (!TRACE_ENABLED ) {
 			return;
@@ -101,17 +66,9 @@ public class Logger {
 		Log.v(textPrefix, sb.toString());
 	}
 
-	public void warn(String text) {
-		Log.w(textPrefix, text);
-	}
-
 	public void warn(String text, Object... args) {
 		StringBuffer sb = append(text, args);
 		Log.w(textPrefix, sb.toString());
-	}
-
-	public void error(String text) {
-		Log.e(textPrefix, text);
 	}
 
 	public void error(String text, Object... args) {
