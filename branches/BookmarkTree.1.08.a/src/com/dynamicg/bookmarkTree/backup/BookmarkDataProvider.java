@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.net.Uri;
 import android.provider.Browser;
 
@@ -18,48 +17,6 @@ public class BookmarkDataProvider {
 	
 	private static final Uri BOOKMARKS_URI = android.provider.Browser.BOOKMARKS_URI;
 	
-	public static ArrayList<BrowserBookmarkBean> readBrowserBookmarks(BookmarkTreeContext ctx) {
-
-		String[] columns = new String[] { Browser.BookmarkColumns._ID
-				, Browser.BookmarkColumns.CREATED
-				, Browser.BookmarkColumns.TITLE
-				, Browser.BookmarkColumns.URL
-				, Browser.BookmarkColumns.FAVICON 
-		};
-		String query = Browser.BookmarkColumns.BOOKMARK+"=1"; // query on bookmarks only, skip history
-		Cursor crs = ctx.activity.managedQuery ( BOOKMARKS_URI
-				, columns
-				, query
-				, null
-				, Browser.BookmarkColumns.TITLE
-		);
-
-		ArrayList<BrowserBookmarkBean> rows = new ArrayList<BrowserBookmarkBean>();
-		
-		// see error report "Aug 13, 2010 10:19:37 PM"
-		if (crs==null) {
-			return rows;
-		}
-		
-		BrowserBookmarkBean b;
-		while ( crs.moveToNext() ) {
-			b = new BrowserBookmarkBean(); 
-			b.id = crs.getInt(0);
-			b.created = crs.getLong(1);
-			b.fullTitle = crs.getString(2);
-			b.url = crs.getString(3);
-			b.faviconData = crs.getBlob(4);
-			rows.add(b);
-		}
-		
-		if (!crs.isClosed()) {
-			crs.close();
-		}
-		
-		return rows;
-
-	}
-
 	private static ContentValues[] transform(ArrayList<BrowserBookmarkBean> rows) {
 		ArrayList<ContentValues> list = new ArrayList<ContentValues>();
 		ContentValues entry;

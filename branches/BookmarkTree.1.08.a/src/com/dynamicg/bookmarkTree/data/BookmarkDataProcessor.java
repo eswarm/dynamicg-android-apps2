@@ -24,7 +24,7 @@ public class BookmarkDataProcessor {
 		if (log.debugEnabled) {
 			log.debug("start");
 		}
-		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity);
+		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, true);
 		buildTree(rows);
 	}
 	

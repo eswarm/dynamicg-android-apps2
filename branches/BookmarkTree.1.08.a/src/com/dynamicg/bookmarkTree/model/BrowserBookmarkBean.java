@@ -4,15 +4,13 @@ import java.util.Collection;
 
 import android.graphics.Bitmap;
 
-/*
- * TODO -- merge with RawDataBean
- */
 public class BrowserBookmarkBean extends Bookmark {
 
 	public int id;
 	public long created;
 	public String fullTitle;
 	public String url;
+	
 	// set alternatively: for backup/restore only the byte[] data
 	public Bitmap favicon;
 	public byte[] faviconData;

@@ -27,7 +27,7 @@ public class SeparatorChangedHandler {
 	}
 
 	private void fullProcess() {
-		ArrayList<BrowserBookmarkBean> browserBookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx);
+		ArrayList<BrowserBookmarkBean> browserBookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, false);
 		for (BrowserBookmarkBean bm:browserBookmarks) {
 			update(bm);
 		}

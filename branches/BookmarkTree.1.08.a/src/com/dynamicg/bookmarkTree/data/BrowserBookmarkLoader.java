@@ -9,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Browser;
 
-import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
@@ -24,10 +23,11 @@ public class BrowserBookmarkLoader {
 		return BitmapFactory.decodeByteArray(blob, 0, blob.length); 
 	}
 
-	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(Activity main) {
+	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(Activity main, boolean resolveImage) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
 		String[] columns = new String[] { Browser.BookmarkColumns._ID
+				, Browser.BookmarkColumns.CREATED
 				, Browser.BookmarkColumns.TITLE
 				, Browser.BookmarkColumns.URL
 				, Browser.BookmarkColumns.FAVICON 
@@ -49,11 +49,19 @@ public class BrowserBookmarkLoader {
 		
 		BrowserBookmarkBean row;
 		while ( crs.moveToNext() ) {
-			row = new BrowserBookmarkBean (  crs.getInt(0)
-					, crs.getString(1)
-					, crs.getString(2)
-					, getFavicon(crs.getBlob(3))
-			);
+			
+			row = new BrowserBookmarkBean(); 
+			row.id = crs.getInt(0);
+			row.created = crs.getLong(1);
+			row.fullTitle = crs.getString(2);
+			row.url = crs.getString(3);
+			if (resolveImage) {
+				row.favicon = getFavicon(crs.getBlob(4));
+			}
+			else {
+				row.faviconData = crs.getBlob(4);
+			}
+			
 			if (log.traceEnabled) {
 				log.debug("loadBrowserBookmarks",row.getFullTitle(),row.getUrl());
 			}
@@ -65,10 +73,6 @@ public class BrowserBookmarkLoader {
 		}
 		
 		return rows;
-	}
-
-	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(BookmarkTreeContext ctx) {
-		return loadBrowserBookmarks(ctx.activity);
 	}
 	
 }
