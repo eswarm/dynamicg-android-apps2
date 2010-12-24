@@ -10,7 +10,7 @@ import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
 import com.dynamicg.common.SystemUtil;
 
-public class AboutPopup {
+public class AboutDialog {
 
 	public static final String AUTHOR = "dynamicg.android@gmail.com";
 	

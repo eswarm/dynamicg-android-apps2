@@ -5,7 +5,7 @@ import java.util.Locale;
 import android.content.Context;
 import android.content.Intent;
 
-import com.dynamicg.bookmarkTree.ui.AboutPopup;
+import com.dynamicg.bookmarkTree.ui.AboutDialog;
 
 public class MailSender {
 
@@ -19,7 +19,7 @@ public class MailSender {
 		msg.putExtra(Intent.EXTRA_TEXT, body);
 		
 		// email recipient
-		String emailRecipient = AboutPopup.AUTHOR;
+		String emailRecipient = AboutDialog.AUTHOR;
 		msg.putExtra(Intent.EXTRA_EMAIL, new String[]{emailRecipient} );
 		
 		context.startActivity(Intent.createChooser(msg, title));
