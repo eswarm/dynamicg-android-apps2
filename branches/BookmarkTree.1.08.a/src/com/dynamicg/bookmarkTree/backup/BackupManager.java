@@ -117,10 +117,10 @@ public class BackupManager {
 						new XmlWriter(xmlfileTemp, bookmarks);
 						xmlfileTemp.renameTo(xmlfileFinal);
 					}
+					catch (RuntimeException e) {
+						throw (RuntimeException)e;
+					}
 					catch (Exception e) {
-						if (e instanceof RuntimeException) {
-							throw (RuntimeException)e;
-						}
 						throw new RuntimeException(e);
 					}
 				}
@@ -162,10 +162,10 @@ public class BackupManager {
 					numberOfRows = rows.size();
 					BookmarkDataProvider.replaceFull(ctx, rows);
 				}
+				catch (RuntimeException e) {
+					throw (RuntimeException)e;
+				}
 				catch (Exception e) {
-					if (e instanceof RuntimeException) {
-						throw (RuntimeException)e;
-					}
 					throw new RuntimeException(e);
 				}
 			}
