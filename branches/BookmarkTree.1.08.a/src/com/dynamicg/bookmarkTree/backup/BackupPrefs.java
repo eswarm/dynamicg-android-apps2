@@ -4,10 +4,13 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 
 public class BackupPrefs {
 
+	private static final Logger log = new Logger(BackupPrefs.class);
+	
 	public static final int DAYS_BETWEEN = 20;
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
@@ -48,7 +51,11 @@ public class BackupPrefs {
 		}
 		int daynr = getDayNr();
 		int lastBackup = settings.getInt(KEY_LAST_BACKUP, 0);
-		if ( daynr-lastBackup > DAYS_BETWEEN ) {
+		boolean required = daynr-lastBackup > DAYS_BETWEEN;
+		if (log.debugEnabled) {
+			log.debug("checkPeriodicBackup", daynr, lastBackup, required);
+		}
+		if (required) {
 			BackupManager.createBackup(ctx, null); // no callback - "createBackup" will register this backup on its own
 		}
 	}
@@ -57,6 +64,9 @@ public class BackupPrefs {
 		Editor edit = settings.edit();
 		edit.putInt(key, value);
 		edit.commit();
+		if (log.debugEnabled) {
+			log.debug("write pref", key, value);
+		}
 	}
 
 	public static void registerBackup() {
@@ -64,6 +74,9 @@ public class BackupPrefs {
 	}
 	
 	public static boolean isAutoBackupEnabled() {
+		if (log.debugEnabled) {
+			log.debug("isAutoBackupEnabled", settings.getInt(KEY_AUTO_ENABLED, 0) == 1 );
+		}
 		return settings.getInt(KEY_AUTO_ENABLED, 0) == 1;
 	}
 
