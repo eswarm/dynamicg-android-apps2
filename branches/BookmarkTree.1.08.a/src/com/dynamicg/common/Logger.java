@@ -56,12 +56,4 @@ public class Logger {
 		Log.d(textPrefix, sb.toString());
 	}
 
-	public void trace(String text, Object... args) {
-		if (!TRACE_ENABLED ) {
-			return;
-		}
-		StringBuffer sb = append(text, args);
-		Log.v(textPrefix, sb.toString());
-	}
-
 }
