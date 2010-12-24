@@ -16,7 +16,7 @@ import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.StringUtil;
 
-//TODO -- validation after backup
+//TODO - validation after backup (?)
 public class BackupManager {
 
 	private static final Logger log = new Logger(BackupManager.class);
