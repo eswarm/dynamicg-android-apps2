@@ -23,13 +23,13 @@ public class BookmarkManager {
 			loadBookmarks();
 		}
 		else {
-			if (log.isDebugEnabled()) {
+			if (log.debugEnabled) {
 				log.debug("reuse cache");
 			}
 		}
 		
 		if (ctx.preferencesWrapper.isKeepState()) {
-			if (log.isDebugEnabled()) {
+			if (log.debugEnabled) {
 				log.debug("restore folder state");
 			}
 			FolderStateHandler.restore(this.bookmarksCache);
@@ -47,7 +47,7 @@ public class BookmarkManager {
 			}
 		}
 		
-		if (log.isTraceEnabled()) {
+		if (log.traceEnabled) {
 			log.debug("############# bookmarksCache size", bookmarksCache.size());
 			
 			for (Bookmark item:bookmarksCache) {

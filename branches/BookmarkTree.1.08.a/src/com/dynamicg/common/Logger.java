@@ -11,6 +11,9 @@ public class Logger {
 		resetLogging();
 	}
 
+	public final boolean debugEnabled = DEBUG_ENABLED;
+	public final boolean traceEnabled = TRACE_ENABLED;
+	
 	public static void resetLogging() {
 		if ( SystemUtil.isDevelopmentOrDevDevice() ) {
 			TRACE_ENABLED = false;
@@ -63,14 +66,6 @@ public class Logger {
 		}
 		StringBuffer sb = append(text, args);
 		Log.v(textPrefix, sb.toString());
-	}
-
-	public boolean isDebugEnabled() {
-		return DEBUG_ENABLED;
-	}
-
-	public boolean isTraceEnabled() {
-		return TRACE_ENABLED;
 	}
 
 }

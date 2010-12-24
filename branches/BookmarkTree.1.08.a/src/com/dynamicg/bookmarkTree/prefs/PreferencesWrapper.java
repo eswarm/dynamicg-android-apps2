@@ -43,7 +43,7 @@ public class PreferencesWrapper {
 	
 	public void write() {
 		SharedPreferences.Editor editor = settings.edit();
-		if (log.isDebugEnabled()) {
+		if (log.debugEnabled) {
 			log.debug("write prefs - folderSeparator", prefsBean.folderSeparator);
 			log.debug("write prefs - listStyle", prefsBean.listStyle);
 			log.debug("write prefs - sortOption", prefsBean.sortOption);

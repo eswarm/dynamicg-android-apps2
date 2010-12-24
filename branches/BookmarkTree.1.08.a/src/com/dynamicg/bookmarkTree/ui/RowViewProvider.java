@@ -21,7 +21,7 @@ public abstract class RowViewProvider {
 	public RowViewProvider(LayoutInflater inflater, boolean compact) {
 		this.inflater = inflater;
 		this.compact = compact;
-		if (log.isDebugEnabled()) {
+		if (log.debugEnabled) {
 			log.debug("create RowViewProvider", this);
 		}
 	}

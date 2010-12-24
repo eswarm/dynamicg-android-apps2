@@ -71,7 +71,7 @@ public class BookmarkDataProvider {
 			entry.put(Browser.BookmarkColumns.URL, b.url);
 			entry.put(Browser.BookmarkColumns.FAVICON, b.favicon);
 			
-			if (log.isDebugEnabled()) {
+			if (log.debugEnabled) {
 				log.debug("put item", b.title, b.url, b.id );
 				log.debug("--- FAVICON", b.favicon!=null?b.favicon.length:"-1");
 			}

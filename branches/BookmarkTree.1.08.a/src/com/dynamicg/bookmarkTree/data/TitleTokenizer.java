@@ -42,7 +42,7 @@ public class TitleTokenizer {
 			items.add(item);
 			parent = item;
 			
-			if (log.isTraceEnabled()) {
+			if (log.traceEnabled) {
 				log.debug("titleItem", item.nodeTitle, item.fullTitle);
 			}
 		}

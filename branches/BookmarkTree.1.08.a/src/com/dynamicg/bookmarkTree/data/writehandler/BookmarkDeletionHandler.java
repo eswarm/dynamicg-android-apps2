@@ -20,7 +20,7 @@ public class BookmarkDeletionHandler {
 		
 		BookmarkWriter deletion = new BookmarkWriter(ctx);
 		
-		if (log.isDebugEnabled()) {
+		if (log.debugEnabled) {
 			log.debug("delete", selectedBookmark.getDisplayTitle());
 		}
 		

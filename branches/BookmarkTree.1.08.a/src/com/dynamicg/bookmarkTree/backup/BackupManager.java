@@ -52,7 +52,7 @@ public class BackupManager {
 			}
 		});
 		
-		if (log.isDebugEnabled()) {
+		if (log.debugEnabled) {
 			log.debug("backup list", dir, files!=null?files.length:-1);
 		}
 		
@@ -219,7 +219,7 @@ public class BackupManager {
 			int comp;
 			for (File f:backupFiles) {
 				comp = f.getName().compareTo(fnameStampLimit);
-				if (log.isDebugEnabled()) {
+				if (log.debugEnabled) {
 					log.debug("check old files", fnameStampLimit, f.getName(), comp, comp<=0?"***":"-");
 				}
 				if (comp<=0) {
