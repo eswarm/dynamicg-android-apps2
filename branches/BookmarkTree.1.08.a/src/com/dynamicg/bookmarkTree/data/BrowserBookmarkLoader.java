@@ -52,7 +52,7 @@ public class BrowserBookmarkLoader {
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static ArrayList<?> readBrowserBookmarks(Activity main, int what) {
+	private static ArrayList readBrowserBookmarks(Activity main, int what) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
 		String[] columns = new String[] {
@@ -70,7 +70,7 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.TITLE
 		);
 
-		ArrayList rows = what==FOR_BACKUP_RESTORE ? new ArrayList<RawBackupDataBean>() : new ArrayList<BrowserBookmarkBean>();
+		ArrayList rows = new ArrayList();
 		
 		// see error report "Aug 13, 2010 10:19:37 PM"
 		if (crs==null) {
