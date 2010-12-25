@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
@@ -54,7 +53,6 @@ public class BrowserBookmarkLoader {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static ArrayList readBrowserBookmarks(Activity main, int what) {
 
-		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
 		String[] columns = new String[] {
 				Browser.BookmarkColumns._ID
 				, Browser.BookmarkColumns.CREATED
@@ -63,7 +61,7 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.FAVICON 
 		};
 		String query = Browser.BookmarkColumns.BOOKMARK+"=1"; // query on bookmarks only, skip history
-		Cursor crs = main.managedQuery ( bookmarksURI
+		Cursor crs = main.managedQuery ( android.provider.Browser.BOOKMARKS_URI
 				, columns
 				, query
 				, null
