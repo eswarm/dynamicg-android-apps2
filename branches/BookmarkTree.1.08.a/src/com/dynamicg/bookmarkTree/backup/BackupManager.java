@@ -8,7 +8,6 @@ import java.util.TreeMap;
 
 import android.content.Context;
 import android.text.format.Time;
-import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
@@ -16,6 +15,7 @@ import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.StringUtil;
+import com.dynamicg.common.SystemUtil;
 
 //TODO - validation after backup (?)
 public class BackupManager {
@@ -69,7 +69,7 @@ public class BackupManager {
 	}
 	
 	private static void toast(BookmarkTreeContext ctx, String text) {
-		Toast.makeText(ctx.activity, text, Toast.LENGTH_LONG).show();
+		SystemUtil.toastLong(ctx.activity, text);
 	}
 	
 	public static interface BackupEventListener {
