@@ -20,6 +20,8 @@ public class BrowserBookmarkLoader {
 	public static final int FOR_BACKUP = 1;
 	public static final int FOR_DISPLAY = 2;
 	
+	private static String EMPTY = "";
+	
 	private static Bitmap getFavicon(byte[] blob) {
 		if (blob==null) {
 			return null;
@@ -27,8 +29,6 @@ public class BrowserBookmarkLoader {
 		return BitmapFactory.decodeByteArray(blob, 0, blob.length); 
 	}
 
-	private static String EMPTY = "";
-	
 	private static String nvl(String value) {
 		return value==null?EMPTY:value;
 	}
@@ -36,7 +36,8 @@ public class BrowserBookmarkLoader {
 	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(Activity main, int what) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
-		String[] columns = new String[] { Browser.BookmarkColumns._ID
+		String[] columns = new String[] {
+				Browser.BookmarkColumns._ID
 				, Browser.BookmarkColumns.CREATED
 				, Browser.BookmarkColumns.TITLE
 				, Browser.BookmarkColumns.URL
