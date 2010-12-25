@@ -7,33 +7,31 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 
 public class BitmapScaleManager {
 
-	private static final ScaleWorker scaleWorker;
+	private static ScaleWorker scaleWorker;
+	private static boolean enabled; 
+	private static boolean isApi3;
 	
-	static {
-		if (!BookmarkTreeContext.preferencesWrapper.isScaleIcons()) {
-			scaleWorker = null;
-		}
-		else {
-			Class<?> scaleWorkerClass;
-			ScaleWorker localScaleWorker;
+	public static void init() {
+		enabled = BookmarkTreeContext.preferencesWrapper.isScaleIcons();
+		
+		if (enabled && scaleWorker==null && !isApi3) {
 			try {
-				scaleWorkerClass = Class.forName("com.dynamicg.bookmarkTree.bitmapScaler.BitmapScalerAPI4");
-				localScaleWorker = (ScaleWorker)scaleWorkerClass.newInstance();
+				Class<?> scaleWorkerClass = Class.forName("com.dynamicg.bookmarkTree.bitmapScaler.BitmapScalerAPI4");
+				scaleWorker = (ScaleWorker)scaleWorkerClass.newInstance();
 			}
 			catch (Throwable e) {
-				localScaleWorker = null;
+				isApi3 = true;
 			}
-			scaleWorker = localScaleWorker;
 		}
 	}
-
+	
 	public static Bitmap getIcon(byte[] blob) {
 		if (blob==null) {
 			return null;
 		}
 		
 		Bitmap b = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-		if (scaleWorker!=null) {
+		if (enabled && scaleWorker!=null) {
 			return scaleWorker.scale(b);
 		}
 		return b;

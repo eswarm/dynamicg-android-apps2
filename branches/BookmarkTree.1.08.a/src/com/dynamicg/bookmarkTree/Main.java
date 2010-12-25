@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
+import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.bookmarkTree.dialogs.EditBookmarkDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
 
@@ -38,6 +39,7 @@ public class Main extends Activity {
         setContentView(R.layout.main);
     	this.ctx = new BookmarkTreeContext(this);
     	
+    	BitmapScaleManager.init();
     	BackupPrefs.onStartup(ctx);
     }
     
