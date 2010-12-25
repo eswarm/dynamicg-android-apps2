@@ -6,6 +6,9 @@ import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager.ScaleWorker;
 
 public class BitmapScalerAPI4 implements ScaleWorker {
 
+	public BitmapScalerAPI4() {
+	}
+	
 	@Override
 	public Bitmap scale(Bitmap b) {
 		b.setDensity(160);
