@@ -2,6 +2,8 @@ package com.dynamicg.common;
 
 import java.util.regex.Pattern;
 
+import android.content.Context;
+
 public class StringUtil {
 
 	/*
@@ -21,4 +23,11 @@ public class StringUtil {
 		return value.replaceFirst(Pattern.quote(search),replace);
 	}
 
+	public static String textWithParam(Context context, int res, String p1) {
+		return context.getString(res).replace("{1}", p1);
+	}
+	public static String textWithParam(Context context, int res, int p1) {
+		return context.getString(res).replace("{1}", Integer.toString(p1));
+	}
+	
 }

@@ -67,8 +67,8 @@ public class Main extends Activity {
 		else if ( id==ACTION_RELOAD ) {
 			ctx.reloadAndRefresh();
 			int numberOfBookmarks = ctx.bookmarkManager.getNumberOfBookmarks();
-			SystemUtil.toastShort(ctx.activity, 
-					StringUtil.replaceFirst(getString(R.string.hintReloaded), "{1}", Integer.toString(numberOfBookmarks)));
+			SystemUtil.toastShort(ctx.activity,
+					StringUtil.textWithParam(this, R.string.hintReloaded, numberOfBookmarks));
 		}
 		else if ( id==ACTION_SETTINGS ) {
 			new PreferencesDialog(ctx);
