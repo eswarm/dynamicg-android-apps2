@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.dynamicg.bookmarkTree.R;
-import com.dynamicg.bookmarkTree.ui.AboutDialog;
+import com.dynamicg.bookmarkTree.dialogs.AboutDialog;
 
 public class ErrorNotification {
 

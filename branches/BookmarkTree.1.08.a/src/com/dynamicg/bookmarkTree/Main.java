@@ -8,8 +8,8 @@ import android.view.MenuItem;
 
 import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
+import com.dynamicg.bookmarkTree.dialogs.EditBookmarkDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
-import com.dynamicg.bookmarkTree.ui.EditBookmarkDialog;
 
 public class Main extends Activity {
 

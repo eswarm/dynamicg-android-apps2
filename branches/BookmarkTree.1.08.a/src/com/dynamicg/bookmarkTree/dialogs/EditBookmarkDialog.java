@@ -1,4 +1,4 @@
-package com.dynamicg.bookmarkTree.ui;
+package com.dynamicg.bookmarkTree.dialogs;
 
 import java.util.ArrayList;
 
