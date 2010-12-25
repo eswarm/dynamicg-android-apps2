@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
@@ -29,6 +28,7 @@ import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.SimpleAlertDialog;
+import com.dynamicg.common.SystemUtil;
 
 public class PreferencesDialog extends Dialog {
 
@@ -106,7 +106,7 @@ public class PreferencesDialog extends Dialog {
 							@Override
 							public void done() {
 								ctx.reloadAndRefresh(); // needs to be done by main thread
-								Toast.makeText(getContext(), getText(R.string.actionSortBookmarksDone), Toast.LENGTH_SHORT).show();
+								SystemUtil.toastShort(getContext(), getText(R.string.actionSortBookmarksDone));
 							}
 						};
 					}

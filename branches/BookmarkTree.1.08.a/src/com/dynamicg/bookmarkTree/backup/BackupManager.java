@@ -68,10 +68,6 @@ public class BackupManager {
 		return sortdesc;
 	}
 	
-	private static void toast(BookmarkTreeContext ctx, String text) {
-		SystemUtil.toastLong(ctx.activity, text);
-	}
-	
 	public static interface BackupEventListener {
 		public void backupDone();
 		public void restoreDone();
@@ -127,7 +123,7 @@ public class BackupManager {
 				.replace("{1}", filename)
 				.replace("{2}", Integer.toString(numberOfRows))
 				;
-				toast(ctx, text);
+				SystemUtil.toastLong(ctx.activity, text);
 				BackupPrefs.registerBackup();
 				if (backupDoneListener!=null) {
 					// "refresh GUI" or "register" callback
@@ -176,7 +172,7 @@ public class BackupManager {
 			@Override
 			public void done() {
 				String text = Messages.brHintBookmarksRestored.replace("{1}", Integer.toString(numberOfRows));
-				toast(ctx, text);
+				SystemUtil.toastLong(ctx.activity, text);
 				backupDoneListener.restoreDone();
 			}
 			
