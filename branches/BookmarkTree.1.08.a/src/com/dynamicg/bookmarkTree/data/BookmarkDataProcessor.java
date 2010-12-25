@@ -16,6 +16,7 @@ public class BookmarkDataProcessor {
 	
 	private final BookmarkTreeContext ctx;
 	private final BookmarkSortCache bookmarkSortCache;
+	public final int numBrowserBookmarks;
 	private int maxLevel;
 
 	public BookmarkDataProcessor(BookmarkTreeContext ctx) {
@@ -25,6 +26,7 @@ public class BookmarkDataProcessor {
 			log.debug("start");
 		}
 		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.forListAdapter(ctx);
+		numBrowserBookmarks = rows.size();
 		buildTree(rows);
 	}
 	
