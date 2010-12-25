@@ -38,7 +38,12 @@ public class XmlReader {
 	private long getNextLong()
 	throws Exception {
 		nextItem();
-		return Long.parseLong(parser.getText());
+		try {
+			return Long.parseLong(parser.getText());
+		} catch (NumberFormatException e) {
+			Logger.dumpIfDevelopment(e);
+			return 0;
+		}
 	}
 	
 	public ArrayList<RestoreDataBean> read() 
