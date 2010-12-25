@@ -8,7 +8,6 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.util.Xml;
 
-import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
 public class XmlReader {
@@ -42,12 +41,12 @@ public class XmlReader {
 		return Long.parseLong(parser.getText());
 	}
 	
-	public ArrayList<BrowserBookmarkBean> read() 
+	public ArrayList<RestoreDataBean> read() 
 	throws Exception {
 		
-		ArrayList<BrowserBookmarkBean> list = new ArrayList<BrowserBookmarkBean>();
+		ArrayList<RestoreDataBean> list = new ArrayList<RestoreDataBean>();
 		
-		BrowserBookmarkBean bean=null;
+		RestoreDataBean bean=null;
 		String tag;
 		while(true) {
 			
@@ -60,7 +59,7 @@ public class XmlReader {
 			if (evtype==XmlPullParser.START_TAG) {
 				tag = parser.getName();
 				if (equals(tag, Tags.ROW)) {
-					bean = new BrowserBookmarkBean();
+					bean = new RestoreDataBean();
 					list.add(bean);
 					nextItem();
 				}

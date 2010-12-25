@@ -8,19 +8,18 @@ import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
 public class RestoreWriter {
 
 	private static final Logger log = new Logger(RestoreWriter.class);
-	
+
 	private static final Uri BOOKMARKS_URI = android.provider.Browser.BOOKMARKS_URI;
 	
-	private static ContentValues[] transform(ArrayList<BrowserBookmarkBean> rows) {
+	private static ContentValues[] transform(ArrayList<RestoreDataBean> rows) {
 		ArrayList<ContentValues> list = new ArrayList<ContentValues>();
 		ContentValues entry;
-		for (BrowserBookmarkBean b:rows) {
+		for (RestoreDataBean b:rows) {
 			entry = new ContentValues();
 			
 			entry.put(Browser.BookmarkColumns.BOOKMARK, 1);
@@ -30,14 +29,14 @@ public class RestoreWriter {
 			entry.put(Browser.BookmarkColumns.FAVICON, b.faviconData);
 			
 			if (log.debugEnabled) {
-				log.debug("put item", b.fullTitle, b.url, b.id, b.faviconData!=null?b.faviconData.length:"-1");
+				log.debug("put item", b.fullTitle, b.url, b.faviconData!=null?b.faviconData.length:"-1");
 			}
 			list.add(entry);
 		}
 		return list.toArray(new ContentValues[]{});
 	}
 	
-	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<BrowserBookmarkBean> rows) 
+	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<RestoreDataBean> rows) 
 	throws Exception {
 		
 		ContentResolver contentResolver = ctx.activity.getContentResolver(); 

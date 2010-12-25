@@ -161,7 +161,7 @@ public class BackupManager {
 			@Override
 			public void backgroundWork() {
 				try {
-					ArrayList<BrowserBookmarkBean> rows = new XmlReader(xmlfile).read();
+					ArrayList<RestoreDataBean> rows = new XmlReader(xmlfile).read();
 					numberOfRows = rows.size();
 					RestoreWriter.replaceFull(ctx, rows);
 				}
