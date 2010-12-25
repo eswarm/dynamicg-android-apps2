@@ -9,7 +9,7 @@ public class BitmapScaleManager {
 
 	private static ScaleWorker scaleWorker;
 	private static boolean enabled; 
-	private static boolean isApi3;
+	private static boolean isApi3=false;
 	
 	public static void init() {
 		enabled = BookmarkTreeContext.preferencesWrapper.isScaleIcons();
