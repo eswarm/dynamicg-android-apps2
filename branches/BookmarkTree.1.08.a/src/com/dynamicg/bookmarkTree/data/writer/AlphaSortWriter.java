@@ -20,7 +20,7 @@ public class AlphaSortWriter extends BookmarkWriterA {
 	public AlphaSortWriter(BookmarkTreeContext ctx) {
 		super(ctx);
 		ArrayList<BrowserBookmarkBean> bookmarks = 
-			BrowserBookmarkLoader.forBatch(ctx);
+			BrowserBookmarkLoader.forInternalOp(ctx);
 		// set new "CREATED" values descending (i.e. newest has highest value)
 		nextValue = BASE + bookmarks.size()*INCREMENT;
 		for (BrowserBookmarkBean bm:bookmarks) {

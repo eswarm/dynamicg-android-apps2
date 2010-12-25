@@ -226,7 +226,7 @@ public class PreferencesDialog extends Dialog {
 
 	private void dumpBrowserBookmarks() {
 		ctx.reloadAndRefresh(); // so that the gui is really in sync with what we display here
-		final ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.forBatch(ctx);
+		final ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.forInternalOp(ctx);
 		
 		final StringBuffer sb = new StringBuffer();
 		for (BrowserBookmarkBean row:rows) {

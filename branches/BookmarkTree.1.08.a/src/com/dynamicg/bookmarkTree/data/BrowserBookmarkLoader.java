@@ -18,9 +18,9 @@ public class BrowserBookmarkLoader {
 
 	private static final Logger log = new Logger(BrowserBookmarkLoader.class);
 
-	private static final int FOR_BATCH = 0;
-	private static final int FOR_BACKUP = 1;
-	private static final int FOR_DISPLAY = 2;
+	private static final int FOR_DISPLAY = 1;
+	private static final int FOR_INTERNAL_OP = 2;
+	private static final int FOR_BACKUP_RESTORE = 3;
 	
 	private static String EMPTY = "";
 	
@@ -38,21 +38,21 @@ public class BrowserBookmarkLoader {
 	
 	@SuppressWarnings({ "unchecked" })
 	public static ArrayList<BrowserBookmarkBean> forListAdapter(BookmarkTreeContext ctx) {
-		return (ArrayList<BrowserBookmarkBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_DISPLAY);
+		return (ArrayList<BrowserBookmarkBean>)readBrowserBookmarks(ctx.activity, FOR_DISPLAY);
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public static ArrayList<BrowserBookmarkBean> forBatch(BookmarkTreeContext ctx) {
-		return (ArrayList<BrowserBookmarkBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BATCH);
+	public static ArrayList<BrowserBookmarkBean> forInternalOp(BookmarkTreeContext ctx) {
+		return (ArrayList<BrowserBookmarkBean>)readBrowserBookmarks(ctx.activity, FOR_INTERNAL_OP);
 	}
 	
 	@SuppressWarnings({ "unchecked" })
 	public static ArrayList<RawBackupDataBean> forBackup(BookmarkTreeContext ctx) {
-		return (ArrayList<RawBackupDataBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BACKUP);
+		return (ArrayList<RawBackupDataBean>)readBrowserBookmarks(ctx.activity, FOR_BACKUP_RESTORE);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private static ArrayList<?> internalLoadBrowserBookmarks(Activity main, int what) {
+	private static ArrayList<?> readBrowserBookmarks(Activity main, int what) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
 		String[] columns = new String[] {
@@ -70,7 +70,7 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.TITLE
 		);
 
-		ArrayList rows = what==FOR_BACKUP ? new ArrayList<RawBackupDataBean>() : new ArrayList<BrowserBookmarkBean>();
+		ArrayList rows = what==FOR_BACKUP_RESTORE ? new ArrayList<RawBackupDataBean>() : new ArrayList<BrowserBookmarkBean>();
 		
 		// see error report "Aug 13, 2010 10:19:37 PM"
 		if (crs==null) {
@@ -82,7 +82,7 @@ public class BrowserBookmarkLoader {
 		
 		while ( crs.moveToNext() ) {
 			
-			if (what==FOR_BACKUP) {
+			if (what==FOR_BACKUP_RESTORE) {
 				backupbean = new RawBackupDataBean();
 				backupbean.created = crs.getLong(1);
 				backupbean.fullTitle = nvl(crs.getString(2));
