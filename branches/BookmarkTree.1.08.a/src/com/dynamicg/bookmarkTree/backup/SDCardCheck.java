@@ -48,7 +48,7 @@ public class SDCardCheck {
 	
 	public File readyForWrite() {
 		
-		if (backupdir.exists() && backupdir.canWrite()) {
+		if (backupdir.exists() && backupdir.isDirectory() && backupdir.canWrite()) {
 			return backupdir;
 		}
 		
@@ -60,7 +60,7 @@ public class SDCardCheck {
 			alert(context, errorTitle, "Directory "+backupdir+" is read only");
 			return null;
 		}
-		else if (!backupdir.exists()) {
+		else if (!backupdir.exists() || !backupdir.isDirectory()) {
 			alert(context, errorTitle, "Could not create backup directory:\n"+backupdir);
 			return null;
 		}
