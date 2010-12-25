@@ -57,6 +57,6 @@
     <string name="hintEmptyUrl">URL is empty. Cannot open.</string>
     <string name="hintTitleMissing">Title is empty. Cannot save.</string>
     <string name="hintUrlMissing">URL is empty. Cannot save.</string>
-    <string name="hintReloaded">{1} bookmarks loaded</string>
+    <string name="hintReloaded">Reloaded {1} bookmarks</string>
     
 </resources>
