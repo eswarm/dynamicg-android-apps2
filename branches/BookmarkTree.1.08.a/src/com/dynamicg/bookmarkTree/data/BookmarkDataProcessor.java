@@ -24,7 +24,7 @@ public class BookmarkDataProcessor {
 		if (log.debugEnabled) {
 			log.debug("start");
 		}
-		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, BrowserBookmarkLoader.FAVOICON_RESOLVE_BITMAP);
+		ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, BrowserBookmarkLoader.FOR_DISPLAY);
 		buildTree(rows);
 	}
 	

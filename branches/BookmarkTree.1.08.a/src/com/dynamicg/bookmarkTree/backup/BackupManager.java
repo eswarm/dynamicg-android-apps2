@@ -106,7 +106,7 @@ public class BackupManager {
 					File xmlfileTemp = new File ( backupdir, filename+".tmp" );
 					File xmlfileFinal = new File ( backupdir, filename );
 					
-					ArrayList<BrowserBookmarkBean> bookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, BrowserBookmarkLoader.FAVOICON_RESOLVE_RAW);
+					ArrayList<BrowserBookmarkBean> bookmarks = BrowserBookmarkLoader.loadBrowserBookmarks(ctx.activity, BrowserBookmarkLoader.FOR_BACKUP);
 					numberOfRows = bookmarks.size();
 					try {
 						new XmlWriter(xmlfileTemp, bookmarks);
