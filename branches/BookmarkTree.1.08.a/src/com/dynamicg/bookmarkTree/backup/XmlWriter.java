@@ -9,8 +9,6 @@ import org.xmlpull.v1.XmlSerializer;
 import android.text.format.Time;
 import android.util.Xml;
 
-import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
-
 public class XmlWriter {
 
 	public static final String ENCODING = "UTF-8";
@@ -18,7 +16,7 @@ public class XmlWriter {
 	private final FileOutputStream fileos;
 	private final XmlSerializer serializer;
 	
-	public XmlWriter(File xmlfile, ArrayList<BrowserBookmarkBean> bookmarks) 
+	public XmlWriter(File xmlfile, ArrayList<RestoreDataBean> bookmarks) 
 	throws Exception {
 		fileos = new FileOutputStream(xmlfile);        
 		serializer = Xml.newSerializer();
@@ -52,11 +50,11 @@ public class XmlWriter {
 		return sb.toString();
 	}
 	
-	private String getIconData(BrowserBookmarkBean b) {
+	private String getIconData(RestoreDataBean b) {
 		String buffer;
 		// buffer = Hex.encodeHex(MockIcon.getIcon(context), false) ;
-		if (b.faviconData!=null&&b.faviconData.length>0) {
-			buffer = Hex.encodeHex(b.faviconData, false) ;
+		if (b.favicon!=null&&b.favicon.length>0) {
+			buffer = Hex.encodeHex(b.favicon, false) ;
 			return split ( new StringBuffer(buffer), 80);
 		}
 		else {
@@ -65,12 +63,12 @@ public class XmlWriter {
 	}
 
 	
-	private void writeXmlFile(ArrayList<BrowserBookmarkBean> bookmarks) 
+	private void writeXmlFile(ArrayList<RestoreDataBean> bookmarks) 
 	throws Exception {
 
 		serializer.startTag(null, Tags.BODY);
 		
-		for (BrowserBookmarkBean b:bookmarks) {
+		for (RestoreDataBean b:bookmarks) {
 			serializer.startTag(null, Tags.ROW);
 			
 			//addTextNode(Tags.ID, b.id); // ID is not restored so we skip it

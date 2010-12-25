@@ -78,7 +78,7 @@ public class XmlReader {
 					bean.url = getNextText();
 				}
 				else if (equals(tag, Tags.FAVICON)) {
-					bean.faviconData = encodeIconData(getNextText());
+					bean.favicon = encodeIconData(getNextText());
 				}
 			}
 			

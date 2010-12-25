@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.Browser;
 
+import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.backup.RestoreDataBean;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.common.Logger;
 
@@ -16,9 +18,9 @@ public class BrowserBookmarkLoader {
 
 	private static final Logger log = new Logger(BrowserBookmarkLoader.class);
 
-	public static final int FOR_BATCH = 0;
-	public static final int FOR_BACKUP = 1;
-	public static final int FOR_DISPLAY = 2;
+	private static final int FOR_BATCH = 0;
+	private static final int FOR_BACKUP = 1;
+	private static final int FOR_DISPLAY = 2;
 	
 	private static String EMPTY = "";
 	
@@ -30,10 +32,27 @@ public class BrowserBookmarkLoader {
 	}
 
 	private static String nvl(String value) {
+		// mask nulls - we got one error report with an NPE on bookmark title (?)
 		return value==null?EMPTY:value;
 	}
 	
-	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(Activity main, int what) {
+	@SuppressWarnings({ "unchecked" })
+	public static ArrayList<BrowserBookmarkBean> forListAdapter(BookmarkTreeContext ctx) {
+		return (ArrayList<BrowserBookmarkBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_DISPLAY);
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public static ArrayList<BrowserBookmarkBean> forBatch(BookmarkTreeContext ctx) {
+		return (ArrayList<BrowserBookmarkBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BATCH);
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public static ArrayList<RestoreDataBean> forBackup(BookmarkTreeContext ctx) {
+		return (ArrayList<RestoreDataBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BACKUP);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static ArrayList<?> internalLoadBrowserBookmarks(Activity main, int what) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
 		String[] columns = new String[] {
@@ -51,37 +70,44 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.TITLE
 		);
 
-		ArrayList<BrowserBookmarkBean> rows = new ArrayList<BrowserBookmarkBean>();
+		ArrayList rows = what==FOR_BACKUP ? new ArrayList<RestoreDataBean>() : new ArrayList<BrowserBookmarkBean>();
 		
 		// see error report "Aug 13, 2010 10:19:37 PM"
 		if (crs==null) {
 			return rows;
 		}
 		
-		BrowserBookmarkBean row;
+		BrowserBookmarkBean databean;
+		RestoreDataBean backupbean;
+		
 		while ( crs.moveToNext() ) {
 			
-			row = new BrowserBookmarkBean(); 
-			row.id = crs.getInt(0);
 			if (what==FOR_BACKUP) {
-				row.created = crs.getLong(1);
+				backupbean = new RestoreDataBean();
+				backupbean.created = crs.getLong(1);
+				backupbean.fullTitle = nvl(crs.getString(2));
+				backupbean.url = nvl(crs.getString(3));
+				backupbean.favicon = crs.getBlob(4);
+				rows.add(backupbean);
+				if (log.traceEnabled) {
+					log.debug("loadBrowserBookmarks", backupbean.fullTitle, backupbean.url, backupbean.created);
+				}
+			}
+			else {
+				// "batch" and "display"
+				databean = new BrowserBookmarkBean(); 
+				databean.id = crs.getInt(0);
+				databean.fullTitle = nvl(crs.getString(2));
+				databean.url = nvl(crs.getString(3));
+				if (what==FOR_DISPLAY) {
+					databean.favicon = getFavicon(crs.getBlob(4));
+				}
+				rows.add(databean);
+				if (log.traceEnabled) {
+					log.debug("loadBrowserBookmarks", databean.id, databean.fullTitle, databean.url);
+				}
 			}
 			
-			// mask nulls - we got one error report with an NPE on bookmark title (?)
-			row.fullTitle = nvl(crs.getString(2));
-			row.url = nvl(crs.getString(3));
-			
-			if (what==FOR_DISPLAY) {
-				row.favicon = getFavicon(crs.getBlob(4));
-			}
-			else if (what==FOR_BACKUP) {
-				row.faviconData = crs.getBlob(4);
-			}
-			
-			if (log.traceEnabled) {
-				log.debug("loadBrowserBookmarks",row.getFullTitle(),row.getUrl());
-			}
-			rows.add(row);
 		}
 		
 		if (!crs.isClosed()) {

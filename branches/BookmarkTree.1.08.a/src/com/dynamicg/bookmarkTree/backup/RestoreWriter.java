@@ -26,10 +26,10 @@ public class RestoreWriter {
 			entry.put(Browser.BookmarkColumns.CREATED, b.created);
 			entry.put(Browser.BookmarkColumns.TITLE, b.fullTitle);
 			entry.put(Browser.BookmarkColumns.URL, b.url);
-			entry.put(Browser.BookmarkColumns.FAVICON, b.faviconData);
+			entry.put(Browser.BookmarkColumns.FAVICON, b.favicon);
 			
 			if (log.debugEnabled) {
-				log.debug("put item", b.fullTitle, b.url, b.faviconData!=null?b.faviconData.length:"-1");
+				log.debug("put item", b.fullTitle, b.url, b.favicon!=null?b.favicon.length:"-1");
 			}
 			list.add(entry);
 		}

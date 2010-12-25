@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
-import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.StringUtil;
@@ -106,7 +105,7 @@ public class BackupManager {
 					File xmlfileTemp = new File ( backupdir, filename+".tmp" );
 					File xmlfileFinal = new File ( backupdir, filename );
 					
-					ArrayList<BrowserBookmarkBean> bookmarks = BrowserBookmarkLoader.forBackup(ctx);
+					ArrayList<RestoreDataBean> bookmarks = BrowserBookmarkLoader.forBackup(ctx);
 					numberOfRows = bookmarks.size();
 					try {
 						new XmlWriter(xmlfileTemp, bookmarks);
