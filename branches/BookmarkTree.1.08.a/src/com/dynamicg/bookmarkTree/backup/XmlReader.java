@@ -42,12 +42,6 @@ public class XmlReader {
 		return Long.parseLong(parser.getText());
 	}
 	
-	private int getNextInt()
-	throws Exception {
-		nextItem();
-		return Integer.parseInt(parser.getText());
-	}
-	
 	public ArrayList<BrowserBookmarkBean> read() 
 	throws Exception {
 		
@@ -69,9 +63,6 @@ public class XmlReader {
 					bean = new BrowserBookmarkBean();
 					list.add(bean);
 					nextItem();
-				}
-				else if (equals(tag, Tags.ID)) {
-					bean.id = getNextInt();
 				}
 				else if (equals(tag, Tags.CREATED)) {
 					bean.created = getNextLong();

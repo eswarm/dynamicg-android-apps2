@@ -73,7 +73,7 @@ public class XmlWriter {
 		for (BrowserBookmarkBean b:bookmarks) {
 			serializer.startTag(null, Tags.ROW);
 			
-			addTextNode(Tags.ID, b.id);
+			//addTextNode(Tags.ID, b.id); // ID is not restored so we skip it
 			addTextNode(Tags.CREATED, b.created);
 			addTextNode(Tags.TITLE, b.fullTitle);
 			addTextNode(Tags.URL, b.url);
