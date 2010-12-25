@@ -77,37 +77,38 @@ public class BrowserBookmarkLoader {
 			return rows;
 		}
 		
-		BrowserBookmarkBean databean;
-		RawBackupDataBean backupbean;
-		
-		while ( crs.moveToNext() ) {
-			
-			if (what==FOR_BACKUP_RESTORE) {
-				backupbean = new RawBackupDataBean();
-				backupbean.created = crs.getLong(1);
-				backupbean.fullTitle = nvl(crs.getString(2));
-				backupbean.url = nvl(crs.getString(3));
-				backupbean.favicon = crs.getBlob(4);
-				rows.add(backupbean);
+		if (what==FOR_BACKUP_RESTORE) {
+			RawBackupDataBean bean;
+			while ( crs.moveToNext() ) {
+				bean = new RawBackupDataBean();
+				bean.created = crs.getLong(1);
+				bean.fullTitle = nvl(crs.getString(2));
+				bean.url = nvl(crs.getString(3));
+				bean.favicon = crs.getBlob(4);
+				
+				rows.add(bean);
 				if (log.traceEnabled) {
-					log.debug("loadBrowserBookmarks", backupbean.fullTitle, backupbean.url, backupbean.created);
+					log.debug("loadBrowserBookmarks", bean.fullTitle, bean.url, bean.created);
 				}
 			}
-			else {
-				// "batch" and "display"
-				databean = new BrowserBookmarkBean(); 
-				databean.id = crs.getInt(0);
-				databean.fullTitle = nvl(crs.getString(2));
-				databean.url = nvl(crs.getString(3));
+		}
+		else { 
+			// "batch" and "display"
+			BrowserBookmarkBean bean;
+			while ( crs.moveToNext() ) {
+				bean = new BrowserBookmarkBean(); 
+				bean.id = crs.getInt(0);
+				bean.fullTitle = nvl(crs.getString(2));
+				bean.url = nvl(crs.getString(3));
 				if (what==FOR_DISPLAY) {
-					databean.favicon = getFavicon(crs.getBlob(4));
+					bean.favicon = getFavicon(crs.getBlob(4));
 				}
-				rows.add(databean);
+				
+				rows.add(bean);
 				if (log.traceEnabled) {
-					log.debug("loadBrowserBookmarks", databean.id, databean.fullTitle, databean.url);
+					log.debug("loadBrowserBookmarks", bean.id, bean.fullTitle, bean.url);
 				}
 			}
-			
 		}
 		
 		if (!crs.isClosed()) {
