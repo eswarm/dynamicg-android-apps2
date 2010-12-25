@@ -45,6 +45,7 @@ public class PreferencesDialog extends Dialog {
 	private CheckBox doFullUpdateCheckbox;
 	private CheckBox optimiseLayout;
 	private CheckBox keepStateCheckbox;
+	private CheckBox scaleIconsCheckbox;
 
 	private boolean dataRefreshRequired;
 
@@ -130,6 +131,9 @@ public class PreferencesDialog extends Dialog {
 		spinnerUtil.bind ( R.id.prefsListStyle, prefsWrapper.prefsBean.getListStyle(), SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );
 		spinnerUtil.bind ( R.id.prefsSortOption, prefsWrapper.prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems(getContext()), R.string.prefsSortLabel );
 		
+		scaleIconsCheckbox = (CheckBox)findViewById(R.id.prefsScaleIcons);
+		scaleIconsCheckbox.setChecked(prefsWrapper.isScaleIcons());
+		
 	}
 	
 	private void checkForChangedSeparator() {
@@ -168,6 +172,7 @@ public class PreferencesDialog extends Dialog {
 		prefsWrapper.prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));
 		prefsWrapper.prefsBean.setSortOption(spinnerUtil.getCurrentValue(R.id.prefsSortOption));
 		prefsWrapper.prefsBean.setKeepState(keepStateCheckbox.isChecked()?1:0);
+		prefsWrapper.prefsBean.setScaleIcons(scaleIconsCheckbox.isChecked()?1:0);
 		
 		// see if "refresh" is required
 		if ( spinnerUtil.isChanged(R.id.prefsListStyle)

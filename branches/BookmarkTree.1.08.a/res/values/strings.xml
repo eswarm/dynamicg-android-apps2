@@ -31,6 +31,7 @@
     <string name="prefsSortAZ">Sort bookmarks A-Z</string>
     <string name="prefsSeparator">Internal folder separator:</string>
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>
+    <string name="prefsScaleIcons">Scale icons</string>
     
     <string name="prefsGroupPresentation">Presentation</string>
     <string name="prefsGroupExtras">Extras</string>
