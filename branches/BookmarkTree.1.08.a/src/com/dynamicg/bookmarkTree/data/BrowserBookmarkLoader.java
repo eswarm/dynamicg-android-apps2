@@ -27,6 +27,12 @@ public class BrowserBookmarkLoader {
 		return BitmapFactory.decodeByteArray(blob, 0, blob.length); 
 	}
 
+	private static String EMPTY = "";
+	
+	private static String nvl(String value) {
+		return value==null?EMPTY:value;
+	}
+	
 	public static ArrayList<BrowserBookmarkBean> loadBrowserBookmarks(Activity main, int what) {
 
 		Uri bookmarksURI = android.provider.Browser.BOOKMARKS_URI;
@@ -59,8 +65,10 @@ public class BrowserBookmarkLoader {
 			if (what==FOR_BACKUP) {
 				row.created = crs.getLong(1);
 			}
-			row.fullTitle = crs.getString(2);
-			row.url = crs.getString(3);
+			
+			// mask nulls - we got one error report with an NPE on bookmark title (?)
+			row.fullTitle = nvl(crs.getString(2));
+			row.url = nvl(crs.getString(3));
 			
 			if (what==FOR_DISPLAY) {
 				row.favicon = getFavicon(crs.getBlob(4));
