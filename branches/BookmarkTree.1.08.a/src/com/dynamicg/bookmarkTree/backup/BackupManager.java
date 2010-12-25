@@ -128,9 +128,9 @@ public class BackupManager {
 				.replace("{2}", Integer.toString(numberOfRows))
 				;
 				toast(ctx, text);
+				BackupPrefs.registerBackup();
 				if (backupDoneListener!=null) {
 					// "refresh GUI" or "register" callback
-					// note that manually fired backups are not registered on the "lastBackup" pref
 					backupDoneListener.backupDone();
 				}
 			}

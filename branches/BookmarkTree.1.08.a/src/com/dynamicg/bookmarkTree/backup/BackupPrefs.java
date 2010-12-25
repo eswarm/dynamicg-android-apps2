@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.bookmarkTree.backup.BackupManager.BackupEventListener;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 
@@ -37,7 +36,7 @@ public class BackupPrefs {
 			@Override
 			public void onPositiveButton() {
 				writePref(KEY_AUTO_ENABLED, 1);
-				backupAndRegister(ctx);
+				startBackup(ctx);
 			}
 		};
 	}
@@ -56,23 +55,16 @@ public class BackupPrefs {
 			log.debug("checkPeriodicBackup", daynr, lastBackup, required);
 		}
 		if (required) {
-			backupAndRegister(ctx);
+			startBackup(ctx);
 		}
 	}
 	
-	private static void backupAndRegister(BookmarkTreeContext ctx) {
-		BackupEventListener l = new BackupEventListener() {
-			@Override
-			public void backupDone() {
-				// register as "latest backup"
-				writePref(KEY_LAST_BACKUP, getDayNr());
-			}
-			@Override
-			public void restoreDone() {
-				// nothing to do
-			}
-		};
-		BackupManager.createBackup(ctx, l);
+	public static void registerBackup() {
+		writePref(KEY_LAST_BACKUP, getDayNr());
+	}
+	
+	private static void startBackup(BookmarkTreeContext ctx) {
+		BackupManager.createBackup(ctx, null); // no callback
 	}
 	
 	private static void writePref(String key, int value) {
@@ -84,14 +76,6 @@ public class BackupPrefs {
 		}
 	}
 
-//	@SuppressWarnings("unused")
-//	private static void cleanup() {
-//		Editor edit = settings.edit();
-//		edit.remove(KEY_AUTO_ENABLED);
-//		edit.remove(KEY_LAST_BACKUP);
-//		edit.commit();
-//	}
-	
 	public static boolean isAutoBackupEnabled() {
 		if (log.debugEnabled) {
 			log.debug("isAutoBackupEnabled", settings.getInt(KEY_AUTO_ENABLED, 0) == 1 );
@@ -103,4 +87,12 @@ public class BackupPrefs {
 		writePref(KEY_AUTO_ENABLED, isChecked?1:0);
 	}
 
+//	@SuppressWarnings("unused")
+//	private static void cleanup() {
+//		Editor edit = settings.edit();
+//		edit.remove(KEY_AUTO_ENABLED);
+//		edit.remove(KEY_LAST_BACKUP);
+//		edit.commit();
+//	}
+	
 }
