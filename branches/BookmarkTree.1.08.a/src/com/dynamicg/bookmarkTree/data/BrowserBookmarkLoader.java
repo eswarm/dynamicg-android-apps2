@@ -56,9 +56,12 @@ public class BrowserBookmarkLoader {
 			
 			row = new BrowserBookmarkBean(); 
 			row.id = crs.getInt(0);
-			row.created = crs.getLong(1);
+			if (what==FOR_BACKUP) {
+				row.created = crs.getLong(1);
+			}
 			row.fullTitle = crs.getString(2);
 			row.url = crs.getString(3);
+			
 			if (what==FOR_DISPLAY) {
 				row.favicon = getFavicon(crs.getBlob(4));
 			}
