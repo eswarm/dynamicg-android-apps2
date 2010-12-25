@@ -21,16 +21,23 @@ public class BackupPrefs {
 	public static void onStartup(BookmarkTreeContext ctx) {
 		//cleanup();
 		int autoEnabled = settings.getInt(KEY_AUTO_ENABLED, -1);
-		if (autoEnabled==-1) {
-			// first call - init to 0 and ask for "auto enable"
-			writePref(KEY_AUTO_ENABLED, 0);
-			BackupPrefs.initialBackupConfirmation(ctx);
-		}
-		else if (autoEnabled==1) {
+		if (autoEnabled==1) {
 			checkPeriodicBackup(ctx);
 		}
+		
+		// initial confirmation for "enable auto backup":
+//		if (autoEnabled==-1) {
+//			// first call - init to 0 and ask for "auto enable"
+//			writePref(KEY_AUTO_ENABLED, 0);
+//			BackupPrefs.initialBackupConfirmation(ctx);
+//		}
+//		else if (autoEnabled==1) {
+//			checkPeriodicBackup(ctx);
+//		}
+		
 	}
 	
+	@SuppressWarnings("unused")
 	private static void initialBackupConfirmation(final BookmarkTreeContext ctx) {
 		new SimpleAlertDialog.OkCancelDialog(ctx.activity, Messages.brEnableAutoBackup) {
 			@Override
