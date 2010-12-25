@@ -4,11 +4,10 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.common.Logger;
@@ -23,13 +22,6 @@ public class BrowserBookmarkLoader {
 	
 	private static String EMPTY = "";
 	
-	private static Bitmap getFavicon(byte[] blob) {
-		if (blob==null) {
-			return null;
-		}
-		return BitmapFactory.decodeByteArray(blob, 0, blob.length); 
-	}
-
 	private static String nvl(String value) {
 		// mask nulls - we got one error report with an NPE on bookmark title (?)
 		return value==null?EMPTY:value;
@@ -100,7 +92,7 @@ public class BrowserBookmarkLoader {
 				bean.fullTitle = nvl(crs.getString(2));
 				bean.url = nvl(crs.getString(3));
 				if (what==FOR_DISPLAY) {
-					bean.favicon = getFavicon(crs.getBlob(4));
+					bean.favicon = BitmapScaleManager.getIcon(crs.getBlob(4));
 				}
 				
 				rows.add(bean);
