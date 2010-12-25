@@ -93,8 +93,8 @@ public class BrowserBookmarkLoader {
 				}
 			}
 		}
-		else { 
-			// "batch" and "display"
+		else {
+			// display
 			BrowserBookmarkBean bean;
 			while ( crs.moveToNext() ) {
 				bean = new BrowserBookmarkBean(); 
