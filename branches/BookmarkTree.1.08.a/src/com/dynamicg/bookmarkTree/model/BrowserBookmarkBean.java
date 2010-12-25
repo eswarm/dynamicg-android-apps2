@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 
 public class BrowserBookmarkBean extends Bookmark {
 
-	public int id;
+	public Integer id;
 	public String fullTitle;
 	public String url;
 	public Bitmap favicon;
