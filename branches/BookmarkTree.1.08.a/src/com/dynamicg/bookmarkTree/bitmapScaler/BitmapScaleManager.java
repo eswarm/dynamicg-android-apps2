@@ -17,16 +17,11 @@ public class BitmapScaleManager {
 			Class<?> scaleWorkerClass;
 			ScaleWorker localScaleWorker;
 			try {
-				try {
-					scaleWorkerClass = Class.forName("com.dynamicg.bookmarkTree.bitmapScaler.BitmapScalerAPI4");
-					localScaleWorker = (ScaleWorker)scaleWorkerClass.newInstance();
-				}
-				catch (Throwable e) {
-					localScaleWorker = null;
-				}
+				scaleWorkerClass = Class.forName("com.dynamicg.bookmarkTree.bitmapScaler.BitmapScalerAPI4");
+				localScaleWorker = (ScaleWorker)scaleWorkerClass.newInstance();
 			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
+			catch (Throwable e) {
+				localScaleWorker = null;
 			}
 			scaleWorker = localScaleWorker;
 		}
