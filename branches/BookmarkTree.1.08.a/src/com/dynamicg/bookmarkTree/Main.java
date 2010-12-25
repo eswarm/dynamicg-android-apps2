@@ -10,6 +10,8 @@ import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.dialogs.EditBookmarkDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
+import com.dynamicg.common.StringUtil;
+import com.dynamicg.common.SystemUtil;
 
 public class Main extends Activity {
 
@@ -64,6 +66,9 @@ public class Main extends Activity {
 		}
 		else if ( id==ACTION_RELOAD ) {
 			ctx.reloadAndRefresh();
+			int numberOfBookmarks = ctx.bookmarkManager.getNumberOfBookmarks();
+			SystemUtil.toastShort(ctx.activity, 
+					StringUtil.replaceFirst(getString(R.string.hintReloaded), "{1}", Integer.toString(numberOfBookmarks)));
 		}
 		else if ( id==ACTION_SETTINGS ) {
 			new PreferencesDialog(ctx);

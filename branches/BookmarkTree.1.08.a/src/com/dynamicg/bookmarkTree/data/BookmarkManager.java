@@ -107,4 +107,7 @@ public class BookmarkManager {
 		return list;
 	}
 
+	public int getNumberOfBookmarks() {
+		return bookmarksCache.size();
+	}
 }
