@@ -16,6 +16,7 @@ public class BookmarkManager {
 	private final BookmarkTreeContext ctx;
 	private ArrayList<Bookmark> bookmarksCache;
 	private ArrayList<FolderBean> foldersCache;
+	private int numBrowserBokmarks;
 
 	public BookmarkManager(BookmarkTreeContext ctx) {
 		this.ctx = ctx;
@@ -38,7 +39,9 @@ public class BookmarkManager {
 	}
 	
 	private void loadBookmarks() {
-		bookmarksCache = new BookmarkDataProcessor(ctx).getBookmarks();
+		BookmarkDataProcessor processor = new BookmarkDataProcessor(ctx);
+		bookmarksCache = processor.getBookmarks();
+		numBrowserBokmarks = processor.numBrowserBookmarks;
 		
 		foldersCache = new ArrayList<FolderBean>();
 		for (Bookmark bm:bookmarksCache) {
@@ -108,6 +111,6 @@ public class BookmarkManager {
 	}
 
 	public int getNumberOfBookmarks() {
-		return bookmarksCache.size();
+		return numBrowserBokmarks;
 	}
 }
