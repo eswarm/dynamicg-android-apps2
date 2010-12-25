@@ -1,6 +1,6 @@
-package com.dynamicg.bookmarkTree.backup;
+package com.dynamicg.bookmarkTree.model;
 
-public class RestoreDataBean {
+public class RawBackupDataBean {
 	public long created;
 	public String fullTitle;
 	public String url;

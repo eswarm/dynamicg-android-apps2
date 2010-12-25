@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
 import com.dynamicg.common.Logger;
 
 public class RestoreWriter {
@@ -16,10 +17,10 @@ public class RestoreWriter {
 
 	private static final Uri BOOKMARKS_URI = android.provider.Browser.BOOKMARKS_URI;
 	
-	private static ContentValues[] transform(ArrayList<RestoreDataBean> rows) {
+	private static ContentValues[] transform(ArrayList<RawBackupDataBean> rows) {
 		ArrayList<ContentValues> list = new ArrayList<ContentValues>();
 		ContentValues entry;
-		for (RestoreDataBean b:rows) {
+		for (RawBackupDataBean b:rows) {
 			entry = new ContentValues();
 			
 			entry.put(Browser.BookmarkColumns.BOOKMARK, 1);
@@ -36,7 +37,7 @@ public class RestoreWriter {
 		return list.toArray(new ContentValues[]{});
 	}
 	
-	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<RestoreDataBean> rows) 
+	public static void replaceFull(BookmarkTreeContext ctx, ArrayList<RawBackupDataBean> rows) 
 	throws Exception {
 		
 		ContentResolver contentResolver = ctx.activity.getContentResolver(); 

@@ -8,6 +8,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.util.Xml;
 
+import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
 import com.dynamicg.common.Logger;
 
 public class XmlReader {
@@ -46,12 +47,12 @@ public class XmlReader {
 		}
 	}
 	
-	public ArrayList<RestoreDataBean> read() 
+	public ArrayList<RawBackupDataBean> read() 
 	throws Exception {
 		
-		ArrayList<RestoreDataBean> list = new ArrayList<RestoreDataBean>();
+		ArrayList<RawBackupDataBean> list = new ArrayList<RawBackupDataBean>();
 		
-		RestoreDataBean bean=null;
+		RawBackupDataBean bean=null;
 		String tag;
 		while(true) {
 			
@@ -64,7 +65,7 @@ public class XmlReader {
 			if (evtype==XmlPullParser.START_TAG) {
 				tag = parser.getName();
 				if (equals(tag, Tags.ROW)) {
-					bean = new RestoreDataBean();
+					bean = new RawBackupDataBean();
 					list.add(bean);
 					nextItem();
 				}

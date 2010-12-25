@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.bookmarkTree.backup.RestoreDataBean;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
+import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
 import com.dynamicg.common.Logger;
 
 public class BrowserBookmarkLoader {
@@ -47,8 +47,8 @@ public class BrowserBookmarkLoader {
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public static ArrayList<RestoreDataBean> forBackup(BookmarkTreeContext ctx) {
-		return (ArrayList<RestoreDataBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BACKUP);
+	public static ArrayList<RawBackupDataBean> forBackup(BookmarkTreeContext ctx) {
+		return (ArrayList<RawBackupDataBean>)internalLoadBrowserBookmarks(ctx.activity, FOR_BACKUP);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -70,7 +70,7 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.TITLE
 		);
 
-		ArrayList rows = what==FOR_BACKUP ? new ArrayList<RestoreDataBean>() : new ArrayList<BrowserBookmarkBean>();
+		ArrayList rows = what==FOR_BACKUP ? new ArrayList<RawBackupDataBean>() : new ArrayList<BrowserBookmarkBean>();
 		
 		// see error report "Aug 13, 2010 10:19:37 PM"
 		if (crs==null) {
@@ -78,12 +78,12 @@ public class BrowserBookmarkLoader {
 		}
 		
 		BrowserBookmarkBean databean;
-		RestoreDataBean backupbean;
+		RawBackupDataBean backupbean;
 		
 		while ( crs.moveToNext() ) {
 			
 			if (what==FOR_BACKUP) {
-				backupbean = new RestoreDataBean();
+				backupbean = new RawBackupDataBean();
 				backupbean.created = crs.getLong(1);
 				backupbean.fullTitle = nvl(crs.getString(2));
 				backupbean.url = nvl(crs.getString(3));

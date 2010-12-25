@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlSerializer;
 
+import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
+
 import android.text.format.Time;
 import android.util.Xml;
 
@@ -16,7 +18,7 @@ public class XmlWriter {
 	private final FileOutputStream fileos;
 	private final XmlSerializer serializer;
 	
-	public XmlWriter(File xmlfile, ArrayList<RestoreDataBean> bookmarks) 
+	public XmlWriter(File xmlfile, ArrayList<RawBackupDataBean> bookmarks) 
 	throws Exception {
 		fileos = new FileOutputStream(xmlfile);        
 		serializer = Xml.newSerializer();
@@ -50,7 +52,7 @@ public class XmlWriter {
 		return sb.toString();
 	}
 	
-	private String getIconData(RestoreDataBean b) {
+	private String getIconData(RawBackupDataBean b) {
 		String buffer;
 		// buffer = Hex.encodeHex(MockIcon.getIcon(context), false) ;
 		if (b.favicon!=null&&b.favicon.length>0) {
@@ -63,12 +65,12 @@ public class XmlWriter {
 	}
 
 	
-	private void writeXmlFile(ArrayList<RestoreDataBean> bookmarks) 
+	private void writeXmlFile(ArrayList<RawBackupDataBean> bookmarks) 
 	throws Exception {
 
 		serializer.startTag(null, Tags.BODY);
 		
-		for (RestoreDataBean b:bookmarks) {
+		for (RawBackupDataBean b:bookmarks) {
 			serializer.startTag(null, Tags.ROW);
 			
 			//addTextNode(Tags.ID, b.id); // ID is not restored so we skip it
