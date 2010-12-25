@@ -18,11 +18,13 @@ public class BrowserBookmarkBean extends Bookmark {
 	public BrowserBookmarkBean() {
 		super();
 	}
-	public BrowserBookmarkBean(Integer id, String fullTitle, String url, Bitmap favicon) {
-		this.id = id;
-		this.fullTitle = fullTitle;
-		this.url = url;
-		this.favicon = favicon;
+	
+	public static BrowserBookmarkBean createNew() {
+		BrowserBookmarkBean bean = new BrowserBookmarkBean();
+		bean.id = -1;
+		bean.fullTitle = "";
+		bean.url = "";
+		return bean;
 	}
 
 	public String toString() {

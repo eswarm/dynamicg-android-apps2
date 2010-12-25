@@ -29,7 +29,7 @@ import com.dynamicg.common.StringUtil;
 public class EditBookmarkDialog extends Dialog {
 
 	private static final Logger log = new Logger(EditBookmarkDialog.class);
-	public static final BrowserBookmarkBean NEW_BOOKMARK = new BrowserBookmarkBean(-1, "", "", null);
+	public static final BrowserBookmarkBean NEW_BOOKMARK = BrowserBookmarkBean.createNew();
 	
 	private final BookmarkTreeContext ctx;
 	private final Bookmark bookmark;
