@@ -23,11 +23,11 @@ import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writehandler.SeparatorChangedHandler;
 import com.dynamicg.bookmarkTree.data.writer.AlphaSortWriter;
-import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
+import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.ui.AboutDialog;
 import com.dynamicg.bookmarkTree.ui.SpinnerUtil;
-import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
+import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.SimpleAlertDialog;
 
@@ -226,11 +226,11 @@ public class PreferencesDialog extends Dialog {
 
 	private void dumpBrowserBookmarks() {
 		ctx.reloadAndRefresh(); // so that the gui is really in sync with what we display here
-		final ArrayList<BrowserBookmarkBean> rows = BrowserBookmarkLoader.forInternalOp(ctx);
+		final ArrayList<RawDataBean> rows = BrowserBookmarkLoader.forInternalOps(ctx);
 		
 		final StringBuffer sb = new StringBuffer();
-		for (BrowserBookmarkBean row:rows) {
-			sb.append(row.getFullTitle() + "\n" );
+		for (RawDataBean row:rows) {
+			sb.append(row.fullTitle + "\n" );
 		}
 		
 		new SimpleAlertDialog(ctx.activity, "Browser Bookmarks", "Close") {

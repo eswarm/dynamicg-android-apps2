@@ -11,7 +11,7 @@ import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
-import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
+import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.common.Logger;
 
 public class BrowserBookmarkLoader {
@@ -42,13 +42,13 @@ public class BrowserBookmarkLoader {
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public static ArrayList<BrowserBookmarkBean> forInternalOp(BookmarkTreeContext ctx) {
-		return (ArrayList<BrowserBookmarkBean>)readBrowserBookmarks(ctx.activity, FOR_INTERNAL_OP);
+	public static ArrayList<RawDataBean> forInternalOps(BookmarkTreeContext ctx) {
+		return (ArrayList<RawDataBean>)readBrowserBookmarks(ctx.activity, FOR_INTERNAL_OP);
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public static ArrayList<RawBackupDataBean> forBackup(BookmarkTreeContext ctx) {
-		return (ArrayList<RawBackupDataBean>)readBrowserBookmarks(ctx.activity, FOR_BACKUP_RESTORE);
+	public static ArrayList<RawDataBean> forBackup(BookmarkTreeContext ctx) {
+		return (ArrayList<RawDataBean>)readBrowserBookmarks(ctx.activity, FOR_BACKUP_RESTORE);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -77,10 +77,11 @@ public class BrowserBookmarkLoader {
 			return rows;
 		}
 		
-		if (what==FOR_BACKUP_RESTORE) {
-			RawBackupDataBean bean;
+		if (what==FOR_BACKUP_RESTORE || what==FOR_INTERNAL_OP) {
+			RawDataBean bean;
 			while ( crs.moveToNext() ) {
-				bean = new RawBackupDataBean();
+				bean = new RawDataBean();
+				bean.id = crs.getInt(0);
 				bean.created = crs.getLong(1);
 				bean.fullTitle = nvl(crs.getString(2));
 				bean.url = nvl(crs.getString(3));

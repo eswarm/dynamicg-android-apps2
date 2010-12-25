@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
-import com.dynamicg.bookmarkTree.model.RawBackupDataBean;
+import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.StringUtil;
@@ -106,7 +106,7 @@ public class BackupManager {
 					File xmlfileTemp = new File ( backupdir, filename+".tmp" );
 					File xmlfileFinal = new File ( backupdir, filename );
 					
-					ArrayList<RawBackupDataBean> bookmarks = BrowserBookmarkLoader.forBackup(ctx);
+					ArrayList<RawDataBean> bookmarks = BrowserBookmarkLoader.forBackup(ctx);
 					numberOfRows = bookmarks.size();
 					try {
 						new XmlWriter(xmlfileTemp, bookmarks);
@@ -161,7 +161,7 @@ public class BackupManager {
 			@Override
 			public void backgroundWork() {
 				try {
-					ArrayList<RawBackupDataBean> rows = new XmlReader(xmlfile).read();
+					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
 					numberOfRows = rows.size();
 					RestoreWriter.replaceFull(ctx, rows);
 				}
