@@ -205,8 +205,7 @@ public class EditBookmarkDialog extends Dialog {
 				alertTitle = getText(R.string.actionDeleteFolderOne);
 			}
 			else {
-				alertTitle = StringUtil.replaceFirst ( getText(R.string.actionDeleteFolderMany)
-						, "{1}", Integer.toString(num) );
+				alertTitle = StringUtil.textWithParam(getContext(), R.string.actionDeleteFolderMany, num );
 			}
 		}
 

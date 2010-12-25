@@ -171,7 +171,7 @@ public class BackupManager {
 			
 			@Override
 			public void done() {
-				String text = Messages.brHintBookmarksRestored.replace("{1}", Integer.toString(numberOfRows));
+				String text = StringUtil.textWithParam(Messages.brHintBookmarksRestored, numberOfRows);
 				SystemUtil.toastLong(ctx.activity, text);
 				backupDoneListener.restoreDone();
 			}

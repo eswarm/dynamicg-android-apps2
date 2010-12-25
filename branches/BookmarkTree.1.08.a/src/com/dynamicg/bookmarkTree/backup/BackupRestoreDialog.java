@@ -83,7 +83,7 @@ implements BackupEventListener {
 	
 	private void setupAutoBackup() {
 		CheckBox autoBackup = (CheckBox)findViewById(R.id.brAutoBackup);
-		String autoBackupLabel = Messages.brAutoBackupLabel.replace("{1}", Integer.toString(BackupPrefs.DAYS_BETWEEN)); 
+		String autoBackupLabel = StringUtil.textWithParam(Messages.brAutoBackupLabel, BackupPrefs.DAYS_BETWEEN); 
 		autoBackup.setText(autoBackupLabel);
 		autoBackup.setChecked(BackupPrefs.isAutoBackupEnabled());
 		
@@ -171,7 +171,7 @@ implements BackupEventListener {
 	}
 	
 	private String getDeletionOldLabel() {
-		return Messages.brDeleteOld.replace("{1}", Integer.toString(DELETION_DAYS_LIMIT));
+		return StringUtil.textWithParam(Messages.brDeleteOld, DELETION_DAYS_LIMIT);
 	}
 	
 	private void deleteConfirmation(final int what) {
