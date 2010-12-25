@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
@@ -90,6 +91,7 @@ implements BackupEventListener {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				BackupPrefs.writeAutoBackupEnabled(isChecked);
+				Toast.makeText(context, "Auto backup "+(isChecked?"enabled":"disabled"), Toast.LENGTH_SHORT).show();
 			}
 		});
 		
