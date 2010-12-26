@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
+import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.ContextUtil;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.SystemUtil;
@@ -12,6 +13,17 @@ import com.dynamicg.common.SystemUtil;
 public class AboutDialog {
 
 	public static final String AUTHOR = "dynamicg.android@gmail.com";
+	
+	private static final int CURRENT_DISCLAIMER_VERSION = 2; 
+	
+	public static void showOnce(BookmarkTreeContext ctx) {
+		PreferencesWrapper prefs = BookmarkTreeContext.preferencesWrapper;
+		if ( CURRENT_DISCLAIMER_VERSION == prefs.prefsBean.getDisclaimerLastDisplayed() ) {
+			return;
+		}
+		show(ctx);
+		prefs.storeDisclaimerLastDisplayed(CURRENT_DISCLAIMER_VERSION);
+	}
 	
 	public static void show(final BookmarkTreeContext ctx) {
 
@@ -32,9 +44,8 @@ public class AboutDialog {
 					+ "\nProgrammed by "+AUTHOR
 					+ "\nSVN Revision: " + (appinfo[1])
 					+ "\n"
-					+ "\n"
 					;
-				TextView revisionItem = (TextView)body.findViewById(R.id.aboutBody);
+				TextView revisionItem = (TextView)body.findViewById(R.id.aboutBodyLinks);
 				revisionItem.setText(revisionText);
 				
 				return body;

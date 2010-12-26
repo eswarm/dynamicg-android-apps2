@@ -8,24 +8,37 @@
 	android:paddingRight="10dip"
 >	
 
-	<TextView 
-		android:id="@+id/aboutSubTitle"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:textStyle="bold"
-		android:textSize="18dp"
-	/>
+<TextView 
+	android:id="@+id/aboutSubTitle"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:textStyle="bold"
+	android:textSize="18dp"
+/>
 
-	<HorizontalScrollView
+<TextView
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:text="
+\nBasic Usage:
+\n\u2022 Long-click to edit selected item and define the folder structure.
+\n\u2022 Short-click on bookmark to open link.
+\n\u2022 Short-click on folder to expand/collapse.
+\n\u2022 Menu/Preferences for advanced settings
+"
+/>
+
+<HorizontalScrollView
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:scrollbars="none"
+	>
+	<TextView android:id="@+id/aboutBodyLinks"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		>
-		<TextView android:id="@+id/aboutBody"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:autoLink="all"
-			/>
-	</HorizontalScrollView>
+		android:autoLink="all"
+		/>
+</HorizontalScrollView>
 
 </LinearLayout>
 
