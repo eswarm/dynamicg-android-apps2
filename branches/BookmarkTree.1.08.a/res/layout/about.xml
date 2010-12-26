@@ -32,6 +32,12 @@
 \n\u2022 Menu/Preferences for advanced settings
 "
 />
+<TextView
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:textStyle="bold"
+	android:text="\u2022 Backup your bookmarks before first edit! See Menu/Backup."
+/>
 
 <HorizontalScrollView
 	android:layout_width="fill_parent"
