@@ -39,6 +39,7 @@ public class PreferencesDialog extends Dialog {
 	private final BookmarkTreeContext ctx;
 	private final String currentSeparator;
 	private final PreferencesWrapper prefsWrapper;
+	private final PreferencesBean prefsBean;
 	private final SpinnerUtil spinnerUtil;
 
 	private EditText separatorItem;
@@ -53,6 +54,7 @@ public class PreferencesDialog extends Dialog {
 		super(ctx.activity);
 		this.ctx = ctx;
 		this.prefsWrapper = BookmarkTreeContext.preferencesWrapper;
+		this.prefsBean = prefsWrapper.prefsBean;
 		this.spinnerUtil = new SpinnerUtil(this);
 		
 		DialogHelper.expandContent(this, R.layout.prefs_body);
@@ -127,8 +129,8 @@ public class PreferencesDialog extends Dialog {
 		};
 
 		// attach spinners
-		spinnerUtil.bind ( R.id.prefsListStyle, prefsWrapper.prefsBean.getListStyle(), SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );
-		spinnerUtil.bind ( R.id.prefsSortOption, prefsWrapper.prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems(getContext()), R.string.prefsSortLabel );
+		spinnerUtil.bind ( R.id.prefsListStyle, prefsBean.getListStyle(), SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );
+		spinnerUtil.bind ( R.id.prefsSortOption, prefsBean.getSortOption(), SpinnerUtil.getSortOptionItems(getContext()), R.string.prefsSortLabel );
 		
 		scaleIconsCheckbox = (CheckBox)findViewById(R.id.prefsScaleIcons);
 		scaleIconsCheckbox.setChecked(prefsWrapper.isScaleIcons());
@@ -165,13 +167,20 @@ public class PreferencesDialog extends Dialog {
 	}
 	
 	private void saveMain() {
+		
+		boolean toastForReopen =
+			spinnerUtil.getCurrentValue(R.id.prefsListStyle) != prefsBean.listStyle
+			|| prefsWrapper.isOptimisedLayout() != optimiseLayout.isChecked()
+			|| prefsWrapper.isScaleIcons() != scaleIconsCheckbox.isChecked()
+			;
+		
 		processSeparatorUpdate();
 		prefsWrapper.setOptimisedLayout(optimiseLayout.isChecked());
 		
-		prefsWrapper.prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));
-		prefsWrapper.prefsBean.setSortOption(spinnerUtil.getCurrentValue(R.id.prefsSortOption));
-		prefsWrapper.prefsBean.setKeepState(keepStateCheckbox.isChecked()?1:0);
-		prefsWrapper.prefsBean.setScaleIcons(scaleIconsCheckbox.isChecked()?1:0);
+		prefsBean.setListStyle(spinnerUtil.getCurrentValue(R.id.prefsListStyle));
+		prefsBean.setSortOption(spinnerUtil.getCurrentValue(R.id.prefsSortOption));
+		prefsBean.setKeepState(keepStateCheckbox.isChecked()?1:0);
+		prefsBean.setScaleIcons(scaleIconsCheckbox.isChecked()?1:0);
 		
 		// see if "refresh" is required
 		if ( spinnerUtil.isChanged(R.id.prefsListStyle)
@@ -182,6 +191,10 @@ public class PreferencesDialog extends Dialog {
 		}
 		
 		prefsWrapper.write();
+		
+		if (toastForReopen) {
+			SystemUtil.toastShort(getContext(), "Please restart the app");
+		}
 	}
 
 	private void savePostprocessing() {
