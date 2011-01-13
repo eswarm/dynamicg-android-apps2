@@ -12,6 +12,7 @@ import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.common.Logger;
 
+// TODO - case insensitive "order by" - ORDER BY name COLLATE NOCASE
 public class BrowserBookmarkLoader {
 
 	private static final Logger log = new Logger(BrowserBookmarkLoader.class);
