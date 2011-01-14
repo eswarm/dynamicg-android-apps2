@@ -14,6 +14,7 @@ public class PreferencesWrapper {
 	public static final PrefEntryInt sortOption = new PrefEntryInt("sortOption", 0);
 	public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
 	public static final PrefEntryInt scaleIcons = new PrefEntryInt("scaleIcons", 1);
+	public static final PrefEntryInt caseInsensitiveSort = new PrefEntryInt("caseInsensitiveSort", 1);
 
 	public static final PrefEntryInt optimisedLayout;
 	static {

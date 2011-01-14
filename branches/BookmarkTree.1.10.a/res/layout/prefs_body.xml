@@ -44,12 +44,18 @@
     </TableLayout>
 
     <CheckBox style="@style/PrefsLabel"
+    	android:id="@+id/prefsCaseInsensSort"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/prefsCaseInsensSort"
+	    />
+	    
+    <CheckBox style="@style/PrefsLabel"
     	android:id="@+id/prefsKeepState"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="@string/prefsKeepState"
 	    />
-	    
     
 	<!-- ====================== Special Ops ====================== -->
 	

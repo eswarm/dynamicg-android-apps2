@@ -10,9 +10,9 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
+import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.Logger;
 
-// TODO - case insensitive "order by" - ORDER BY name COLLATE NOCASE
 public class BrowserBookmarkLoader {
 
 	private static final Logger log = new Logger(BrowserBookmarkLoader.class);
@@ -53,12 +53,19 @@ public class BrowserBookmarkLoader {
 				, Browser.BookmarkColumns.URL
 				, Browser.BookmarkColumns.FAVICON 
 		};
-		String query = Browser.BookmarkColumns.BOOKMARK+"=1"; // query on bookmarks only, skip history
+		
+		// query on bookmarks only, skip history
+		String query = Browser.BookmarkColumns.BOOKMARK+"=1"; 
+		
+		// order by, optionally case-insensitive
+		String sortOrder = PreferencesWrapper.caseInsensitiveSort.isOn() ?
+				Browser.BookmarkColumns.TITLE+" COLLATE NOCASE" : Browser.BookmarkColumns.TITLE;
+		
 		Cursor crs = main.managedQuery ( android.provider.Browser.BOOKMARKS_URI
 				, columns
 				, query
 				, null
-				, Browser.BookmarkColumns.TITLE
+				, sortOrder
 		);
 
 		ArrayList rows = new ArrayList();
