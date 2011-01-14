@@ -32,7 +32,7 @@
     <string name="prefsSeparator">Internal folder separator:</string>
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>
     <string name="prefsScaleIcons">Scale icons</string>
-    <string name="prefsCaseInsensSort">Case insensitive sort</string>
+    <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
     
     <string name="prefsGroupPresentation">Presentation</string>
     <string name="prefsGroupExtras">Extras</string>

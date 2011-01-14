@@ -23,6 +23,9 @@ public class BrowserBookmarkLoader {
 	
 	private static String EMPTY = "";
 	
+	private static final String SORT_STD = Browser.BookmarkColumns.TITLE;
+	private static final String SORT_CASE_INSENSITIVE = Browser.BookmarkColumns.TITLE+" COLLATE NOCASE";
+	
 	private static String nvl(String value) {
 		// mask nulls - we got one error report with an NPE on bookmark title (?)
 		return value==null?EMPTY:value;
@@ -58,8 +61,7 @@ public class BrowserBookmarkLoader {
 		String query = Browser.BookmarkColumns.BOOKMARK+"=1"; 
 		
 		// order by, optionally case-insensitive
-		String sortOrder = PreferencesWrapper.caseInsensitiveSort.isOn() ?
-				Browser.BookmarkColumns.TITLE+" COLLATE NOCASE" : Browser.BookmarkColumns.TITLE;
+		String sortOrder = PreferencesWrapper.sortCaseInsensitive.isOn() ? SORT_CASE_INSENSITIVE : SORT_STD;
 		
 		Cursor crs = main.managedQuery ( android.provider.Browser.BOOKMARKS_URI
 				, columns

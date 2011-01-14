@@ -121,7 +121,7 @@ public class PreferencesDialog extends Dialog {
 		optimiseLayout = bindCheckbox(R.id.prefsOptimiseLayout, PreferencesWrapper.optimisedLayout);
 		scaleIconsCheckbox = bindCheckbox(R.id.prefsScaleIcons, PreferencesWrapper.scaleIcons);
 		bindCheckbox(R.id.prefsKeepState, PreferencesWrapper.keepState);
-		bindCheckbox(R.id.prefsCaseInsensSort, PreferencesWrapper.caseInsensitiveSort);
+		bindCheckbox(R.id.prefsSortCaseInsensitive, PreferencesWrapper.sortCaseInsensitive);
 		
 		// bind spinners
 		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );

@@ -44,10 +44,10 @@
     </TableLayout>
 
     <CheckBox style="@style/PrefsLabel"
-    	android:id="@+id/prefsCaseInsensSort"
+    	android:id="@+id/prefsSortCaseInsensitive"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/prefsCaseInsensSort"
+	    android:text="@string/prefsSortCaseInsensitive"
 	    />
 	    
     <CheckBox style="@style/PrefsLabel"
