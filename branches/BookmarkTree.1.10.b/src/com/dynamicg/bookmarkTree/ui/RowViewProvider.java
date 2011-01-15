@@ -19,16 +19,13 @@ public abstract class RowViewProvider {
 	
 	public final LayoutInflater inflater;
 	public final boolean compact;
-	public final boolean applyTextColors;
+	
+	public boolean applyTextColors;
 
 	public RowViewProvider(LayoutInflater inflater, boolean compact) {
 		this.inflater = inflater;
 		this.compact = compact;
-		this.applyTextColors =
-			PreferencesWrapper.colorFolder.value != Color.WHITE
-			|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
-			|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
-			;
+		beforeRedraw();
 		
 		if (log.debugEnabled) {
 			log.debug("create RowViewProvider", this);
@@ -167,6 +164,14 @@ public abstract class RowViewProvider {
 			
 		}
 		
+	}
+
+	public void beforeRedraw() {
+		this.applyTextColors =
+			PreferencesWrapper.colorFolder.value != Color.WHITE
+			|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
+			|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
+			;
 	}
 	
 }

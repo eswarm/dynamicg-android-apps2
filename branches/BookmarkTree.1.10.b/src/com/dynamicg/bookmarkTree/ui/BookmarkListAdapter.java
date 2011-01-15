@@ -126,6 +126,7 @@ public class BookmarkListAdapter extends BaseAdapter {
 	
 	// called by click event and via menu actions
 	public void redraw() {
+		rowViewProvider.beforeRedraw();
 		updateBookmarkList();
 //		if (rowViewProvider!=null) {
 //			rowViewProvider.compact = ctx.preferencesWrapper.isCompact();
