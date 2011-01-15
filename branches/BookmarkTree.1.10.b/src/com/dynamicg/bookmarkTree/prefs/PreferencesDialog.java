@@ -166,6 +166,7 @@ public class PreferencesDialog extends Dialog {
 			@Override
 			public void colorSelected(int selectedColor) {
 				prefEntry.updatedValue = selectedColor;
+				dataRefreshRequired = true;
 			}
 		};
 		link.setOnClickListener(new View.OnClickListener() {
