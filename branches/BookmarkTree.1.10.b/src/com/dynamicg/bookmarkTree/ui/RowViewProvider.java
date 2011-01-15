@@ -91,7 +91,6 @@ public abstract class RowViewProvider {
 			return rowview;
 		}
 		
-		
 	}
 	
 	static class ViewHolder {
@@ -113,12 +112,18 @@ public abstract class RowViewProvider {
 		private void prepare(ViewHolder holder, Bookmark bm) {
 			
 			holder.titleCell.setText(bm.getDisplayTitle());
+	        if (applyTextColors) {
+	        	holder.titleCell.setTextColor(bm.isFolder() ? PreferencesWrapper.colorFolder.value : PreferencesWrapper.colorBookmarkTitle.value );
+	        }
 	    	holder.indentionCell.getLayoutParams().width = bm.hasParentFolder() ? bm.getLevel() * childLevelIndention : 0; 
 	    	
 	    	if (!compact) {
 		    	if (bm.isBrowserBookmark()) {
 			        holder.urlCell.setText(bm.getUrl());
 			        holder.urlCell.setVisibility(View.VISIBLE);
+			        if (applyTextColors) {
+			        	holder.urlCell.setTextColor(PreferencesWrapper.colorBookmarkUrl.value);
+			        }
 		    	}
 		    	else if (holder.urlCell!=null) {
 		    		holder.urlCell.setText(null);
