@@ -4,7 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SystemUtil {
@@ -33,6 +36,12 @@ public class SystemUtil {
 	}
 	public static void toastLong(Context context, String text) {
 		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+	}
+	
+	public static void underline(TextView view) {
+		SpannableString content = new SpannableString(view.getText());
+	    content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+	    view.setText(content);
 	}
 	
 }
