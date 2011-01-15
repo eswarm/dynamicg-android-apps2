@@ -57,6 +57,13 @@
 	    android:text="@string/prefsKeepState"
 	    />
     
+	<!-- ====================== Colors ====================== -->
+	<TextView style="@style/PrefsGroup" android:text="@string/prefsGroupColors" /> 
+
+	<TextView style="@style/PrefsClickText" android:id="@+id/prefsColorFolder" android:text="@string/prefsColorFolder" /> 
+	<TextView style="@style/PrefsClickText" android:id="@+id/prefsColorBookmarkTitle" android:text="@string/prefsColorBookmarkTitle" /> 
+	<TextView style="@style/PrefsClickText" android:id="@+id/prefsColorBookmarkUrl" android:text="@string/prefsColorBookmarkUrl" /> 
+	
 	<!-- ====================== Special Ops ====================== -->
 	
 	<TextView style="@style/PrefsGroup" android:text="@string/prefsGroupExtras" /> 
