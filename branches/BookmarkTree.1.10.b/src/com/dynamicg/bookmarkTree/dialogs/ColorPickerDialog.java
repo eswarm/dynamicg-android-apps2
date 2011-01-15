@@ -84,7 +84,7 @@ public class ColorPickerDialog extends Dialog {
 		layout.addView(margin);
 		
 		Button btSave = new Button(context);
-		btSave.setText(R.string.commonSave);
+		btSave.setText(R.string.commonOK);
 		btSave.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
