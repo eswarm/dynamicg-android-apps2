@@ -1,5 +1,6 @@
 package com.dynamicg.bookmarkTree.ui;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.model.Bookmark;
+import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.Logger;
 
 public abstract class RowViewProvider {
@@ -17,10 +19,17 @@ public abstract class RowViewProvider {
 	
 	public final LayoutInflater inflater;
 	public final boolean compact;
+	public final boolean applyTextColors;
 
 	public RowViewProvider(LayoutInflater inflater, boolean compact) {
 		this.inflater = inflater;
 		this.compact = compact;
+		this.applyTextColors =
+			PreferencesWrapper.colorFolder.value != Color.WHITE
+			|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
+			|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
+			;
+		
 		if (log.debugEnabled) {
 			log.debug("create RowViewProvider", this);
 		}
@@ -38,6 +47,9 @@ public abstract class RowViewProvider {
 			
 	        TextView titleCell = (TextView) rowview.findViewById(R.id.bmTitle);
 	        titleCell.setText(bm.getDisplayTitle());
+	        if (applyTextColors) {
+	        	titleCell.setTextColor(bm.isFolder() ? PreferencesWrapper.colorFolder.value : PreferencesWrapper.colorBookmarkTitle.value );
+	        }
 	        
 	        View indentionCell = rowview.findViewById(R.id.bmIndention);
 	    	indentionCell.getLayoutParams().width = bm.hasParentFolder() ? bm.getLevel() * childLevelIndention : 0; 
@@ -46,6 +58,9 @@ public abstract class RowViewProvider {
 		    	if (bm.isBrowserBookmark()) {
 			        TextView urlCell = (TextView) rowview.findViewById(R.id.bmUrl);
 			        urlCell.setText(bm.getUrl());
+			        if (applyTextColors) {
+			        	urlCell.setTextColor(PreferencesWrapper.colorBookmarkUrl.value);
+			        }
 		    	}
 	    	}
 
