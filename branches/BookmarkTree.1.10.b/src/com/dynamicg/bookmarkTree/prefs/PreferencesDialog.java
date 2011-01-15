@@ -25,6 +25,8 @@ import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.data.writehandler.SeparatorChangedHandler;
 import com.dynamicg.bookmarkTree.data.writer.AlphaSortWriter;
 import com.dynamicg.bookmarkTree.dialogs.AboutDialog;
+import com.dynamicg.bookmarkTree.dialogs.ColorPickerDialog;
+import com.dynamicg.bookmarkTree.dialogs.ColorPickerDialog.ColorSelectedListener;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.prefs.SpinnerUtil.KeyValue;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
@@ -127,6 +129,11 @@ public class PreferencesDialog extends Dialog {
 		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );
 		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(getContext()), R.string.prefsSortLabel );
 		
+		// color items
+		bindColorPicker(R.id.prefsColorFolder, PreferencesWrapper.colorFolder);
+		bindColorPicker(R.id.prefsColorBookmarkTitle, PreferencesWrapper.colorBookmarkTitle);
+		bindColorPicker(R.id.prefsColorBookmarkUrl, PreferencesWrapper.colorBookmarkUrl);
+		
 		// save/cancel panel
 		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_SAVE_CANCEL) {
 			@Override
@@ -147,6 +154,26 @@ public class PreferencesDialog extends Dialog {
 		CheckBox box = (CheckBox)findViewById(id);
 		box.setChecked(prefEntry.isOn());
 		return box;
+	}
+	
+	private void bindColorPicker(int id, final PrefEntryInt prefEntry) {
+		prefToViewMap.put(prefEntry, id);
+
+		TextView link = (TextView)findViewById(id);
+		SystemUtil.underline(link);
+
+		final ColorSelectedListener colorSelectedListener = new ColorSelectedListener() {
+			@Override
+			public void colorSelected(int selectedColor) {
+				prefEntry.updatedValue = selectedColor;
+			}
+		};
+		link.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				new ColorPickerDialog(getContext(), prefEntry.updatedValue, colorSelectedListener);
+			}
+		});
 	}
 	
 	private void checkForChangedSeparator() {
