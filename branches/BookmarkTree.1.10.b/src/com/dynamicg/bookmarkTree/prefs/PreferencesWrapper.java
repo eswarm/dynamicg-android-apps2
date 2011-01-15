@@ -1,5 +1,7 @@
 package com.dynamicg.bookmarkTree.prefs;
 
+import android.graphics.Color;
+
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.VersionAccessor;
 
@@ -16,6 +18,10 @@ public class PreferencesWrapper {
 	public static final PrefEntryInt scaleIcons = new PrefEntryInt("scaleIcons", 1);
 	public static final PrefEntryInt sortCaseInsensitive = new PrefEntryInt("sortCaseInsensitive", 1);
 
+	public static final PrefEntryInt colorFolder = new PrefEntryInt("color.folder", Color.WHITE);
+	public static final PrefEntryInt colorBookmarkTitle = new PrefEntryInt("color.bookmarkTitle", Color.WHITE);
+	public static final PrefEntryInt colorBookmarkUrl = new PrefEntryInt("color.bookmarkUrl", Color.WHITE);
+	
 	public static final PrefEntryInt optimisedLayout;
 	static {
 		int defaultOptimisation=0;
