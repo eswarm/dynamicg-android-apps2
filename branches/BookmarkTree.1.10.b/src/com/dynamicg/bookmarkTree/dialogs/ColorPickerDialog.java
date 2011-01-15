@@ -71,7 +71,7 @@ public class ColorPickerDialog extends Dialog {
 		layout.setBackgroundColor(Color.BLACK);
 		
 		this.titleCell = new TextView(context);
-		titleCell.setText("Select color (R/G/B)"); // ## TODO i18n
+		titleCell.setText(R.string.titleColorPicker);
 		titleCell.setTextSize(22);
 		layout.addView(titleCell);
 
