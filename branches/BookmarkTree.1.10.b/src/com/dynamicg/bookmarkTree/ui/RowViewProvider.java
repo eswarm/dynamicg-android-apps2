@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.model.Bookmark;
+import com.dynamicg.bookmarkTree.prefs.PrefEntryInt;
 import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.Logger;
 
@@ -166,13 +167,17 @@ public abstract class RowViewProvider {
 		
 	}
 
+	private static boolean nonWhite(PrefEntryInt item) {
+		return item.value != Color.WHITE;
+	}
+
 	public void beforeRedraw() {
-		if ( PreferencesWrapper.colorFolder.value != Color.WHITE
-				|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
-				|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
+		if ( nonWhite(PreferencesWrapper.colorFolder)
+				|| nonWhite(PreferencesWrapper.colorBookmarkTitle)
+				|| nonWhite(PreferencesWrapper.colorBookmarkUrl)
 		) {
 			this.applyTextColors = true;
 		}
 	}
-	
+
 }
