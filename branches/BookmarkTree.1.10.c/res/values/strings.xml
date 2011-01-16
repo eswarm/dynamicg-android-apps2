@@ -34,7 +34,7 @@
     <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
     <string name="prefsColorFolder">Folders title</string>
     <string name="prefsColorBookmarkTitle">Bookmarks title</string>
-    <string name="prefsColorBookmarkUrl">Bookmarks URL</string>
+    <string name="prefsColorBookmarkUrl">Bookmarks address</string>
     
     <string name="prefsGroupLayout">Layout</string>
     <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>
