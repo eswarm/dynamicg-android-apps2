@@ -82,48 +82,11 @@ public class PreferencesDialog extends Dialog {
 		setContentView(R.layout.prefs_tab_control);
 		prepareTabs();
 		
-		setTitle(R.string.commonPreferences);
-
-		separatorItem = (EditText)findViewById(R.id.prefsSeparator);
-		separatorItem.setText(currentSeparator);
-		separatorItem.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-			}
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-			}
-			@Override
-			public void afterTextChanged(Editable s) {
-				checkForChangedSeparator();
-			}
-		});
-
+		setupSeparatorItem();
+		setupAlphaSort();
+		
 		doFullUpdateCheckbox = (CheckBox)findViewById(R.id.prefsFullUpdateOnChange);
 		checkForChangedSeparator(); // inactivate intially
-		
-		Button sortAlpha = (Button)findViewById(R.id.prefsActionSortAlpha);
-		sortAlpha.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new SimpleAlertDialog.OkCancelDialog(ctx.activity, R.string.actionSortBookmarksConfirm) {
-					@Override
-					public void onPositiveButton() {
-						new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait) ) {
-							@Override
-							public void backgroundWork() {
-								new AlphaSortWriter(ctx);
-							}
-							@Override
-							public void done() {
-								ctx.reloadAndRefresh(); // needs to be done by main thread
-								SystemUtil.toastShort(context, context.getString(R.string.actionSortBookmarksDone));
-							}
-						};
-					}
-				};
-			}
-		});
 		
 		// bind checkboxes
 		optimiseLayout = bindCheckbox(R.id.prefsOptimiseLayout, PreferencesWrapper.optimisedLayout);
@@ -150,6 +113,48 @@ public class PreferencesDialog extends Dialog {
 
 		LayoutUtil.maximizeDialogHeight(this);
 		
+	}
+	
+	private void setupSeparatorItem() {
+		separatorItem = (EditText)findViewById(R.id.prefsSeparator);
+		separatorItem.setText(currentSeparator);
+		separatorItem.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			}
+			@Override
+			public void afterTextChanged(Editable s) {
+				checkForChangedSeparator();
+			}
+		});
+	}
+	
+	private void setupAlphaSort() {
+		Button sortAlpha = (Button)findViewById(R.id.prefsActionSortAlpha);
+		sortAlpha.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				new SimpleAlertDialog.OkCancelDialog(ctx.activity, R.string.actionSortBookmarksConfirm) {
+					@Override
+					public void onPositiveButton() {
+						new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait) ) {
+							@Override
+							public void backgroundWork() {
+								new AlphaSortWriter(ctx);
+							}
+							@Override
+							public void done() {
+								ctx.reloadAndRefresh(); // needs to be done by main thread
+								SystemUtil.toastShort(context, context.getString(R.string.actionSortBookmarksDone));
+							}
+						};
+					}
+				};
+			}
+		});
 	}
 	
 	private void prepareTabs() {
