@@ -167,11 +167,12 @@ public abstract class RowViewProvider {
 	}
 
 	public void beforeRedraw() {
-		this.applyTextColors =
-			PreferencesWrapper.colorFolder.value != Color.WHITE
-			|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
-			|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
-			;
+		if ( PreferencesWrapper.colorFolder.value != Color.WHITE
+				|| PreferencesWrapper.colorBookmarkTitle.value != Color.WHITE
+				|| PreferencesWrapper.colorBookmarkUrl.value != Color.WHITE
+		) {
+			this.applyTextColors = true;
+		}
 	}
 	
 }
