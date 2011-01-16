@@ -44,6 +44,7 @@ public class PreferencesDialog extends Dialog {
 
     public static final int ACTION_DUMP_BOOKMARKS = 1;
     public static final int ACTION_SHOW_DISCLAIMER = 2;
+    private static final int TAB_HEIGHT = 36;
     
 	private final BookmarkTreeContext ctx;
 	private final Context context;
@@ -159,7 +160,7 @@ public class PreferencesDialog extends Dialog {
 		
 		TabSpec tspec;
 		View child;
-		int tabHeight = ContextUtil.getScaledSizeInt(context, 36);
+		int tabHeight = ContextUtil.getScaledSizeInt(context, TAB_HEIGHT);
 		for ( int i=0;i<layouts.length;i++) {
 			tspec = tabs.newTabSpec("tab"+i);
 			tspec.setContent(layouts[i]);
