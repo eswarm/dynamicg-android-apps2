@@ -32,17 +32,18 @@
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>
     <string name="prefsScaleIcons">Scale icons</string>
     <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
-    <string name="prefsColorFolder">Folders title</string>
-    <string name="prefsColorBookmarkTitle">Bookmarks title</string>
-    <string name="prefsColorBookmarkUrl">Bookmarks address</string>
-    
+
     <string name="prefsGroupLayout">Layout</string>
     <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>
     <string name="prefsGroupPresentation">Presentation</string>
     <string name="prefsGroupExtras">Extras</string>
     <string name="prefsGroupSetup">App setup</string>
-    <string name="prefsGroupColors">Text color</string>
     <string name="prefsGroupTools">Tools</string>
+    
+    <string name="prefsGroupColors">Text colors</string>
+    <string name="prefsColorFolder">Folder title</string>
+    <string name="prefsColorBookmarkTitle">Bookmark title</string>
+    <string name="prefsColorBookmarkUrl">Bookmark address</string>
     
     <string name="editTitle">Title:</string>
     <string name="editUrl">URL:</string>
