@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,12 +12,15 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
@@ -30,8 +34,9 @@ import com.dynamicg.bookmarkTree.dialogs.ColorPickerDialog.ColorSelectedListener
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.prefs.SpinnerUtil.KeyValue;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
-import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
+import com.dynamicg.common.ContextUtil;
+import com.dynamicg.common.LayoutUtil;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.SystemUtil;
 
@@ -41,6 +46,7 @@ public class PreferencesDialog extends Dialog {
     public static final int ACTION_SHOW_DISCLAIMER = 2;
     
 	private final BookmarkTreeContext ctx;
+	private final Context context;
 	private final String currentSeparator;
 	private final SpinnerUtil spinnerUtil;
 
@@ -56,19 +62,18 @@ public class PreferencesDialog extends Dialog {
 	public PreferencesDialog(BookmarkTreeContext ctx) {
 		super(ctx.activity);
 		this.ctx = ctx;
-		
-		PrefEntryInt.resetUpdatedValue();
-		
+		this.context = getContext();
 		this.spinnerUtil = new SpinnerUtil(this);
 		
-		DialogHelper.expandContent(this, R.layout.prefs_body);
-
+		PrefEntryInt.resetUpdatedValue();
 		currentSeparator = ctx.getFolderSeparator();
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.show();
 	}
 
 	private String getText(int res) {
-		return getContext().getString(res);
+		return context.getString(res);
 	}
 	
 	@Override
@@ -76,6 +81,9 @@ public class PreferencesDialog extends Dialog {
 
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.prefs_tab_control);
+		prepareTabs();
+		
 		setTitle(R.string.commonPreferences);
 
 		separatorItem = (EditText)findViewById(R.id.prefsSeparator);
@@ -111,7 +119,7 @@ public class PreferencesDialog extends Dialog {
 							@Override
 							public void done() {
 								ctx.reloadAndRefresh(); // needs to be done by main thread
-								SystemUtil.toastShort(getContext(), getText(R.string.actionSortBookmarksDone));
+								SystemUtil.toastShort(context, getText(R.string.actionSortBookmarksDone));
 							}
 						};
 					}
@@ -126,8 +134,8 @@ public class PreferencesDialog extends Dialog {
 		bindCheckbox(R.id.prefsSortCaseInsensitive, PreferencesWrapper.sortCaseInsensitive);
 		
 		// bind spinners
-		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(getContext()), R.string.prefsListStyle );
-		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(getContext()), R.string.prefsSortLabel );
+		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(context), R.string.prefsListStyle );
+		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(context), R.string.prefsSortLabel );
 		
 		// color items
 		bindColorPicker(R.id.prefsColorFolder, PreferencesWrapper.colorFolder);
@@ -142,6 +150,33 @@ public class PreferencesDialog extends Dialog {
 			}
 		};
 
+		LayoutUtil.maximizeDialogHeight(this);
+		
+	}
+	
+	private void prepareTabs() {
+		TabHost tabs = (TabHost) this.findViewById(R.id.prefsTabHost);
+		tabs.setup();
+		
+		int[] layouts = {R.id.prefsTabContent1, R.id.prefsTabContent2}; 
+		int[] titles = {R.string.prefsGroupPresentation, R.string.prefsGroupToolsAndSetup};
+		
+		String title;
+		TabSpec tspec;
+		View child;
+		int tabHeight = ContextUtil.getScaledSizeInt(context, 36);
+		for ( int i=0;i<layouts.length;i++) {
+			title = context.getString(titles[i]);
+			tspec = tabs.newTabSpec("tab"+i);
+			tspec.setContent(layouts[i]);
+			tspec.setIndicator(title);
+			tabs.addTab(tspec);
+			// smaller tab height
+			child = tabs.getTabWidget().getChildAt(i);
+			child.getLayoutParams().height = tabHeight;
+			child.setPadding(0,child.getPaddingTop(),0,child.getPaddingBottom());
+		}
+		
 	}
 	
 	private void bindSpinner(int spinnerResId, PrefEntryInt prefEntry, ArrayList<KeyValue> items, int prompt) {
@@ -160,7 +195,7 @@ public class PreferencesDialog extends Dialog {
 		prefToViewMap.put(prefEntry, id);
 
 		TextView link = (TextView)findViewById(id);
-		SystemUtil.underline(link);
+		LayoutUtil.underline(link);
 
 		final ColorSelectedListener colorSelectedListener = new ColorSelectedListener() {
 			@Override
@@ -172,7 +207,7 @@ public class PreferencesDialog extends Dialog {
 		link.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new ColorPickerDialog(getContext(), prefEntry.updatedValue, colorSelectedListener);
+				new ColorPickerDialog(context, prefEntry.updatedValue, colorSelectedListener);
 			}
 		});
 	}
@@ -231,7 +266,7 @@ public class PreferencesDialog extends Dialog {
 		PreferencesUpdater.write();
 		
 		if (toastForReopen) {
-			SystemUtil.toastShort(getContext(), "Please restart the app");
+			SystemUtil.toastShort(context, "Please restart the app");
 		}
 	}
 
