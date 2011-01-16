@@ -42,8 +42,9 @@ import com.dynamicg.common.SystemUtil;
 
 public class PreferencesDialog extends Dialog {
 
-    public static final int ACTION_DUMP_BOOKMARKS = 1;
-    public static final int ACTION_SHOW_DISCLAIMER = 2;
+	private static final int ACTION_DUMP_BOOKMARKS = 1;
+    private static final int ACTION_SHOW_DISCLAIMER = 2;
+    
     private static final int TAB_HEIGHT = 36;
     
 	private final BookmarkTreeContext ctx;
