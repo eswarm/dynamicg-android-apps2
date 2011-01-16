@@ -9,6 +9,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -101,7 +102,9 @@ public class ColorPickerDialog extends Dialog {
 		
 		updateTitleColor();
 		
-		this.setContentView(layout);
+		ScrollView scrollView = new ScrollView(context);
+		scrollView.addView(layout);
+		this.setContentView(scrollView);
 		
 	}
 	
