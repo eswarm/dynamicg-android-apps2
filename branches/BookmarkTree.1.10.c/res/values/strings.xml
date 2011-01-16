@@ -37,10 +37,13 @@
     <string name="prefsColorBookmarkTitle">Bookmarks title</string>
     <string name="prefsColorBookmarkUrl">Bookmarks URL</string>
     
+    <string name="prefsGroupLayout">Layout</string>
+    <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>
     <string name="prefsGroupPresentation">Presentation</string>
     <string name="prefsGroupExtras">Extras</string>
     <string name="prefsGroupSetup">App setup</string>
-    <string name="prefsGroupColors">Text color (click to change)</string>
+    <string name="prefsGroupColors">Text color</string>
+    <string name="prefsGroupTools">Tools</string>
     
     <string name="editTitle">Title:</string>
     <string name="editUrl">URL:</string>
