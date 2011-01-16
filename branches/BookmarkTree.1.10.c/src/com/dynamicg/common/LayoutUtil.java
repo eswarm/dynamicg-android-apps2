@@ -14,9 +14,9 @@ public class LayoutUtil {
 	    view.setText(content);
 	}
 	
-	public static void maximizeDialogHeight(Dialog dialog) {
+	public static void maximizeDialog(Dialog dialog) {
 		// see http://devstream.stefanklumpp.com/2010/07/android-display-dialogs-in-fullscreen.html
-		dialog.getWindow().setLayout(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT);
+		dialog.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 	}
 
 }

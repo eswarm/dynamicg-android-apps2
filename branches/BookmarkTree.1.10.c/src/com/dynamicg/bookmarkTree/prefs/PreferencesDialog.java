@@ -111,7 +111,7 @@ public class PreferencesDialog extends Dialog {
 			}
 		};
 
-		LayoutUtil.maximizeDialogHeight(this);
+		LayoutUtil.maximizeDialog(this);
 		
 	}
 	
