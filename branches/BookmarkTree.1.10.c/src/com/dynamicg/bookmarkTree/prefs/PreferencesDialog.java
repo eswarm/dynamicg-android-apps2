@@ -72,10 +72,6 @@ public class PreferencesDialog extends Dialog {
 		this.show();
 	}
 
-	private String getText(int res) {
-		return context.getString(res);
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
@@ -111,7 +107,7 @@ public class PreferencesDialog extends Dialog {
 				new SimpleAlertDialog.OkCancelDialog(ctx.activity, R.string.actionSortBookmarksConfirm) {
 					@Override
 					public void onPositiveButton() {
-						new SimpleProgressDialog(ctx.activity, getText(R.string.commonPleaseWait) ) {
+						new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait) ) {
 							@Override
 							public void backgroundWork() {
 								new AlphaSortWriter(ctx);
@@ -119,7 +115,7 @@ public class PreferencesDialog extends Dialog {
 							@Override
 							public void done() {
 								ctx.reloadAndRefresh(); // needs to be done by main thread
-								SystemUtil.toastShort(context, getText(R.string.actionSortBookmarksDone));
+								SystemUtil.toastShort(context, context.getString(R.string.actionSortBookmarksDone));
 							}
 						};
 					}
@@ -161,15 +157,13 @@ public class PreferencesDialog extends Dialog {
 		int[] layouts = {R.id.prefsTabContent1, R.id.prefsTabContent2}; 
 		int[] titles = {R.string.prefsGroupPresentation, R.string.prefsGroupToolsAndSetup};
 		
-		String title;
 		TabSpec tspec;
 		View child;
 		int tabHeight = ContextUtil.getScaledSizeInt(context, 36);
 		for ( int i=0;i<layouts.length;i++) {
-			title = context.getString(titles[i]);
 			tspec = tabs.newTabSpec("tab"+i);
 			tspec.setContent(layouts[i]);
-			tspec.setIndicator(title);
+			tspec.setIndicator ( context.getString(titles[i]) );
 			tabs.addTab(tspec);
 			// smaller tab height
 			child = tabs.getTabWidget().getChildAt(i);
@@ -227,7 +221,7 @@ public class PreferencesDialog extends Dialog {
 			savePostprocessing();
 		}
 		else {
-			new SimpleProgressDialog(ctx.activity, getText(R.string.commonPleaseWait)) {
+			new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait)) {
 				@Override
 				public void backgroundWork() {
 					saveMain();
