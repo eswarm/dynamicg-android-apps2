@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -35,7 +37,6 @@ import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.prefs.SpinnerUtil.KeyValue;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
-import com.dynamicg.common.ContextUtil;
 import com.dynamicg.common.LayoutUtil;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.SystemUtil;
@@ -45,12 +46,13 @@ public class PreferencesDialog extends Dialog {
 	private static final int ACTION_DUMP_BOOKMARKS = 1;
     private static final int ACTION_SHOW_DISCLAIMER = 2;
     
-    private static final int TAB_HEIGHT = 36;
-    
 	private final BookmarkTreeContext ctx;
 	private final Context context;
 	private final String currentSeparator;
 	private final SpinnerUtil spinnerUtil;
+	
+	private final float dialogWidth;
+	private final float tabHeight;
 
 	private EditText separatorItem;
 	private CheckBox doFullUpdateCheckbox;
@@ -71,6 +73,11 @@ public class PreferencesDialog extends Dialog {
 		currentSeparator = ctx.getFolderSeparator();
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		Resources resources = context.getResources();
+		this.dialogWidth = resources.getDimension(R.dimen.prefsDialogWidth);
+		this.tabHeight = resources.getDimension(R.dimen.prefsTabHeight);
+		
 		this.show();
 	}
 
@@ -110,9 +117,9 @@ public class PreferencesDialog extends Dialog {
 				saveClicked();
 			}
 		};
-
-		LayoutUtil.maximizeDialog(this);
 		
+		// see http://devstream.stefanklumpp.com/2010/07/android-display-dialogs-in-fullscreen.html
+		getWindow().setLayout( (int)this.dialogWidth, LayoutParams.FILL_PARENT);
 	}
 	
 	private void setupSeparatorItem() {
@@ -166,7 +173,6 @@ public class PreferencesDialog extends Dialog {
 		
 		TabSpec tspec;
 		View child;
-		int tabHeight = ContextUtil.getScaledSizeInt(context, TAB_HEIGHT);
 		for ( int i=0;i<layouts.length;i++) {
 			tspec = tabs.newTabSpec("tab"+i);
 			tspec.setContent(layouts[i]);
@@ -174,7 +180,7 @@ public class PreferencesDialog extends Dialog {
 			tabs.addTab(tspec);
 			// smaller tab height
 			child = tabs.getTabWidget().getChildAt(i);
-			child.getLayoutParams().height = tabHeight;
+			child.getLayoutParams().height = (int)this.tabHeight;
 			child.setPadding(0,child.getPaddingTop(),0,child.getPaddingBottom());
 		}
 		
