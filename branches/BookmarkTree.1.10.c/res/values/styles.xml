@@ -79,6 +79,10 @@
         <item name="android:paddingBottom">2dip</item>
     </style>
 
+    <style name="PrefsGroupFirst" parent="PrefsGroup">
+        <item name="android:layout_marginTop">0dip</item>
+    </style>
+    
 	<style name="EditBodyLabel">
 		<item name="android:layout_width">wrap_content</item>
 		<item name="android:layout_height">wrap_content</item>
@@ -89,4 +93,10 @@
 		<item name="android:singleLine">true</item>
 	</style>
 
+	<style name="PrefsTabScrollView">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginBottom">50dip</item>
+	</style>
+	
 </resources>
