@@ -96,7 +96,7 @@
 	<style name="PrefsTabScrollView">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
-        <item name="android:layout_marginBottom">50dip</item>
+        <item name="android:layout_marginBottom">60dip</item>
 	</style>
 	
 </resources>
