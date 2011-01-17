@@ -18,7 +18,7 @@ public class BitmapScalerAPI3 implements ScaleWorker {
 	}
 
 	@Override
-	public void scale(Bitmap b, int density) {
+	public void setDensity(Bitmap b, int density) {
 	}
 	
 	@Override
