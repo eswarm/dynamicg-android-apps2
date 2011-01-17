@@ -30,6 +30,7 @@ public class ShortcutCreator {
 	
 	private Parcelable getIcon(int bgcolor, int targetDensity) {
 		
+		// see http://developer.android.com/guide/topics/graphics/index.html
 		final int size = ContextUtil.getScaledSizeInt(context,SIZE);
 		final Bitmap target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
 		
