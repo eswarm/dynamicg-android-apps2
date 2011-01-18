@@ -89,6 +89,7 @@ public class ShortcutCreateDialog extends Dialog {
 		/*
 		 * DENSITY
 		 */
+		setLabel(R.id.shortcutIconDensityLabel, R.string.shortcutIconDensity);
 		int defaultDensity = BitmapScaleManager.ScaleWorker.DFLT_DENSITY;
 		densitySpinner = (Spinner)findViewById(R.id.shortcutIconDensity);
 		spinnerUtil.bind ( R.id.shortcutIconDensity, defaultDensity, SpinnerUtil.getBitmapDensity(), R.string.shortcutIconDensity);
@@ -108,6 +109,10 @@ public class ShortcutCreateDialog extends Dialog {
 		 */
 		previewCell = (ImageView)findViewById(R.id.shortcutIconPreview);
 		drawPreviewIcon();
+	}
+	
+	private void setLabel(int res, int title) {
+		((TextView)findViewById(res)).setText(context.getString(title)+":");
 	}
 	
 	private Bitmap getIcon() {

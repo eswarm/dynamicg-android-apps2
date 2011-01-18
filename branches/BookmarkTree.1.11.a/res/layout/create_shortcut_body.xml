@@ -15,10 +15,10 @@
 	    />
 	    
     <!-- ICON DENSITY -->
-    <TextView style="@style/EditBodyLabel" android:text="Image density:" /> <!-- TODO i18n -->
+    <TextView style="@style/EditBodyLabel" android:id="@+id/shortcutIconDensityLabel" />
     <Spinner 
         android:id="@+id/shortcutIconDensity"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="true"
     />
