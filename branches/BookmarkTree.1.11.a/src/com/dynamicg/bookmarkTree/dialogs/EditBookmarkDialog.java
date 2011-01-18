@@ -91,7 +91,7 @@ public class EditBookmarkDialog extends Dialog {
 		 */
 		if (!forCreateBookmark) {
 			TextView deleteTitle = (TextView)findViewById(R.id.editBookmarkDeleteText);
-			deleteTitle.setText(bookmark.isFolder() ? "Delete Folder" : "Delete Bookmark");
+			deleteTitle.setText(bookmark.isFolder() ? R.string.editLinkDeleteFolder : R.string.editLinkDeleteBookmark);
 			View deleteIcon = findViewById(R.id.editBookmarkDeleteIcon);
 			deleteIcon.setOnClickListener(new View.OnClickListener() {
 				@Override
