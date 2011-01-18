@@ -108,6 +108,7 @@ public class EditBookmarkDialog extends Dialog {
 		
 		/*
 		 * create shortcut
+		 * TODO - hide if folder
 		 */
 		findViewById(R.id.editCreateShortcut).setOnClickListener(new View.OnClickListener() {
 			@Override
