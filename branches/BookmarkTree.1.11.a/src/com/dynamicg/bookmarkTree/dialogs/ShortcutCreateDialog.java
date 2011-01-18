@@ -80,6 +80,9 @@ public class ShortcutCreateDialog extends Dialog {
 					@Override
 					public void colorSelected(int selectedColor) {
 						backgroundColor = selectedColor;
+						if (log.debugEnabled) {
+							log.debug("ColorPickerDialog.ColorSelectedListener");
+						}
 						drawPreviewIcon();
 					}
 				};
@@ -98,6 +101,9 @@ public class ShortcutCreateDialog extends Dialog {
 		densitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				if (log.debugEnabled) {
+					log.debug("densitySpinner.setOnItemSelected");
+				}
 				drawPreviewIcon();
 			}
 			@Override
@@ -127,7 +133,7 @@ public class ShortcutCreateDialog extends Dialog {
 
 	private void drawPreviewIcon() {
 		if (log.debugEnabled) {
-			log.debug("preview()");
+			log.debug("=== preview()");
 		}
 		previewCell.setImageBitmap(getIcon());
 	}

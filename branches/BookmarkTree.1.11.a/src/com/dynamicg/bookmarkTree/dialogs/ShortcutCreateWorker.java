@@ -12,9 +12,11 @@ import android.net.Uri;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.common.ContextUtil;
+import com.dynamicg.common.Logger;
 
 public class ShortcutCreateWorker {
-
+	
+	private static final Logger log = new Logger(ShortcutCreateWorker.class);
 	private static final String LAUNCH_ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
 	
 	private final Context context;
@@ -23,7 +25,7 @@ public class ShortcutCreateWorker {
 		this.context = context;
 	}
 	
-	public Bitmap getIcon(Bitmap favicon, int bgcolor, int targetDensity) {
+	public Bitmap getIcon(Bitmap originalFavicon, int bgcolor, int targetDensity) {
 		
 		// see http://developer.android.com/guide/topics/graphics/index.html
 		final int size = ContextUtil.getDimension(context, R.dimen.iconSize);
@@ -40,6 +42,8 @@ public class ShortcutCreateWorker {
 		canvas.drawRoundRect(rect, 6, 6, paint);
 		
 		// scale favicon
+		// => note we copy the icon first as we're going to overwrite the density
+		Bitmap favicon = originalFavicon.copy(originalFavicon.getConfig(), true);
 		int currentDensity = BitmapScaleManager.getDensity(favicon);
 		BitmapScaleManager.scale(favicon, targetDensity);
 		
@@ -47,8 +51,12 @@ public class ShortcutCreateWorker {
 		float densityPatch = (float)currentDensity / (float)targetDensity;
 		float xOffset = (size - favicon.getWidth()*densityPatch) / 2;
 		float yOffset = (size - favicon.getHeight()*densityPatch) / 2;
-//		System.err.println( "DENSITY-PATCH="+densityPatch);
-//		System.err.println( "OFFSETS="+xOffset+"/"+yOffset);
+		if (log.debugEnabled) {
+			log.debug("favicon width/height", favicon.getWidth(), favicon.getHeight());
+			log.debug("densityPatch", densityPatch);
+			log.debug("offset", xOffset, yOffset);
+		}
+
 		canvas.drawBitmap(favicon, xOffset, yOffset, null);
 		
 		return target;
