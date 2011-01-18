@@ -49,4 +49,8 @@ public class ContextUtil {
 		return (int) (size * DENSITY_SCALE) ;
 	}
 	
+	public static int getDimension(Context context, int id) {
+		return (int)context.getResources().getDimension(id);
+	}
+	
 }

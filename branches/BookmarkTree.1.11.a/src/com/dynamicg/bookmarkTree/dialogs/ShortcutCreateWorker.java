@@ -9,13 +9,13 @@ import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.net.Uri;
 
+import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.common.ContextUtil;
 
 public class ShortcutCreateWorker {
 
 	private static final String LAUNCH_ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
-	private static final int SIZE = 50;
 	
 	private final Context context;
 	
@@ -26,7 +26,7 @@ public class ShortcutCreateWorker {
 	public Bitmap getIcon(Bitmap favicon, int bgcolor, int targetDensity) {
 		
 		// see http://developer.android.com/guide/topics/graphics/index.html
-		final int size = ContextUtil.getScaledSizeInt(context,SIZE);
+		final int size = ContextUtil.getDimension(context, R.dimen.iconSize);
 		final Bitmap target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
 		final Canvas canvas = new Canvas();
 		
