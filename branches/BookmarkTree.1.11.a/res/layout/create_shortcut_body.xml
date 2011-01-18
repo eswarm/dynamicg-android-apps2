@@ -28,13 +28,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/shortcutBgColor"
-        android:text="Background color"
+        android:text="@string/shortcutBackgroundColor"
         android:layout_marginTop="10dip"
         android:layout_marginBottom="10dip"
-    /> <!-- TODO i18n -->
+    />
 
     <!-- PREVIEW -->
-    <TextView style="@style/EditBodyLabel" android:text="Preview:" /> <!-- TODO i18n -->
+    <TextView style="@style/EditBodyLabel" android:text="@string/shortcutPreviewLabel" />
 	<ImageView
         android:layout_width="50dip"
         android:layout_height="50dip"

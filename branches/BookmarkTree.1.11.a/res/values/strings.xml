@@ -71,5 +71,7 @@
 	<string name="titleColorPicker">Choose color (R/G/B)</string>
 
     <string name="shortcutIconDensity">Icon density</string>
+    <string name="shortcutPreviewLabel">Preview:</string>
+    <string name="shortcutBackgroundColor">Background color</string>
     
 </resources>
