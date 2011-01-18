@@ -4,37 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.net.Uri;
-import android.os.Parcelable;
 
 import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
-import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.common.ContextUtil;
 
-public class ShortcutCreator {
+public class ShortcutCreateWorker {
 
 	private static final String LAUNCH_ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
 	private static final int SIZE = 50;
 	
 	private final Context context;
-	private final Bookmark bookmark;
 	
-	public ShortcutCreator(Context context, Bookmark bookmark) {
+	public ShortcutCreateWorker(Context context) {
 		this.context = context;
-		this.bookmark = bookmark;
 	}
 	
-	private Parcelable getIcon(int bgcolor, int targetDensity) {
+	public Bitmap getIcon(Bitmap favicon, int bgcolor, int targetDensity) {
 		
 		// see http://developer.android.com/guide/topics/graphics/index.html
 		final int size = ContextUtil.getScaledSizeInt(context,SIZE);
 		final Bitmap target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-		
-		final Bitmap favicon = bookmark.getFavicon();
 		final Canvas canvas = new Canvas();
 		
 		canvas.setBitmap(target);
@@ -62,20 +55,13 @@ public class ShortcutCreator {
 		
 	}
 	
-	public void create() {
+	public void create(Bitmap icon, String title, String url) {
+		
 		/*
 		 * the actual shortcut action (i.e. open web link) 
 		 */
 		Intent shortcutIntent = new Intent(Intent.ACTION_VIEW);
-		shortcutIntent.setData(Uri.parse(bookmark.getUrl()));
-		
-		/*
-		 * shortcut items
-		 * TODO - pick these from dialog
-		 */
-		String title = bookmark.getDisplayTitle();
-		int density = 120;
-		int bgcolor = Color.rgb(127,127,127);
+		shortcutIntent.setData(Uri.parse(url));
 		
 		/*
 		 * shortcut creation intent
@@ -83,9 +69,10 @@ public class ShortcutCreator {
 		Intent intent = new Intent();
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, title);
-		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, getIcon(bgcolor,density) );
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, icon);
 		intent.setAction(LAUNCH_ACTION);
 		context.sendBroadcast(intent);
+		
 	}
 
 }

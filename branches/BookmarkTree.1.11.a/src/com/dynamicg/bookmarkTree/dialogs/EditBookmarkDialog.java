@@ -20,8 +20,8 @@ import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.FolderBean;
 import com.dynamicg.bookmarkTree.util.BookmarkUtil;
-import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
+import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
@@ -105,6 +105,16 @@ public class EditBookmarkDialog extends Dialog {
 			view.setVisibility(View.INVISIBLE);
 			view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,0));
 		}
+		
+		/*
+		 * create shortcut
+		 */
+		findViewById(R.id.editCreateShortcut).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				new ShortcutCreateDialog(ctx, bookmark);
+			}
+		});
 		
 	}
 
