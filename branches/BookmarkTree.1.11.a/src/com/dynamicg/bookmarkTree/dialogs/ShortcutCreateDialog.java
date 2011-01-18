@@ -59,6 +59,7 @@ public class ShortcutCreateDialog extends Dialog {
 				String title = titleCell.getText().toString();
 				String url = bookmark.getUrl();
 				shortcutCreateWorker.create(getIcon(), title, url);
+				dismiss();
 			}
 		};
 		
