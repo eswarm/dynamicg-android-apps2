@@ -24,12 +24,12 @@ import com.dynamicg.common.Logger;
 public class ShortcutCreateDialog extends Dialog {
 
 	private static final Logger log = new Logger(ShortcutCreateDialog.class);
-	
+
 	private final Context context;
 	private final Bookmark bookmark;
 	private final SpinnerUtil spinnerUtil;
 	private final ShortcutCreateWorker shortcutCreateWorker;
-	
+
 	private TextView titleCell;
 	private ImageView previewCell;
 	private Spinner densitySpinner;
@@ -41,18 +41,18 @@ public class ShortcutCreateDialog extends Dialog {
 		this.bookmark = bookmark;
 		this.spinnerUtil = new SpinnerUtil(this);
 		this.shortcutCreateWorker = new ShortcutCreateWorker(context);
-		
+
 		this.show();
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
-		
+
 		DialogHelper.expandContent(this, R.layout.create_shortcut_body);
 		setTitle(R.string.commonCreateShortcut);
-		
+
 		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_CREATE_CANCEL) {
 			@Override
 			public void onPositiveButton() {
@@ -62,13 +62,13 @@ public class ShortcutCreateDialog extends Dialog {
 				dismiss();
 			}
 		};
-		
+
 		/*
 		 * TITLE
 		 */
 		titleCell = (TextView)findViewById(R.id.shortcutTitle);
 		titleCell.setText(bookmark.getDisplayTitle());
-		
+
 		/*
 		 * COLOR PICKER
 		 */
@@ -86,7 +86,7 @@ public class ShortcutCreateDialog extends Dialog {
 				new ColorPickerDialog(context,backgroundColor,colorChangedListener);
 			}
 		});
-		
+
 		/*
 		 * DENSITY
 		 */
@@ -104,18 +104,18 @@ public class ShortcutCreateDialog extends Dialog {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		
+
 		/*
 		 * DONE
 		 */
 		previewCell = (ImageView)findViewById(R.id.shortcutIconPreview);
 		drawPreviewIcon();
 	}
-	
+
 	private void setLabel(int res, int title) {
 		((TextView)findViewById(res)).setText(context.getString(title)+":");
 	}
-	
+
 	private Bitmap getIcon() {
 		int color = this.backgroundColor;
 		int targetDensity = spinnerUtil.getCurrentValue(R.id.shortcutIconDensity);
@@ -124,12 +124,12 @@ public class ShortcutCreateDialog extends Dialog {
 		}
 		return shortcutCreateWorker.getIcon(bookmark.getFavicon(), color, targetDensity);
 	}
-	
+
 	private void drawPreviewIcon() {
 		if (log.debugEnabled) {
 			log.debug("preview()");
 		}
 		previewCell.setImageBitmap(getIcon());
 	}
-	
+
 }
