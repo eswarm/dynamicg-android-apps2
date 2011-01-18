@@ -10,7 +10,7 @@ public abstract class DialogButtonPanelWrapper {
 
 	public static final int TYPE_SAVE_CANCEL = 1;
 	public static final int TYPE_CLOSE = 2;
-	public static final int TYPE_CREATE_CANCEL = 3;
+	public static final int TYPE_CREATE_CANCEL = 3; // TODO - use this for "create new bookmark"
 	
 	private final Dialog dialog;
 	
