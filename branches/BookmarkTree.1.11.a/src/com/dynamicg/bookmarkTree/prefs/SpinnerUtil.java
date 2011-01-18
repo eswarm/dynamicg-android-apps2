@@ -82,8 +82,14 @@ public class SpinnerUtil {
 		public SpinnerItems(Context context) {
 			this.context = context;
 		}
-		public void add(int key, int title) {
-			list.add(new KeyValue(key,context.getString(title)));
+		public SpinnerItems() {
+			this.context = null;
+		}
+		public void add(int key, int titleRes) {
+			list.add(new KeyValue(key,context.getString(titleRes)));
+		}
+		public void add(int key, String title) {
+			list.add(new KeyValue(key,title));
 		}
 	}
 	
@@ -99,6 +105,14 @@ public class SpinnerUtil {
 		items.add ( PreferencesWrapper.SORT_ALPHA, R.string.domainSortAlphaOverall );
 		items.add ( PreferencesWrapper.SORT_FOLDERS_FIRST, R.string.domainSortFoldersFirst );
 		items.add ( PreferencesWrapper.SORT_BOOKMARKS_FIRST, R.string.domainSortBookmarksFirst );
+		return items.list;
+	}
+	
+	public static ArrayList<KeyValue> getBitmapDensity() {
+		SpinnerItems items = new SpinnerItems();
+		items.add ( 120, "120dpi" );
+		items.add ( 160, "160dpi" );
+		items.add ( 240, "240dpi" );
 		return items.list;
 	}
 	
