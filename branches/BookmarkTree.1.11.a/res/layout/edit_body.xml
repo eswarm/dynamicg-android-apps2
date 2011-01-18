@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
     android:orientation="vertical"
-    android:padding="@dimen/mainPadding"
+    android:paddingTop="0dip"
+    android:paddingLeft="@dimen/mainPadding"
+    android:paddingRight="@dimen/mainPadding"
+    android:paddingBottom="@dimen/mainPadding"
     >
     
     <!-- ruler to allow more width on landscape mode (otherwise we get trimmed down to the button panel width) -->
