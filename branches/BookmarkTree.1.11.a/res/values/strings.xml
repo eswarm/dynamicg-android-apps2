@@ -20,6 +20,8 @@
     <string name="commonDeleteBookmark">Delete bookmark</string>
     <string name="commonPleaseWait">Please wait ...</string>
     <string name="commonClose">Close</string>
+    <string name="commonCreate">Create</string>
+    <string name="commonCreateShortcut">Create shortcut</string>
     
     <string name="prefsHintRestart">\u2192 Restart app when changed.</string>
     <string name="prefsListStyle">List style:</string>
@@ -68,4 +70,6 @@
     <string name="hintReloaded">Reloaded {1} bookmarks</string>
 	<string name="titleColorPicker">Choose color (R/G/B)</string>
 
+    <string name="shortcutIconDensity">Icon density</string>
+    
 </resources>
