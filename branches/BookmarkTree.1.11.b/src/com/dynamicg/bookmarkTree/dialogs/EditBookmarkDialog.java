@@ -20,8 +20,8 @@ import com.dynamicg.bookmarkTree.model.Bookmark;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.FolderBean;
 import com.dynamicg.bookmarkTree.util.BookmarkUtil;
-import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
+import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
@@ -91,7 +91,7 @@ public class EditBookmarkDialog extends Dialog {
 		 */
 		if (!forCreateBookmark) {
 			TextView deleteTitle = (TextView)findViewById(R.id.editBookmarkDeleteText);
-			deleteTitle.setText(bookmark.isFolder() ? "Delete Folder" : "Delete Bookmark");
+			deleteTitle.setText(bookmark.isFolder() ? R.string.editLinkDeleteFolder : R.string.editLinkDeleteBookmark );
 			View deleteIcon = findViewById(R.id.editBookmarkDeleteIcon);
 			deleteIcon.setOnClickListener(new View.OnClickListener() {
 				@Override

@@ -16,8 +16,6 @@
     <string name="commonEditFolder">Edit folder</string>
     <string name="commonEditBookmark">Edit bookmark</string>
     <string name="commonNewBookmark">New bookmark</string>
-    <string name="commonDeleteFolder">Delete folder</string>
-    <string name="commonDeleteBookmark">Delete bookmark</string>
     <string name="commonPleaseWait">Please wait ...</string>
     <string name="commonClose">Close</string>
     
@@ -49,6 +47,8 @@
     <string name="editUrl">URL:</string>
     <string name="editParentFolder">Parent folder:</string>
     <string name="editAddToNewFolder">Add to new folder:</string>
+    <string name="editLinkDeleteFolder">Delete folder</string>
+    <string name="editLinkDeleteBookmark">Delete bookmark</string>
 
     <string name="actionDeleteBookmark">Delete this bookmark?</string>
     <string name="actionDeleteFolderOne">Delete this folder?</string>
