@@ -131,7 +131,7 @@ public class ShortcutCreateDialog extends Dialog {
 		int color = this.backgroundColor;
 		int targetDensity = spinnerUtil.getCurrentValue(R.id.shortcutIconDensity);
 		if (log.debugEnabled) {
-			log.debug("getIcon()", targetDensity, color);
+			log.debug("getIcon() - density/color", targetDensity, color);
 		}
 		return shortcutCreateWorker.getIcon(bookmark.getFavicon(), color, targetDensity);
 	}

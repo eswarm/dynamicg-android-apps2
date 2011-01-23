@@ -28,14 +28,14 @@ public class ShortcutCreateWorker {
 	public Bitmap getIcon(Bitmap originalFavicon, int bgcolor, int targetDensity) {
 		
 		// see http://developer.android.com/guide/topics/graphics/index.html
-		final int size = ContextUtil.getDimension(context, R.dimen.iconSize);
-		final Bitmap target = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+		final int shortcutIconSize = ContextUtil.getDimension(context, R.dimen.shortcutIconSize);
+		final Bitmap target = Bitmap.createBitmap(shortcutIconSize, shortcutIconSize, Bitmap.Config.ARGB_8888);
 		final Canvas canvas = new Canvas();
 		
 		canvas.setBitmap(target);
 		
 		// solid background
-		RectF rect = new RectF(0,0,size,size);
+		RectF rect = new RectF(0,0,shortcutIconSize,shortcutIconSize);
 		Paint paint = new Paint();
 		paint.setColor(bgcolor);
 		paint.setStyle(Style.FILL);
@@ -49,11 +49,13 @@ public class ShortcutCreateWorker {
 		
 		// draw centered
 		float densityPatch = (float)currentDensity / (float)targetDensity;
-		float xOffset = (size - favicon.getWidth()*densityPatch) / 2;
-		float yOffset = (size - favicon.getHeight()*densityPatch) / 2;
+		float xOffset = (shortcutIconSize - favicon.getWidth()*densityPatch) / 2;
+		float yOffset = (shortcutIconSize - favicon.getHeight()*densityPatch) / 2;
 		if (log.debugEnabled) {
-			log.debug("favicon width/height", favicon.getWidth(), favicon.getHeight());
+			log.debug("shortcutIconSize", shortcutIconSize);
+			log.debug("favicon original width/height", favicon.getWidth(), favicon.getHeight());
 			log.debug("densityPatch", densityPatch);
+			log.debug("favicon patched width/height", favicon.getWidth()*densityPatch, favicon.getHeight()*densityPatch );
 			log.debug("offset", xOffset, yOffset);
 		}
 

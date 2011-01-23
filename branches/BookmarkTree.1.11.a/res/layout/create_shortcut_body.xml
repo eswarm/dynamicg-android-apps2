@@ -36,8 +36,8 @@
     <!-- PREVIEW -->
     <TextView style="@style/EditBodyLabel" android:text="@string/shortcutPreviewLabel" />
 	<ImageView
-        android:layout_width="@dimen/iconSize"
-        android:layout_height="@dimen/iconSize"
+        android:layout_width="@dimen/shortcutIconSize"
+        android:layout_height="@dimen/shortcutIconSize"
         android:id="@+id/shortcutIconPreview"
         />
 
