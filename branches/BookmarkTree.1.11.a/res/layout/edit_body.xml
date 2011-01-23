@@ -76,6 +76,7 @@
 
     <!-- CREATE SHORTCUT -->
 	<LinearLayout
+        android:id="@+id/editBookmarkCreateShortcutPanel"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
@@ -83,13 +84,14 @@
 		android:layout_marginTop="20dip"
 	    >
 	    <TextView
-	        android:id="@+id/editCreateShortcut"
-	        android:text="@string/commonCreateShortcut"
+	        android:id="@+id/editCreateShortcutText"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginRight="10dip"
+	        android:text="@string/commonCreateShortcut"
 		    />
 	    <ImageView
+	        android:id="@+id/editCreateShortcutIcon"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_marginRight="5dip"

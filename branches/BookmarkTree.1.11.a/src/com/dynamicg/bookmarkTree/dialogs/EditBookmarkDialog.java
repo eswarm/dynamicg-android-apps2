@@ -89,36 +89,48 @@ public class EditBookmarkDialog extends Dialog {
 		/*
 		 * delete
 		 */
-		if (!forCreateBookmark) {
-			TextView deleteTitle = (TextView)findViewById(R.id.editBookmarkDeleteText);
-			deleteTitle.setText(bookmark.isFolder() ? R.string.editLinkDeleteFolder : R.string.editLinkDeleteBookmark);
+		if (forCreateBookmark) {
+			removePanel(R.id.editBookmarkDeletePanel);
+		}
+		else {
+			TextView deleteLabel = (TextView)findViewById(R.id.editBookmarkDeleteText);
 			View deleteIcon = findViewById(R.id.editBookmarkDeleteIcon);
-			deleteIcon.setOnClickListener(new View.OnClickListener() {
+			deleteLabel.setText(bookmark.isFolder() ? R.string.editLinkDeleteFolder : R.string.editLinkDeleteBookmark);
+			View.OnClickListener deleteAction = (new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					deleteConfirmation();
 				}
 			});
-		}
-		else {
-			View view = findViewById(R.id.editBookmarkDeletePanel);
-			view.setVisibility(View.INVISIBLE);
-			view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,0));
+			deleteIcon.setOnClickListener(deleteAction);
+			deleteLabel.setOnClickListener(deleteAction);
 		}
 		
 		/*
 		 * create shortcut
-		 * TODO - hide if folder
 		 */
-		findViewById(R.id.editCreateShortcut).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new ShortcutCreateDialog(ctx, bookmark);
-			}
-		});
+		if (forCreateBookmark || bookmark.isFolder()) {
+			removePanel(R.id.editBookmarkCreateShortcutPanel);			
+		}
+		else {
+			View.OnClickListener action = new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					new ShortcutCreateDialog(ctx, bookmark);
+				}
+			};
+			findViewById(R.id.editCreateShortcutIcon).setOnClickListener(action);
+			findViewById(R.id.editCreateShortcutText).setOnClickListener(action);
+		}
 		
 	}
 
+	private void removePanel(int id) {
+		View view = findViewById(id);
+		view.setVisibility(View.INVISIBLE);
+		view.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT,0));
+	}
+	
 	private void prepareParentFolderSpinner(final Bookmark bookmark) {
 
 		/*
