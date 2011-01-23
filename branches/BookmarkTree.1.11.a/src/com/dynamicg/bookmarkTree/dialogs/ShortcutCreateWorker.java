@@ -18,6 +18,7 @@ public class ShortcutCreateWorker {
 	
 	private static final Logger log = new Logger(ShortcutCreateWorker.class);
 	private static final String LAUNCH_ACTION = "com.android.launcher.action.INSTALL_SHORTCUT";
+	private static final int CORNER_DIM = 8;
 	
 	private final Context context;
 	
@@ -39,7 +40,9 @@ public class ShortcutCreateWorker {
 		Paint paint = new Paint();
 		paint.setColor(bgcolor);
 		paint.setStyle(Style.FILL);
-		canvas.drawRoundRect(rect, 6, 6, paint);
+		
+		int roundedCorner = ContextUtil.getScaledSizeInt(context, CORNER_DIM);
+		canvas.drawRoundRect(rect, roundedCorner, roundedCorner, paint);
 		
 		// scale favicon
 		// => note we copy the icon first as we're going to overwrite the density
