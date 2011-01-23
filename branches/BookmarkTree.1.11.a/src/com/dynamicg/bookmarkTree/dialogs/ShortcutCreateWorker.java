@@ -46,6 +46,7 @@ public class ShortcutCreateWorker {
 		
 		// scale favicon
 		// => note we copy the icon first as we're going to overwrite the density
+		// TODO - catch NPE if originalFavicon is null
 		Bitmap favicon = originalFavicon.copy(originalFavicon.getConfig(), true);
 		int currentDensity = BitmapScaleManager.getDensity(favicon);
 		BitmapScaleManager.scale(favicon, targetDensity);
