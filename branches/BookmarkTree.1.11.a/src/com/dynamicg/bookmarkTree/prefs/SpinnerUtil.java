@@ -113,6 +113,7 @@ public class SpinnerUtil {
 		items.add ( 120, "120dpi" );
 		items.add ( 160, "160dpi" );
 		items.add ( 240, "240dpi" );
+		items.add ( 320, "320dpi" );
 		return items.list;
 	}
 	
