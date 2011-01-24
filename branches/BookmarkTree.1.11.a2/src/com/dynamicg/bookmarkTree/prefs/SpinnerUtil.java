@@ -93,10 +93,11 @@ public class SpinnerUtil {
 		}
 	}
 	
-	public static ArrayList<KeyValue> getListStyleItems(Context context) {
+	public static ArrayList<KeyValue> getListSizeItems(Context context) {
 		SpinnerItems items = new SpinnerItems(context);
-		items.add ( PreferencesWrapper.LIST_STYLE_CLASSIC, R.string.domainStyleClassic );
-		items.add ( PreferencesWrapper.LIST_STYLE_COMPACT, R.string.domainStyleCompact );
+		items.add ( PreferencesWrapper.LIST_SIZE_LARGE, R.string.domainListSizeLarge);
+		items.add ( PreferencesWrapper.LIST_SIZE_MEDIUM, R.string.domainListSizeMedium );
+		items.add ( PreferencesWrapper.LIST_SIZE_SMALL, R.string.domainListSizeSmall );
 		return items.list;
 	}
 	
