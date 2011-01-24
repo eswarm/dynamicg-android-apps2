@@ -102,7 +102,7 @@ public class PreferencesDialog extends Dialog {
 		bindCheckbox(R.id.prefsSortCaseInsensitive, PreferencesWrapper.sortCaseInsensitive);
 		
 		// bind spinners
-		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listSize, SpinnerUtil.getListSizeItems(context), R.string.prefsListStyle );
+		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListSizeItems(context), R.string.prefsListStyle );
 		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(context), R.string.prefsSortLabel );
 		
 		// color items
@@ -251,7 +251,7 @@ public class PreferencesDialog extends Dialog {
 	private void saveMain() {
 		
 		boolean toastForReopen =
-			PreferencesWrapper.listSize.value != spinnerUtil.getCurrentValue(R.id.prefsListStyle)
+			PreferencesWrapper.listStyle.value != spinnerUtil.getCurrentValue(R.id.prefsListStyle)
 			|| PreferencesWrapper.optimisedLayout.isOn() != optimiseLayout.isChecked()
 			|| PreferencesWrapper.scaleIcons.isOn() != scaleIconsCheckbox.isChecked()
 			;

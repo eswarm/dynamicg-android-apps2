@@ -95,9 +95,9 @@ public class SpinnerUtil {
 	
 	public static ArrayList<KeyValue> getListSizeItems(Context context) {
 		SpinnerItems items = new SpinnerItems(context);
-		items.add ( PreferencesWrapper.LIST_SIZE_LARGE, R.string.domainListSizeLarge);
-		items.add ( PreferencesWrapper.LIST_SIZE_MEDIUM, R.string.domainListSizeMedium );
-		items.add ( PreferencesWrapper.LIST_SIZE_SMALL, R.string.domainListSizeSmall );
+		items.add ( PreferencesWrapper.LIST_SIZE_LARGE, R.string.domainListStyleLarge);
+		items.add ( PreferencesWrapper.LIST_SIZE_MEDIUM, R.string.domainListStyleMedium );
+		items.add ( PreferencesWrapper.LIST_SIZE_SMALL, R.string.domainListStyleSmall );
 		return items.list;
 	}
 	

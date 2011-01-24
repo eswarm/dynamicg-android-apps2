@@ -27,8 +27,8 @@ public abstract class RowViewProvider {
 
 	public RowViewProvider(LayoutInflater inflater) {
 		this.inflater = inflater;
-		this.listSizeMedium = PreferencesWrapper.isListSizeMedium();
-		this.listSizeSmall = PreferencesWrapper.isListSizeSmall();
+		this.listSizeMedium = PreferencesWrapper.isListStyleMedium();
+		this.listSizeSmall = PreferencesWrapper.isListStyleSmall();
 		this.compact = listSizeMedium || listSizeSmall;
 		beforeRedraw();
 		
