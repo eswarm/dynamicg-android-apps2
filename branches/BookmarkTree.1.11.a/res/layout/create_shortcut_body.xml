@@ -34,13 +34,19 @@
     />
 
     <!-- PREVIEW -->
-    <TextView style="@style/EditBodyLabel" android:text="@string/shortcutPreviewLabel" />
+    <TextView style="@style/EditBodyLabel" android:text="@string/shortcutIconPreviewLabel" />
 	<ImageView
         android:layout_width="@dimen/shortcutIconSize"
         android:layout_height="@dimen/shortcutIconSize"
         android:id="@+id/shortcutIconPreview"
         />
 
+	<!-- ====================== Hint ====================== -->
+    <TextView style="@style/PrefsHint"
+    	android:text="\u2192 This function is Beta. Icon scaling does not work with 1.5 devices." 
+    	android:layout_marginTop="5dip"
+    	/>
+    
 	<!-- ====================== done ====================== -->
 	<View
 	    android:layout_height="5dip"

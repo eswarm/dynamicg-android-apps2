@@ -71,7 +71,7 @@
 	<string name="titleColorPicker">Choose color (R/G/B)</string>
 
     <string name="shortcutIconScale">Icon scaling</string>
-    <string name="shortcutPreviewLabel">Preview:</string>
+    <string name="shortcutIconPreviewLabel">Icon preview:</string>
     <string name="shortcutBackgroundColor">Background color</string>
     
 </resources>
