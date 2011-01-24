@@ -83,10 +83,10 @@ public abstract class RowViewProvider {
 		public View getView(Bookmark bm, View convertView, ViewGroup parent) {
 	        int resid;
 	        if (listStyleMedium) {
-	        	resid = R.layout.list_row_size_medium;
+	        	resid = R.layout.list_row_style_medium;
 	        }
 	        else if (listStyleSmall) {
-	        	resid = R.layout.list_row_size_small;
+	        	resid = R.layout.list_row_style_small;
 	        }
 	        else {
 	        	resid = bm.isFolder() ? R.layout.list15_row_folder : R.layout.list15_row_bookmark;
@@ -111,8 +111,8 @@ public abstract class RowViewProvider {
 
 		public ProviderModern(LayoutInflater inflater) {
 			super(inflater);
-			this.layoutId = listStyleMedium ? R.layout.list_row_size_medium
-					: listStyleSmall ? R.layout.list_row_size_small
+			this.layoutId = listStyleMedium ? R.layout.list_row_style_medium
+					: listStyleSmall ? R.layout.list_row_style_small
 							: R.layout.list20_row_relative;
 		}
 
