@@ -110,10 +110,11 @@ public class SpinnerUtil {
 	
 	public static ArrayList<KeyValue> getBitmapDensity() {
 		SpinnerItems items = new SpinnerItems();
-		items.add ( 120, "120dpi" );
-		items.add ( 160, "160dpi" );
-		items.add ( 240, "240dpi" );
-		items.add ( 320, "320dpi" );
+		items.add (  80, "2.0x (80dpi)" );
+		items.add ( 120, "1.5x (120dpi)" );
+		items.add ( 160, "Default (160dpi)" );
+		items.add ( 240, "0.75x (240dpi)" );
+		items.add ( 320, "0.5x (320dpi)" );
 		return items.list;
 	}
 	
