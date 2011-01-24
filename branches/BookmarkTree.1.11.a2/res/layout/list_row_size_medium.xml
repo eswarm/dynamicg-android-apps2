@@ -24,7 +24,7 @@
         android:layout_marginBottom="2dip"
         />
         
-    <TextView style="@style/TitleTextCompact"
+    <TextView style="@style/TitleTextSizeMedium"
         android:id="@+id/bmTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
