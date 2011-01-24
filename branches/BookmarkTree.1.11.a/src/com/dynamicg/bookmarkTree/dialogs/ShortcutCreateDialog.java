@@ -29,14 +29,16 @@ public class ShortcutCreateDialog extends Dialog {
 	private final Bookmark bookmark;
 	private final SpinnerUtil spinnerUtil;
 	private final ShortcutCreateWorker shortcutCreateWorker;
+	private final Dialog opener;
 
 	private TextView titleCell;
 	private ImageView previewCell;
 	private Spinner densitySpinner;
 	private int backgroundColor = Color.WHITE;
 
-	public ShortcutCreateDialog(BookmarkTreeContext ctx, Bookmark bookmark) {
+	public ShortcutCreateDialog(Dialog opener, BookmarkTreeContext ctx, Bookmark bookmark) {
 		super(ctx.activity);
+		this.opener = opener;
 		this.context = getContext();
 		this.bookmark = bookmark;
 		this.spinnerUtil = new SpinnerUtil(this);
@@ -59,7 +61,9 @@ public class ShortcutCreateDialog extends Dialog {
 				String title = titleCell.getText().toString();
 				String url = bookmark.getUrl();
 				shortcutCreateWorker.create(getIcon(), title, url);
+				// close window and opener (which is "edit dialog")
 				dismiss();
+				opener.dismiss();
 			}
 		};
 

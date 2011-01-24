@@ -117,7 +117,7 @@ public class EditBookmarkDialog extends Dialog {
 			View.OnClickListener action = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					new ShortcutCreateDialog(ctx, bookmark);
+					new ShortcutCreateDialog(EditBookmarkDialog.this, ctx, bookmark);
 				}
 			};
 			findViewById(R.id.editCreateShortcutIcon).setOnClickListener(action);
