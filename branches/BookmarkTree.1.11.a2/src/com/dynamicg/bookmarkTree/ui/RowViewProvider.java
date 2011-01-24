@@ -19,17 +19,17 @@ public abstract class RowViewProvider {
 	private static final int childLevelIndention = 32;
 	
 	public final LayoutInflater inflater;
-	public final boolean listSizeMedium;
-	public final boolean listSizeSmall;
+	public final boolean listStyleMedium;
+	public final boolean listStyleSmall;
 	public final boolean compact;
 	
 	public boolean applyTextColors;
 
 	public RowViewProvider(LayoutInflater inflater) {
 		this.inflater = inflater;
-		this.listSizeMedium = PreferencesWrapper.isListStyleMedium();
-		this.listSizeSmall = PreferencesWrapper.isListStyleSmall();
-		this.compact = listSizeMedium || listSizeSmall;
+		this.listStyleMedium = PreferencesWrapper.isListStyleMedium();
+		this.listStyleSmall = PreferencesWrapper.isListStyleSmall();
+		this.compact = listStyleMedium || listStyleSmall;
 		beforeRedraw();
 		
 		if (log.debugEnabled) {
@@ -82,10 +82,10 @@ public abstract class RowViewProvider {
 		@Override
 		public View getView(Bookmark bm, View convertView, ViewGroup parent) {
 	        int resid;
-	        if (listSizeMedium) {
+	        if (listStyleMedium) {
 	        	resid = R.layout.list_row_size_medium;
 	        }
-	        else if (listSizeSmall) {
+	        else if (listStyleSmall) {
 	        	resid = R.layout.list_row_size_small;
 	        }
 	        else {
@@ -111,8 +111,8 @@ public abstract class RowViewProvider {
 
 		public ProviderModern(LayoutInflater inflater) {
 			super(inflater);
-			this.layoutId = listSizeMedium ? R.layout.list_row_size_medium
-					: listSizeSmall ? R.layout.list_row_size_small
+			this.layoutId = listStyleMedium ? R.layout.list_row_size_medium
+					: listStyleSmall ? R.layout.list_row_size_small
 							: R.layout.list20_row_relative;
 		}
 
