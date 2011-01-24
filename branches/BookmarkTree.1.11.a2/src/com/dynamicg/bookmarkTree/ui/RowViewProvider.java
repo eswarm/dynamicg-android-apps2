@@ -19,17 +19,17 @@ public abstract class RowViewProvider {
 	private static final int childLevelIndention = 32;
 	
 	public final LayoutInflater inflater;
-	public final boolean listStyleMedium;
-	public final boolean listStyleSmall;
+	public final boolean listSizeMedium;
+	public final boolean listSizeSmall;
 	public final boolean compact;
 	
 	public boolean applyTextColors;
 
 	public RowViewProvider(LayoutInflater inflater) {
 		this.inflater = inflater;
-		this.listStyleMedium = PreferencesWrapper.isListSizeMedium();
-		this.listStyleSmall = PreferencesWrapper.isListSizeSmall();
-		this.compact = listStyleMedium || listStyleSmall;
+		this.listSizeMedium = PreferencesWrapper.isListSizeMedium();
+		this.listSizeSmall = PreferencesWrapper.isListSizeSmall();
+		this.compact = listSizeMedium || listSizeSmall;
 		beforeRedraw();
 		
 		if (log.debugEnabled) {
@@ -82,8 +82,11 @@ public abstract class RowViewProvider {
 		@Override
 		public View getView(Bookmark bm, View convertView, ViewGroup parent) {
 	        int resid;
-	        if (compact) {
-	        	resid = R.layout.list_row_compact;
+	        if (listSizeMedium) {
+	        	resid = R.layout.list_row_size_medium;
+	        }
+	        else if (listSizeSmall) {
+	        	resid = R.layout.list_row_size_small;
 	        }
 	        else {
 	        	resid = bm.isFolder() ? R.layout.list15_row_folder : R.layout.list15_row_bookmark;
@@ -108,9 +111,11 @@ public abstract class RowViewProvider {
 
 		public ProviderModern(LayoutInflater inflater) {
 			super(inflater);
-			this.layoutId = compact ? R.layout.list_row_compact : R.layout.list20_row_relative;
+			this.layoutId = listSizeMedium ? R.layout.list_row_size_medium
+					: listSizeSmall ? R.layout.list_row_size_small
+							: R.layout.list20_row_relative;
 		}
-		
+
 		private void prepare(ViewHolder holder, Bookmark bm) {
 			
 			holder.titleCell.setText(bm.getDisplayTitle());
