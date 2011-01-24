@@ -44,9 +44,15 @@ public class ShortcutCreateWorker {
 		int roundedCorner = ContextUtil.getScaledSizeInt(context, CORNER_DIM);
 		canvas.drawRoundRect(rect, roundedCorner, roundedCorner, paint);
 		
+		if (originalFavicon==null) {
+			// prevent NPE
+			return target;
+		}
+		
 		// scale favicon
 		// => note we copy the icon first as we're going to overwrite the density
-		// TODO - catch NPE if originalFavicon is null
+		// TODO - close edit dialog after "create shortcut"
+		
 		Bitmap favicon = originalFavicon.copy(originalFavicon.getConfig(), true);
 		int currentDensity = BitmapScaleManager.getDensity(favicon);
 		BitmapScaleManager.scale(favicon, targetDensity);
