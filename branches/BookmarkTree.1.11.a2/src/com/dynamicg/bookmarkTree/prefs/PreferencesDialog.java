@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -118,8 +120,33 @@ public class PreferencesDialog extends Dialog {
 			}
 		};
 		
+		setLinks();
+		
 		// see http://devstream.stefanklumpp.com/2010/07/android-display-dialogs-in-fullscreen.html
 		getWindow().setLayout( (int)this.dialogWidth, LayoutParams.FILL_PARENT);
+	}
+	
+	private void setLinks() {
+		
+		View.OnClickListener openMarket = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String url = "market://details?id=com.dynamicg.bookmarkTree";
+				Intent i = new Intent(Intent.ACTION_VIEW);
+				i.setData(Uri.parse(url));
+				context.startActivity(i);
+			}
+		};
+		TextView linkNode = (TextView)findViewById(R.id.prefsLinkToMarket);
+		linkNode.setOnClickListener(openMarket);
+		
+		findViewById(R.id.prefsLinkAbout).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				AboutDialog.show(ctx);
+			}
+		});
+		
 	}
 	
 	private void setupSeparatorItem() {
