@@ -10,17 +10,27 @@ import android.widget.TextView;
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
+import com.dynamicg.common.Logger;
 import com.dynamicg.common.SimpleAlertDialog;
 
 public abstract class PlainBookmarksDump {
 
+	private static final Logger log = new Logger(PlainBookmarksDump.class);
+	
 	public static void show(final BookmarkTreeContext ctx) {
 		ctx.reloadAndRefresh(); // so that the gui is really in sync with what we display here
 		final ArrayList<RawDataBean> rows = BrowserBookmarkLoader.forInternalOps(ctx);
 		
 		final StringBuffer sb = new StringBuffer();
+		String line;
 		for (RawDataBean row:rows) {
-			sb.append(row.fullTitle + "\n" );
+			if (log.debugEnabled) {
+				line = row.fullTitle + " ["+ (row.created/1000) +"]" + "\n";
+			}
+			else {
+				line = row.fullTitle + "\n";
+			}
+			sb.append(line);
 		}
 		
 		new SimpleAlertDialog(ctx.activity, "Browser Bookmarks", "Close") {
