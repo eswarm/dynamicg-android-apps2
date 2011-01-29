@@ -25,7 +25,7 @@ public abstract class PlainBookmarksDump {
 		String line;
 		for (RawDataBean row:rows) {
 			if (log.debugEnabled) {
-				line = row.fullTitle + " ["+ (row.created/1000) +"]" + "\n";
+				line = row.fullTitle + " ["+ (row.created/1000l/1000l) +"]" + "\n";
 			}
 			else {
 				line = row.fullTitle + "\n";
