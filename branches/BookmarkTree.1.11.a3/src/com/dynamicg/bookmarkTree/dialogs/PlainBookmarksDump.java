@@ -22,10 +22,15 @@ public abstract class PlainBookmarksDump {
 		final ArrayList<RawDataBean> rows = BrowserBookmarkLoader.forInternalOps(ctx);
 		
 		final StringBuffer sb = new StringBuffer();
+		final long div = 1000l * 1000l;
 		String line;
 		for (RawDataBean row:rows) {
 			if (log.debugEnabled) {
-				line = row.fullTitle + " ["+ (row.created/1000l/1000l) +"]" + "\n";
+				line =
+					row.fullTitle 
+					+ " ["+ (row.created/div) +"]" 
+					+ " ["+ (row.visits/div) +"]" 
+					+ "\n";
 			}
 			else {
 				line = row.fullTitle + "\n";

@@ -86,6 +86,7 @@ public class BrowserBookmarkLoader {
 				bean.fullTitle = nvl(crs.getString(2));
 				bean.url = nvl(crs.getString(3));
 				bean.favicon = crs.getBlob(4);
+				bean.visits = crs.getLong(5);
 				
 				rows.add(bean);
 				if (log.traceEnabled) {

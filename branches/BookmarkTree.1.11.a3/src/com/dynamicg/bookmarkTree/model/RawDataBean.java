@@ -6,4 +6,5 @@ public class RawDataBean {
 	public String fullTitle;
 	public String url;
 	public byte[] favicon;
+	public long visits;
 }
