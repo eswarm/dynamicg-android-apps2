@@ -50,6 +50,7 @@ public class ColorPickerDialog extends Dialog {
 		this.colorSelectedListener = colorSelectedListener;
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		maximizeWindowWidth();
 		
 		paddingLayout = ContextUtil.getScaledSizeInt(context, 10);
 		
@@ -71,9 +72,11 @@ public class ColorPickerDialog extends Dialog {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
+		LayoutParams layoutParams = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
+		
 		LinearLayout layout = new LinearLayout(context);
 		layout.setOrientation(LinearLayout.VERTICAL);
-		layout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		layout.setLayoutParams(layoutParams);
 		layout.setPadding(paddingLayout,paddingLayout,paddingLayout,paddingLayout);
 		layout.setBackgroundColor(Color.BLACK);
 		
@@ -108,6 +111,13 @@ public class ColorPickerDialog extends Dialog {
 		scrollView.addView(layout);
 		this.setContentView(scrollView);
 		
+		// maximize window width
+		//LayoutUtil.maximizeDialog(this);
+		maximizeWindowWidth();
+	}
+	
+	private void maximizeWindowWidth() {
+		getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
 	}
 	
 	private int getSelectedColor() {
