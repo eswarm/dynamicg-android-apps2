@@ -3,6 +3,7 @@ package com.dynamicg.bookmarkTree.dialogs;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -76,9 +77,9 @@ public class ColorPickerDialog extends Dialog {
 		titleCell.setTextSize(22);
 		layout.addView(titleCell);
 
-		layout.addView ( createBar(colorPickerRed) );
-		layout.addView ( createBar(colorPickerGreen) );
-		layout.addView ( createBar(colorPickerBlue) );
+		layout.addView ( createBar(colorPickerRed, R.drawable.progress_bg_red) );
+		layout.addView ( createBar(colorPickerGreen, R.drawable.progress_bg_green) );
+		layout.addView ( createBar(colorPickerBlue, R.drawable.progress_bg_blue) );
 		
 		TextView margin = new TextView(context);
 		margin.setHeight(paddingSeekbarTop);
@@ -116,12 +117,18 @@ public class ColorPickerDialog extends Dialog {
 		titleCell.setTextColor(getSelectedColor());
 	}
 	
-	private SeekBar createBar(final IntHolder target) {
+	private Drawable getBackground(int res) {
+		return context.getResources().getDrawable(res);
+	}
+	
+	private SeekBar createBar(final IntHolder target, int background) {
 		
 		SeekBar slider = new SeekBar(context);
 		slider.setMax(255);
 		slider.setProgress(target.value);
 		slider.setPadding(paddingSeekbarLR, paddingSeekbarTop, paddingSeekbarLR, 0);
+		
+		slider.setProgressDrawable(getBackground(background));
 		
 		slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			private void update(SeekBar seekBar) {
