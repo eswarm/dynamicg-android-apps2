@@ -63,7 +63,6 @@
     	android:id="@+id/prefsLinkAbout"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="\u2192 About"
 	    android:layout_marginTop="15dip"
 	    android:focusable="true"
 	    />
@@ -72,7 +71,6 @@
     	android:id="@+id/prefsLinkToMarket"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="\u2192 Link to Android Market - please rate"
 	    android:layout_marginTop="15dip"
 	    android:focusable="true"
 	    />

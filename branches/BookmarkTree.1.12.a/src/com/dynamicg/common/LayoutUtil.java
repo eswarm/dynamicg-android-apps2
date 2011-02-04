@@ -1,5 +1,6 @@
 package com.dynamicg.common;
 
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.widget.TextView;
@@ -17,4 +18,13 @@ public class LayoutUtil {
 //		dialog.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 //	}
 
+	public static void indentedFocusable(TextView node, String prefix, String text) {
+		String fulltext = prefix+text;
+		node.setFocusable(true);
+		//node.setTextColor(ResourcesWrapper.getColorStateList(R.color.selector_selectable_text));
+		SpannableString str = new SpannableString(fulltext);
+		str.setSpan(new UnderlineSpan(), prefix.length(), fulltext.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		node.setText(str,TextView.BufferType.SPANNABLE);
+	}
+	
 }
