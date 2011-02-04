@@ -25,6 +25,7 @@ public class ColorPickerDialog extends Dialog {
 	
 	private final int paddingLayout;
 	private final int paddingSeekbarTop;
+	private final int paddingSeekbarBottom;
 	private final int paddingSeekbarLR;
 	
 	private TextView titleCell;
@@ -49,7 +50,9 @@ public class ColorPickerDialog extends Dialog {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		paddingLayout = ContextUtil.getScaledSizeInt(context, 10);
-		paddingSeekbarTop = ContextUtil.getScaledSizeInt(context, 30);
+		
+		paddingSeekbarTop = ContextUtil.getScaledSizeInt(context, 10);
+		paddingSeekbarBottom = ContextUtil.getScaledSizeInt(context, 30);
 		paddingSeekbarLR = ContextUtil.getScaledSizeInt(context, 15);
 		
 		initColor(color);
@@ -81,9 +84,9 @@ public class ColorPickerDialog extends Dialog {
 		layout.addView ( createBar(colorPickerGreen, R.drawable.progress_bg_green) );
 		layout.addView ( createBar(colorPickerBlue, R.drawable.progress_bg_blue) );
 		
-		TextView margin = new TextView(context);
-		margin.setHeight(paddingSeekbarTop);
-		layout.addView(margin);
+//		TextView margin = new TextView(context);
+//		margin.setHeight(paddingSeekbarTop);
+//		layout.addView(margin);
 		
 		Button btSave = new Button(context);
 		btSave.setText(R.string.commonOK);
@@ -126,9 +129,7 @@ public class ColorPickerDialog extends Dialog {
 		SeekBar slider = new SeekBar(context);
 		slider.setMax(255);
 		slider.setProgress(target.value);
-		slider.setPadding(paddingSeekbarLR, paddingSeekbarTop, paddingSeekbarLR, 0);
-		
-		slider.setProgressDrawable(getBackground(background));
+		slider.setPadding(paddingSeekbarLR, paddingSeekbarTop, paddingSeekbarLR, paddingSeekbarBottom);
 		
 		slider.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			private void update(SeekBar seekBar) {
@@ -147,6 +148,8 @@ public class ColorPickerDialog extends Dialog {
 				update(seekBar);
 			}
 		});
+		
+		slider.setProgressDrawable(getBackground(background));
 		
 		return slider;
 	}
