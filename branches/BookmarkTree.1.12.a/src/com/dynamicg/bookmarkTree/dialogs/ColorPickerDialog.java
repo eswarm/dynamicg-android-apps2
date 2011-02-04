@@ -20,6 +20,8 @@ import com.dynamicg.common.ContextUtil;
 
 public class ColorPickerDialog extends Dialog {
 
+	private static final int TEXTSIZE = 22;
+	
 	private final Context context;
 	private final ColorSelectedListener colorSelectedListener;
 	
@@ -77,16 +79,12 @@ public class ColorPickerDialog extends Dialog {
 		
 		this.titleCell = new TextView(context);
 		titleCell.setText(R.string.titleColorPicker);
-		titleCell.setTextSize(22);
+		titleCell.setTextSize(TEXTSIZE);
 		layout.addView(titleCell);
 
 		layout.addView ( createBar(colorPickerRed, R.drawable.progress_bg_red) );
 		layout.addView ( createBar(colorPickerGreen, R.drawable.progress_bg_green) );
 		layout.addView ( createBar(colorPickerBlue, R.drawable.progress_bg_blue) );
-		
-//		TextView margin = new TextView(context);
-//		margin.setHeight(paddingSeekbarTop);
-//		layout.addView(margin);
 		
 		Button btSave = new Button(context);
 		btSave.setText(R.string.commonOK);
@@ -127,6 +125,8 @@ public class ColorPickerDialog extends Dialog {
 	private SeekBar createBar(final IntHolder target, int background) {
 		
 		SeekBar slider = new SeekBar(context);
+		slider.setProgressDrawable(getBackground(background));
+		
 		slider.setMax(255);
 		slider.setProgress(target.value);
 		slider.setPadding(paddingSeekbarLR, paddingSeekbarTop, paddingSeekbarLR, paddingSeekbarBottom);
@@ -148,8 +148,6 @@ public class ColorPickerDialog extends Dialog {
 				update(seekBar);
 			}
 		});
-		
-		slider.setProgressDrawable(getBackground(background));
 		
 		return slider;
 	}
