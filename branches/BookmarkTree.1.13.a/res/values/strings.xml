@@ -26,7 +26,6 @@
     <string name="prefsListStyle">List style:</string>
     <string name="prefsSortLabel">Sort:</string>
     <string name="prefsKeepState">Keep folder state on app close</string>
-    <string name="prefsOptimiseHint">\u2192 Disable if layout broken. Restart when changed.</string>
     <string name="prefsSortAZ">Sort bookmarks A-Z</string>
     <string name="prefsSeparator">Internal folder separator:</string>
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>

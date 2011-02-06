@@ -78,7 +78,7 @@
 	    android:text="@string/prefsScaleIcons"
 	    />
    	<TextView style="@style/PrefsHint" 
-   		android:text="@string/prefsOptimiseHint"
+   		android:text="@string/prefsHintRestart"
    		/>
 	    
 	<!-- ====================== done ====================== -->
