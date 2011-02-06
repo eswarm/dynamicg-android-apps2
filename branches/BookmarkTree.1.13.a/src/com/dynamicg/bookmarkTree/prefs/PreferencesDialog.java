@@ -55,7 +55,6 @@ public class PreferencesDialog extends Dialog {
 
 	private EditText separatorItem;
 	private CheckBox doFullUpdateCheckbox;
-	private CheckBox optimiseLayout;
 	private CheckBox scaleIconsCheckbox;
 
 	private boolean dataRefreshRequired;
@@ -95,7 +94,6 @@ public class PreferencesDialog extends Dialog {
 		checkForChangedSeparator(); // inactivate intially
 		
 		// bind checkboxes
-		optimiseLayout = bindCheckbox(R.id.prefsOptimiseLayout, PreferencesWrapper.optimisedLayout);
 		scaleIconsCheckbox = bindCheckbox(R.id.prefsScaleIcons, PreferencesWrapper.scaleIcons);
 		bindCheckbox(R.id.prefsKeepState, PreferencesWrapper.keepState);
 		bindCheckbox(R.id.prefsSortCaseInsensitive, PreferencesWrapper.sortCaseInsensitive);
@@ -280,7 +278,6 @@ public class PreferencesDialog extends Dialog {
 		
 		boolean toastForReopen =
 			PreferencesWrapper.listStyle.value != spinnerUtil.getCurrentValue(R.id.prefsListStyle)
-			|| PreferencesWrapper.optimisedLayout.isOn() != optimiseLayout.isChecked()
 			|| PreferencesWrapper.scaleIcons.isOn() != scaleIconsCheckbox.isChecked()
 			;
 		
