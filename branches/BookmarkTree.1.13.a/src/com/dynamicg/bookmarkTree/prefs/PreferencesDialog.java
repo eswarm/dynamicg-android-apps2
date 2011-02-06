@@ -8,10 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.StyleSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -201,7 +205,7 @@ public class PreferencesDialog extends Dialog {
 		for ( int i=0;i<layouts.length;i++) {
 			tspec = tabs.newTabSpec("tab"+i);
 			tspec.setContent(layouts[i]);
-			tspec.setIndicator ( context.getString(titles[i]) );
+			tspec.setIndicator ( bold(context.getString(titles[i])) );
 			tabs.addTab(tspec);
 			// smaller tab height
 			child = tabs.getTabWidget().getChildAt(i);
@@ -209,6 +213,12 @@ public class PreferencesDialog extends Dialog {
 			child.setPadding(0,child.getPaddingTop(),0,child.getPaddingBottom());
 		}
 		
+	}
+	
+	private static SpannableString bold(String text) {
+		SpannableString str = new SpannableString(text);
+		str.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		return str;
 	}
 	
 	private void bindSpinner(int spinnerResId, PrefEntryInt prefEntry, ArrayList<KeyValue> items, int prompt) {
