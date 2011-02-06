@@ -98,7 +98,7 @@ public class ShortcutCreateDialog extends Dialog {
 		 * DENSITY
 		 */
 		setLabel(R.id.shortcutIconDensityLabel, R.string.shortcutIconScale);
-		int defaultDensity = BitmapScaleManager.ScaleWorker.DFLT_DENSITY;
+		int defaultDensity = BitmapScaleManager.DFLT_DENSITY;
 		densitySpinner = (Spinner)findViewById(R.id.shortcutIconDensity);
 		spinnerUtil.bind ( R.id.shortcutIconDensity, defaultDensity, SpinnerUtil.getBitmapDensity(), R.string.shortcutIconScale);
 		
