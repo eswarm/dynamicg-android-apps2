@@ -51,9 +51,9 @@ public abstract class RowViewProvider {
 
 		public ProviderModern(LayoutInflater inflater) {
 			super(inflater);
-			this.layoutId = listStyleMedium ? R.layout.list_row_style_medium
-					: listStyleSmall ? R.layout.list_row_style_small
-							: R.layout.list20_row_relative;
+			this.layoutId = listStyleSmall ? R.layout.list_row_style_small
+					: listStyleMedium ? R.layout.list_row_style_medium
+							: R.layout.list_row_style_large;
 		}
 
 		private void prepare(ViewHolder holder, Bookmark bm) {
