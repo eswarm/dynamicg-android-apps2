@@ -308,7 +308,7 @@ public class PreferencesDialog extends Dialog {
 		PreferencesUpdater.writeAll();
 		
 		if (toastForReopen) {
-			SystemUtil.toastShort(context, "Please restart the app");
+			SystemUtil.toastShort(context, context.getString(R.string.hintRestartApp));
 		}
 	}
 
