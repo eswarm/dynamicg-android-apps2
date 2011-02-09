@@ -42,13 +42,15 @@ public abstract class AboutDialog {
 				TextView titleItem = (TextView)body.findViewById(R.id.aboutSubTitle);
 				titleItem.setText(title);
 				
-				String revisionText = "\nThis app is open source:"
+				String txtOpenSource = "\nThis app is open source:"
 					+ "\nhttps://dynamicg-android-apps2.googlecode.com/svn/trunk/BookmarkTree"
-					+ "\n"
-					+ "\nProgrammed by "+AUTHOR
+					+ "\n";
+				String txtAuthor = "\nProgrammed by "+AUTHOR
 					+ "\nSVN Revision: " + (appinfo[1])
 					+ "\n"
 					;
+				
+				String revisionText = txtOpenSource + txtAuthor;
 				TextView revisionItem = (TextView)body.findViewById(R.id.aboutBodyLinks);
 				revisionItem.setText(revisionText);
 				
