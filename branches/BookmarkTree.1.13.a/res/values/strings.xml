@@ -93,4 +93,11 @@
 	<string name="brDeleteAll">Delete all backups</string>
 	<string name="brAutoBackupLabel">Auto backup every {1} days</string>
     
+	<string name="sdcardErrorTitle">SD Card access error</string>
+	<string name="sdcardErrorNotMounted">SD Card is not mounted.\nCurrent state is \'{1}\'</string>
+	<string name="sdcardErrorReadOnly">Directory {1} is read only</string>
+	<string name="sdcardErrorCreateError">Could not create backup directory:\n{1}</string>
+	<string name="sdcardErrorNotExists">Backup directory does not exist:\n{1}</string>
+	<string name="sdcardErrorNotAvailable">SD Card is not available.\nCurrent state is \'{1}\'</string>
+	
 </resources>
