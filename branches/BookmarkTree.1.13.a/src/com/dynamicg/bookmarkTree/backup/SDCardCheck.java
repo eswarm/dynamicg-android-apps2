@@ -67,11 +67,11 @@ public class SDCardCheck {
 			return null;
 		}
 		else if (backupdir.exists() && backupdir.canRead() && !backupdir.canWrite()) {
-			alert(context, errorTitle, R.string.sdcardErrorReadOnly, backupdir);
+			alert(context, errorTitle, R.string.sdcardErrorDirReadOnly, backupdir);
 			return null;
 		}
 		else if (!backupdir.exists() || !backupdir.isDirectory()) {
-			alert(context, errorTitle, R.string.sdcardErrorCreateError, backupdir);
+			alert(context, errorTitle, R.string.sdcardErrorDirCreateFailed, backupdir);
 			return null;
 		}
 		else {
@@ -90,7 +90,7 @@ public class SDCardCheck {
 			return false;
 		}
 		else if (!backupdir.exists()) {
-			alert(context, errorTitle, R.string.sdcardErrorNotExists, backupdir);
+			alert(context, errorTitle, R.string.sdcardErrorDirMissing, backupdir);
 			return false;
 		}
 		
