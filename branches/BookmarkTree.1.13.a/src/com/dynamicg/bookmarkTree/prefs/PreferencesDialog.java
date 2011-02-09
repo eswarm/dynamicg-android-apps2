@@ -176,7 +176,7 @@ public class PreferencesDialog extends Dialog {
 				new SimpleAlertDialog.OkCancelDialog(ctx.activity, R.string.actionSortBookmarksConfirm) {
 					@Override
 					public void onPositiveButton() {
-						new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait) ) {
+						new SimpleProgressDialog(ctx.activity, R.string.commonPleaseWait ) {
 							@Override
 							public void backgroundWork() {
 								new AlphaSortWriter(ctx);
@@ -270,7 +270,7 @@ public class PreferencesDialog extends Dialog {
 			savePostprocessing();
 		}
 		else {
-			new SimpleProgressDialog(ctx.activity, context.getString(R.string.commonPleaseWait)) {
+			new SimpleProgressDialog(ctx.activity, R.string.commonPleaseWait) {
 				@Override
 				public void backgroundWork() {
 					saveMain();

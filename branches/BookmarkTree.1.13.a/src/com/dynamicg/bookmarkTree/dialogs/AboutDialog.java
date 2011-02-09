@@ -1,5 +1,6 @@
 package com.dynamicg.bookmarkTree.dialogs;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,14 +30,15 @@ public abstract class AboutDialog {
 	
 	public static void show(final BookmarkTreeContext ctx) {
 
-		final String[] appinfo = ContextUtil.getVersion(ctx.activity);
+		final Context context = ctx.activity;
+		final String[] appinfo = ContextUtil.getVersion(context);
 
-		new SimpleAlertDialog(ctx.activity, "About", "Close") {
+		new SimpleAlertDialog(context, R.string.commonAbout, R.string.commonClose) {
 			@Override
 			public View getBody() {
-				View body = SystemUtil.getLayoutInflater(ctx.activity).inflate(R.layout.about, null);
+				View body = SystemUtil.getLayoutInflater(context).inflate(R.layout.about, null);
 
-				String title = "Bookmark Tree Manager "+appinfo[0];
+				String title = context.getString(R.string.app_name)+" "+appinfo[0];
 				TextView titleItem = (TextView)body.findViewById(R.id.aboutSubTitle);
 				titleItem.setText(title);
 				
