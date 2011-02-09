@@ -63,7 +63,7 @@ public class SDCardCheck {
 		}
 		
 		if (!Environment.MEDIA_MOUNTED.equals(sdCardState)) {
-			alert(context, errorTitle, R.string.sdcardErrorNotMounted, sdCardState);
+			alert(context, errorTitle, R.string.sdcardErrorNotAvailable, sdCardState);
 			return null;
 		}
 		else if (backupdir.exists() && backupdir.canRead() && !backupdir.canWrite()) {
