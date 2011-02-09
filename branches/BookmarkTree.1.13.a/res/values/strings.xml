@@ -80,6 +80,8 @@
     <string name="bckBackup">Backup</string>
     <string name="bckCreateBackup">Create backup</string>
     <string name="bckRestoreSelection">Restore - select file:</string>
+	<string name="hintAutoBackupEnabled">Auto backup enabled</string>
+	<string name="hintAutoBackupDisabled">Auto backup disabled</string>
     
 	<string name="brDialogTitle">Backup and restore</string>
 	<string name="brRestoreConfirmation">Restore bookmarks?</string>

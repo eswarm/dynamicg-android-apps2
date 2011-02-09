@@ -91,7 +91,7 @@ implements BackupEventListener {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				BackupPrefs.writeAutoBackupEnabled(isChecked);
-				SystemUtil.toastShort(context, "Auto backup "+(isChecked?"enabled":"disabled"));
+				SystemUtil.toastShort(context, context.getString(isChecked?R.string.hintAutoBackupEnabled:R.string.hintAutoBackupDisabled));
 			}
 		});
 		
