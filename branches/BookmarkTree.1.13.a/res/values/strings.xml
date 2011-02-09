@@ -102,4 +102,12 @@
 	<string name="sdcardErrorDirMissing">Backup directory does not exist:\n{1}</string>
 	<string name="sdcardErrorNotAvailable">SD Card is not available.\nCurrent state is \'{1}\'</string>
 	
+	<string name="aboutUsage">\nBasic Usage:
+\n\u2022 Long-click to edit selected item and define the folder structure.
+\n\u2022 Short-click on bookmark to open link.
+\n\u2022 Short-click on folder to expand/collapse.
+\n\u2022 Menu/Preferences for advanced settings
+</string>
+	<string name="aboutDoBackup">\u2022 Backup your bookmarks before first edit! See Menu/Backup, or click here.</string>
+	
 </resources>
