@@ -11,6 +11,10 @@ public abstract class SimpleProgressDialog {
 
 	private final Context context;
 
+	public SimpleProgressDialog(Context context, int title) {
+		this(context, context.getString(title));
+	}
+	
 	public SimpleProgressDialog(Context context, String title) {
 		
 		this.context = context;
