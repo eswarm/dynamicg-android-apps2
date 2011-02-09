@@ -76,4 +76,10 @@
     <string name="shortcutIconPreviewLabel">Icon preview:</string>
     <string name="shortcutBackgroundColor">Background color</string>
     
+    <string name="bckBackup">Backup</string>
+    <string name="bckCreateBackup">Create backup</string>
+    <string name="bckRestoreSelection">Restore - select file:</string>
+    
+    
+    
 </resources>

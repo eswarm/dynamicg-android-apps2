@@ -61,7 +61,7 @@
 	    />
 	    
 	<!-- ====================== ABOUT ====================== -->
-	<TextView style="@style/PrefsGroup" android:text="About" android:layout_marginTop="10dip" /> 
+	<TextView style="@style/PrefsGroup" android:text="@string/commonAbout" android:layout_marginTop="10dip" /> 
 	
     <TextView style="@style/PrefsClickText"
     	android:id="@+id/prefsLinkAbout"
