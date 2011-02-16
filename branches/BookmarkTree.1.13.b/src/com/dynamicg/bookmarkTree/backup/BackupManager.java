@@ -141,6 +141,13 @@ public class BackupManager {
 		
 	}
 	
+	public static String getProgressMessage(Context context, int step) {
+		return StringUtil.textWithParam(context, R.string.brProgressRestoreBookmarks, step);
+	}
+	public static void updateProgressMessage(BookmarkTreeContext ctx, SimpleProgressDialog progress, int step) {
+		progress.updateTitle ( BackupManager.getProgressMessage(ctx.activity,step) );
+	}
+	
 	public synchronized static void restore ( final BookmarkTreeContext ctx
 			, final File xmlfile
 			, final BackupEventListener backupDoneListener
@@ -153,16 +160,18 @@ public class BackupManager {
 			return;
 		}
 		
-		new SimpleProgressDialog(context, R.string.brProgressRestoreBookmarks) {
+		
+		new SimpleProgressDialog(context, getProgressMessage(context,0) ) {
 			
 			int numberOfRows;
 			
 			@Override
 			public void backgroundWork() {
 				try {
+					updateProgressMessage(ctx, this, 1);
 					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
 					numberOfRows = rows.size();
-					RestoreWriter.replaceFull(ctx, rows);
+					RestoreWriter.replaceFull(ctx, rows, this);
 				}
 				catch (RuntimeException e) {
 					throw (RuntimeException)e;
