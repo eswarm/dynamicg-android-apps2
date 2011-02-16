@@ -41,7 +41,7 @@ public abstract class SimpleProgressDialog {
 					handleError ( (Throwable)msg.obj );
 				}
 				else if (msg.what==MSG_UPDATE_TEXT) {
-					progressDialog.setTitle(msg.obj.toString());
+					progressDialog.setMessage(msg.obj.toString());
 				}
 			}
 		};
