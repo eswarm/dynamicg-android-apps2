@@ -161,14 +161,14 @@ public class BackupManager {
 		}
 		
 		
-		new SimpleProgressDialog(context, getProgressMessage(context,0) ) {
+		new SimpleProgressDialog(context, getProgressMessage(context,1) ) {
 			
 			int numberOfRows;
 			
 			@Override
 			public void backgroundWork() {
 				try {
-					updateProgressMessage(ctx, this, 1);
+					updateProgressMessage(ctx, this, 2);
 					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
 					numberOfRows = rows.size();
 					RestoreWriter.replaceFull(ctx, rows, this);

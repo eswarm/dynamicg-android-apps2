@@ -44,18 +44,18 @@ public class RestoreWriter {
 		ContentResolver contentResolver = ctx.activity.getContentResolver(); 
 		
 		// prepare new rows
-		BackupManager.updateProgressMessage(ctx, progress, 2);
+		BackupManager.updateProgressMessage(ctx, progress, 3);
 		ContentValues[] newValues = transform(rows);
 		
 		// delete existing entries
-		BackupManager.updateProgressMessage(ctx, progress, 3);
+		BackupManager.updateProgressMessage(ctx, progress, 4);
 		contentResolver.delete ( BOOKMARKS_URI
 				, Browser.BookmarkColumns.BOOKMARK+"=1"
 				, new String[]{}
 		);
 		
 		// insert
-		BackupManager.updateProgressMessage(ctx, progress, 4);
+		BackupManager.updateProgressMessage(ctx, progress, 5);
 		contentResolver.bulkInsert(BOOKMARKS_URI, newValues);
 		
 	}

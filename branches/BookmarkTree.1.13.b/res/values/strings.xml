@@ -88,7 +88,7 @@
 	<string name="brSelectedFileLabel">Selected file:\n{1}</string>
 	<string name="brProgressCreateBackup">Creating backup ...</string>
 	<string name="brHintBackupCreated">Backup file created with {2} bookmarks:\n{1}</string>
-	<string name="brProgressRestoreBookmarks">Restoring bookmarks (step {1}/4)...</string>
+	<string name="brProgressRestoreBookmarks">Restoring bookmarks (step {1}/5)...</string>
 	<string name="brHintBookmarksRestored">Restore done, imported {1} bookmarks</string>
 	<string name="brNoFilesForRestore">\u2192 No backup files available</string>
 	<string name="brStorageHint">\u2192 Backup files are stored here:</string>
