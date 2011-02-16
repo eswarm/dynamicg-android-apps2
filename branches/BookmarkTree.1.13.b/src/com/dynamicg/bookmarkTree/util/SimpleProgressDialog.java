@@ -75,7 +75,7 @@ public abstract class SimpleProgressDialog {
 		ErrorNotification.notifyError(context, e);
 	}
 	
-	public void updateTitle(String text) {
+	public void updateProgressMessage(String text) {
 		Message msg = new Message();
 		msg.what=MSG_UPDATE_TEXT;
 		msg.obj=text;
