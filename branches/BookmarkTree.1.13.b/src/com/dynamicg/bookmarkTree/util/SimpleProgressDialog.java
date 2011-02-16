@@ -9,7 +9,13 @@ import com.dynamicg.common.ErrorNotification;
 
 public abstract class SimpleProgressDialog {
 
+	private static final int MSG_DONE = 0;
+	private static final int MSG_ERROR = 1;
+	private static final int MSG_UPDATE_TEXT = 2;
+	
 	private final Context context;
+	private final ProgressDialog progressDialog;
+	private final Handler doneHandler;
 
 	public SimpleProgressDialog(Context context, int title) {
 		this(context, context.getString(title));
@@ -18,20 +24,19 @@ public abstract class SimpleProgressDialog {
 	public SimpleProgressDialog(Context context, String title) {
 		
 		this.context = context;
-		final ProgressDialog progressDialog;
 		progressDialog = new ProgressDialog(context);
 		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 		progressDialog.setMessage(title);
 		progressDialog.setCancelable(false);
 		progressDialog.show();
 
-		final Handler doneHandler = new Handler() {
+		doneHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				if (msg.what==0) {
+				if (msg.what==MSG_DONE) {
 					done();
 					progressDialog.dismiss();
 				}
-				else if (msg.what==1) {
+				else if (msg.what==MSG_ERROR) {
 					progressDialog.dismiss();
 					handleError ( (Throwable)msg.obj );
 				}
@@ -42,11 +47,11 @@ public abstract class SimpleProgressDialog {
 			public void run() {
 				try {
 					backgroundWork();
-					doneHandler.sendEmptyMessage(0);
+					doneHandler.sendEmptyMessage(MSG_DONE);
 				}
 				catch (Throwable e) {
 					Message msg = new Message();
-					msg.what=1;
+					msg.what=MSG_ERROR;
 					msg.obj=e;
 					doneHandler.sendMessage(msg);
 				}
@@ -65,6 +70,13 @@ public abstract class SimpleProgressDialog {
 	 */
 	public void handleError(final Throwable e) {
 		ErrorNotification.notifyError(context, e);
+	}
+	
+	public void updateText(String text) {
+		Message msg = new Message();
+		msg.what=MSG_UPDATE_TEXT;
+		msg.obj=text;
+		doneHandler.sendMessage(msg);
 	}
 	
 }
