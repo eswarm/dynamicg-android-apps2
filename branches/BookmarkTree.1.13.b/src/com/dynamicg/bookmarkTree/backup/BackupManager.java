@@ -141,11 +141,11 @@ public class BackupManager {
 		
 	}
 	
-	public static String getProgressMessage(Context context, int step) {
+	public static String getProgressMessageText(Context context, int step) {
 		return StringUtil.textWithParam(context, R.string.brProgressRestoreBookmarks, step);
 	}
 	public static void updateProgressMessage(BookmarkTreeContext ctx, SimpleProgressDialog progress, int step) {
-		progress.updateTitle ( BackupManager.getProgressMessage(ctx.activity,step) );
+		progress.updateTitle ( BackupManager.getProgressMessageText(ctx.activity,step) );
 	}
 	
 	public synchronized static void restore ( final BookmarkTreeContext ctx
@@ -161,7 +161,7 @@ public class BackupManager {
 		}
 		
 		
-		new SimpleProgressDialog(context, getProgressMessage(context,1) ) {
+		new SimpleProgressDialog(context, getProgressMessageText(context,1) ) {
 			
 			int numberOfRows;
 			
