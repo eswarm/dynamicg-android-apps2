@@ -12,7 +12,6 @@
 	<TextView style="@style/PrefsGroupFirst" android:text="@string/prefsGroupLayout" /> 
     
    	<TextView style="@style/PrefsHint" 
-   		android:layout_span="2"
    		android:text="@string/prefsHintRestart"
    		/>
 
@@ -74,7 +73,7 @@
    	<TextView style="@style/PrefsLabel"
    		android:text="@string/prefsIconScaling" 
    		/>
-    <Spinner style="@style/PrefsLabel"
+    <Spinner
     	android:id="@+id/prefsIconScaling"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
