@@ -7,6 +7,7 @@ import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 
 public class BitmapScaleManager {
 
+	private static final int MAX_SMALL_ICON_SIZE = 24;
 	private static int selection; 
 	
 	public static void init() {
@@ -50,11 +51,11 @@ public class BitmapScaleManager {
 			return b;
 		}
 		else if (selection==PreferencesWrapper.ICON_SCALING_160_120) {
-			b.setDensity ( b.getWidth()>=24 ? 160 : 120 );
+			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 120 );
 			return b;
 		}
 		else if (selection==PreferencesWrapper.ICON_SCALING_240_160) {
-			b.setDensity ( b.getWidth()>=40 ? 240 : 160 );
+			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 240 : 160 );
 			return b;
 		}
 		else {
