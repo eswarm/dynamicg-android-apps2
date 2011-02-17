@@ -71,6 +71,8 @@
 	<TextView style="@style/PrefsGroup" android:text="@string/prefsGroupExtras" /> 
 
    	<TextView style="@style/PrefsLabel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
    		android:text="@string/prefsIconScaling" 
    		/>
     <Spinner
