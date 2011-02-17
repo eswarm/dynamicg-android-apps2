@@ -10,7 +10,7 @@ public class BitmapScaleManager {
 	private static int selection; 
 	
 	public static void init() {
-		selection = PreferencesWrapper.scaleIcons.value;
+		selection = PreferencesWrapper.iconScaling.value;
 	}
 	
 	// for list view provider 

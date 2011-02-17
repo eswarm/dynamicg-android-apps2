@@ -16,7 +16,7 @@ public class PreferencesWrapper {
 	public static final PrefEntryInt listStyle = new PrefEntryInt("listStyle", 0);
 	public static final PrefEntryInt sortOption = new PrefEntryInt("sortOption", 0);
 	public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
-	public static final PrefEntryInt scaleIcons = new PrefEntryInt("scaleIcons", 1);
+	public static final PrefEntryInt iconScaling = new PrefEntryInt("scaleIcons", 1);
 	public static final PrefEntryInt sortCaseInsensitive = new PrefEntryInt("sortCaseInsensitive", 1);
 
 	public static final PrefEntryInt colorFolder = new PrefEntryInt("color.folder", Color.WHITE);

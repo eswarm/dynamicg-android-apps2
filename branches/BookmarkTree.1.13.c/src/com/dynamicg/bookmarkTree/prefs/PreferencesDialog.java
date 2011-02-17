@@ -104,7 +104,7 @@ public class PreferencesDialog extends Dialog {
 		// bind spinners
 		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(context), R.string.prefsListStyle );
 		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(context), R.string.prefsSortLabel );
-		bindSpinner ( R.id.prefsIconScaling, PreferencesWrapper.scaleIcons, SpinnerUtil.getIconScalingItems(), R.string.prefsIconScaling );
+		bindSpinner ( R.id.prefsIconScaling, PreferencesWrapper.iconScaling, SpinnerUtil.getIconScalingItems(), R.string.prefsIconScaling );
 		
 		// color items
 		bindColorPicker(R.id.prefsColorFolder, PreferencesWrapper.colorFolder, R.string.prefsColorFolder);
@@ -288,7 +288,7 @@ public class PreferencesDialog extends Dialog {
 		
 		boolean toastForReopen =
 			PreferencesWrapper.listStyle.value != spinnerUtil.getCurrentValue(R.id.prefsListStyle)
-			|| PreferencesWrapper.scaleIcons.isOn() != scaleIconsCheckbox.isChecked()
+			|| PreferencesWrapper.iconScaling.value != spinnerUtil.getCurrentValue(R.id.prefsIconScaling)
 			;
 		
 		processSeparatorUpdate();
