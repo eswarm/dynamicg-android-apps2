@@ -7,10 +7,10 @@ import android.database.Cursor;
 import android.provider.Browser;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
-import com.dynamicg.bookmarkTree.bitmapScaler.BitmapScaleManager;
 import com.dynamicg.bookmarkTree.model.BrowserBookmarkBean;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
+import com.dynamicg.bookmarkTree.util.BitmapScaleManager;
 import com.dynamicg.common.Logger;
 
 public class BrowserBookmarkLoader {

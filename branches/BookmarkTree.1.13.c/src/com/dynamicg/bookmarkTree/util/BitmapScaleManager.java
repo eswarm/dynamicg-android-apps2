@@ -1,4 +1,4 @@
-package com.dynamicg.bookmarkTree.bitmapScaler;
+package com.dynamicg.bookmarkTree.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
