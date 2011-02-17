@@ -21,12 +21,15 @@ public class BitmapScaleManager {
 		}
 		
 		Bitmap b = BitmapFactory.decodeByteArray(blob, 0, blob.length);
-		if (b==null || selection==PreferencesWrapper.ICON_SCALING_NONE) {
-			// error report Dec 28, 2010 8:35:05 PM => decodeByteArray might return null even if we have a blob
+		if (b==null) {
+			// error report Dec 28, 2010 8:35:05 PM
 			return null;
 		}
-
-		if (selection==PreferencesWrapper.ICON_SCALING_160) {
+		
+		if (selection==PreferencesWrapper.ICON_SCALING_NONE) {
+			return b;
+		}
+		else if (selection==PreferencesWrapper.ICON_SCALING_160) {
 			b.setDensity(160);
 			return b;
 		}
