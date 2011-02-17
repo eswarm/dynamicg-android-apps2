@@ -7,28 +7,6 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 
 public class PreferencesWrapper {
 	
-	protected static final String KEY_FOLDER_SEPARATOR = "separator";
-	protected static final String DEFVALUE_FOLDER_SEPARATOR = "-";
-	
-	public static final String KEY_DISCLAIMER = "disclaimerLastDisplayed";
-	private static final String KEY_DATE_INITIALISED = "dateInitialised";
-	
-	public static final PrefEntryInt listStyle = new PrefEntryInt("listStyle", 0);
-	public static final PrefEntryInt sortOption = new PrefEntryInt("sortOption", 0);
-	public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
-	public static final PrefEntryInt iconScaling = new PrefEntryInt("scaleIcons", 1);
-	public static final PrefEntryInt sortCaseInsensitive = new PrefEntryInt("sortCaseInsensitive", 1);
-
-	public static final PrefEntryInt colorFolder = new PrefEntryInt("color.folder", Color.WHITE);
-	public static final PrefEntryInt colorBookmarkTitle = new PrefEntryInt("color.bookmarkTitle", Color.WHITE);
-	public static final PrefEntryInt colorBookmarkUrl = new PrefEntryInt("color.bookmarkUrl", Color.WHITE);
-	
-	public static final SeparatorPreference separatorPreference = new SeparatorPreference();
-	static {
-		String separator = BookmarkTreeContext.settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR);
-		PreferencesUpdater.setFolderSeparator(separator);
-	}
-	
 	public static final int SORT_ALPHA = 0;
 	public static final int SORT_FOLDERS_FIRST = 1;
 	public static final int SORT_BOOKMARKS_FIRST = 2;
@@ -42,6 +20,28 @@ public class PreferencesWrapper {
 	public static final int ICON_SCALING_160_120 = 2;
 	public static final int ICON_SCALING_240 = 3;
 	public static final int ICON_SCALING_240_160 = 4;
+	
+	protected static final String KEY_FOLDER_SEPARATOR = "separator";
+	protected static final String DEFVALUE_FOLDER_SEPARATOR = "-";
+	
+	public static final String KEY_DISCLAIMER = "disclaimerLastDisplayed";
+	private static final String KEY_DATE_INITIALISED = "dateInitialised";
+	
+	public static final PrefEntryInt listStyle = new PrefEntryInt("listStyle", 0);
+	public static final PrefEntryInt sortOption = new PrefEntryInt("sortOption", 0);
+	public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
+	public static final PrefEntryInt iconScaling = new PrefEntryInt("scaleIcons", ICON_SCALING_160_120);
+	public static final PrefEntryInt sortCaseInsensitive = new PrefEntryInt("sortCaseInsensitive", 1);
+
+	public static final PrefEntryInt colorFolder = new PrefEntryInt("color.folder", Color.WHITE);
+	public static final PrefEntryInt colorBookmarkTitle = new PrefEntryInt("color.bookmarkTitle", Color.WHITE);
+	public static final PrefEntryInt colorBookmarkUrl = new PrefEntryInt("color.bookmarkUrl", Color.WHITE);
+	
+	public static final SeparatorPreference separatorPreference = new SeparatorPreference();
+	static {
+		String separator = BookmarkTreeContext.settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR);
+		PreferencesUpdater.setFolderSeparator(separator);
+	}
 	
 	public static boolean isListStyleMedium() {
 		return listStyle.value == LIST_SIZE_MEDIUM;
