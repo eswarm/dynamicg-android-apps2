@@ -59,7 +59,7 @@ public class PreferencesDialog extends Dialog {
 
 	private EditText separatorItem;
 	private CheckBox doFullUpdateCheckbox;
-	private CheckBox scaleIconsCheckbox;
+	//private CheckBox scaleIconsCheckbox;
 
 	private boolean dataRefreshRequired;
 	
@@ -98,13 +98,13 @@ public class PreferencesDialog extends Dialog {
 		checkForChangedSeparator(); // inactivate intially
 		
 		// bind checkboxes
-		scaleIconsCheckbox = bindCheckbox(R.id.prefsScaleIcons, PreferencesWrapper.scaleIcons);
 		bindCheckbox(R.id.prefsKeepState, PreferencesWrapper.keepState);
 		bindCheckbox(R.id.prefsSortCaseInsensitive, PreferencesWrapper.sortCaseInsensitive);
 		
 		// bind spinners
 		bindSpinner ( R.id.prefsListStyle, PreferencesWrapper.listStyle, SpinnerUtil.getListStyleItems(context), R.string.prefsListStyle );
 		bindSpinner ( R.id.prefsSortOption, PreferencesWrapper.sortOption, SpinnerUtil.getSortOptionItems(context), R.string.prefsSortLabel );
+		bindSpinner ( R.id.prefsIconScaling, PreferencesWrapper.scaleIcons, SpinnerUtil.getIconScalingItems(), R.string.prefsIconScaling );
 		
 		// color items
 		bindColorPicker(R.id.prefsColorFolder, PreferencesWrapper.colorFolder, R.string.prefsColorFolder);

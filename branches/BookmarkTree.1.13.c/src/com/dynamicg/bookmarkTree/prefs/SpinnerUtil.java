@@ -119,7 +119,7 @@ public class SpinnerUtil {
 		return items.list;
 	}
 	
-	public static ArrayList<KeyValue> getScalingBitmapDensity() {
+	public static ArrayList<KeyValue> getIconScalingItems() {
 		SpinnerItems items = new SpinnerItems();
 		items.add ( PreferencesWrapper.ICON_SCALING_NONE, "None" );
 		items.add ( PreferencesWrapper.ICON_SCALING_160, "160" );

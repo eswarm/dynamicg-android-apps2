@@ -30,9 +30,9 @@
     <string name="prefsSortAlphaHint">\u2192 This will sort the bookmarks A-Z for usage within the browser</string>
     <string name="prefsSeparator">Internal folder separator:</string>
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>
-    <string name="prefsScaleIcons">Scale icons</string>
     <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
     <string name="prefsLinkToMarket">Link to Android Market - please rate</string>
+    <string name="prefsIconScaling">Icon scaling:</string>
 
     <string name="prefsGroupLayout">Layout</string>
     <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>

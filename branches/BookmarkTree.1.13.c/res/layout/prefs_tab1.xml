@@ -71,11 +71,13 @@
 	
 	<TextView style="@style/PrefsGroup" android:text="@string/prefsGroupExtras" /> 
 
-    <CheckBox style="@style/PrefsLabel"
-    	android:id="@+id/prefsScaleIcons"
-	    android:layout_width="fill_parent"
+   	<TextView style="@style/PrefsLabel"
+   		android:text="@string/prefsIconScaling" 
+   		/>
+    <Spinner style="@style/PrefsLabel"
+    	android:id="@+id/prefsIconScaling"
+	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="@string/prefsScaleIcons"
 	    />
    	<TextView style="@style/PrefsHint" 
    		android:text="@string/prefsHintRestart"
