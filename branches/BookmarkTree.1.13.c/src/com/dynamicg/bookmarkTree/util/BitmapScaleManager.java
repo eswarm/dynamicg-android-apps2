@@ -26,6 +26,18 @@ public class BitmapScaleManager {
 			return null;
 		}
 		
+//		// FOR TESTING
+//		if (true) {
+//			int w = b.getWidth();
+//			if (w<=24) {
+//				b.setDensity(120);
+//				return b;
+//			}
+//			else {
+//				return null;
+//			}
+//		}
+		
 		if (selection==PreferencesWrapper.ICON_SCALING_NONE) {
 			return b;
 		}
