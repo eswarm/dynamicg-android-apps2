@@ -7,6 +7,9 @@ import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 
 public class PreferencesWrapper {
 	
+	/*
+	 * GLOBALS
+	 */
 	public static final int SORT_ALPHA = 0;
 	public static final int SORT_FOLDERS_FIRST = 1;
 	public static final int SORT_BOOKMARKS_FIRST = 2;
@@ -21,12 +24,18 @@ public class PreferencesWrapper {
 	public static final int ICON_SCALING_240 = 3;
 	public static final int ICON_SCALING_240_160 = 4;
 	
+	/*
+	 * KEYS
+	 */
 	protected static final String KEY_FOLDER_SEPARATOR = "separator";
 	protected static final String DEFVALUE_FOLDER_SEPARATOR = "-";
 	
 	public static final String KEY_DISCLAIMER = "disclaimerLastDisplayed";
 	private static final String KEY_DATE_INITIALISED = "dateInitialised";
 	
+	/*
+	 * PREFERENCE ITEMS
+	 */
 	public static final PrefEntryInt listStyle = new PrefEntryInt("listStyle", 0);
 	public static final PrefEntryInt sortOption = new PrefEntryInt("sortOption", 0);
 	public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
@@ -43,6 +52,9 @@ public class PreferencesWrapper {
 		PreferencesUpdater.setFolderSeparator(separator);
 	}
 	
+	/*
+	 * WRAPPERS
+	 */
 	public static boolean isListStyleMedium() {
 		return listStyle.value == LIST_SIZE_MEDIUM;
 	}
