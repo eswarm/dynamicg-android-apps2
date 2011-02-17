@@ -37,6 +37,12 @@ public class PreferencesWrapper {
 	public static final int LIST_SIZE_MEDIUM = 1;
 	public static final int LIST_SIZE_SMALL = 2;
 	
+	public static final int ICON_SCALING_NONE = 0;
+	public static final int ICON_SCALING_160 = 1;
+	public static final int ICON_SCALING_160_120 = 2;
+	public static final int ICON_SCALING_240 = 3;
+	public static final int ICON_SCALING_240_160 = 4;
+	
 	public static boolean isListStyleMedium() {
 		return listStyle.value == LIST_SIZE_MEDIUM;
 	}
