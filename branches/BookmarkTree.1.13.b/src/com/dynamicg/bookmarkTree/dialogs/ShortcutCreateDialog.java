@@ -100,7 +100,7 @@ public class ShortcutCreateDialog extends Dialog {
 		setLabel(R.id.shortcutIconDensityLabel, R.string.shortcutIconScale);
 		int defaultDensity = BitmapScaleManager.DFLT_DENSITY;
 		densitySpinner = (Spinner)findViewById(R.id.shortcutIconDensity);
-		spinnerUtil.bind ( R.id.shortcutIconDensity, defaultDensity, SpinnerUtil.getBitmapDensity(), R.string.shortcutIconScale);
+		spinnerUtil.bind ( R.id.shortcutIconDensity, defaultDensity, SpinnerUtil.getShortcutBitmapDensity(), R.string.shortcutIconScale);
 		
 		// override the default "on change" listener:
 		final long initGracetime = System.currentTimeMillis() + 300l; // screen setup triggers "onItemSeleced" so we catch the initial call

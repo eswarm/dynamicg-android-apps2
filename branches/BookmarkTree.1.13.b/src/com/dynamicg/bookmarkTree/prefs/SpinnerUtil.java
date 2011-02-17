@@ -109,7 +109,7 @@ public class SpinnerUtil {
 		return items.list;
 	}
 	
-	public static ArrayList<KeyValue> getBitmapDensity() {
+	public static ArrayList<KeyValue> getShortcutBitmapDensity() {
 		SpinnerItems items = new SpinnerItems();
 		items.add (  80, "2.0x (80dpi)" );
 		items.add ( 120, "1.5x (120dpi)" );
