@@ -54,6 +54,10 @@ public class BitmapScaleManager {
 			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 120 );
 			return b;
 		}
+		else if (selection==PreferencesWrapper.ICON_SCALING_160_90) {
+			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 90 );
+			return b;
+		}
 		else if (selection==PreferencesWrapper.ICON_SCALING_240_160) {
 			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 240 : 160 );
 			return b;
