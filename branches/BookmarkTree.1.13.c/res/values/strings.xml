@@ -32,12 +32,11 @@
     <string name="prefsUpdateWithNewSep">Update all bookmarks\nwith new separator</string>
     <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
     <string name="prefsLinkToMarket">Link to Android Market - please rate</string>
-    <string name="prefsIconScaling">Icon scaling:</string>
+    <string name="prefsIconScaling">Icon\nscaling:</string>
 
     <string name="prefsGroupLayout">Layout</string>
     <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>
     <string name="prefsGroupPresentation">Presentation</string>
-    <string name="prefsGroupExtras">Extras</string>
     <string name="prefsGroupSetup">App setup</string>
     <string name="prefsGroupTools">Tools</string>
     
