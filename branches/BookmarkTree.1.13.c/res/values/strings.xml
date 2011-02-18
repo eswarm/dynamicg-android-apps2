@@ -33,6 +33,7 @@
     <string name="prefsSortCaseInsensitive">Case insensitive sort</string>
     <string name="prefsLinkToMarket">Link to Android Market - please rate</string>
     <string name="prefsIconScaling">Icon\nscaling:</string>
+    <string name="prefsIconScalingHint">\u2192 second value is for small icons</string>
 
     <string name="prefsGroupLayout">Layout</string>
     <string name="prefsGroupToolsAndSetup">Tools &amp; Setup</string>

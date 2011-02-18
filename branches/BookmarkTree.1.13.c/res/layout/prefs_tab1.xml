@@ -45,7 +45,10 @@
 	    		android:text="@string/prefsIconScaling" 
 	    		android:layout_gravity="center_vertical"
 	    		/>
-	    	<Spinner style="@style/PrefsSpinner" android:id="@+id/prefsIconScaling" />
+	    	<Spinner style="@style/PrefsSpinner" android:id="@+id/prefsIconScaling" android:layout_marginBottom="0dip" />
+	    </TableRow>
+	    <TableRow>
+	    	<TextView style="@style/PrefsHint" android:layout_span="2" android:text="@string/prefsIconScalingHint" /> 
 	    </TableRow>
 	    
     </TableLayout>

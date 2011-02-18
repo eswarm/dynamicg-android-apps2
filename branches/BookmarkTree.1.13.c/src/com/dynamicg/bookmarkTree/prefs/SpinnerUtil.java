@@ -123,9 +123,9 @@ public class SpinnerUtil {
 		SpinnerItems items = new SpinnerItems();
 		items.add ( PreferencesWrapper.ICON_SCALING_NONE, "None" );
 		items.add ( PreferencesWrapper.ICON_SCALING_160, "160dpi" );
-		items.add ( PreferencesWrapper.ICON_SCALING_160_120, "160dpi, small=120dpi" );
+		items.add ( PreferencesWrapper.ICON_SCALING_160_120, "160dpi, 120dpi" );
 		items.add ( PreferencesWrapper.ICON_SCALING_240, "240dpi" );
-		items.add ( PreferencesWrapper.ICON_SCALING_240_160, "240dpi, small=160dpi" );
+		items.add ( PreferencesWrapper.ICON_SCALING_240_160, "240dpi, 160dpi" );
 		return items.list;
 	}
 	
