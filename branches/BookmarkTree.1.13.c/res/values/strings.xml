@@ -60,8 +60,8 @@
     <string name="actionSortBookmarksDone">Bookmark sort done</string>
 
     <string name="domainListStyleLarge">Large font</string>
-    <string name="domainListStyleMedium">Medium font (18sp)</string>
-    <string name="domainListStyleSmall">Medium font (16sp)</string>
+    <string name="domainListStyleMedium">Medium font, 18sp</string>
+    <string name="domainListStyleSmall">Medium font, 16sp</string>
     <string name="domainSortAlphaOverall">Alpha overall</string>
     <string name="domainSortFoldersFirst">Folders first</string>
     <string name="domainSortBookmarksFirst">Bookmarks first</string>
