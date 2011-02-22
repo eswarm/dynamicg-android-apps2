@@ -54,8 +54,12 @@ public class BitmapScaleManager {
 			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 120 );
 			return b;
 		}
-		else if (selection==PreferencesWrapper.ICON_SCALING_160_90) {
-			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 90 );
+		else if (selection==PreferencesWrapper.ICON_SCALING_160_100) {
+			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 100 );
+			return b;
+		}
+		else if (selection==PreferencesWrapper.ICON_SCALING_160_80) {
+			b.setDensity ( b.getWidth()>MAX_SMALL_ICON_SIZE ? 160 : 80 );
 			return b;
 		}
 		else if (selection==PreferencesWrapper.ICON_SCALING_240_160) {
