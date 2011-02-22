@@ -124,7 +124,8 @@ public class SpinnerUtil {
 		items.add ( PreferencesWrapper.ICON_SCALING_NONE, "None" );
 		items.add ( PreferencesWrapper.ICON_SCALING_160, "160dpi" );
 		items.add ( PreferencesWrapper.ICON_SCALING_160_120, "160dpi, 120dpi" );
-		items.add ( PreferencesWrapper.ICON_SCALING_160_90, "160dpi, 90dpi" );
+		items.add ( PreferencesWrapper.ICON_SCALING_160_100, "160dpi, 100dpi" );
+		items.add ( PreferencesWrapper.ICON_SCALING_160_80, "160dpi, 80dpi" );
 		items.add ( PreferencesWrapper.ICON_SCALING_240, "240dpi" );
 		items.add ( PreferencesWrapper.ICON_SCALING_240_160, "240dpi, 160dpi" );
 		return items.list;

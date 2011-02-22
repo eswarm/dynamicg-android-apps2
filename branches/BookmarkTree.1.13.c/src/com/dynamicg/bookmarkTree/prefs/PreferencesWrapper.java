@@ -23,7 +23,8 @@ public class PreferencesWrapper {
 	public static final int ICON_SCALING_160_120 = 2;
 	public static final int ICON_SCALING_240 = 3;
 	public static final int ICON_SCALING_240_160 = 4;
-	public static final int ICON_SCALING_160_90 = 5;
+	public static final int ICON_SCALING_160_100 = 5;
+	public static final int ICON_SCALING_160_80 = 6;
 	
 	/*
 	 * KEYS
