@@ -52,7 +52,6 @@ public class ShortcutCreateWorker {
 		// => note we copy the icon first as we're going to overwrite the density
 		final float shortcutDensity = shortcutBitmap.getDensity();
 		Bitmap favicon = originalFavicon.copy(originalFavicon.getConfig(), true);
-		final float faviconCurrentDensity = favicon.getDensity();
 		favicon.setDensity((int)faviconTargetDensity);
 		
 		/*
@@ -60,55 +59,25 @@ public class ShortcutCreateWorker {
 		 */
 		final float faviconW = favicon.getWidth();
 		final float faviconH = favicon.getHeight();
-		final float faviconScaledW = ContextUtil.getScaledSizeInt(context, favicon.getWidth());
-		final float faviconScaledH = ContextUtil.getScaledSizeInt(context, favicon.getHeight());
-		
-		final float patch = (shortcutDensity/faviconTargetDensity); //context.getResources().getDisplayMetrics().density / faviconTargetDensity;
-		final float faviconPatchedW = faviconW * patch;
-		final float faviconPatchedH = faviconH * patch ;
+		final float scalePatch = shortcutDensity / faviconTargetDensity;
+		final float faviconPatchedW = faviconW * scalePatch;
+		final float faviconPatchedH = faviconH * scalePatch ;
 		
 		final float xOffset = (float)(shortcutSizeScaled - faviconPatchedW) / 2f;
 		final float yOffset = (float)(shortcutSizeScaled - faviconPatchedH) / 2f;
-		final float shortcutIconSizeUnscaled = ContextUtil.getUnscaledSizeInt(context, shortcutSizeScaled);
-		
-		
-		/*
-		 * sample on L
-		 * . DENSITY_SCALE = 1.5
-		 * . favicon = 16x16, 120dpi, scaled to 24x24
-		 * . target shortcut = 50x50, scaled to 75x75
-		 * 
-		 * if <160dpi>:
-		 * . icon 120dpi=>160dpi
-		 * 
-		 * 
-		 * if <120dpi>:
-		 * . (75-24) / 2 = 25 top/left
-		 * 
-		 * 
-		 */
 		
 		if (log.debugEnabled) {
 			log.debug("--> dimensions");
-			log.debug("shortcutIconSize", shortcutSizeScaled, shortcutIconSizeUnscaled);
-			
-			log.debug("--> favicon");
+			log.debug("shortcutSizeScaled", shortcutSizeScaled);
 			log.debug("favicon width/height", faviconW, faviconH);
-			log.debug("favicon scaled width/height", faviconScaledW, faviconScaledH);
 			log.debug("favicon patched width/height", faviconPatchedW, faviconPatchedH);
-			
-			log.debug("shortcutDensity,  faviconCurrentDensity, faviconTargetDensity: ", shortcutDensity,  faviconCurrentDensity, faviconTargetDensity);
-			log.debug("offsetPatch", patch);
-			
-			log.debug("--> patches");
-			log.debug("current/target density & patch", faviconCurrentDensity, faviconTargetDensity);
-			log.debug("favicon original width/height", faviconScaledW, faviconScaledH);
+			log.debug("shortcutDensity, faviconTargetDensity, scalePatch ", shortcutDensity, faviconTargetDensity, scalePatch);
 			log.debug("offset", xOffset, yOffset);
 		}
 
 		canvas.drawBitmap ( favicon
-				, xOffset // (float)ContextUtil.getUnscaledSizeInt(context, xOffset)
-				, yOffset // (float)ContextUtil.getUnscaledSizeInt(context, yOffset)
+				, xOffset
+				, yOffset
 				, null
 				);
 		
