@@ -20,6 +20,9 @@ import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.Logger;
 
+/*
+ * TODO we get the preview icon twice when the dialog opens
+ */
 public class ShortcutCreateDialog extends Dialog {
 
 	private static final Logger log = new Logger(ShortcutCreateDialog.class);
