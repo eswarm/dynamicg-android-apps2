@@ -20,6 +20,9 @@ public class Main extends Activity {
 	 * icons sources:
 	 * http://www.veryicon.com/search/bookmark/ 
 	 * http://www.iconeasy.com/
+	 * 
+	 * http://www.softicons.com
+	 * http://www.softicons.com/free-icons/folder-icons/latt-for-os-x-icons-by-rick-patrick
 	 */
 	
     public static final int ACTION_COLLAPSE_ALL = 1;
