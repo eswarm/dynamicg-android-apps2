@@ -7,7 +7,12 @@
 	android:layout_marginTop="-60dip"
     >
     
-    <TextView android:layout_height="1px" android:layout_width="fill_parent" android:background="#444" />
+    <TextView
+        android:layout_height="1px"
+        android:layout_width="fill_parent"
+        android:background="#555" 
+        android:layout_marginTop="8dip"
+        />
     
 	<LinearLayout
 	    android:orientation="horizontal"
@@ -20,7 +25,7 @@
 	    	android:layout_weight="1"
 	        />
 	
-	    <TextView android:layout_width="1px" android:layout_height="fill_parent" android:background="#444" />
+	    <TextView android:layout_width="1px" android:layout_height="26dip" android:background="#555" />
 	    
 	    <Button style="@style/DialogButton"
 	    	android:id="@+id/button1"
