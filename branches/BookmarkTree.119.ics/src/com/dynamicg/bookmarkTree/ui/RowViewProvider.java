@@ -80,7 +80,12 @@ public abstract class RowViewProvider {
 
 	    	holder.iconCell.isFolder = bm.isFolder();
 			if (bm.isFolder()) {
-		        holder.iconCell.setImageResource(bm.isExpanded() ? R.drawable.folder_open : R.drawable.folder_dflt );
+				if (android.os.Build.VERSION.SDK_INT>=11) {
+			        holder.iconCell.setImageResource(bm.isExpanded() ? R.drawable.folder_holo_open : R.drawable.folder_holo_closed);
+				}
+				else {
+			        holder.iconCell.setImageResource(bm.isExpanded() ? R.drawable.folder_std_open : R.drawable.folder_std_closed);
+				}
 			}
 			else {
 				holder.iconCell.setImageBitmap(bm.getFavicon());
