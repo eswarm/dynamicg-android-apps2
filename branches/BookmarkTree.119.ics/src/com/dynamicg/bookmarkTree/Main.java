@@ -25,6 +25,10 @@ public class Main extends Activity {
 	 * http://www.softicons.com/free-icons/folder-icons/latt-for-os-x-icons-by-rick-patrick
 	 */
 	
+	// TODO title "Backup & Restore" on holo -> change and reuse "Backup and restore"
+	// TODO auto backup every 10 days
+	// TODO "config change"
+	
     public static final int ACTION_COLLAPSE_ALL = 1;
     public static final int ACTION_EXPAND_ALL = 2;
     public static final int ACTION_RELOAD = 3;
