@@ -26,8 +26,6 @@ public class Main extends Activity {
 	 * http://www.softicons.com/free-icons/folder-icons/latt-for-os-x-icons-by-rick-patrick
 	 */
 	
-	// TODO auto backup every 10 days
-	
     public static final int ACTION_COLLAPSE_ALL = 1;
     public static final int ACTION_EXPAND_ALL = 2;
     public static final int ACTION_RELOAD = 3;
