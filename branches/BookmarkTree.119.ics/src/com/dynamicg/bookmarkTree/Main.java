@@ -11,6 +11,7 @@ import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.dialogs.AboutDialog;
 import com.dynamicg.bookmarkTree.dialogs.EditBookmarkDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
+import com.dynamicg.common.ErrorNotification;
 import com.dynamicg.common.StringUtil;
 import com.dynamicg.common.SystemUtil;
 
@@ -42,13 +43,16 @@ public class Main extends Activity {
     }
     
     public void onCreate(Bundle savedInstanceState) {
-        
     	super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-    	this.ctx = new BookmarkTreeContext(this);
-    	
-    	BackupPrefs.onStartup(ctx);
-    	AboutDialog.showOnce(ctx, false); // for debugging
+    	try {
+	        setContentView(R.layout.main);
+	    	this.ctx = new BookmarkTreeContext(this);
+	    	BackupPrefs.onStartup(ctx);
+	    	AboutDialog.showOnce(ctx, false); // for debugging
+    	}
+    	catch (Throwable t) {
+    		ErrorNotification.notifyError(this, "App error", t);
+    	}
     }
     
     
