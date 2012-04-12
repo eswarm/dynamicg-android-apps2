@@ -26,7 +26,6 @@ public class Main extends Activity {
 	 * http://www.softicons.com/free-icons/folder-icons/latt-for-os-x-icons-by-rick-patrick
 	 */
 	
-	// TODO title "Backup & Restore" on holo -> change and reuse "Backup and restore"
 	// TODO auto backup every 10 days
 	
     public static final int ACTION_COLLAPSE_ALL = 1;
@@ -65,7 +64,7 @@ public class Main extends Activity {
 		createMenu(menu, ACTION_COLLAPSE_ALL, R.string.menuCollapseAll, R.drawable.menu_collapse);
 		createMenu(menu, ACTION_RELOAD, R.string.menuReload, R.drawable.menu_reload);
 		createMenu(menu, ACTION_NEW_BM, R.string.menuCreate, R.drawable.menu_create);
-		createMenu(menu, ACTION_BACKUP_RESTORE, R.string.menuBackup, R.drawable.menu_save);
+		createMenu(menu, ACTION_BACKUP_RESTORE, SystemUtil.isHoneycombOrNewer()?R.string.brDialogTitle:R.string.menuBackup, R.drawable.menu_save);
 		createMenu(menu, ACTION_SETTINGS, R.string.menuPrefs, R.drawable.menu_prefs);
 		return true;
 	}
