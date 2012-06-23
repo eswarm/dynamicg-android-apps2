@@ -65,7 +65,7 @@ public class BackupPrefs {
 	}
 
 	public static int getAutoPrefValue() {
-		return BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 0);
+		return BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, PreferencesWrapper.BCK_20);
 	}
 	
 	public static void writeBackupPref(int newPrefValue) {
