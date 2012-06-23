@@ -23,28 +23,7 @@ public class BackupPrefs {
 			checkPeriodicBackup(ctx);
 		}
 		
-		// initial confirmation for "enable auto backup":
-//		if (autoEnabled==-1) {
-//			// first call - init to 0 and ask for "auto enable"
-//			writePref(KEY_AUTO_ENABLED, 0);
-//			BackupPrefs.initialBackupConfirmation(ctx);
-//		}
-//		else if (autoEnabled==1) {
-//			checkPeriodicBackup(ctx);
-//		}
-		
 	}
-	
-//	@SuppressWarnings("unused")
-//	private static void initialBackupConfirmation(final BookmarkTreeContext ctx) {
-//		new SimpleAlertDialog.OkCancelDialog(ctx.activity, Messages.brEnableAutoBackup) {
-//			@Override
-//			public void onPositiveButton() {
-//				writePref(KEY_AUTO_ENABLED, 1);
-//				startBackup(ctx);
-//			}
-//		};
-//	}
 	
 	private static int getDayNr() {
 		long now = System.currentTimeMillis();
@@ -88,12 +67,4 @@ public class BackupPrefs {
 		writePref(KEY_AUTO_ENABLED, isChecked?1:0);
 	}
 
-//	@SuppressWarnings("unused")
-//	private static void cleanup() {
-//		Editor edit = settings.edit();
-//		edit.remove(KEY_AUTO_ENABLED);
-//		edit.remove(KEY_LAST_BACKUP);
-//		edit.commit();
-//	}
-	
 }
