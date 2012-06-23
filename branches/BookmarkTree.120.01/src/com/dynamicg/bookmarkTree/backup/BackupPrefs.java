@@ -17,7 +17,7 @@ public class BackupPrefs {
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
-		int autoEnabled = settings.getInt(KEY_AUTO_BACKUP, -1);
+		int autoEnabled = getBackupDaysPrefValue();
 		if (autoEnabled>0) {
 			checkPeriodicBackup(ctx);
 		}
@@ -32,7 +32,7 @@ public class BackupPrefs {
 	private static void checkPeriodicBackup(BookmarkTreeContext ctx) {
 		int daynr = getDayNr();
 		int lastBackup = settings.getInt(KEY_LAST_BACKUP, 0);
-		int daysBetween = PreferencesWrapper.autoBackupSpinner.value;
+		int daysBetween = getBackupDaysInterval();
 		boolean required = daynr-lastBackup >= daysBetween;
 		if (log.debugEnabled) {
 			log.debug("checkPeriodicBackup", daynr, lastBackup, required);
@@ -54,8 +54,12 @@ public class BackupPrefs {
 		PreferencesUpdater.writeIntPref(key, value);
 	}
 
-	public static int getBackupDaysInterval() {
-		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 0);
+	public static int getBackupDaysPrefValue() {
+		return BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 0);
+	}
+	
+	private static int getBackupDaysInterval() {
+		final int autoBackupValue = getBackupDaysPrefValue();
 		switch (autoBackupValue) {
 		case PreferencesWrapper.BCK_5: return 5;
 		case PreferencesWrapper.BCK_10: return 10;

@@ -110,7 +110,7 @@ implements BackupEventListener {
 	
 	private void setupAutoBackup() {
 		final SpinnerUtil spinnerUtil = new SpinnerUtil(this);
-		final int autoBackupValue = BackupPrefs.getBackupDaysInterval();
+		final int autoBackupValue = BackupPrefs.getBackupDaysPrefValue();
 		final Spinner spinner = (Spinner)findViewById(R.id.brAutoBackupSpinner);
 		spinnerUtil.bindSpinnerItems(spinner, autoBackupValue, SpinnerUtil.getAutoBackupItems(), R.string.brAutoBackupLabel);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
