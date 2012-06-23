@@ -4,13 +4,12 @@ import android.content.SharedPreferences;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.prefs.PreferencesUpdater;
+import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.Logger;
 
 public class BackupPrefs {
 
 	private static final Logger log = new Logger(BackupPrefs.class);
-	
-	public static final int DAYS_BETWEEN = log.debugEnabled ? 5 : 20;
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
 	private static final String KEY_AUTO_ENABLED = "backup.auto";
@@ -56,7 +55,8 @@ public class BackupPrefs {
 	private static void checkPeriodicBackup(BookmarkTreeContext ctx) {
 		int daynr = getDayNr();
 		int lastBackup = settings.getInt(KEY_LAST_BACKUP, 0);
-		boolean required = daynr-lastBackup >= DAYS_BETWEEN;
+		int daysBetween = PreferencesWrapper.autoBackupSpinner.value;
+		boolean required = daynr-lastBackup >= daysBetween;
 		if (log.debugEnabled) {
 			log.debug("checkPeriodicBackup", daynr, lastBackup, required);
 		}
