@@ -122,7 +122,7 @@ implements BackupEventListener {
 					return;
 				}
 				int currentValue = spinnerUtil.getCurrentValue(R.id.brAutoBackupSpinner);
-				BackupPrefs.writeBackupInterval(currentValue);
+				BackupPrefs.writeBackupPref(currentValue);
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {

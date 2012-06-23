@@ -64,8 +64,8 @@ public class BackupPrefs {
 		}
 	}
 	
-	public static void writeBackupInterval(int newValue) {
-		writePref(KEY_AUTO_BACKUP, newValue);
+	public static void writeBackupPref(int newPrefValue) {
+		writePref(KEY_AUTO_BACKUP, newPrefValue);
 	}
 
 }
