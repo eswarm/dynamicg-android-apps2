@@ -34,8 +34,7 @@ public class SpinnerUtil {
 		}
 	}
 	
-	public void bind(final int spinnerResId, int currentKey, ArrayList<KeyValue> items, int prompt) {
-		Spinner spinner = (Spinner)dialog.findViewById(spinnerResId);
+	public void bindSpinnerItems(Spinner spinner, int currentKey, ArrayList<KeyValue> items, int prompt) {
 		ArrayAdapter<KeyValue> adapter = new ArrayAdapter<KeyValue> ( spinner.getContext()
 				, android.R.layout.simple_spinner_item, items);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -49,7 +48,11 @@ public class SpinnerUtil {
 				break;
 			}
 		}
-		
+	}
+	
+	public void bind(final int spinnerResId, int currentKey, ArrayList<KeyValue> items, int prompt) {
+		Spinner spinner = (Spinner)dialog.findViewById(spinnerResId);
+		bindSpinnerItems(spinner, currentKey, items, prompt);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,int position, long id) {
