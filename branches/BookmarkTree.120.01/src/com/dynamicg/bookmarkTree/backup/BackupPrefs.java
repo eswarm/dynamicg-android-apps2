@@ -54,9 +54,14 @@ public class BackupPrefs {
 		PreferencesUpdater.writeIntPref(key, value);
 	}
 
-	public static int getBackupInterval() {
-		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 10);
-		return autoBackupValue;
+	public static int getBackupDaysInterval() {
+		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 0);
+		switch (autoBackupValue) {
+		case PreferencesWrapper.BCK_5: return 5;
+		case PreferencesWrapper.BCK_10: return 10;
+		case PreferencesWrapper.BCK_20: return 20;
+		default: return 0;
+		}
 	}
 	
 	public static void writeBackupInterval(int newValue) {
