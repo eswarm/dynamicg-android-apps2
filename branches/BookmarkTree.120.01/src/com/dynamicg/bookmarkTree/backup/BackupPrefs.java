@@ -1,6 +1,7 @@
 package com.dynamicg.bookmarkTree.backup;
 
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.prefs.PreferencesUpdater;
@@ -12,16 +13,30 @@ public class BackupPrefs {
 	private static final Logger log = new Logger(BackupPrefs.class);
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
-	//private static final String KEY_AUTO_ENABLED = "backup.auto"; // TODO migrate 0/1 to 0 or 10
+	private static final String LEGACY_AUTO_ENABLED = "backup.auto";
 	
     private static final String KEY_AUTO_BACKUP = "backup.interval";
 	
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
+		migrate120();
 		int autoEnabled = settings.getInt(KEY_AUTO_BACKUP, -1);
 		if (autoEnabled>0) {
 			checkPeriodicBackup(ctx);
+		}
+	}
+	
+	private static void migrate120() {
+		// migrate from 1.20
+		if (BookmarkTreeContext.settings.contains(LEGACY_AUTO_ENABLED)) {
+			int value = BookmarkTreeContext.settings.getInt(LEGACY_AUTO_ENABLED,0);
+			if (value==1) {
+				writeBackupInterval(20);
+			}
+			Editor editor = BookmarkTreeContext.settings.edit();
+			editor.remove(LEGACY_AUTO_ENABLED);
+			editor.commit();
 		}
 	}
 	

@@ -26,7 +26,6 @@ import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
-import com.dynamicg.common.SystemUtil;
 
 public class BackupRestoreDialog extends Dialog
 implements BackupEventListener {
