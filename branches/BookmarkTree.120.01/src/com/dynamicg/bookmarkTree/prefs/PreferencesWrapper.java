@@ -47,6 +47,8 @@ public class PreferencesWrapper {
 	public static final PrefEntryInt colorBookmarkTitle = new PrefEntryInt("color.bookmarkTitle", Color.WHITE);
 	public static final PrefEntryInt colorBookmarkUrl = new PrefEntryInt("color.bookmarkUrl", Color.WHITE);
 	
+	public static final PrefEntryInt autoBackupSpinner = new PrefEntryInt("autoBackup", 10);
+	
 	public static final SeparatorPreference separatorPreference = new SeparatorPreference();
 	static {
 		String separator = BookmarkTreeContext.settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR);

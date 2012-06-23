@@ -131,4 +131,13 @@ public class SpinnerUtil {
 		return items.list;
 	}
 	
+	public static ArrayList<KeyValue> getAutoBackupItems() {
+		SpinnerItems items = new SpinnerItems();
+		items.add ( 0, "None" );
+		items.add ( 5, "5" );
+		items.add ( 10, "10" );
+		items.add ( 20, "20" );
+		return items.list;
+	}
+	
 }
