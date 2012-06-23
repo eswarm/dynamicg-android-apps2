@@ -12,15 +12,15 @@ public class BackupPrefs {
 	private static final Logger log = new Logger(BackupPrefs.class);
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
-	private static final String KEY_AUTO_ENABLED = "backup.auto"; // TODO migrate
+	//private static final String KEY_AUTO_ENABLED = "backup.auto"; // TODO migrate 0/1 to 0 or 10
 	
     private static final String KEY_AUTO_BACKUP = "backup.interval";
 	
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
-		int autoEnabled = settings.getInt(KEY_AUTO_ENABLED, -1);
-		if (autoEnabled==1) {
+		int autoEnabled = settings.getInt(KEY_AUTO_BACKUP, -1);
+		if (autoEnabled>0) {
 			checkPeriodicBackup(ctx);
 		}
 	}
@@ -61,15 +61,8 @@ public class BackupPrefs {
 		return autoBackupValue;
 	}
 	
-	public static void writeAutoBackup(int newValue) {
-		writePref(KEY_AUTO_ENABLED, newValue);
-	}
-
-	public static boolean isAutoBackupEnabled() {
-		if (log.debugEnabled) {
-			log.debug("isAutoBackupEnabled", settings.getInt(KEY_AUTO_ENABLED, 0) == 1 );
-		}
-		return settings.getInt(KEY_AUTO_ENABLED, 0) == 1;
+	public static void writeBackupInterval(int newValue) {
+		writePref(KEY_AUTO_BACKUP, newValue);
 	}
 
 }

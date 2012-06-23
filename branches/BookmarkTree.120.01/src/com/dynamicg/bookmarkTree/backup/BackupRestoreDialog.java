@@ -123,7 +123,7 @@ implements BackupEventListener {
 					return;
 				}
 				int currentValue = spinnerUtil.getCurrentValue(R.id.brAutoBackupSpinner);
-				BackupPrefs.writeAutoBackup(currentValue);
+				BackupPrefs.writeBackupInterval(currentValue);
 				SystemUtil.toastShort(context, "WRITTEN:"+currentValue); // TODO REMOVE
 			}
 			@Override
