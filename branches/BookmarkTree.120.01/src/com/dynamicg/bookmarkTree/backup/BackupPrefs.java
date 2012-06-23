@@ -17,12 +17,10 @@ public class BackupPrefs {
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
 	public static void onStartup(BookmarkTreeContext ctx) {
-		//cleanup();
 		int autoEnabled = settings.getInt(KEY_AUTO_ENABLED, -1);
 		if (autoEnabled==1) {
 			checkPeriodicBackup(ctx);
 		}
-		
 	}
 	
 	private static int getDayNr() {

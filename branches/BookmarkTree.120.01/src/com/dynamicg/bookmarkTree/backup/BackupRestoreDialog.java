@@ -9,22 +9,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.backup.BackupManager.BackupEventListener;
+import com.dynamicg.bookmarkTree.prefs.PreferencesUpdater;
+import com.dynamicg.bookmarkTree.prefs.SpinnerUtil;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
-import com.dynamicg.common.SystemUtil;
 
 public class BackupRestoreDialog extends Dialog
 implements BackupEventListener {
@@ -33,6 +35,8 @@ implements BackupEventListener {
 	
     public static final int ACTION_DELETE_OLD = 1;
     public static final int ACTION_DELETE_ALL = 2;
+    
+    private static final String KEY_AUTO_BACKUP = "AutoBackupDays";
     
 	private final BookmarkTreeContext ctx;
 	private final Activity context;
@@ -108,19 +112,21 @@ implements BackupEventListener {
 	}
 	
 	private void setupAutoBackup() {
-		CheckBox autoBackup = (CheckBox)findViewById(R.id.brAutoBackup);
-		String autoBackupLabel = StringUtil.textWithParam(context, R.string.brAutoBackupLabel, BackupPrefs.DAYS_BETWEEN); 
-		autoBackup.setText(autoBackupLabel);
-		autoBackup.setChecked(BackupPrefs.isAutoBackupEnabled());
-		
-		autoBackup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 10);
+		final SpinnerUtil spinnerUtil = new SpinnerUtil(this);
+		final Spinner spinner = (Spinner)findViewById(R.id.brAutoBackupSpinner);
+		spinnerUtil.bindSpinnerItems(spinner, autoBackupValue, SpinnerUtil.getAutoBackupItems(), R.string.brAutoBackupLabel);
+		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				BackupPrefs.writeAutoBackupEnabled(isChecked);
-				SystemUtil.toastShort(context, context.getString(isChecked?R.string.hintAutoBackupEnabled:R.string.hintAutoBackupDisabled));
+			public void onItemSelected(AdapterView<?> parent, View view,int position, long id) {
+				int currentValue = spinnerUtil.getCurrentValue(R.id.brAutoBackupSpinner);
+				PreferencesUpdater.writeIntPref(KEY_AUTO_BACKUP, currentValue);
+				//SystemUtil.toastShort(context, "WRITTEN:"+currentValue);
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		
 	}
 	
 	private int refreshBackupFilesList() {
