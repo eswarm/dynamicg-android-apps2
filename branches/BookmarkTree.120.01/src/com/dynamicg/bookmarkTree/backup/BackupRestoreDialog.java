@@ -124,7 +124,6 @@ implements BackupEventListener {
 				}
 				int currentValue = spinnerUtil.getCurrentValue(R.id.brAutoBackupSpinner);
 				BackupPrefs.writeBackupInterval(currentValue);
-				SystemUtil.toastShort(context, "WRITTEN:"+currentValue); // TODO REMOVE
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
