@@ -21,12 +21,12 @@ import android.widget.TextView;
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.backup.BackupManager.BackupEventListener;
-import com.dynamicg.bookmarkTree.prefs.PreferencesUpdater;
 import com.dynamicg.bookmarkTree.prefs.SpinnerUtil;
 import com.dynamicg.bookmarkTree.util.DialogButtonPanelWrapper;
 import com.dynamicg.bookmarkTree.util.DialogHelper;
 import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
+import com.dynamicg.common.SystemUtil;
 
 public class BackupRestoreDialog extends Dialog
 implements BackupEventListener {
@@ -35,8 +35,6 @@ implements BackupEventListener {
 	
     public static final int ACTION_DELETE_OLD = 1;
     public static final int ACTION_DELETE_ALL = 2;
-    
-    private static final String KEY_AUTO_BACKUP = "AutoBackupDays";
     
 	private final BookmarkTreeContext ctx;
 	private final Activity context;
@@ -112,16 +110,21 @@ implements BackupEventListener {
 	}
 	
 	private void setupAutoBackup() {
-		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 10);
 		final SpinnerUtil spinnerUtil = new SpinnerUtil(this);
+		final int autoBackupValue = BackupPrefs.getBackupInterval();
 		final Spinner spinner = (Spinner)findViewById(R.id.brAutoBackupSpinner);
 		spinnerUtil.bindSpinnerItems(spinner, autoBackupValue, SpinnerUtil.getAutoBackupItems(), R.string.brAutoBackupLabel);
 		spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+			boolean isFirst = true;
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,int position, long id) {
+				if (isFirst) {
+					isFirst=false;
+					return;
+				}
 				int currentValue = spinnerUtil.getCurrentValue(R.id.brAutoBackupSpinner);
-				PreferencesUpdater.writeIntPref(KEY_AUTO_BACKUP, currentValue);
-				//SystemUtil.toastShort(context, "WRITTEN:"+currentValue);
+				BackupPrefs.writeAutoBackup(currentValue);
+				SystemUtil.toastShort(context, "WRITTEN:"+currentValue); // TODO REMOVE
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {

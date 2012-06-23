@@ -12,7 +12,9 @@ public class BackupPrefs {
 	private static final Logger log = new Logger(BackupPrefs.class);
 	
 	private static final String KEY_LAST_BACKUP = "backup.last";
-	private static final String KEY_AUTO_ENABLED = "backup.auto";
+	private static final String KEY_AUTO_ENABLED = "backup.auto"; // TODO migrate
+	
+    private static final String KEY_AUTO_BACKUP = "backup.interval";
 	
 	private static final SharedPreferences settings = BookmarkTreeContext.settings;
 	
@@ -54,15 +56,20 @@ public class BackupPrefs {
 		PreferencesUpdater.writeIntPref(key, value);
 	}
 
+	public static int getBackupInterval() {
+		final int autoBackupValue = BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, 10);
+		return autoBackupValue;
+	}
+	
+	public static void writeAutoBackup(int newValue) {
+		writePref(KEY_AUTO_ENABLED, newValue);
+	}
+
 	public static boolean isAutoBackupEnabled() {
 		if (log.debugEnabled) {
 			log.debug("isAutoBackupEnabled", settings.getInt(KEY_AUTO_ENABLED, 0) == 1 );
 		}
 		return settings.getInt(KEY_AUTO_ENABLED, 0) == 1;
-	}
-
-	public static void writeAutoBackupEnabled(boolean isChecked) {
-		writePref(KEY_AUTO_ENABLED, isChecked?1:0);
 	}
 
 }
