@@ -136,10 +136,10 @@ public class SpinnerUtil {
 	
 	public static ArrayList<KeyValue> getAutoBackupItems() {
 		SpinnerItems items = new SpinnerItems();
-		items.add ( 0, "None" );
-		items.add ( 5, "5" );
-		items.add ( 10, "10" );
-		items.add ( 20, "20" );
+		items.add ( PreferencesWrapper.BCK_OFF, "None" );
+		items.add ( PreferencesWrapper.BCK_5, "5" );
+		items.add ( PreferencesWrapper.BCK_10, "10" );
+		items.add ( PreferencesWrapper.BCK_20, "20" );
 		return items.list;
 	}
 	
