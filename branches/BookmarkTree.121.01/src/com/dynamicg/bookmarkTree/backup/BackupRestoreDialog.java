@@ -238,8 +238,6 @@ implements BackupEventListener {
 	
 	public static void confirmGoogleDriveRestore(Intent data) {
 		String path = data!=null ? data.getStringExtra(GoogleDriveGlobals.KEY_FNAME_ABS) : null;
-		System.err.println("PATH="+path);
-		System.err.println("CALLER="+caller);
 		if (path==null || path.length()==0) {
 			return;
 		}
