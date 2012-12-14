@@ -27,12 +27,14 @@ public class BackupManager {
 	private static final String FILE_PATTERN = FILE_PREFIX + "{stamp}" + FILE_SUFFIX;
 	private static final String FMT_STAMP = "%Y-%m-%d.%H-%M-%S";
 	
+	public static final String GZ_FILE_NAME = FILE_PREFIX+"xml.gz";
+	
 	private static String getFilename(Time t) {
 		return StringUtil.replaceAll(FILE_PATTERN, "{stamp}", t.format(FMT_STAMP));
 	}
 	private static String getFilename(boolean useGZ) {
 		if (useGZ) {
-			return FILE_PREFIX+"xml.gz";
+			return GZ_FILE_NAME;
 		}
 		Time t = new Time();
 		t.setToNow();

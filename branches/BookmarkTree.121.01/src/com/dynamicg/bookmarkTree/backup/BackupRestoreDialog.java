@@ -214,7 +214,9 @@ implements BackupEventListener {
 		BackupEventListener listener = new BackupEventListener() {
 			@Override
 			public void backupDone(File backupFile) {
-				// TODO ## implement
+				if (backupFile!=null) {
+					GoogleDriveUtil.upload(context, backupFile);
+				}
 			}
 			@Override
 			public void restoreDone() {
@@ -224,7 +226,7 @@ implements BackupEventListener {
 	}
 	
 	private void googleDriveRestore() {
-		// TODO ## implement
+		GoogleDriveUtil.startDownload(context); // result gets wrapped through onActivityResult
 	}
 	
 	@Override
