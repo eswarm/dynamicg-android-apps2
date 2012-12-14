@@ -69,7 +69,7 @@ public class BackupManager {
 	}
 	
 	public static interface BackupEventListener {
-		public void backupDone();
+		public void backupDone(File backupFile);
 		public void restoreDone();
 	}
 	
@@ -95,6 +95,7 @@ public class BackupManager {
 		new SimpleProgressDialog(context, R.string.brProgressCreateBackup) {
 			
 			int numberOfRows;
+			File backupFile;
 			
 			@Override
 			public void backgroundWork() {
@@ -107,6 +108,7 @@ public class BackupManager {
 					try {
 						new XmlWriter(xmlfileTemp, bookmarks);
 						xmlfileTemp.renameTo(xmlfileFinal);
+						backupFile = xmlfileFinal;
 					}
 					catch (RuntimeException e) {
 						throw (RuntimeException)e;
@@ -127,7 +129,7 @@ public class BackupManager {
 				BackupPrefs.registerBackup();
 				if (backupDoneListener!=null) {
 					// "refresh GUI" or "register" callback
-					backupDoneListener.backupDone();
+					backupDoneListener.backupDone(this.backupFile);
 				}
 			}
 			

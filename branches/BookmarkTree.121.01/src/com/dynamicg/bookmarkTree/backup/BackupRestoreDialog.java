@@ -214,7 +214,7 @@ implements BackupEventListener {
 		// TODO ## implement
 		BackupEventListener listener = new BackupEventListener() {
 			@Override
-			public void backupDone() {
+			public void backupDone(File backupFile) {
 			}
 			@Override
 			public void restoreDone() {
@@ -228,7 +228,7 @@ implements BackupEventListener {
 	}
 	
 	@Override
-	public void backupDone() {
+	public void backupDone(File backupFile) {
 		if (autoBackup) {
 			dismiss(); // auto close
 		}
