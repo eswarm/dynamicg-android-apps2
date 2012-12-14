@@ -211,16 +211,16 @@ implements BackupEventListener {
 	}
 	
 	private void googleDriveBackup() {
-		// TODO ## implement
 		BackupEventListener listener = new BackupEventListener() {
 			@Override
 			public void backupDone(File backupFile) {
+				// TODO ## implement
 			}
 			@Override
 			public void restoreDone() {
 			}
 		};
-		BackupManager.createBackup(ctx, listener);
+		BackupManager.createBackup(ctx, listener, true);
 	}
 	
 	private void googleDriveRestore() {

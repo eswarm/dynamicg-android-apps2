@@ -30,7 +30,10 @@ public class BackupManager {
 	private static String getFilename(Time t) {
 		return StringUtil.replaceAll(FILE_PATTERN, "{stamp}", t.format(FMT_STAMP));
 	}
-	private static String getFilename() {
+	private static String getFilename(boolean useGZ) {
+		if (useGZ) {
+			return FILE_PREFIX+"xml.gz";
+		}
 		Time t = new Time();
 		t.setToNow();
 		return getFilename(t);
@@ -76,15 +79,20 @@ public class BackupManager {
 	private static final HashSet<String> locktable = new HashSet<String>();
 	
 	public synchronized static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener) {
+		createBackup(ctx, backupDoneListener, false);
+	}
+	
+	public synchronized static void createBackup(final BookmarkTreeContext ctx, final BackupEventListener backupDoneListener, final boolean forGoogleDrive) {
 		
 		final Context context = ctx.activity;
+		final boolean useGZ = forGoogleDrive;
 		
 		final File backupdir = new SDCardCheck(context).readyForWrite();
 		if (backupdir==null) {
 			return; // not ready
 		}
 		
-		final String filename = getFilename();
+		final String filename = getFilename(useGZ);
 		synchronized (locktable) {
 			if (locktable.contains(filename)) {
 				return; // already running. double-click(?)
@@ -106,9 +114,14 @@ public class BackupManager {
 					ArrayList<RawDataBean> bookmarks = BrowserBookmarkLoader.forBackup(ctx);
 					numberOfRows = bookmarks.size();
 					try {
-						new XmlWriter(xmlfileTemp, bookmarks);
+						new XmlWriter(xmlfileTemp, bookmarks, useGZ);
+						if (xmlfileFinal.exists()) {
+							xmlfileFinal.delete();
+						}
+						
 						xmlfileTemp.renameTo(xmlfileFinal);
 						backupFile = xmlfileFinal;
+						locktable.remove(filename);
 					}
 					catch (RuntimeException e) {
 						throw (RuntimeException)e;
@@ -125,7 +138,9 @@ public class BackupManager {
 				.replace("{1}", filename)
 				.replace("{2}", Integer.toString(numberOfRows))
 				;
-				SystemUtil.toastShort(ctx.activity, text);
+				if (!forGoogleDrive) {
+					SystemUtil.toastShort(ctx.activity, text);
+				}
 				BackupPrefs.registerBackup();
 				if (backupDoneListener!=null) {
 					// "refresh GUI" or "register" callback
