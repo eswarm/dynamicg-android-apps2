@@ -76,6 +76,21 @@ implements BackupEventListener {
 			}
 		});
 		
+		Button googleDriveBackup = (Button)findViewById(R.id.brDriveBackup);
+		googleDriveBackup.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				googleDriveBackup();
+			}
+		});
+		
+		Button googleDriveRestore = (Button)findViewById(R.id.brDriveRestore);
+		googleDriveRestore.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				googleDriveRestore();
+			}
+		});
 		int numFiles = refreshBackupFilesList();
 		
 		new DialogButtonPanelWrapper(this, DialogButtonPanelWrapper.TYPE_CLOSE) {
@@ -193,6 +208,23 @@ implements BackupEventListener {
 
 	private void createBackup() {
 		BackupManager.createBackup(ctx, this);
+	}
+	
+	private void googleDriveBackup() {
+		// TODO ## implement
+		BackupEventListener listener = new BackupEventListener() {
+			@Override
+			public void backupDone() {
+			}
+			@Override
+			public void restoreDone() {
+			}
+		};
+		BackupManager.createBackup(ctx, listener);
+	}
+	
+	private void googleDriveRestore() {
+		// TODO ## implement
 	}
 	
 	@Override
