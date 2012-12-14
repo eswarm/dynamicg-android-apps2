@@ -39,8 +39,8 @@ public class GoogleDriveUtil {
 		final int requestCode = GoogleDriveGlobals.ACTION_RESTORE; // TODO new action for "bookmarks" (?)
 		
 		Intent intent = getBaseIntent(requestCode);
-		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_DRIVE, BackupManager.GZ_FILE_NAME);
-		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_LOCAL, BackupManager.GZ_FILE_NAME);
+		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_DRIVE, BackupManager.GOOGLE_DRIVE_FILE_NAME);
+		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_LOCAL, BackupManager.GOOGLE_DRIVE_FILE_NAME);
 
 		try {
 			context.startActivityForResult(intent, requestCode);
@@ -71,16 +71,6 @@ public class GoogleDriveUtil {
 		intent.putExtra(GoogleDriveGlobals.KEY_APP_INSTANCE, "F"); // free
 		intent.putExtra(GoogleDriveGlobals.KEY_REQUEST_CODE, requestCode);
 		return intent;
-	}
-
-	public static void confirmImport(Intent data) {
-		String path = data!=null ? data.getStringExtra(GoogleDriveGlobals.KEY_FNAME_ABS) : null;
-		if (path==null || path.length()==0) {
-			return;
-		}
-		
-		File file = new File(path);
-		
 	}
 
 }

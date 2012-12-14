@@ -1,10 +1,12 @@
 package com.dynamicg.bookmarkTree.backup;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -38,6 +40,8 @@ implements BackupEventListener {
 	private final BookmarkTreeContext ctx;
 	private final Activity context;
 	private final boolean autoBackup;
+	
+	private static WeakReference<BackupRestoreDialog> caller;
 
 	public BackupRestoreDialog(BookmarkTreeContext ctx, boolean autoBackup) {
 		super(ctx.activity);
@@ -195,7 +199,9 @@ implements BackupEventListener {
 
 			@Override
 			public void onNegativeButton() {
-				group.clearCheck();
+				if (group!=null) {
+					group.clearCheck();
+				}
 			}
 
 			@Override
@@ -226,7 +232,23 @@ implements BackupEventListener {
 	}
 	
 	private void googleDriveRestore() {
+		caller = new WeakReference<BackupRestoreDialog>(this);
 		GoogleDriveUtil.startDownload(context); // result gets wrapped through onActivityResult
+	}
+	
+	public static void confirmGoogleDriveRestore(Intent data) {
+		String path = data!=null ? data.getStringExtra(GoogleDriveGlobals.KEY_FNAME_ABS) : null;
+		System.err.println("PATH="+path);
+		System.err.println("CALLER="+caller);
+		if (path==null || path.length()==0) {
+			return;
+		}
+		BackupRestoreDialog dialog = caller!=null ? caller.get() : null;
+		if (caller==null) {
+			return;
+		}
+		File file = new File(path);
+		dialog.restore(null, file);
 	}
 	
 	@Override

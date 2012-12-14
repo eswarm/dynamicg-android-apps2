@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import com.dynamicg.bookmarkTree.backup.BackupPrefs;
 import com.dynamicg.bookmarkTree.backup.BackupRestoreDialog;
 import com.dynamicg.bookmarkTree.backup.GoogleDriveGlobals;
-import com.dynamicg.bookmarkTree.backup.GoogleDriveUtil;
 import com.dynamicg.bookmarkTree.dialogs.AboutDialog;
 import com.dynamicg.bookmarkTree.dialogs.EditBookmarkDialog;
 import com.dynamicg.bookmarkTree.prefs.PreferencesDialog;
@@ -100,9 +99,8 @@ public class Main extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		//System.err.println("ON ACTIVITY RESULT = "+requestCode+"/"+resultCode);
-		if (resultCode==GoogleDriveGlobals.ACTION_RESTORE) {
-			GoogleDriveUtil.confirmImport(data);
+		if (requestCode==GoogleDriveGlobals.ACTION_RESTORE) {
+			BackupRestoreDialog.confirmGoogleDriveRestore(data);
 		}
 	}
 	
