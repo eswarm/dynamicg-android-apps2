@@ -73,4 +73,14 @@ public class GoogleDriveUtil {
 		return intent;
 	}
 
+	public static void confirmImport(Intent data) {
+		String path = data!=null ? data.getStringExtra(GoogleDriveGlobals.KEY_FNAME_ABS) : null;
+		if (path==null || path.length()==0) {
+			return;
+		}
+		
+		File file = new File(path);
+		
+	}
+
 }
