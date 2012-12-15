@@ -7,12 +7,23 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Typeface;
+import android.view.View;
+import android.widget.TextView;
+
+import com.dynamicg.bookmarkTree.R;
+import com.dynamicg.bookmarkTree.prefs.MarketLinkHelper;
+import com.dynamicg.common.ContextUtil;
+import com.dynamicg.common.SimpleAlertDialog;
 
 public class GoogleDriveUtil {
-	
+
 	public static final String PLUGIN_APP = "com.dynamicg.timerec.plugin3";
 	private static final String PLUGIN_ACTIVITY = "com.dynamicg.timerec.plugin3.gdrive.FileProviderActivity";
-	
+
 	private static Intent getBaseIntent(int requestCode) {
 		ComponentName component = new ComponentName(PLUGIN_APP, PLUGIN_ACTIVITY);
 		Intent intent = new Intent();
@@ -25,7 +36,7 @@ public class GoogleDriveUtil {
 	public static void upload(Context context, File file) {
 
 		final int requestCode = GoogleDriveGlobals.ACTION_BACKUP;
-		
+
 		if (file==null) {
 			return;
 		}
@@ -42,11 +53,11 @@ public class GoogleDriveUtil {
 			showPermissionError(context, e);
 		}
 	}
-	
+
 	public static void startDownload(Activity context) {
-		
+
 		final int requestCode = GoogleDriveGlobals.ACTION_RESTORE;
-		
+
 		Intent intent = getBaseIntent(requestCode);
 		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_DRIVE, BackupManager.GOOGLE_DRIVE_FILE_NAME);
 		intent.putExtra(GoogleDriveGlobals.KEY_FNAME_LOCAL, BackupManager.GOOGLE_DRIVE_FILE_NAME);
@@ -65,17 +76,35 @@ public class GoogleDriveUtil {
 	private static void showPermissionError(Context context, SecurityException e) {
 		// TODO Auto-generated method stub
 		System.err.println("TODO - showPermissionError");
-		
+
 	}
 
-	public static void alertMissingPlugin(Context context) {
-		// TODO Auto-generated method stub
-		System.err.println("TODO - alertMissingPlugin");
+	public static void alertMissingPlugin(final Context context) {
+		new SimpleAlertDialog(context, R.string.missingAppTitle, R.string.commonClose) {
+			@Override
+			public View getBody() {
+				String text = context.getString(R.string.missingAppBody);
+				TextView node = createTextView(text);
+				node.setTextColor(context.getResources().getColorStateList(R.color.linksabout));
+				node.setTypeface(Typeface.DEFAULT_BOLD, Typeface.BOLD);
+				node.setOnClickListener(MarketLinkHelper.getGoogleDrivePluginLink(context));
+
+				int padlr = ContextUtil.getScaledSizeInt(context, 6);
+				int padtb = ContextUtil.getScaledSizeInt(context, 20);
+				node.setPadding(padlr, padtb, padlr, padtb);
+
+				return node;
+			}
+		};
 	}
 
-	public static boolean isPluginAvailable() {
-		// TODO Auto-generated method stub
-		return false;
+	public static boolean isPluginAvailable(Context context) {
+		try {
+			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(PLUGIN_APP, PackageManager.GET_ACTIVITIES);
+			return packageInfo!=null;
+		} catch (NameNotFoundException e) {
+			return false;
+		}
 	}
 
 }

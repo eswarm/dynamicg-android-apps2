@@ -228,7 +228,7 @@ implements BackupEventListener {
 			public void restoreDone() {
 			}
 		};
-		if (GoogleDriveUtil.isPluginAvailable()) {
+		if (GoogleDriveUtil.isPluginAvailable(context)) {
 			BackupManager.createBackup(ctx, listener, true);
 		}
 		else {
@@ -237,7 +237,7 @@ implements BackupEventListener {
 	}
 
 	private void googleDriveRestore() {
-		if (GoogleDriveUtil.isPluginAvailable()) {
+		if (GoogleDriveUtil.isPluginAvailable(context)) {
 			caller = new WeakReference<BackupRestoreDialog>(this);
 			GoogleDriveUtil.startDownload(context); // result gets wrapped through onActivityResult
 		}
