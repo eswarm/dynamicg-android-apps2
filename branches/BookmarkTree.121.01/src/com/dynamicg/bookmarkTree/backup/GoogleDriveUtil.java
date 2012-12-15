@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.dynamicg.bookmarkTree.R;
 import com.dynamicg.bookmarkTree.prefs.MarketLinkHelper;
 import com.dynamicg.common.ContextUtil;
+import com.dynamicg.common.ErrorNotification;
 import com.dynamicg.common.SimpleAlertDialog;
 
 public class GoogleDriveUtil {
@@ -73,10 +74,9 @@ public class GoogleDriveUtil {
 		}
 	}
 
-	private static void showPermissionError(Context context, SecurityException e) {
-		// TODO Auto-generated method stub
-		System.err.println("TODO - showPermissionError");
-
+	private static void showPermissionError(final Context context, final SecurityException e) {
+		// TODO link this to the timerec online help (error27)
+		ErrorNotification.notifyError(context, "SecurityException", e);
 	}
 
 	public static void alertMissingPlugin(final Context context) {
