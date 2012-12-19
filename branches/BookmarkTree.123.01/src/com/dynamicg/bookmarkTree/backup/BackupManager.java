@@ -214,18 +214,15 @@ public class BackupManager {
 
 			void askForSettingsImport() {
 				new SimpleAlertDialog(ctx.activity, R.string.confirmImportSettings, R.string.buttonYes, R.string.buttonNo) {
-
 					@Override
 					public void onPositiveButton() {
-						XmlSettingsHelper.recover(settingsFromXml);
+						XmlSettingsHelper.restore(settingsFromXml);
 						restoreDone();
 					}
-
 					@Override
 					public void onNegativeButton() {
 						restoreDone();
 					}
-
 				};
 			}
 

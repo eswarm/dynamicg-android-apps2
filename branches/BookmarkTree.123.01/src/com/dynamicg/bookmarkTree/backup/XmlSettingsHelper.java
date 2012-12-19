@@ -8,12 +8,17 @@ import java.util.TreeSet;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
+import android.content.SharedPreferences.Editor;
+
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.common.Logger;
 
 public class XmlSettingsHelper {
 
 	private static final Logger log = new Logger(XmlSettingsHelper.class);
+
+	private static final String TYPE_STRING = "String";
+	private static final String TYPE_INTEGER = "Integer";
 
 	public static void writeSettings(XmlSerializer serializer)
 			throws IOException {
@@ -35,7 +40,7 @@ public class XmlSettingsHelper {
 		private String datatype;
 	}
 
-	public static void read(XmlPullParser parser, ArrayList<PreferenceEntry> settings) {
+	public static void readSettings(XmlPullParser parser, ArrayList<PreferenceEntry> settings) {
 		PreferenceEntry entry = new PreferenceEntry();
 		entry.name = parser.getAttributeValue(null, Tags.PREF_NAME);
 		entry.value = parser.getAttributeValue(null, Tags.PREF_VALUE);
@@ -44,14 +49,28 @@ public class XmlSettingsHelper {
 
 		if (log.debugEnabled) {
 			log.debug("pref entry loaded", entry.name, entry.value, entry.datatype);
-
 		}
 	}
 
-	public static void recover(ArrayList<PreferenceEntry> settingsFromXml) {
+	public static void restore(ArrayList<PreferenceEntry> settingsFromXml) {
+		Editor edit = BookmarkTreeContext.settings.edit();
 		for (PreferenceEntry entry:settingsFromXml) {
-
+			if (TYPE_STRING.equals(entry.datatype)) {
+				edit.putString(entry.name, entry.value);
+				log.debug("restore string", entry.name, entry.value);
+			}
+			else if (TYPE_INTEGER.equals(entry.datatype)) {
+				try {
+					edit.putInt(entry.name, Integer.parseInt(entry.value));
+					log.debug("restore int", entry.name, entry.value);
+				}
+				catch (NumberFormatException e) {}
+			}
 		}
+		edit.commit();
+
+		// TODO ## propagate to PreferencesWrapper
+
 	}
 
 }

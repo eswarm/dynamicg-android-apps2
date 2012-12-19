@@ -90,7 +90,7 @@ public class XmlReader {
 					bean.favicon = encodeIconData(getNextText());
 				}
 				else if (equals(tag, Tags.PREF_ENTRY)) {
-					XmlSettingsHelper.read(parser, settings);
+					XmlSettingsHelper.readSettings(parser, settings);
 				}
 
 			}
