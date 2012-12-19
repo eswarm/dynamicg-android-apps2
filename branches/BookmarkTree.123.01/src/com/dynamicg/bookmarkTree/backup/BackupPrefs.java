@@ -70,7 +70,7 @@ public class BackupPrefs {
 	public static int getAutoPrefValue() {
 		if (!BookmarkTreeContext.settings.contains(KEY_LAST_BACKUP)) {
 			// prevent initial firing of backup
-			registerBackup();
+			writePref(KEY_LAST_BACKUP, getDayNr());
 		}
 		return BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, BCK_20);
 	}
