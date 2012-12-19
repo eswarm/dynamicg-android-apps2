@@ -130,6 +130,14 @@ public class XmlWriter {
 			}
 		}
 
+		/*
+		 * 2.02 append settings
+		 */
+		serializer.startTag(null, Tags.SETTINGS);
+		XmlSettingsHelper.append(serializer);
+		serializer.endTag(null, Tags.SETTINGS);
+
+		// DONE
 		serializer.endTag(null, Tags.BODY);
 	}
 
