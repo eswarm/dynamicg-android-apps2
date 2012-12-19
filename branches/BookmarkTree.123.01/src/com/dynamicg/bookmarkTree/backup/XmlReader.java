@@ -10,6 +10,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 import android.util.Xml;
 
+import com.dynamicg.bookmarkTree.backup.XmlSettingsHelper.PreferenceEntry;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.common.Logger;
 
@@ -19,7 +20,7 @@ public class XmlReader {
 
 	private int evtype;
 
-	public final ArrayList<XmlSettingsHelper.Settings> settings = new ArrayList<XmlSettingsHelper.Settings>();
+	public final ArrayList<PreferenceEntry> settings = new ArrayList<PreferenceEntry>();
 
 	public XmlReader(File xmlfile)
 			throws Exception {

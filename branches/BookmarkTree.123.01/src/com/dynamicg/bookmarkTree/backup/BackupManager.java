@@ -11,10 +11,12 @@ import android.text.format.Time;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
 import com.dynamicg.bookmarkTree.R;
+import com.dynamicg.bookmarkTree.backup.XmlSettingsHelper.PreferenceEntry;
 import com.dynamicg.bookmarkTree.data.BrowserBookmarkLoader;
 import com.dynamicg.bookmarkTree.model.RawDataBean;
 import com.dynamicg.bookmarkTree.util.SimpleProgressDialog;
 import com.dynamicg.common.Logger;
+import com.dynamicg.common.SimpleAlertDialog;
 import com.dynamicg.common.StringUtil;
 import com.dynamicg.common.SystemUtil;
 
@@ -184,6 +186,7 @@ public class BackupManager {
 		new SimpleProgressDialog(context, getProgressMessageText(context,1) ) {
 
 			int numberOfRows;
+			ArrayList<PreferenceEntry> settingsFromXml;
 
 			@Override
 			public void backgroundWork() {
@@ -192,6 +195,7 @@ public class BackupManager {
 					XmlReader xmlReader = new XmlReader(xmlfile);
 					ArrayList<RawDataBean> rows = xmlReader.read();
 					numberOfRows = rows.size();
+					settingsFromXml = xmlReader.settings;
 					RestoreWriter.replaceFull(ctx, rows, this);
 				}
 				catch (RuntimeException e) {
@@ -202,11 +206,37 @@ public class BackupManager {
 				}
 			}
 
-			@Override
-			public void done() {
+			void restoreDone() {
 				String text = StringUtil.textWithParam(context, R.string.brHintBookmarksRestored, numberOfRows);
 				SystemUtil.toastShort(context, text);
 				backupDoneListener.restoreDone();
+			}
+
+			void askForSettingsImport() {
+				new SimpleAlertDialog(ctx.activity, R.string.confirmImportSettings, R.string.buttonYes, R.string.buttonNo) {
+
+					@Override
+					public void onPositiveButton() {
+						XmlSettingsHelper.recover(settingsFromXml);
+						restoreDone();
+					}
+
+					@Override
+					public void onNegativeButton() {
+						restoreDone();
+					}
+
+				};
+			}
+
+			@Override
+			public void done() {
+				if (settingsFromXml!=null && settingsFromXml.size()>0) {
+					askForSettingsImport();
+				}
+				else {
+					restoreDone();
+				}
 			}
 
 			@Override

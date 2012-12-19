@@ -29,14 +29,14 @@ public class XmlSettingsHelper {
 		}
 	}
 
-	public static class Settings {
-		public String name;
-		public String value;
-		public String datatype;
+	public static class PreferenceEntry {
+		private String name;
+		private String value;
+		private String datatype;
 	}
 
-	public static void read(XmlPullParser parser, ArrayList<Settings> settings) {
-		Settings entry = new Settings();
+	public static void read(XmlPullParser parser, ArrayList<PreferenceEntry> settings) {
+		PreferenceEntry entry = new PreferenceEntry();
 		entry.name = parser.getAttributeValue(null, Tags.PREF_NAME);
 		entry.value = parser.getAttributeValue(null, Tags.PREF_VALUE);
 		entry.datatype = parser.getAttributeValue(null, Tags.PREF_TYPE);
@@ -44,6 +44,12 @@ public class XmlSettingsHelper {
 
 		if (log.debugEnabled) {
 			log.debug("pref entry loaded", entry.name, entry.value, entry.datatype);
+
+		}
+	}
+
+	public static void recover(ArrayList<PreferenceEntry> settingsFromXml) {
+		for (PreferenceEntry entry:settingsFromXml) {
 
 		}
 	}
