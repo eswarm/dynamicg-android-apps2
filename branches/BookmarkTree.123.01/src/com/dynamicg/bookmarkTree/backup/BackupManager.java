@@ -189,7 +189,8 @@ public class BackupManager {
 			public void backgroundWork() {
 				try {
 					updateProgressMessageText(ctx, this, 2);
-					ArrayList<RawDataBean> rows = new XmlReader(xmlfile).read();
+					XmlReader xmlReader = new XmlReader(xmlfile);
+					ArrayList<RawDataBean> rows = xmlReader.read();
 					numberOfRows = rows.size();
 					RestoreWriter.replaceFull(ctx, rows, this);
 				}
