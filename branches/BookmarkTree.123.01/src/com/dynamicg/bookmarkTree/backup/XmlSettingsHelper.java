@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlSerializer;
 import android.content.SharedPreferences.Editor;
 
 import com.dynamicg.bookmarkTree.BookmarkTreeContext;
+import com.dynamicg.bookmarkTree.prefs.PreferencesWrapper;
 import com.dynamicg.common.Logger;
 
 public class XmlSettingsHelper {
@@ -69,8 +70,8 @@ public class XmlSettingsHelper {
 		}
 		edit.commit();
 
-		// TODO ## propagate to PreferencesWrapper
-
+		// DONE - RELOAD CACHE
+		PreferencesWrapper.afterRestore();
 	}
 
 }
