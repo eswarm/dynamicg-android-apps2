@@ -50,13 +50,17 @@ public class PreferencesWrapper {
 
 	public static final SeparatorPreference separatorPreference = new SeparatorPreference();
 	static {
-		String separator = BookmarkTreeContext.settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR);
-		PreferencesUpdater.setFolderSeparator(separator);
+		propagateSeparator();
 	}
 
 	// removed from screen - is now always on:
 	//public static final PrefEntryInt keepState = new PrefEntryInt("keepState", 1);
 	public static final boolean isKeepState = true;
+
+	private static void propagateSeparator() {
+		String separator = BookmarkTreeContext.settings.getString(KEY_FOLDER_SEPARATOR, DEFVALUE_FOLDER_SEPARATOR);
+		PreferencesUpdater.setFolderSeparator(separator);
+	}
 
 	/*
 	 * WRAPPERS
@@ -92,6 +96,7 @@ public class PreferencesWrapper {
 		for (PrefEntryInt entry:PrefEntryInt.cache) {
 			entry.reload();
 		}
+		propagateSeparator();
 		BitmapScaleManager.init();
 	}
 
