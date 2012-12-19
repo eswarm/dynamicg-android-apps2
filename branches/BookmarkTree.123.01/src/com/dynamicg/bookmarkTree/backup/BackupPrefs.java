@@ -42,7 +42,6 @@ public class BackupPrefs {
 		}
 	}
 
-	// TODO ## this fires right away on first start (since the "getBackupDaysInterval" default is 20)
 	private static void checkPeriodicBackup(BookmarkTreeContext ctx) {
 		int daynr = getDayNr();
 		int lastBackup = settings.getInt(KEY_LAST_BACKUP, 0);
@@ -69,6 +68,10 @@ public class BackupPrefs {
 	}
 
 	public static int getAutoPrefValue() {
+		if (!BookmarkTreeContext.settings.contains(KEY_LAST_BACKUP)) {
+			// prevent initial firing of backup
+			registerBackup();
+		}
 		return BookmarkTreeContext.settings.getInt(KEY_AUTO_BACKUP, BCK_20);
 	}
 
