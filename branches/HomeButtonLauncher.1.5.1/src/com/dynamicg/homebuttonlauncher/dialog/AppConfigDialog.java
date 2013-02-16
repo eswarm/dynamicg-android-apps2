@@ -17,6 +17,7 @@ import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.AppEntry;
 import com.dynamicg.homebuttonlauncher.AppListAdapter;
 import com.dynamicg.homebuttonlauncher.AppListAdapterSort;
+import com.dynamicg.homebuttonlauncher.AppListContainer;
 import com.dynamicg.homebuttonlauncher.AppListContextMenu;
 import com.dynamicg.homebuttonlauncher.MainActivityHome;
 import com.dynamicg.homebuttonlauncher.MenuGlobals;
@@ -39,7 +40,7 @@ public class AppConfigDialog extends Dialog {
 	private final MainActivityHome activity;
 	private final Context context;
 	private final PrefShortlist prefShortlist;
-	private final List<AppEntry> appList;
+	private final AppListContainer appList;
 	private final boolean actionAdd;
 	private final boolean actionRemove;
 	private final boolean actionSort;
@@ -85,7 +86,7 @@ public class AppConfigDialog extends Dialog {
 		else if (actionSort && sortChanged[0]) {
 			// only store the sorted list if we actually had changes
 			log.debug("actionSort");
-			prefShortlist.saveSortedList(appList);
+			prefShortlist.saveSortedList(appList.getApps());
 		}
 		afterSave();
 	}
@@ -180,7 +181,7 @@ public class AppConfigDialog extends Dialog {
 
 	private List<String> getSelectedComponents() {
 		List<String> list = new ArrayList<String>();
-		for (AppEntry entry:appList) {
+		for (AppEntry entry:appList.getApps()) {
 			if (entry.isChecked()) {
 				list.add(entry.getComponent());
 			}

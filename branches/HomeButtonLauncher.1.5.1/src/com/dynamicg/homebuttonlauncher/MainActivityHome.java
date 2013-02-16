@@ -1,7 +1,5 @@
 package com.dynamicg.homebuttonlauncher;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -95,7 +93,7 @@ public class MainActivityHome extends Activity {
 		final AbsListView listview = getListView();
 		listview.setId(R.id.mainListView);
 
-		final List<AppEntry> appList = AppHelper.getSelectedAppsList(context, preferences.prefShortlist);
+		final AppListContainer appList = AppHelper.getSelectedAppsList(context, preferences.prefShortlist);
 		final BaseAdapter adapter = new AppListAdapter(this, appList, preferences.prefSettings);
 		listview.setAdapter(adapter);
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
