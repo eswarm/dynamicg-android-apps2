@@ -24,14 +24,17 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 	private static final Logger log = new Logger(AppConfigDialogAdd.class);
 
 	private final List<AppEntry> baseAppList;
-	private final String[] baseSearchLabels;
+	private String[] baseSearchLabels = null; // lazy
 
 	private TextView titleNode;
 
 	public AppConfigDialogAdd(MainActivityHome activity, PreferencesManager preferences) {
 		super(activity, preferences, MenuGlobals.APPS_ADD);
 		this.baseAppList = appList.getApps();
-		this.baseSearchLabels = new String[baseAppList.size()];
+	}
+
+	private void initSearchLabels() {
+		baseSearchLabels = new String[baseAppList.size()];
 		for (int i=0;i<baseAppList.size();i++) {
 			baseSearchLabels[i] = baseAppList.get(i).label.toLowerCase(Locale.getDefault());
 		}
@@ -83,9 +86,17 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 
 		log.debug("updateAppList", query);
 
+		if (baseAppList.size()==0) {
+			return;
+		}
+
 		if (query==null || query.length()==0) {
 			super.updateAppList(baseAppList);
 			return;
+		}
+
+		if (baseSearchLabels==null) {
+			initSearchLabels();
 		}
 
 		final String searchstr = query.toLowerCase(Locale.getDefault());
