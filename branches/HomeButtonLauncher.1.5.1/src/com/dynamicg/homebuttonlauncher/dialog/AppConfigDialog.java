@@ -3,10 +3,8 @@ package com.dynamicg.homebuttonlauncher.dialog;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,20 +25,18 @@ import com.dynamicg.homebuttonlauncher.preferences.HomeLauncherBackupAgent;
 import com.dynamicg.homebuttonlauncher.preferences.PrefShortlist;
 import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
-import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
-import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
-import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
 
 public abstract class AppConfigDialog extends Dialog {
 
 	private static final Logger log = new Logger(AppConfigDialog.class);
 
-	private static final int MENU_RESET = 1;
+	protected static final int MENU_RESET = 1;
 
-	private final MainActivityHome activity;
-	private final Context context;
-	private final PrefShortlist prefShortlist;
-	private final AppListContainer appList;
+	protected final MainActivityHome activity;
+	protected final Context context;
+	protected final PrefShortlist prefShortlist;
+	protected final AppListContainer appList;
+
 	private final boolean actionAdd;
 	private final boolean actionRemove;
 	private final boolean actionSort;
@@ -68,7 +64,9 @@ public abstract class AppConfigDialog extends Dialog {
 		}
 	}
 
-	private void afterSave() {
+	public abstract void attachHeader();
+
+	protected void afterSave() {
 		activity.refreshList();
 		HomeLauncherBackupAgent.requestBackup(context);
 		dismiss();
@@ -91,6 +89,10 @@ public abstract class AppConfigDialog extends Dialog {
 		afterSave();
 	}
 
+	protected final void hideCustomHeader() {
+		findViewById(R.id.headerContainer).setVisibility(View.GONE);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -99,14 +101,7 @@ public abstract class AppConfigDialog extends Dialog {
 		setTitle(titleResId);
 
 		setContentView(R.layout.configure_apps);
-
-		if (actionSort) {
-			attachHeaderForSort();
-		}
-		else {
-			// hide custom header
-			findViewById(R.id.headerContainer).setVisibility(View.GONE);
-		}
+		attachHeader();
 
 		findViewById(R.id.buttonOk).setOnClickListener(new OnClickListenerWrapper() {
 			@Override
@@ -147,36 +142,6 @@ public abstract class AppConfigDialog extends Dialog {
 		}
 
 		new AppListContextMenu(context).attach(listview, appList);
-	}
-
-	private void attachHeaderForSort() {
-		final View anchor = DialogHelper.prepareCustomHeader(this, R.string.menuSort);
-		final PopupMenuItemListener listener = new PopupMenuItemListener() {
-			@Override
-			public void popupMenuItemSelected(int id) {
-				if (id==MENU_RESET) {
-					confirmSortReset();
-				}
-			}
-		};
-		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, anchor, listener);
-		menuWrapper.attachToAnchorClick();
-		menuWrapper.addItem(MENU_RESET, R.string.menuReset);
-	}
-
-	private void confirmSortReset() {
-		AlertDialog.Builder b = new AlertDialog.Builder(context);
-		String label = context.getString(R.string.menuReset)+"?";
-		b.setTitle(label);
-		b.setPositiveButton(R.string.buttonOk, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				prefShortlist.resetSortList();
-				afterSave();
-			}
-		} );
-		b.setNegativeButton(R.string.buttonCancel, null);
-		b.show();
 	}
 
 	private List<String> getSelectedComponents() {

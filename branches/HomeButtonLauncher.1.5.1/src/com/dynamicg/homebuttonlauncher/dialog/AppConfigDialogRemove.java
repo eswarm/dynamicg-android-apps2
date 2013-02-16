@@ -10,5 +10,9 @@ public class AppConfigDialogRemove extends AppConfigDialog {
 		super(activity, preferences, MenuGlobals.APPS_REMOVE);
 	}
 
+	@Override
+	public void attachHeader() {
+		hideCustomHeader();
+	}
 
 }

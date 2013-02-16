@@ -10,5 +10,9 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 		super(activity, preferences, MenuGlobals.APPS_ADD);
 	}
 
+	@Override
+	public void attachHeader() {
+		hideCustomHeader();
+	}
 
 }
