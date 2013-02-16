@@ -31,7 +31,7 @@ import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
 
-public class AppConfigDialog extends Dialog {
+public abstract class AppConfigDialog extends Dialog {
 
 	private static final Logger log = new Logger(AppConfigDialog.class);
 

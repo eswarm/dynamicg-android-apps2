@@ -13,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import com.dynamicg.homebuttonlauncher.dialog.AboutDialog;
-import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialogAdd;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialogRemove;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialogSort;
 import com.dynamicg.homebuttonlauncher.dialog.PreferencesDialog;
 import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
@@ -130,10 +132,10 @@ public class MainActivityHome extends Activity {
 				final MainActivityHome activity = MainActivityHome.this;
 				switch (id) {
 				case MenuGlobals.APPS_ADD:
-					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_ADD).show();
+					new AppConfigDialogAdd(activity, preferences).show();
 					break;
 				case MenuGlobals.APPS_REMOVE:
-					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_REMOVE).show();
+					new AppConfigDialogRemove(activity, preferences).show();
 					break;
 				case MenuGlobals.ABOUT:
 					new AboutDialog(activity).show();
@@ -142,7 +144,7 @@ public class MainActivityHome extends Activity {
 					new PreferencesDialog(activity, preferences).show();
 					break;
 				case MenuGlobals.APPS_SORT:
-					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_SORT).show();
+					new AppConfigDialogSort(activity, preferences).show();
 					break;
 				}
 			}
