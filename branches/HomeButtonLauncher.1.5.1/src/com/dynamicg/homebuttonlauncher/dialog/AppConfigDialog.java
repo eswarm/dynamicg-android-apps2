@@ -43,6 +43,8 @@ public abstract class AppConfigDialog extends Dialog {
 
 	private final boolean[] sortChanged = new boolean[]{false};
 
+	protected AppListAdapter adapter;
+
 	public AppConfigDialog(MainActivityHome activity, PreferencesManager preferences, int action) {
 		super(activity);
 		this.activity = activity;
@@ -59,7 +61,7 @@ public abstract class AppConfigDialog extends Dialog {
 			this.appList = AppHelper.getSelectedAppsList(activity, prefShortlist);
 		}
 
-		if (actionSort) {
+		if (actionSort||actionAdd) {
 			requestWindowFeature(Window.FEATURE_NO_TITLE);
 		}
 	}
@@ -117,12 +119,11 @@ public abstract class AppConfigDialog extends Dialog {
 			}
 		});
 
-		final AppListAdapter adapter;
 		if (actionSort) {
-			adapter = new AppListAdapterSort(activity, appList, sortChanged);
+			this.adapter = new AppListAdapterSort(activity, appList, sortChanged);
 		}
 		else {
-			adapter = new AppListAdapter(activity, appList, R.layout.app_entry_default);
+			this.adapter = new AppListAdapter(activity, appList, R.layout.app_entry_default);
 		}
 
 		final ListView listview = (ListView)findViewById(R.id.applist);
@@ -152,6 +153,11 @@ public abstract class AppConfigDialog extends Dialog {
 			}
 		}
 		return list;
+	}
+
+	public void updateAppList(List<AppEntry> newList) {
+		appList.updateList(newList);
+		adapter.notifyDataSetChanged();
 	}
 
 }
