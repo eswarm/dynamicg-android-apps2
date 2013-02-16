@@ -53,7 +53,7 @@ public class DialogHelper {
 	}
 
 	public static void setCustomHeaderWidth(Dialog dialog) {
-		int width = (int)dialog.getContext().getResources().getDimension(R.dimen.widthDefault);
+		int width = (int)dialog.getContext().getResources().getDimension(R.dimen.widthAppConfig);
 		View container = dialog.findViewById(R.id.headerContainer);
 		container.setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
 	}
