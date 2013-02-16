@@ -43,4 +43,8 @@ public class AppListContainer {
 		list.add(newPosition, entry);
 	}
 
+	public void updateList(List<AppEntry> newList) {
+		this.list = newList;
+	}
+
 }

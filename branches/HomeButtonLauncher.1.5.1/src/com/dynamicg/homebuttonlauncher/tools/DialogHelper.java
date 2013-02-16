@@ -47,12 +47,15 @@ public class DialogHelper {
 	 */
 	public static View prepareCustomHeader(Dialog dialog, int label) {
 		// set container width and title
+		setCustomHeaderWidth(dialog);
 		((TextView)dialog.findViewById(R.id.headerTitle)).setText(label);
+		return dialog.findViewById(R.id.headerIcon);
+	}
+
+	public static void setCustomHeaderWidth(Dialog dialog) {
 		int width = (int)dialog.getContext().getResources().getDimension(R.dimen.widthDefault);
 		View container = dialog.findViewById(R.id.headerContainer);
 		container.setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
-
-		return dialog.findViewById(R.id.headerIcon);
 	}
 
 }
