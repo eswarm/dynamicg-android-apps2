@@ -44,8 +44,8 @@ public class HeaderSortReset implements CustomHeader {
 		b.setTitle(label);
 		b.setPositiveButton(R.string.buttonOk, new DialogInterface.OnClickListener() {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				HeaderSortReset.this.dialog.doSortReset();
+			public void onClick(DialogInterface d, int which) {
+				dialog.doSortReset();
 			}
 		} );
 		b.setNegativeButton(R.string.buttonCancel, null);

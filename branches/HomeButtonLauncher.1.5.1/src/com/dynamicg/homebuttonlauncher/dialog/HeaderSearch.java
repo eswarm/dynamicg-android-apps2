@@ -24,15 +24,15 @@ public class HeaderSearch implements CustomHeader {
 	private final AppConfigDialog dialog;
 	private final Context context;
 	private final List<AppEntry> baseAppList;
+	private final TextView titleNode;
+
 	private String[] baseSearchLabels = null; // lazy
-
-	private TextView titleNode;
-
 
 	public HeaderSearch(AppConfigDialog dialog) {
 		this.dialog = dialog;
 		this.context = dialog.getContext();
 		this.baseAppList = dialog.appList.getApps();
+		this.titleNode = ((TextView)dialog.findViewById(R.id.headerTitle));
 	}
 
 	private void initSearchLabels() {
@@ -44,9 +44,6 @@ public class HeaderSearch implements CustomHeader {
 
 	@Override
 	public void attach() {
-
-		titleNode = ((TextView)dialog.findViewById(R.id.headerTitle));
-		titleNode.setText(R.string.menuAddApps);
 
 		OnQueryTextListener onQueryTextListener = new OnQueryTextListener() {
 			@Override
