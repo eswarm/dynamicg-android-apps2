@@ -13,15 +13,15 @@ import android.widget.SearchView.OnQueryTextListener;
 import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.AppEntry;
 
-public class HeaderSearch extends HeaderAbstract {
+public class ConfigHeaderSearch extends ConfigHeaderAbstract {
 
-	private static final Logger log = new Logger(HeaderSearch.class);
+	private static final Logger log = new Logger(ConfigHeaderSearch.class);
 
 	private final List<AppEntry> baseAppList;
 
 	private String[] baseSearchLabels = null; // lazy
 
-	public HeaderSearch(AppConfigDialog dialog) {
+	public ConfigHeaderSearch(AppConfigDialog dialog) {
 		super(dialog);
 		this.baseAppList = dialog.appList.getApps();
 	}

@@ -91,7 +91,7 @@ public class AppConfigDialog extends Dialog {
 
 		setContentView(R.layout.configure_apps);
 
-		HeaderAbstract header = actionSort ? new HeaderSortReset(this) : new HeaderSearch(this);
+		ConfigHeaderAbstract header = actionSort ? new ConfigHeaderSortReset(this) : new ConfigHeaderSearch(this);
 		header.attach();
 		final int titleResId = actionRemove ? R.string.menuRemoveApps : actionSort ? R.string.menuSort : R.string.menuAddApps;
 		header.setTitleAndWidth(titleResId);

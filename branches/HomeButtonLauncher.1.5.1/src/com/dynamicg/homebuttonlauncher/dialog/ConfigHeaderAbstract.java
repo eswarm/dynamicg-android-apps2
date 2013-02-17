@@ -7,14 +7,14 @@ import android.widget.TextView;
 
 import com.dynamicg.homebuttonlauncher.R;
 
-public abstract class HeaderAbstract {
+public abstract class ConfigHeaderAbstract {
 
 	protected final AppConfigDialog dialog;
 	protected final Context context;
 	protected final TextView titleNode;
 	protected final View iconNode;
 
-	public HeaderAbstract(AppConfigDialog dialog) {
+	public ConfigHeaderAbstract(AppConfigDialog dialog) {
 		this.dialog = dialog;
 		this.context = dialog.getContext();
 		this.titleNode = ((TextView)dialog.findViewById(R.id.headerTitle));

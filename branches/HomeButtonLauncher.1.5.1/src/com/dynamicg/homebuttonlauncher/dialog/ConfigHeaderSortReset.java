@@ -8,9 +8,9 @@ import com.dynamicg.homebuttonlauncher.R;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
 
-public class HeaderSortReset extends HeaderAbstract {
+public class ConfigHeaderSortReset extends ConfigHeaderAbstract {
 
-	public HeaderSortReset(AppConfigDialog dialog) {
+	public ConfigHeaderSortReset(AppConfigDialog dialog) {
 		super(dialog);
 	}
 
