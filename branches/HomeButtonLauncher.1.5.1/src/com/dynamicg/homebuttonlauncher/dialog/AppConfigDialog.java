@@ -30,16 +30,15 @@ public class AppConfigDialog extends Dialog {
 
 	private static final Logger log = new Logger(AppConfigDialog.class);
 
-	protected final MainActivityHome activity;
-	protected final Context context;
-	protected final PrefShortlist prefShortlist;
+	private final MainActivityHome activity;
+	private final Context context;
+	private final PrefShortlist prefShortlist;
 	protected final AppListContainer appList;
+	private final boolean[] sortChanged = new boolean[]{false};
 
 	private final boolean actionAdd;
 	private final boolean actionRemove;
 	private final boolean actionSort;
-
-	private final boolean[] sortChanged = new boolean[]{false};
 
 	protected AppListAdapter adapter;
 
@@ -151,6 +150,7 @@ public class AppConfigDialog extends Dialog {
 		afterSave();
 	}
 
+	// when "search" is applied
 	public void updateAppList(List<AppEntry> newList) {
 		appList.updateList(newList);
 		adapter.notifyDataSetChanged();
