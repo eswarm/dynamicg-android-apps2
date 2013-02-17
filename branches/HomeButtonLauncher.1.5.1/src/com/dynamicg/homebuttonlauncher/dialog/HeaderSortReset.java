@@ -1,37 +1,41 @@
 package com.dynamicg.homebuttonlauncher.dialog;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 
-import com.dynamicg.homebuttonlauncher.MainActivityHome;
 import com.dynamicg.homebuttonlauncher.MenuGlobals;
 import com.dynamicg.homebuttonlauncher.R;
-import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog.CustomHeader;
 import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
 
-public class AppConfigDialogSort extends AppConfigDialog {
+public class HeaderSortReset implements CustomHeader {
 
-	public AppConfigDialogSort(MainActivityHome activity, PreferencesManager preferences) {
-		super(activity, preferences, MenuGlobals.APPS_SORT);
+	private final AppConfigDialog opener;
+	private final Context context;
+
+	public HeaderSortReset(AppConfigDialog dialog) {
+		this.opener = dialog;
+		this.context = dialog.getContext();
 	}
 
 	@Override
-	public void attachHeader() {
-		final View anchor = DialogHelper.prepareCustomHeader(this, R.string.menuSort);
+	public void attach() {
+		final View anchor = DialogHelper.prepareCustomHeader(opener, R.string.menuSort);
 		final PopupMenuItemListener listener = new PopupMenuItemListener() {
 			@Override
 			public void popupMenuItemSelected(int id) {
-				if (id==MENU_RESET) {
+				if (id==MenuGlobals.RESET) {
 					confirmSortReset();
 				}
 			}
 		};
 		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, anchor, listener);
 		menuWrapper.attachToAnchorClick();
-		menuWrapper.addItem(MENU_RESET, R.string.menuReset);
+		menuWrapper.addItem(MenuGlobals.RESET, R.string.menuReset);
 	}
 
 	private void confirmSortReset() {
@@ -41,8 +45,7 @@ public class AppConfigDialogSort extends AppConfigDialog {
 		b.setPositiveButton(R.string.buttonOk, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				prefShortlist.resetSortList();
-				afterSave();
+				opener.doSortReset();
 			}
 		} );
 		b.setNegativeButton(R.string.buttonCancel, null);

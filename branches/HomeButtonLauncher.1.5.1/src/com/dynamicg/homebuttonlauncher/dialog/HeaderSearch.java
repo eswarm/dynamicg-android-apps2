@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Context;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
@@ -13,24 +14,26 @@ import android.widget.TextView;
 
 import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.AppEntry;
-import com.dynamicg.homebuttonlauncher.MainActivityHome;
-import com.dynamicg.homebuttonlauncher.MenuGlobals;
 import com.dynamicg.homebuttonlauncher.R;
-import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog.CustomHeader;
 import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 
-public class AppConfigDialogAdd extends AppConfigDialog {
+public class HeaderSearch implements CustomHeader {
 
-	private static final Logger log = new Logger(AppConfigDialogAdd.class);
+	private static final Logger log = new Logger(HeaderSearch.class);
 
+	private final AppConfigDialog opener;
+	private final Context context;
 	private final List<AppEntry> baseAppList;
 	private String[] baseSearchLabels = null; // lazy
 
 	private TextView titleNode;
 
-	public AppConfigDialogAdd(MainActivityHome activity, PreferencesManager preferences) {
-		super(activity, preferences, MenuGlobals.APPS_ADD);
-		this.baseAppList = appList.getApps();
+
+	public HeaderSearch(AppConfigDialog dialog) {
+		this.opener = dialog;
+		this.context = dialog.getContext();
+		this.baseAppList = dialog.appList.getApps();
 	}
 
 	private void initSearchLabels() {
@@ -41,10 +44,10 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 	}
 
 	@Override
-	public void attachHeader() {
+	public void attach() {
 
-		DialogHelper.setCustomHeaderWidth(this);
-		titleNode = ((TextView)findViewById(R.id.headerTitle));
+		DialogHelper.setCustomHeaderWidth(opener);
+		titleNode = ((TextView)opener.findViewById(R.id.headerTitle));
 		titleNode.setText(R.string.menuAddApps);
 
 		OnQueryTextListener onQueryTextListener = new OnQueryTextListener() {
@@ -76,7 +79,7 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 		search.setOnQueryTextListener(onQueryTextListener);
 		search.setOnQueryTextFocusChangeListener(onFocusChangeListener);
 
-		View menuIcon = findViewById(R.id.headerIcon);
+		View menuIcon = opener.findViewById(R.id.headerIcon);
 		menuIcon.setVisibility(View.GONE);
 		ViewGroup container = ((ViewGroup)menuIcon.getParent());
 		container.addView(search, container.indexOfChild(menuIcon));
@@ -91,7 +94,7 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 		}
 
 		if (query==null || query.length()==0) {
-			super.updateAppList(baseAppList);
+			opener.updateAppList(baseAppList);
 			return;
 		}
 
@@ -107,7 +110,7 @@ public class AppConfigDialogAdd extends AppConfigDialog {
 				matchingApps.add(baseAppList.get(i));
 			}
 		}
-		super.updateAppList(matchingApps);
+		opener.updateAppList(matchingApps);
 	}
 
 }

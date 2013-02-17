@@ -26,11 +26,9 @@ import com.dynamicg.homebuttonlauncher.preferences.PrefShortlist;
 import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
 
-public abstract class AppConfigDialog extends Dialog {
+public class AppConfigDialog extends Dialog {
 
 	private static final Logger log = new Logger(AppConfigDialog.class);
-
-	protected static final int MENU_RESET = 1;
 
 	protected final MainActivityHome activity;
 	protected final Context context;
@@ -61,12 +59,8 @@ public abstract class AppConfigDialog extends Dialog {
 			this.appList = AppHelper.getSelectedAppsList(activity, prefShortlist);
 		}
 
-		if (actionSort||actionAdd) {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
-		}
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 	}
-
-	public abstract void attachHeader();
 
 	protected void afterSave() {
 		activity.refreshList();
@@ -91,8 +85,8 @@ public abstract class AppConfigDialog extends Dialog {
 		afterSave();
 	}
 
-	protected final void hideCustomHeader() {
-		findViewById(R.id.headerContainer).setVisibility(View.GONE);
+	static interface CustomHeader {
+		public void attach();
 	}
 
 	@Override
@@ -103,7 +97,9 @@ public abstract class AppConfigDialog extends Dialog {
 		setTitle(titleResId);
 
 		setContentView(R.layout.configure_apps);
-		attachHeader();
+
+		CustomHeader header = actionSort ? new HeaderSortReset(this) : new HeaderSearch(this);
+		header.attach();
 
 		findViewById(R.id.buttonOk).setOnClickListener(new OnClickListenerWrapper() {
 			@Override
@@ -153,6 +149,11 @@ public abstract class AppConfigDialog extends Dialog {
 			}
 		}
 		return list;
+	}
+
+	public void doSortReset() {
+		prefShortlist.resetSortList();
+		afterSave();
 	}
 
 	public void updateAppList(List<AppEntry> newList) {
