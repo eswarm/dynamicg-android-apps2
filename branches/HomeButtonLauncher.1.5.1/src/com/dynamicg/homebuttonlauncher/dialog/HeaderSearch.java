@@ -16,13 +16,12 @@ import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.AppEntry;
 import com.dynamicg.homebuttonlauncher.R;
 import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog.CustomHeader;
-import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 
 public class HeaderSearch implements CustomHeader {
 
 	private static final Logger log = new Logger(HeaderSearch.class);
 
-	private final AppConfigDialog opener;
+	private final AppConfigDialog dialog;
 	private final Context context;
 	private final List<AppEntry> baseAppList;
 	private String[] baseSearchLabels = null; // lazy
@@ -31,7 +30,7 @@ public class HeaderSearch implements CustomHeader {
 
 
 	public HeaderSearch(AppConfigDialog dialog) {
-		this.opener = dialog;
+		this.dialog = dialog;
 		this.context = dialog.getContext();
 		this.baseAppList = dialog.appList.getApps();
 	}
@@ -46,8 +45,7 @@ public class HeaderSearch implements CustomHeader {
 	@Override
 	public void attach() {
 
-		DialogHelper.setCustomHeaderWidth(opener);
-		titleNode = ((TextView)opener.findViewById(R.id.headerTitle));
+		titleNode = ((TextView)dialog.findViewById(R.id.headerTitle));
 		titleNode.setText(R.string.menuAddApps);
 
 		OnQueryTextListener onQueryTextListener = new OnQueryTextListener() {
@@ -79,7 +77,7 @@ public class HeaderSearch implements CustomHeader {
 		search.setOnQueryTextListener(onQueryTextListener);
 		search.setOnQueryTextFocusChangeListener(onFocusChangeListener);
 
-		View menuIcon = opener.findViewById(R.id.headerIcon);
+		View menuIcon = dialog.findViewById(R.id.headerIcon);
 		menuIcon.setVisibility(View.GONE);
 		ViewGroup container = ((ViewGroup)menuIcon.getParent());
 		container.addView(search, container.indexOfChild(menuIcon));
@@ -94,7 +92,7 @@ public class HeaderSearch implements CustomHeader {
 		}
 
 		if (query==null || query.length()==0) {
-			opener.updateAppList(baseAppList);
+			dialog.updateAppList(baseAppList);
 			return;
 		}
 
@@ -110,7 +108,7 @@ public class HeaderSearch implements CustomHeader {
 				matchingApps.add(baseAppList.get(i));
 			}
 		}
-		opener.updateAppList(matchingApps);
+		dialog.updateAppList(matchingApps);
 	}
 
 }

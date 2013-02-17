@@ -14,17 +14,17 @@ import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListe
 
 public class HeaderSortReset implements CustomHeader {
 
-	private final AppConfigDialog opener;
+	private final AppConfigDialog dialog;
 	private final Context context;
 
 	public HeaderSortReset(AppConfigDialog dialog) {
-		this.opener = dialog;
+		this.dialog = dialog;
 		this.context = dialog.getContext();
 	}
 
 	@Override
 	public void attach() {
-		final View anchor = DialogHelper.prepareCustomHeader(opener, R.string.menuSort);
+		final View anchor = DialogHelper.getAnchor(dialog);
 		final PopupMenuItemListener listener = new PopupMenuItemListener() {
 			@Override
 			public void popupMenuItemSelected(int id) {
@@ -45,7 +45,7 @@ public class HeaderSortReset implements CustomHeader {
 		b.setPositiveButton(R.string.buttonOk, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				opener.doSortReset();
+				HeaderSortReset.this.dialog.doSortReset();
 			}
 		} );
 		b.setNegativeButton(R.string.buttonCancel, null);

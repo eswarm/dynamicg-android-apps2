@@ -25,6 +25,7 @@ import com.dynamicg.homebuttonlauncher.preferences.HomeLauncherBackupAgent;
 import com.dynamicg.homebuttonlauncher.preferences.PrefShortlist;
 import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
+import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 
 public class AppConfigDialog extends Dialog {
 
@@ -93,13 +94,13 @@ public class AppConfigDialog extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		int titleResId = actionRemove ? R.string.menuRemoveApps : actionSort ? R.string.menuSort : R.string.menuAddApps;
-		setTitle(titleResId);
-
 		setContentView(R.layout.configure_apps);
 
 		CustomHeader header = actionSort ? new HeaderSortReset(this) : new HeaderSearch(this);
 		header.attach();
+
+		int titleResId = actionRemove ? R.string.menuRemoveApps : actionSort ? R.string.menuSort : R.string.menuAddApps;
+		DialogHelper.setCustomHeaderTitle(this, titleResId);
 
 		findViewById(R.id.buttonOk).setOnClickListener(new OnClickListenerWrapper() {
 			@Override

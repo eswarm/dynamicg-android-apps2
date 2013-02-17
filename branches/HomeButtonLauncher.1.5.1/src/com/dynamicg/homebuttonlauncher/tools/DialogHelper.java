@@ -45,17 +45,15 @@ public class DialogHelper {
 	/*
 	 * return the popup menu anchor (i.e. dropdown icon)
 	 */
-	public static View prepareCustomHeader(Dialog dialog, int label) {
-		// set container width and title
-		setCustomHeaderWidth(dialog);
+	public static void setCustomHeaderTitle(Dialog dialog, int label) {
 		((TextView)dialog.findViewById(R.id.headerTitle)).setText(label);
-		return dialog.findViewById(R.id.headerIcon);
-	}
-
-	public static void setCustomHeaderWidth(Dialog dialog) {
 		int width = (int)dialog.getContext().getResources().getDimension(R.dimen.widthAppConfig);
 		View container = dialog.findViewById(R.id.headerContainer);
 		container.setLayoutParams(new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.WRAP_CONTENT));
+	}
+
+	public static View getAnchor(Dialog dialog) {
+		return dialog.findViewById(R.id.headerIcon);
 	}
 
 }
