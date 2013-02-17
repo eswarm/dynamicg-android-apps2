@@ -50,24 +50,38 @@ public class ConfigHeaderSearch extends ConfigHeaderAbstract {
 		};
 
 		OnFocusChangeListener onFocusChangeListener = new View.OnFocusChangeListener() {
-			private boolean titleVisible = true;
 			@Override
 			public void onFocusChange(View view, boolean queryTextFocused) {
 				log.debug("onFocusChange", queryTextFocused);
-				if (titleVisible) {
-					titleNode.setVisibility(View.GONE);
-					titleVisible = false;
+				if (queryTextFocused) {
+					switchTitle(View.GONE);
 				}
+			}
+		};
+
+		SearchView.OnCloseListener onCloseListener = new SearchView.OnCloseListener() {
+			@Override
+			public boolean onClose() {
+				log.debug("onCloseListener");
+				switchTitle(View.VISIBLE);
+				return false;
 			}
 		};
 
 		final SearchView search = new SearchView(context);
 		search.setOnQueryTextListener(onQueryTextListener);
 		search.setOnQueryTextFocusChangeListener(onFocusChangeListener);
+		search.setOnCloseListener(onCloseListener);
 
 		iconNode.setVisibility(View.GONE);
 		ViewGroup container = ((ViewGroup)iconNode.getParent());
 		container.addView(search, container.indexOfChild(iconNode));
+	}
+
+	private void switchTitle(int what) {
+		if (titleNode.getVisibility()!=what) {
+			titleNode.setVisibility(what);
+		}
 	}
 
 	private void updateAppList(String query) {
