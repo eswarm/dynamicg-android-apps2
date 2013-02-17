@@ -1,30 +1,21 @@
 package com.dynamicg.homebuttonlauncher.dialog;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.view.View;
 
 import com.dynamicg.homebuttonlauncher.MenuGlobals;
 import com.dynamicg.homebuttonlauncher.R;
-import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog.CustomHeader;
-import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
 import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
 
-public class HeaderSortReset implements CustomHeader {
-
-	private final AppConfigDialog dialog;
-	private final Context context;
+public class HeaderSortReset extends HeaderAbstract {
 
 	public HeaderSortReset(AppConfigDialog dialog) {
-		this.dialog = dialog;
-		this.context = dialog.getContext();
+		super(dialog);
 	}
 
 	@Override
 	public void attach() {
-		final View anchor = DialogHelper.getAnchor(dialog);
 		final PopupMenuItemListener listener = new PopupMenuItemListener() {
 			@Override
 			public void popupMenuItemSelected(int id) {
@@ -33,7 +24,7 @@ public class HeaderSortReset implements CustomHeader {
 				}
 			}
 		};
-		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, anchor, listener);
+		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, iconNode, listener);
 		menuWrapper.attachToAnchorClick();
 		menuWrapper.addItem(MenuGlobals.RESET, R.string.menuReset);
 	}

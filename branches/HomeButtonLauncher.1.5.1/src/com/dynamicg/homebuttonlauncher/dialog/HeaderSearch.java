@@ -4,35 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import android.content.Context;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.widget.TextView;
 
 import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.AppEntry;
-import com.dynamicg.homebuttonlauncher.R;
-import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog.CustomHeader;
 
-public class HeaderSearch implements CustomHeader {
+public class HeaderSearch extends HeaderAbstract {
 
 	private static final Logger log = new Logger(HeaderSearch.class);
 
-	private final AppConfigDialog dialog;
-	private final Context context;
 	private final List<AppEntry> baseAppList;
-	private final TextView titleNode;
 
 	private String[] baseSearchLabels = null; // lazy
 
 	public HeaderSearch(AppConfigDialog dialog) {
-		this.dialog = dialog;
-		this.context = dialog.getContext();
+		super(dialog);
 		this.baseAppList = dialog.appList.getApps();
-		this.titleNode = ((TextView)dialog.findViewById(R.id.headerTitle));
 	}
 
 	private void initSearchLabels() {
@@ -74,10 +65,9 @@ public class HeaderSearch implements CustomHeader {
 		search.setOnQueryTextListener(onQueryTextListener);
 		search.setOnQueryTextFocusChangeListener(onFocusChangeListener);
 
-		View menuIcon = dialog.findViewById(R.id.headerIcon);
-		menuIcon.setVisibility(View.GONE);
-		ViewGroup container = ((ViewGroup)menuIcon.getParent());
-		container.addView(search, container.indexOfChild(menuIcon));
+		iconNode.setVisibility(View.GONE);
+		ViewGroup container = ((ViewGroup)iconNode.getParent());
+		container.addView(search, container.indexOfChild(iconNode));
 	}
 
 	private void updateAppList(String query) {
