@@ -9,7 +9,7 @@ public abstract class OnLongClickListenerWrapper implements View.OnLongClickList
 	@Override
 	public final boolean onLongClick(View view) {
 		try {
-			return onLongClick(view);
+			return onLongClickImpl(view);
 		}
 		catch (Throwable t) {
 			DialogHelper.showCrashReport(view.getContext(), t);
