@@ -1,0 +1,194 @@
+package com.dynamicg.homebuttonlauncher;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.view.Window;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+
+import com.dynamicg.common.Logger;
+import com.dynamicg.homebuttonlauncher.dialog.AboutDialog;
+import com.dynamicg.homebuttonlauncher.dialog.AppConfigDialog;
+import com.dynamicg.homebuttonlauncher.dialog.PreferencesDialog;
+import com.dynamicg.homebuttonlauncher.preferences.PreferencesManager;
+import com.dynamicg.homebuttonlauncher.tools.AppHelper;
+import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
+import com.dynamicg.homebuttonlauncher.tools.IconProvider;
+import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper;
+import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListener;
+
+// see https://plus.google.com/104570711580136846518/posts/QpqfXXigAWW
+
+//note we cannot filter the app on "needs soft home button" (i.e. a non-physical home button like galaxy nexus)
+//http://developer.android.com/guide/topics/manifest/uses-feature-element.html
+public class MainActivityHome extends Activity {
+
+	private static final Logger log = new Logger(MainActivityHome.class);
+
+	private Context context;
+	private PreferencesManager preferences;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		context = this;
+
+		try {
+			main();
+		}
+		catch (Throwable t) {
+			DialogHelper.showCrashReport(context, t);
+		}
+	}
+
+	private void main() {
+		setContentView(R.layout.activity_main);
+		preferences = new PreferencesManager(context);
+		if (isAutoStartSingleSuccessful()) {
+			return;
+		}
+		IconProvider.init(context);
+		attachContextMenu();
+		setListAdapter();
+		setMinWidth();
+	}
+
+	private boolean isAutoStartSingleSuccessful() {
+		if (!preferences.prefSettings.isAutoStartSingle()) {
+			log.debug("autoStart", "disabled");
+			return false;
+		}
+
+		if (getIntent().getBooleanExtra(MainActivityOpen.KEY, false) == true) {
+			// called through "OpenActivity" (i.e. app drawer or homescreen icon), not through swipe
+			// -> skip, otherwise we will lock ourselves out
+			log.debug("autoStart", "from OpenActivity");
+			return false;
+		}
+
+		final AppListContainer appList = AppHelper.getSelectedAppsList(context, preferences.prefShortlist);
+		if (appList.size()!=1) {
+			log.debug("autoStart", "size!=1");
+			return false;
+		}
+
+		AppEntry entry = appList.get(0);
+		log.debug("autoStart", entry.getComponent());
+		boolean started = startAppAndClose(entry);
+		return started;
+	}
+
+	public void refreshList() {
+		try {
+			setListAdapter();
+			setMinWidth();
+		}
+		catch (Throwable t) {
+			DialogHelper.showCrashReport(context, t);
+		}
+	}
+
+	private void setMinWidth() {
+		int widthDim = preferences.prefSettings.getMinWidthDimen();
+		float minWidth = context.getResources().getDimension(widthDim);
+		findViewById(R.id.headerContainer).setMinimumWidth((int)minWidth);
+	}
+
+	private AbsListView getListView() {
+		final int layoutResId = preferences.prefSettings.getListLayoutId();
+		final View listview = findViewById(R.id.mainListView);
+
+		if (listview instanceof ViewStub) {
+			// first call
+			ViewStub stub = (ViewStub)listview;
+			stub.setLayoutResource(layoutResId);
+			return (AbsListView)stub.inflate();
+		}
+
+		// replace existing list on refresh
+		ViewGroup parent = (ViewGroup)listview.getParent();
+		AbsListView replacementListView = (AbsListView)getLayoutInflater().inflate(layoutResId, null);
+		parent.addView(replacementListView, parent.indexOfChild(listview));
+		parent.removeView(listview);
+		return replacementListView;
+	}
+
+	private void setListAdapter() {
+		final AbsListView listview = getListView();
+		listview.setId(R.id.mainListView);
+
+		final AppListContainer appList = AppHelper.getSelectedAppsList(context, preferences.prefShortlist);
+		final BaseAdapter adapter = new AppListAdapter(this, appList, preferences.prefSettings);
+		listview.setAdapter(adapter);
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				startAppAndClose(appList.get(position));
+			}
+		});
+		new AppListContextMenu(context).attach(listview, appList);
+	}
+
+	private boolean startAppAndClose(AppEntry entry) {
+		String component=null;
+		try {
+			component = entry.getComponent();
+			Intent intent = AppHelper.getStartIntent(component);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+			startActivity(intent);
+			finish();
+			return true;
+		}
+		catch (Throwable t) {
+			String title = "ERROR - cannot open";
+			String details = "Component: "+component+"\nException: "+t.getClass().getSimpleName();
+			DialogHelper.showError(context, title, details);
+			return false;
+		}
+	}
+
+	private void attachContextMenu() {
+		final View anchor = findViewById(R.id.headerIcon);
+		final PopupMenuItemListener listener = new PopupMenuItemListener() {
+			@Override
+			public void popupMenuItemSelected(int id) {
+				final MainActivityHome activity = MainActivityHome.this;
+				switch (id) {
+				case MenuGlobals.APPS_ADD:
+					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_ADD).show();
+					break;
+				case MenuGlobals.APPS_REMOVE:
+					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_REMOVE).show();
+					break;
+				case MenuGlobals.APPS_SORT:
+					new AppConfigDialog(activity, preferences, MenuGlobals.APPS_SORT).show();
+					break;
+				case MenuGlobals.ABOUT:
+					new AboutDialog(activity).show();
+					break;
+				case MenuGlobals.PREFERENCES:
+					new PreferencesDialog(activity, preferences).show();
+					break;
+				}
+			}
+		};
+
+		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, anchor, listener);
+		menuWrapper.attachToAnchorClick();
+		menuWrapper.addItem(MenuGlobals.APPS_ADD, R.string.menuAddApps);
+		menuWrapper.addItem(MenuGlobals.APPS_REMOVE, R.string.menuRemoveApps);
+		menuWrapper.addItem(MenuGlobals.APPS_SORT, R.string.menuSort);
+		menuWrapper.addItem(MenuGlobals.ABOUT, R.string.menuAbout);
+		menuWrapper.addItem(MenuGlobals.PREFERENCES, R.string.preferences);
+
+	}
+
+}
