@@ -3,7 +3,6 @@ package com.dynamicg.homebuttonlauncher;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.Typeface;
 import android.text.InputType;
 import android.view.Gravity;
@@ -99,9 +98,9 @@ public class MainTabHelper {
 		editor.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		OnClickListener okListener = new OnClickListener() {
+		DialogInterface.OnClickListener okListener = new OnClickListenerDialogWrapper(context) {
 			@Override
-			public void onClick(DialogInterface dialog, int which) {
+			public void onClickImpl(DialogInterface dialog, int which) {
 				String newLabel = editor.getText().toString();
 				newLabel = newLabel!=null?newLabel:"";
 				setLabel(labelNode, newLabel);
