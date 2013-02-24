@@ -58,6 +58,10 @@ public class MainActivityHome extends Activity {
 		attachContextMenu();
 		setListAdapter();
 		setMinWidth();
+
+		if (preferences.prefSettings.getNumTabs()>0) {
+			new MainTabHelper(this, preferences).bindTabs();
+		}
 	}
 
 	private boolean isAutoStartSingleSuccessful() {
@@ -73,9 +77,15 @@ public class MainActivityHome extends Activity {
 			return false;
 		}
 
+		if (preferences.prefShortlist.getComponentsMap().size()!=1) {
+			// shortcut - this is faster than "getSelectedAppsList" just below
+			log.debug("autoStart", "getComponentsMap", "size!=1");
+			return false;
+		}
+
 		final AppListContainer appList = AppHelper.getSelectedAppsList(context, preferences.prefShortlist);
 		if (appList.size()!=1) {
-			log.debug("autoStart", "size!=1");
+			log.debug("autoStart", "getSelectedAppsList", "size!=1");
 			return false;
 		}
 
@@ -189,6 +199,18 @@ public class MainActivityHome extends Activity {
 		menuWrapper.addItem(MenuGlobals.ABOUT, R.string.menuAbout);
 		menuWrapper.addItem(MenuGlobals.PREFERENCES, R.string.preferences);
 
+	}
+
+	public void updateOnTabSwitch(int tabindex) {
+		if (preferences.getTabIndex()!=tabindex) {
+			log.debug("updateOnTabSwitch", tabindex);
+			preferences.switchShortlist(tabindex);
+			refreshList();
+		}
+	}
+
+	public void redrawTabContainer() {
+		new MainTabHelper(this, preferences).redraw();
 	}
 
 }

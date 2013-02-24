@@ -9,6 +9,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.dynamicg.common.Logger;
 import com.dynamicg.homebuttonlauncher.MainActivityHome;
 import com.dynamicg.homebuttonlauncher.OnClickListenerWrapper;
 import com.dynamicg.homebuttonlauncher.R;
@@ -19,18 +20,23 @@ import com.dynamicg.homebuttonlauncher.tools.DialogHelper;
 
 public class PreferencesDialog extends Dialog {
 
+	private static final Logger log = new Logger(PreferencesDialog.class);
+
+	private final PreferencesManager preferences;
 	private final PrefSettings prefSettings;
 	private final MainActivityHome activity;
 
 	private int selectedLayout;
 	private SeekBar seekbarLabelSize;
 	private SeekBar seekbarIconSize;
+	private SeekBar seekbarNumTabs;
 	private CheckBox highRes;
 	private CheckBox autoStartSingle;
 
 	public PreferencesDialog(MainActivityHome activity, PreferencesManager preferences) {
 		super(activity);
 		this.activity = activity;
+		this.preferences = preferences;
 		this.prefSettings = preferences.prefSettings;
 	}
 
@@ -42,6 +48,7 @@ public class PreferencesDialog extends Dialog {
 
 		seekbarLabelSize = attachSeekBar(R.id.prefsLabelSize, R.id.prefsLabelSizeIndicator, SizePrefsHelper.LABEL_SIZES, prefSettings.getLabelSize());
 		seekbarIconSize = attachSeekBar(R.id.prefsIconSize, R.id.prefsIconSizeIndicator, SizePrefsHelper.ICON_SIZES, prefSettings.getIconSize());
+		seekbarNumTabs = attachSeekBar(R.id.prefsNumTabs, R.id.prefsNumTabsIndicator, SizePrefsHelper.NUM_TABS, prefSettings.getNumTabs());
 
 		highRes = (CheckBox)findViewById(R.id.prefsHighResIcon);
 		highRes.setChecked(prefSettings.isHighResIcons());
@@ -122,7 +129,17 @@ public class PreferencesDialog extends Dialog {
 	private void saveSettings() {
 		int labelSize = (Integer)seekbarLabelSize.getTag(R.id.buttonOk);
 		int iconSize = (Integer)seekbarIconSize.getTag(R.id.buttonOk);
-		prefSettings.writeAppSettings(selectedLayout, labelSize, iconSize, highRes.isChecked(), autoStartSingle.isChecked());
+		int numTabs = (Integer)seekbarNumTabs.getTag(R.id.buttonOk);
+		prefSettings.writeAppSettings(selectedLayout, labelSize, iconSize, highRes.isChecked(), autoStartSingle.isChecked(), numTabs);
+
+		int previousNumTabs = ((Integer)seekbarNumTabs.getTag(R.id.buttonCancel));
+		if (numTabs!=previousNumTabs) {
+			// redraw tabs only if "numTabs" has changed
+			log.debug("saveSettings", "redraw tabs", numTabs, seekbarNumTabs.getTag());
+			preferences.switchShortlist(preferences.getTabIndex());
+			activity.redrawTabContainer();
+		}
+
 		activity.refreshList();
 		HomeLauncherBackupAgent.requestBackup(getContext());
 	}

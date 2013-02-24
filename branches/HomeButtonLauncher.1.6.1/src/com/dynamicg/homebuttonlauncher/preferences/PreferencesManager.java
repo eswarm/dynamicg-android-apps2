@@ -3,8 +3,10 @@ package com.dynamicg.homebuttonlauncher.preferences;
 import java.util.Arrays;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
+import com.dynamicg.homebuttonlauncher.MainTabHelper;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
 
 public class PreferencesManager {
@@ -12,19 +14,31 @@ public class PreferencesManager {
 	protected static final String PREF_SHORTLIST = "apps";
 	protected static final String PREF_SETTINGS = "settings";
 
+	private static final String KEY_TAB_INDEX = "tabIndex";
+	private static final String KEY_TAB_LABEL_PREFIX = "tabTitle.";
+
 	private static final String[] DFLT_GOOGLE_SEARCH = new String[] {
 		"com.google.android.googlequicksearchbox/com.google.android.googlequicksearchbox.SearchActivity"
 		, "com.android.quicksearchbox/com.android.quicksearchbox.SearchActivity"
 	};
 
-	public final PrefShortlist prefShortlist;
+	private final Context context;
 	public final PrefSettings prefSettings;
+	public final PrefShortlist prefShortlist;
+
+	protected static String getShortlistName(int tabindex) {
+		return tabindex==0 ? PREF_SHORTLIST : PREF_SHORTLIST+tabindex;
+	}
+
+	private SharedPreferences getShortlistPrefs(int tabindex) {
+		return context.getSharedPreferences(getShortlistName(tabindex), Context.MODE_PRIVATE);
+	}
 
 	public PreferencesManager(Context context) {
-		this.prefShortlist = new PrefShortlist(context.getPackageManager(), context.getSharedPreferences(PREF_SHORTLIST, Context.MODE_PRIVATE));
+		this.context = context;
 		this.prefSettings = new PrefSettings(context.getSharedPreferences(PREF_SETTINGS, Context.MODE_PRIVATE));
+		this.prefShortlist = new PrefShortlist(context.getPackageManager(), getShortlistPrefs(getTabIndex()));
 		checkOnStartup(context);
-		//invalidate(); // to test invalid apps
 	}
 
 	private void checkOnStartup(Context context) {
@@ -38,6 +52,25 @@ public class PreferencesManager {
 				return;
 			}
 		}
+	}
+
+	public void switchShortlist(int tabindex) {
+		prefShortlist.switchSharedPrefs(getShortlistPrefs(tabindex));
+		prefSettings.write(KEY_TAB_INDEX, tabindex);
+	}
+
+	public int getTabIndex() {
+		int tabindex = prefSettings.getIntValue(KEY_TAB_INDEX);
+		int numTabs = prefSettings.getNumTabs();
+		return MainTabHelper.getValidatedTabNum(tabindex, numTabs);
+	}
+
+	public String getTabTitle(int index) {
+		return prefSettings.getStringValue(KEY_TAB_LABEL_PREFIX+index, "");
+	}
+
+	public void writeTabTitle(int index, String label) {
+		prefSettings.write(KEY_TAB_LABEL_PREFIX+index, label);
 	}
 
 }

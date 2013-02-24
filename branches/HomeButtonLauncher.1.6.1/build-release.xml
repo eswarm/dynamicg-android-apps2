@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="HomeButtonLauncher" default="main">
+<project name="HomeButtonLauncherMultiTabs" default="main">
 	
 	<!-- 
 === how to update the build.xml file ===
@@ -12,7 +12,7 @@ android update project -n HomeButtonLauncher -p C:\workspace\androidBookmarkTree
 	<property name="buildDirRoot" value="D:/ant.tmp/build" />
 	
 	<property name="workspace" value="${basedir}/.." />
-	<property name="projectname" value="HomeButtonLauncher" />
+	<property name="projectname" value="HomeButtonLauncherMultiTabs" />
 
 	<target name=".copysrc">
 		<delete dir="${buildDirRoot}/${projectname}" />
