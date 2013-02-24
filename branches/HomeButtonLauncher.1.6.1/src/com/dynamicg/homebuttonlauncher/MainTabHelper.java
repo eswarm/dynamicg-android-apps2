@@ -41,7 +41,7 @@ public class MainTabHelper {
 			@Override
 			public void onClickImpl(View v) {
 				int tabIndex = (Integer)v.getTag();
-				decorateTabs(container, tabIndex);
+				decorateTabs(tabIndex);
 				activity.updateOnTabSwitch(tabIndex);
 			}
 		};
@@ -77,7 +77,7 @@ public class MainTabHelper {
 			tabs[i] = node;
 		}
 
-		decorateTabs(container, getValidatedTabNum(selectedTabIndex, numTabs));
+		decorateTabs(getValidatedTabNum(selectedTabIndex, numTabs));
 
 		// attach after header
 		View header = activity.findViewById(R.id.headerContainer);
@@ -131,9 +131,9 @@ public class MainTabHelper {
 		bindTabs();
 	}
 
-	private void decorateTabs(ViewGroup container, int selectedTab) {
+	private void decorateTabs(int selectedTab) {
 		for (int i=0;i<numTabs;i++) {
-			View tab = container.getChildAt(i);
+			View tab = tabs[i];
 			int bgres = i==selectedTab ? R.drawable.tab_active_shape : R.drawable.tab_inactive_selector;
 			tab.setBackgroundResource(bgres);
 		}
