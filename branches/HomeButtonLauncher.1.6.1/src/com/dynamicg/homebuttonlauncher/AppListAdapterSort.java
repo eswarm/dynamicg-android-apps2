@@ -30,9 +30,9 @@ public class AppListAdapterSort extends AppListAdapter {
 			}
 		};
 
-		longClickListener = new View.OnLongClickListener() {
+		longClickListener = new OnLongClickListenerWrapper() {
 			@Override
-			public synchronized boolean onLongClick(View v) {
+			public synchronized boolean onLongClickImpl(View v) {
 				int oldPosition = (Integer)v.getTag();
 				int newPosition = v.getId()==R.id.sortDown ? applist.size()-1 : 0;
 				applyMove(oldPosition, newPosition);

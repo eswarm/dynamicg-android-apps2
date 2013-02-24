@@ -46,9 +46,9 @@ public class MainTabHelper {
 			}
 		};
 
-		View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
+		View.OnLongClickListener longClickListener = new OnLongClickListenerWrapper() {
 			@Override
-			public boolean onLongClick(View v) {
+			public boolean onLongClickImpl(View v) {
 				int tabIndex = (Integer)v.getTag();
 				editLabel((TextView)v, tabIndex);
 				return true;
