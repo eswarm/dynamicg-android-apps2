@@ -21,9 +21,9 @@ public class AppListAdapterSort extends AppListAdapter {
 		super(activity, apps, R.layout.app_entry_sort);
 		this.sortChanged = sortChanged;
 
-		clickListener = new View.OnClickListener() {
+		clickListener = new OnClickListenerWrapper() {
 			@Override
-			public synchronized void onClick(View v) {
+			public synchronized void onClickImpl(View v) {
 				int oldPosition = (Integer)v.getTag();
 				int newPosition = v.getId()==R.id.sortDown ? oldPosition+1 : oldPosition-1;
 				applyMove(oldPosition, newPosition);

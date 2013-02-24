@@ -37,9 +37,9 @@ public class MainTabHelper {
 		final LayoutInflater inflater = activity.getLayoutInflater();
 		final ViewGroup container = (ViewGroup)inflater.inflate(R.layout.tabs_container, null);
 
-		View.OnClickListener clickListener = new View.OnClickListener() {
+		View.OnClickListener clickListener = new OnClickListenerWrapper() {
 			@Override
-			public void onClick(View v) {
+			public void onClickImpl(View v) {
 				int tabIndex = (Integer)v.getTag();
 				decorateTabs(container, tabIndex);
 				activity.updateOnTabSwitch(tabIndex);
