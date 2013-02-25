@@ -129,14 +129,28 @@ public class PreferencesDialog extends Dialog {
 		setLayoutSelection(parent, prefSettings.getLayoutType());
 	}
 
-	private void saveSettings() {
-		int labelSize = (Integer)seekbarLabelSize.getTag(TAG_NEW_VALUE);
-		int iconSize = (Integer)seekbarIconSize.getTag(TAG_NEW_VALUE);
-		int numTabs = (Integer)seekbarNumTabs.getTag(TAG_NEW_VALUE);
-		prefSettings.writeAppSettings(selectedLayout, labelSize, iconSize, highRes.isChecked(), autoStartSingle.isChecked(), numTabs);
+	private static int getNewValue(SeekBar bar) {
+		return (Integer)bar.getTag(TAG_NEW_VALUE);
+	}
 
-		int previousNumTabs = ((Integer)seekbarNumTabs.getTag(TAG_OLD_VALUE));
-		if (numTabs!=previousNumTabs) {
+	private static boolean isChanged(SeekBar bar) {
+		int i1 = (Integer)bar.getTag(TAG_OLD_VALUE);
+		int i2 = (Integer)bar.getTag(TAG_NEW_VALUE);
+		return i1!=i2;
+	}
+
+	private void saveSettings() {
+		int numTabs = (Integer)seekbarNumTabs.getTag(TAG_NEW_VALUE);
+		prefSettings.writeAppSettings(
+				selectedLayout
+				, getNewValue(seekbarLabelSize)
+				, getNewValue(seekbarIconSize)
+				, highRes.isChecked()
+				, autoStartSingle.isChecked()
+				, getNewValue(seekbarNumTabs)
+				);
+
+		if (isChanged(seekbarNumTabs)) {
 			// redraw tabs only if "numTabs" has changed
 			log.debug("saveSettings", "redraw tabs", numTabs, seekbarNumTabs.getTag());
 			preferences.switchShortlist(preferences.getTabIndex());
