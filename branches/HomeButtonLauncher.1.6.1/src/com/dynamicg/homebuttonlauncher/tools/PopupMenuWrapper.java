@@ -62,11 +62,11 @@ public class PopupMenuWrapper {
 	}
 
 	public void addItem(int id, int titleResId, int imageId) {
-		String label = "   "+context.getString(titleResId);
+		String label = "   "+context.getString(titleResId)+"   ";
 		SpannableString spannable = new SpannableString(label);
 		ImageSpan imagespan = new ImageSpan(context, imageId, ImageSpan.ALIGN_BASELINE);
 		spannable.setSpan(imagespan, 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-		spannable.setSpan(new SuperscriptSpan(), 2, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		spannable.setSpan(new SuperscriptSpan(), 1, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		menu.add(id, id, 0, spannable);
 	}
 
