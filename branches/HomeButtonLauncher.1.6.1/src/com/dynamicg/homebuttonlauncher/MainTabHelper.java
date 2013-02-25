@@ -76,7 +76,6 @@ public class MainTabHelper {
 		View header = activity.findViewById(R.id.headerContainer);
 		ViewGroup main = (ViewGroup)header.getParent();
 		main.addView(tabhost, main.indexOfChild(header)+1);
-
 	}
 
 	private void createTabs(TabHost tabhost) {
@@ -139,7 +138,9 @@ public class MainTabHelper {
 		log.debug("set label", label, index);
 		//tabs[index].setIndicator(label); // does not work
 		TextView title = (TextView)tabviews[index].findViewById(android.R.id.title);
-		title.setText(label);
+		if (title!=null) {
+			title.setText(label);
+		}
 	}
 
 	public void redraw() {
