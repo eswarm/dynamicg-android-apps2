@@ -22,6 +22,9 @@ public class PreferencesDialog extends Dialog {
 
 	private static final Logger log = new Logger(PreferencesDialog.class);
 
+	private static final int TAG_OLD_VALUE = R.id.buttonCancel;
+	private static final int TAG_NEW_VALUE = R.id.buttonOk;
+
 	private final PreferencesManager preferences;
 	private final PrefSettings prefSettings;
 	private final MainActivityHome activity;
@@ -78,8 +81,8 @@ public class PreferencesDialog extends Dialog {
 	private SeekBar attachSeekBar(final int id, final int indicatorId, final int[] values, final int initialValue) {
 		final SeekBar bar = (SeekBar)findViewById(id);
 		SizePrefsHelper.setSeekBar(bar, initialValue, values);
-		bar.setTag(R.id.buttonOk, initialValue);
-		bar.setTag(R.id.buttonCancel, initialValue); // also store original value
+		bar.setTag(TAG_NEW_VALUE, initialValue);
+		bar.setTag(TAG_OLD_VALUE, initialValue);
 
 		final TextView indicator = (TextView)findViewById(indicatorId);
 		bar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
@@ -94,7 +97,7 @@ public class PreferencesDialog extends Dialog {
 				if (fromUser) {
 					int selectedValue = SizePrefsHelper.getSelectedValue(bar, values);
 					indicator.setText("["+selectedValue+"]");
-					bar.setTag(R.id.buttonOk, selectedValue);
+					bar.setTag(TAG_NEW_VALUE, selectedValue);
 				}
 			}
 		});
@@ -127,12 +130,12 @@ public class PreferencesDialog extends Dialog {
 	}
 
 	private void saveSettings() {
-		int labelSize = (Integer)seekbarLabelSize.getTag(R.id.buttonOk);
-		int iconSize = (Integer)seekbarIconSize.getTag(R.id.buttonOk);
-		int numTabs = (Integer)seekbarNumTabs.getTag(R.id.buttonOk);
+		int labelSize = (Integer)seekbarLabelSize.getTag(TAG_NEW_VALUE);
+		int iconSize = (Integer)seekbarIconSize.getTag(TAG_NEW_VALUE);
+		int numTabs = (Integer)seekbarNumTabs.getTag(TAG_NEW_VALUE);
 		prefSettings.writeAppSettings(selectedLayout, labelSize, iconSize, highRes.isChecked(), autoStartSingle.isChecked(), numTabs);
 
-		int previousNumTabs = ((Integer)seekbarNumTabs.getTag(R.id.buttonCancel));
+		int previousNumTabs = ((Integer)seekbarNumTabs.getTag(TAG_OLD_VALUE));
 		if (numTabs!=previousNumTabs) {
 			// redraw tabs only if "numTabs" has changed
 			log.debug("saveSettings", "redraw tabs", numTabs, seekbarNumTabs.getTag());

@@ -55,7 +55,7 @@ public class MainTabHelper {
 		View.OnLongClickListener longClickListener = new OnLongClickListenerWrapper() {
 			@Override
 			public boolean onLongClickImpl(View v) {
-				int index = (Integer)v.getTag(R.id.buttonOk);
+				int index = (Integer)v.getTag();
 				editLabel(index);
 				return true;
 			}
@@ -64,7 +64,7 @@ public class MainTabHelper {
 		int tabHeight = (int)context.getResources().getDimension(R.dimen.tabHeight);
 		for (int i=0;i<numTabs;i++) {
 			View tab = tabviews[i];
-			tab.setTag(R.id.buttonOk, i);
+			tab.setTag(i);
 			tab.setLongClickable(true);
 			tab.setOnLongClickListener(longClickListener);
 			// layout options is same as time recording, see com.dynamicg.timerecording.util.ui.TabHostUtil.prepareTabs(Dialog, int, int[], int[])
