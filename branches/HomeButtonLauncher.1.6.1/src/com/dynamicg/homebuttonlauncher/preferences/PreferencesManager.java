@@ -37,8 +37,12 @@ public class PreferencesManager {
 	public PreferencesManager(Context context) {
 		this.context = context;
 		this.prefSettings = new PrefSettings(context.getSharedPreferences(PREF_SETTINGS, Context.MODE_PRIVATE));
-		this.prefShortlist = new PrefShortlist(context.getPackageManager(), getShortlistPrefs(getTabIndex()));
-		checkOnStartup(context);
+		int tabindex = getTabIndex();
+		this.prefShortlist = new PrefShortlist(context.getPackageManager(), getShortlistPrefs(tabindex));
+		if (tabindex==0) {
+			// skip for all extra tabs
+			checkOnStartup(context);
+		}
 	}
 
 	private void checkOnStartup(Context context) {
