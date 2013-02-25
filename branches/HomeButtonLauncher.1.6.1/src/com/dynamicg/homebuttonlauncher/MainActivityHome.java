@@ -167,6 +167,20 @@ public class MainActivityHome extends Activity {
 
 	private void attachContextMenu() {
 		final View anchor = findViewById(R.id.headerIcon);
+		anchor.setOnClickListener(new OnClickListenerWrapper() {
+			private PopupMenuWrapper wrapper;
+			@Override
+			public void onClickImpl(View v) {
+				// create the popup only if actually required
+				if (wrapper==null) {
+					wrapper = bindMenu(anchor);
+				}
+				wrapper.showMenu();
+			}
+		});
+	}
+
+	private PopupMenuWrapper bindMenu(final View anchor) {
 		final PopupMenuItemListener listener = new PopupMenuItemListener() {
 			@Override
 			public void popupMenuItemSelected(int id) {
@@ -192,13 +206,12 @@ public class MainActivityHome extends Activity {
 		};
 
 		final PopupMenuWrapper menuWrapper = new PopupMenuWrapper(context, anchor, listener);
-		menuWrapper.attachToAnchorClick();
-		menuWrapper.addItem(MenuGlobals.APPS_ADD, R.string.menuAddApps);
-		menuWrapper.addItem(MenuGlobals.APPS_REMOVE, R.string.menuRemoveApps);
-		menuWrapper.addItem(MenuGlobals.APPS_SORT, R.string.menuSort);
-		menuWrapper.addItem(MenuGlobals.ABOUT, R.string.menuAbout);
-		menuWrapper.addItem(MenuGlobals.PREFERENCES, R.string.preferences);
-
+		menuWrapper.addItem(MenuGlobals.APPS_ADD, R.string.menuAddApps, android.R.drawable.ic_menu_add);
+		menuWrapper.addItem(MenuGlobals.APPS_REMOVE, R.string.menuRemoveApps, android.R.drawable.ic_menu_close_clear_cancel);
+		menuWrapper.addItem(MenuGlobals.APPS_SORT, R.string.menuSort, android.R.drawable.ic_menu_sort_by_size);
+		menuWrapper.addItem(MenuGlobals.ABOUT, R.string.menuAbout, android.R.drawable.ic_menu_info_details);
+		menuWrapper.addItem(MenuGlobals.PREFERENCES, R.string.preferences, android.R.drawable.ic_menu_preferences);
+		return menuWrapper;
 	}
 
 	public void updateOnTabSwitch(int tabindex) {

@@ -1,6 +1,10 @@
 package com.dynamicg.homebuttonlauncher.tools;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ImageSpan;
+import android.text.style.SuperscriptSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,11 +19,13 @@ public class PopupMenuWrapper {
 		public void popupMenuItemSelected(int id);
 	}
 
+	private final Context context;
 	private final View anchor;
 	private final PopupMenu popupMenu;
 	private final Menu menu;
 
 	public PopupMenuWrapper(final Context context, final View anchor, final PopupMenuItemListener listener) {
+		this.context = context;
 		this.anchor = anchor;
 		this.popupMenu = new PopupMenu(context, anchor);
 		this.menu = popupMenu.getMenu();
@@ -55,11 +61,13 @@ public class PopupMenuWrapper {
 		menu.add(id, id, 0, titleResId);
 	}
 
-	//	public void addItem(int id, int titleResId, boolean enabled) {
-	//		menu.add(id, id, 0, titleResId);
-	//		if (!enabled) {
-	//			menu.setGroupEnabled(id, false);
-	//		}
-	//	}
+	public void addItem(int id, int titleResId, int imageId) {
+		String label = "   "+context.getString(titleResId);
+		SpannableString spannable = new SpannableString(label);
+		ImageSpan imagespan = new ImageSpan(context, imageId, ImageSpan.ALIGN_BASELINE);
+		spannable.setSpan(imagespan, 0, 1, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+		spannable.setSpan(new SuperscriptSpan(), 2, label.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		menu.add(id, id, 0, spannable);
+	}
 
 }
