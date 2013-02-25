@@ -41,23 +41,7 @@ public class MainTabHelper {
 		final LayoutInflater inflater = activity.getLayoutInflater();
 		final TabHost tabhost = (TabHost)inflater.inflate(R.layout.tabs_container, null);
 		tabhost.setup();
-
-		final TabHost.TabContentFactory factory = new TabHost.TabContentFactory() {
-			@Override
-			public View createTabContent(String tag) {
-				return new View(context);
-			}
-		};
-
-		this.tabs = new TabSpec[numTabs];
-		for (int i=0;i<numTabs;i++) {
-			TabSpec spec = tabhost.newTabSpec(Integer.toString(i));
-			spec.setIndicator(preferences.getTabTitle(i));
-			spec.setContent(factory);
-			tabhost.addTab(spec);
-			tabs[i] = spec;
-		}
-
+		createTabs(tabhost);
 		tabhost.setCurrentTab(selectedIndex);
 
 		tabhost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -78,21 +62,14 @@ public class MainTabHelper {
 		};
 
 		int tabHeight = (int)context.getResources().getDimension(R.dimen.tabHeight);
-
-		TabWidget tabWidget = tabhost.getTabWidget();
-		if (log.isDebugEnabled) {
-			log.debug("tabWidget", tabWidget.getChildCount(), tabWidget.getChildAt(0));
-		}
-		this.tabviews = new View[numTabs];
 		for (int i=0;i<numTabs;i++) {
-			View node = tabWidget.getChildAt(i);
-			node.setTag(R.id.buttonOk, i);
-			node.setLongClickable(true);
-			node.setOnLongClickListener(longClickListener);
-			// same as time recording, see com.dynamicg.timerecording.util.ui.TabHostUtil.prepareTabs(Dialog, int, int[], int[])
-			node.getLayoutParams().height = tabHeight;
-			node.setPadding(0, node.getPaddingTop(), 0, node.getPaddingBottom());
-			tabviews[i] = node;
+			View tab = tabviews[i];
+			tab.setTag(R.id.buttonOk, i);
+			tab.setLongClickable(true);
+			tab.setOnLongClickListener(longClickListener);
+			// layout options is same as time recording, see com.dynamicg.timerecording.util.ui.TabHostUtil.prepareTabs(Dialog, int, int[], int[])
+			tab.getLayoutParams().height = tabHeight;
+			tab.setPadding(0, tab.getPaddingTop(), 0, tab.getPaddingBottom());
 		}
 
 		// attach after header
@@ -100,6 +77,32 @@ public class MainTabHelper {
 		ViewGroup main = (ViewGroup)header.getParent();
 		main.addView(tabhost, main.indexOfChild(header)+1);
 
+	}
+
+	private void createTabs(TabHost tabhost) {
+		final TabHost.TabContentFactory factory = new TabHost.TabContentFactory() {
+			@Override
+			public View createTabContent(String tag) {
+				return new View(context);
+			}
+		};
+
+		this.tabs = new TabSpec[numTabs];
+		this.tabviews = new View[numTabs];
+
+		TabWidget tabWidget = tabhost.getTabWidget();
+		if (log.isDebugEnabled) {
+			log.debug("tabWidget", tabWidget.getChildCount(), tabWidget.getChildAt(0));
+		}
+
+		for (int i=0;i<numTabs;i++) {
+			TabSpec spec = tabhost.newTabSpec(Integer.toString(i));
+			spec.setIndicator(preferences.getTabTitle(i));
+			spec.setContent(factory);
+			tabhost.addTab(spec);
+			tabs[i] = spec;
+			tabviews[i] = tabWidget.getChildAt(i); // up to 4.2 we have one child view (LinerarLayout) per tab
+		}
 	}
 
 	protected void editLabel(final int index) {
