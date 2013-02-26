@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 
-import com.dynamicg.homebuttonlauncher.MainTabHelper;
 import com.dynamicg.homebuttonlauncher.tools.AppHelper;
 
 public class PreferencesManager {
@@ -66,7 +65,7 @@ public class PreferencesManager {
 	public int getTabIndex() {
 		int tabindex = prefSettings.getIntValue(KEY_TAB_INDEX);
 		int numTabs = prefSettings.getNumTabs();
-		return MainTabHelper.getValidatedTabNum(tabindex, numTabs);
+		return tabindex>=numTabs?0:tabindex;
 	}
 
 	public String getTabTitle(int index) {

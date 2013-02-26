@@ -151,8 +151,4 @@ public class MainTabHelper {
 		bindTabs();
 	}
 
-	public static int getValidatedTabNum(int selectedTabIndex, int numTabs) {
-		return selectedTabIndex>=numTabs?0:selectedTabIndex;
-	}
-
 }
