@@ -17,7 +17,7 @@ import com.dynamicg.homebuttonlauncher.tools.PopupMenuWrapper.PopupMenuItemListe
 public class AppListContextMenu {
 
 	private final MainActivityHome context;
-	private PrefShortlist prefShortlist;
+	private final PrefShortlist prefShortlist;
 
 	public AppListContextMenu(MainActivityHome activity, PrefShortlist prefShortlist) {
 		this.context = activity;
@@ -26,6 +26,7 @@ public class AppListContextMenu {
 
 	public AppListContextMenu(MainActivityHome activity) {
 		this.context = activity;
+		this.prefShortlist = null;
 	}
 
 	public void attach(final AbsListView listview, final AppListContainer appList) {
