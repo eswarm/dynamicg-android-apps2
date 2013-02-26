@@ -36,6 +36,7 @@ public class HomeLauncherBackupAgent extends BackupAgentHelper {
 				return;
 			}
 			for (int i=1;i<numTabs;i++) {
+				// add extra tabs (tab0 is already added)
 				list.add(PreferencesManager.getShortlistName(i));
 			}
 		}
