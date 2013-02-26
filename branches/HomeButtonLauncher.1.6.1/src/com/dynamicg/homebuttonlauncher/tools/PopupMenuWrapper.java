@@ -61,6 +61,7 @@ public class PopupMenuWrapper {
 		menu.add(id, id, 0, titleResId);
 	}
 
+	// TODO THIS WILL PROBABLY NOT WORK ON SOME DEVICES SO MAYBE WE SHOULD SKIP IT ??
 	public void addItem(int id, int titleResId, int imageId) {
 		String label = "   "+context.getString(titleResId)+"   ";
 		SpannableString spannable = new SpannableString(label);
