@@ -133,13 +133,17 @@ public class PreferencesDialog extends Dialog {
 		return (Integer)bar.getTag(TAG_NEW_VALUE);
 	}
 
-	private static boolean isChanged(SeekBar bar) {
-		int i1 = (Integer)bar.getTag(TAG_OLD_VALUE);
-		int i2 = (Integer)bar.getTag(TAG_NEW_VALUE);
-		return i1!=i2;
+	private static int getOldValue(SeekBar bar) {
+		return (Integer)bar.getTag(TAG_OLD_VALUE);
 	}
 
 	private void saveSettings() {
+
+		int oldNumTabs = getOldValue(seekbarNumTabs);
+		int newNumTabs = getNewValue(seekbarNumTabs);
+		int currentTabIndex = preferences.getTabIndex();
+		log.debug("saveSettings", oldNumTabs, newNumTabs, currentTabIndex);
+
 		prefSettings.writeAppSettings(
 				selectedLayout
 				, getNewValue(seekbarLabelSize)
@@ -149,10 +153,12 @@ public class PreferencesDialog extends Dialog {
 				, getNewValue(seekbarNumTabs)
 				);
 
-		if (isChanged(seekbarNumTabs)) {
-			// redraw tabs only if "numTabs" has changed
-			log.debug("saveSettings", "redraw tabs", getNewValue(seekbarNumTabs), seekbarNumTabs.getTag());
-			preferences.switchShortlist(preferences.getTabIndex());
+		if (currentTabIndex>=newNumTabs) {
+			// reset to first tab if current is above max
+			preferences.switchShortlist(0);
+		}
+		if (oldNumTabs!=newNumTabs) {
+			// redraw tabs when changed
 			activity.redrawTabContainer();
 		}
 

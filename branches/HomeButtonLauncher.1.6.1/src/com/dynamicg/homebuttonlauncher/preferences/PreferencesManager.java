@@ -63,6 +63,7 @@ public class PreferencesManager {
 	}
 
 	public int getTabIndex() {
+		// TODO two calls ?
 		int tabindex = prefSettings.getIntValue(KEY_TAB_INDEX);
 		int numTabs = prefSettings.getNumTabs();
 		return tabindex>=numTabs?0:tabindex;
