@@ -1,5 +1,6 @@
 package com.dynamicg.homebuttonlauncher;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
@@ -75,10 +76,15 @@ public class AppListContextMenu {
 		MarketLinkHelper.openMarketIntent(context, appEntry.getPackage());
 	}
 
-	private void remove(AppEntry appEntry) {
-		// TODO CONFIRMATION
-		prefShortlist.remove(appEntry);
-		context.refreshList();
+	private void remove(final AppEntry appEntry) {
+		OnClickListenerDialogWrapper okListener = new OnClickListenerDialogWrapper(context) {
+			@Override
+			public void onClickImpl(DialogInterface d, int which) {
+				prefShortlist.remove(appEntry);
+				context.refreshList();
+			}
+		};
+		DialogHelper.confirm(context, R.string.menuRemove, okListener);
 	}
 
 }
