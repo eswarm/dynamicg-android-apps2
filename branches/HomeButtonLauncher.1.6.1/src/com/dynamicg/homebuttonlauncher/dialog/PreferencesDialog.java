@@ -140,7 +140,6 @@ public class PreferencesDialog extends Dialog {
 	}
 
 	private void saveSettings() {
-		int numTabs = (Integer)seekbarNumTabs.getTag(TAG_NEW_VALUE);
 		prefSettings.writeAppSettings(
 				selectedLayout
 				, getNewValue(seekbarLabelSize)
@@ -152,7 +151,7 @@ public class PreferencesDialog extends Dialog {
 
 		if (isChanged(seekbarNumTabs)) {
 			// redraw tabs only if "numTabs" has changed
-			log.debug("saveSettings", "redraw tabs", numTabs, seekbarNumTabs.getTag());
+			log.debug("saveSettings", "redraw tabs", getNewValue(seekbarNumTabs), seekbarNumTabs.getTag());
 			preferences.switchShortlist(preferences.getTabIndex());
 			activity.redrawTabContainer();
 		}
