@@ -73,13 +73,15 @@ public class TabHelperMain extends TabHelper {
 
 		ViewGroup moveTabPanel = (ViewGroup)activity.getLayoutInflater().inflate(R.layout.common_spinner_panel, null);
 		final SpinnerHelper switchTabSpinner = new SpinnerHelper(moveTabPanel.findViewById(R.id.spinnerPanelSpinner));
+		switchTabSpinner.bind(items, 0);
+
+		// "move" label and padding
 		((TextView)moveTabPanel.findViewById(R.id.spinnerPabelLabel)).setText(R.string.moveTab);
 		int padding = (int)context.getResources().getDimension(R.dimen.appLinePadding);
 		moveTabPanel.setPadding(padding, padding, padding, padding);
-		switchTabSpinner.bind(items, 0);
 
 		/*
-		 * label
+		 * label editor
 		 */
 		final String currentLabel = preferences.getTabTitle(tabindex);
 		TextEditorListener callback = new DialogHelper.TextEditorListener() {
