@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dynamicg.homebuttonlauncher"
     android:versionCode="27001"
-    android:versionName="2.7"
+    android:versionName="2.7.1"
     android:installLocation="internalOnly"
     >
 

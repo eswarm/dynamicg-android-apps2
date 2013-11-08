@@ -18,9 +18,9 @@ public class PrefSettings {
 	public static final String KEY_NUM_TABS = "numTabs";
 	public static final String KEY_BACKGROUND_ICON_LOADER = "iconsInBG";
 	public static final String KEY_SEMI_TRANSPARENT = "semiTransp";
-	public static final String KEY_APP_CLEAR_TASK = "clearTask";
 	public static final String KEY_TRANS_ALPHA = "transAlpha";
 	public static final String KEY_HOME_TAB_NUM = "homeTab";
+	public static final String KEY_STATUS_LINE = "statusLine";
 
 	public static final int NUM_LAYOUTS = 5;
 	private static final int LAYOUT_PLAIN_2 = 1;
@@ -33,7 +33,8 @@ public class PrefSettings {
 	public final SharedPreferences sharedPrefs;
 
 	public PrefSettings(Context context) {
-		this.sharedPrefs = context.getSharedPreferences(HBLConstants.PREFS_SETTINGS, Context.MODE_PRIVATE);
+		this.sharedPrefs = context.getSharedPreferences(
+				HBLConstants.PREFS_SETTINGS, Context.MODE_PRIVATE);
 	}
 
 	public void apply(String key, int value) {
@@ -56,14 +57,18 @@ public class PrefSettings {
 		return sharedPrefs.getString(key, dflt);
 	}
 
-	// this is "sp". see com.dynamicg.homebuttonlauncher.dialog.SizePrefsHelper.LABEL_SIZES
+	// this is "sp". see
+	// com.dynamicg.homebuttonlauncher.dialog.SizePrefsHelper.LABEL_SIZES
 	public int getLabelSize() {
-		return sharedPrefs.getInt(KEY_LABEL_SIZE, SizePrefsHelper.DEFAULT_LABEL_SIZE);
+		return sharedPrefs.getInt(KEY_LABEL_SIZE,
+				SizePrefsHelper.DEFAULT_LABEL_SIZE);
 	}
 
-	// this is "dp". see com.dynamicg.homebuttonlauncher.dialog.SizePrefsHelper.ICON_SIZES
+	// this is "dp". see
+	// com.dynamicg.homebuttonlauncher.dialog.SizePrefsHelper.ICON_SIZES
 	public int getIconSize() {
-		return sharedPrefs.getInt(KEY_ICON_SIZE, SizePrefsHelper.DEFAULT_ICON_SIZE);
+		return sharedPrefs.getInt(KEY_ICON_SIZE,
+				SizePrefsHelper.DEFAULT_ICON_SIZE);
 	}
 
 	public int getNumTabs() {
@@ -76,21 +81,20 @@ public class PrefSettings {
 
 	public int[] getMainLayout() {
 		int layoutType = getLayoutType();
-		if (layoutType==LAYOUT_COMPACT_4) {
-			return new int[]{R.layout.applist_gridview, 4};
+		if (layoutType == LAYOUT_COMPACT_4) {
+			return new int[] { R.layout.applist_gridview, 4 };
+		} else if (layoutType == LAYOUT_COMPACT_3) {
+			return new int[] { R.layout.applist_gridview, 3 };
+		} else if (layoutType == LAYOUT_PLAIN_2
+				|| layoutType == LAYOUT_COMPACT_2) {
+			return new int[] { R.layout.applist_gridview, 2 };
 		}
-		else if (layoutType==LAYOUT_COMPACT_3) {
-			return new int[]{R.layout.applist_gridview, 3};
-		}
-		else if (layoutType==LAYOUT_PLAIN_2 || layoutType==LAYOUT_COMPACT_2) {
-			return new int[]{R.layout.applist_gridview, 2};
-		}
-		return new int[]{R.layout.applist_listview, 0};
+		return new int[] { R.layout.applist_listview, 0 };
 	}
 
 	public int getMinWidthDimension() {
 		int layoutType = getLayoutType();
-		if (layoutType==LAYOUT_PLAIN_2 || layoutType==LAYOUT_COMPACT_4) {
+		if (layoutType == LAYOUT_PLAIN_2 || layoutType == LAYOUT_COMPACT_4) {
 			return R.dimen.widthWide;
 		}
 		return R.dimen.widthDefault;
@@ -98,7 +102,8 @@ public class PrefSettings {
 
 	public int getAppEntryLayoutId() {
 		int layoutType = getLayoutType();
-		if (layoutType==LAYOUT_COMPACT_2 || layoutType==LAYOUT_COMPACT_3 || layoutType==LAYOUT_COMPACT_4) {
+		if (layoutType == LAYOUT_COMPACT_2 || layoutType == LAYOUT_COMPACT_3
+				|| layoutType == LAYOUT_COMPACT_4) {
 			return R.layout.app_entry_compact;
 		}
 		return R.layout.app_entry_default;
@@ -120,10 +125,6 @@ public class PrefSettings {
 		return sharedPrefs.getBoolean(KEY_SEMI_TRANSPARENT, false);
 	}
 
-	public boolean isAppClearTask() {
-		return sharedPrefs.getBoolean(KEY_APP_CLEAR_TASK, false);
-	}
-
 	public int getTransparencyAlpha() {
 		return sharedPrefs.getInt(KEY_TRANS_ALPHA, DFLT_TRANSPARENCY_ALPHA);
 	}
@@ -131,6 +132,10 @@ public class PrefSettings {
 	// "HomeTab" pref is tabindex+1: 0=off, 1=tab1, 2=tab2
 	public int getHomeTabNum() {
 		return sharedPrefs.getInt(KEY_HOME_TAB_NUM, 0);
+	}
+
+	public boolean isShowStatusLine() {
+		return sharedPrefs.getBoolean(KEY_STATUS_LINE, false);
 	}
 
 }
